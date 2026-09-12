@@ -564,12 +564,15 @@ async function seedInitialData() {
   }
 }
 
+const { seedMoesData } = require('../database/seedMoesData');
+
 /**
  * Initial database setup
  */
 const seedPromise = (async () => {
   await testConnection();
   await seedInitialData();
+  await seedMoesData(pool);
 })();
 
 /**

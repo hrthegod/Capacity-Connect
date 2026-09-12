@@ -280,8 +280,8 @@ const QuizScore = ({ quiz = null, result = null }) => {
 
               <div className="quiz-score__points-total">
                 <strong>
-                  {earnedPoints}
-                  <span> / {totalPoints}</span>
+                  {earnedPoints.toFixed(2)}
+                  <span> / {totalPoints.toFixed(2)}</span>
                 </strong>
 
                 <small>Total Points</small>
@@ -299,7 +299,7 @@ const QuizScore = ({ quiz = null, result = null }) => {
               </div>
 
               <div className="quiz-score__points-percent">
-                {Math.round(pointsPercentage)}%
+                {pointsPercentage.toFixed(2)}%
               </div>
             </div>
           </div>
@@ -319,7 +319,7 @@ const QuizScore = ({ quiz = null, result = null }) => {
               <div className="quiz-score__comparison-content">
                 <span>Passing Score</span>
 
-                <strong>{passingScore}%</strong>
+                <strong>{passingScore.toFixed(2)}%</strong>
 
                 <small>Required to pass</small>
               </div>
@@ -335,7 +335,7 @@ const QuizScore = ({ quiz = null, result = null }) => {
               <div className="quiz-score__comparison-content">
                 <span>Your Score</span>
 
-                <strong>{score}%</strong>
+                <strong>{score.toFixed(2)}%</strong>
 
                 <small>You achieved</small>
               </div>
@@ -359,7 +359,7 @@ const QuizScore = ({ quiz = null, result = null }) => {
 
                 <strong>
                   {scoreDifference >= 0 ? "+" : ""}
-                  {scoreDifference}%
+                  {scoreDifference.toFixed(2)}%
                 </strong>
 
                 <small>
@@ -447,7 +447,7 @@ const QuizScore = ({ quiz = null, result = null }) => {
               </svg>
 
               <div className="quiz-score__dark-score-value">
-                <strong>{score}%</strong>
+                <strong>{score.toFixed(2)}%</strong>
 
                 <span>Your Score</span>
               </div>

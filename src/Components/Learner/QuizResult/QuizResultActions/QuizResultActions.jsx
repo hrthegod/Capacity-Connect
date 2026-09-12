@@ -331,7 +331,7 @@ const QuizResultActions = ({
             <p>
               {passed
                 ? "Consistent learning leads to meaningful progress. Stay curious and keep challenging yourself."
-                : `You scored ${score}%. Review your answers, strengthen your weak areas, and try again.`}
+                : `You scored ${Number(score).toFixed(2)}%. Review your answers, strengthen your weak areas, and try again.`}
             </p>
 
             <button

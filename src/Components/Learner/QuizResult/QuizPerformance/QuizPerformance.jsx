@@ -378,7 +378,7 @@ const QuizPerformance = ({ quiz = null, result = null }) => {
           <div className="quiz-performance__metric-content">
             <span>Accuracy Rate</span>
 
-            <strong>{accuracy}%</strong>
+            <strong>{accuracy.toFixed(2)}%</strong>
 
             <p>Correct out of attempted</p>
           </div>
@@ -386,7 +386,7 @@ const QuizPerformance = ({ quiz = null, result = null }) => {
           <div className="quiz-performance__metric-trend">
             <ArrowUp size={15} strokeWidth={2.7} />
 
-            <span>{Math.max(accuracy - 68, 0)}%</span>
+            <span>{Math.max(accuracy - 68, 0).toFixed(2)}%</span>
           </div>
 
           <div className="quiz-performance__mini-wave">
@@ -443,7 +443,7 @@ const QuizPerformance = ({ quiz = null, result = null }) => {
               />
             </svg>
 
-            <strong>{attemptedPercentage}%</strong>
+            <strong>{attemptedPercentage.toFixed(2)}%</strong>
           </div>
         </article>
 
@@ -609,9 +609,10 @@ const QuizPerformance = ({ quiz = null, result = null }) => {
                 <strong>{correctAnswers}</strong>
 
                 <small>
-                  {totalQuestions > 0
-                    ? Math.round((correctAnswers / totalQuestions) * 100)
-                    : 0}
+                  {(totalQuestions > 0
+                    ? (correctAnswers / totalQuestions) * 100
+                    : 0
+                  ).toFixed(2)}
                   %
                 </small>
               </div>
@@ -624,9 +625,10 @@ const QuizPerformance = ({ quiz = null, result = null }) => {
                 <strong>{incorrectAnswers}</strong>
 
                 <small>
-                  {totalQuestions > 0
-                    ? Math.round((incorrectAnswers / totalQuestions) * 100)
-                    : 0}
+                  {(totalQuestions > 0
+                    ? (incorrectAnswers / totalQuestions) * 100
+                    : 0
+                  ).toFixed(2)}
                   %
                 </small>
               </div>
@@ -639,9 +641,10 @@ const QuizPerformance = ({ quiz = null, result = null }) => {
                 <strong>{unanswered}</strong>
 
                 <small>
-                  {totalQuestions > 0
-                    ? Math.round((unanswered / totalQuestions) * 100)
-                    : 0}
+                  {(totalQuestions > 0
+                    ? (unanswered / totalQuestions) * 100
+                    : 0
+                  ).toFixed(2)}
                   %
                 </small>
               </div>
@@ -654,7 +657,7 @@ const QuizPerformance = ({ quiz = null, result = null }) => {
             <Info size={21} strokeWidth={2} />
 
             <span>
-              You answered <strong>{accuracy}%</strong> of the questions
+              You answered <strong>{accuracy.toFixed(2)}%</strong> of the questions
               correctly. Keep practicing to improve even further!
             </span>
           </div>
@@ -721,7 +724,7 @@ const QuizPerformance = ({ quiz = null, result = null }) => {
                     />
                   </div>
 
-                  <strong>{topic.percentage}%</strong>
+                  <strong>{Number(topic.percentage).toFixed(2)}%</strong>
 
                   <span>
                     {topic.correct}/{topic.total}
@@ -783,7 +786,7 @@ const QuizPerformance = ({ quiz = null, result = null }) => {
                   </span>
                 </div>
 
-                <b>{item.percentage}%</b>
+                <b>{Number(item.percentage).toFixed(2)}%</b>
               </div>
             ))}
           </div>
@@ -826,7 +829,7 @@ const QuizPerformance = ({ quiz = null, result = null }) => {
                   </span>
                 </div>
 
-                <b>{item.percentage}%</b>
+                <b>{Number(item.percentage).toFixed(2)}%</b>
               </div>
             ))}
           </div>

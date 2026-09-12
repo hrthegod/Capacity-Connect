@@ -434,9 +434,10 @@ const QuizReview = ({ quiz = null, result = null }) => {
             <strong>{correctAnswers}</strong>
 
             <p>
-              {totalQuestions > 0
-                ? Math.round((correctAnswers / totalQuestions) * 100)
-                : 0}
+              {(totalQuestions > 0
+                ? (correctAnswers / totalQuestions) * 100
+                : 0
+              ).toFixed(2)}
               % accuracy
             </p>
           </div>
@@ -455,9 +456,10 @@ const QuizReview = ({ quiz = null, result = null }) => {
             <strong>{incorrectAnswers}</strong>
 
             <p>
-              {totalQuestions > 0
-                ? Math.round((incorrectAnswers / totalQuestions) * 100)
-                : 0}
+              {(totalQuestions > 0
+                ? (incorrectAnswers / totalQuestions) * 100
+                : 0
+              ).toFixed(2)}
               % of questions
             </p>
           </div>
@@ -476,9 +478,10 @@ const QuizReview = ({ quiz = null, result = null }) => {
             <strong>{unanswered}</strong>
 
             <p>
-              {totalQuestions > 0
-                ? Math.round((unanswered / totalQuestions) * 100)
-                : 0}
+              {(totalQuestions > 0
+                ? (unanswered / totalQuestions) * 100
+                : 0
+              ).toFixed(2)}
               % of questions
             </p>
           </div>
@@ -711,7 +714,7 @@ const QuizReview = ({ quiz = null, result = null }) => {
                     <div className="quiz-review__detail-stat">
                       <span>Points</span>
 
-                      <strong>{question.points}</strong>
+                      <strong>{Number(question.points).toFixed(2)}</strong>
                     </div>
 
                     <div className="quiz-review__detail-stat">

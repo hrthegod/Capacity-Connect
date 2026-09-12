@@ -28,6 +28,8 @@ const QuizProgress = ({
   onPrevious,
   onNext,
   onMarkReview,
+  onAnswerSelect,
+  onSubmit,
 }) => {
   /* =======================================================
      SAFE DATA
@@ -36,6 +38,8 @@ const QuizProgress = ({
   const totalQuestions = progress.totalQuestions || questions.length || 10;
 
   const currentQuestion = progress.currentQuestion || currentQuestionIndex + 1;
+
+  const isLastQuestion = currentQuestionIndex >= totalQuestions - 1;
 
   const answeredQuestions =
     progress.answeredQuestions ??
@@ -138,13 +142,7 @@ const QuizProgress = ({
       return;
     }
 
-    onQuestionSelect?.(currentQuestionIndex);
-
-    /*
-      The actual answer-selection handler
-      will be connected when QuizQuestion
-      is separated into its own component.
-    */
+    onAnswerSelect?.(activeQuestion.questionId, option);
   };
 
   /* =======================================================
@@ -357,16 +355,27 @@ const QuizProgress = ({
             <span>Previous</span>
           </button>
 
-          <button
-            type="button"
-            className="quiz-progress__next"
-            onClick={onNext}
-            disabled={currentQuestion >= totalQuestions}
-          >
-            <span>Next Question</span>
+          {isLastQuestion ? (
+            <button
+              type="button"
+              className="quiz-progress__next quiz-progress__next--submit"
+              onClick={onSubmit}
+            >
+              <span>Submit Quiz</span>
 
-            <ChevronRight size={19} />
-          </button>
+              <ChevronRight size={19} />
+            </button>
+          ) : (
+            <button
+              type="button"
+              className="quiz-progress__next"
+              onClick={onNext}
+            >
+              <span>Next Question</span>
+
+              <ChevronRight size={19} />
+            </button>
+          )}
         </div>
       </div>
 

@@ -28,19 +28,7 @@ const Quizzes = () => {
   ======================================================= */
 
   const handleStartQuiz = () => {
-    if (!allQuizzes || allQuizzes.length === 0) {
-      console.log("No quizzes are currently available.");
-      return;
-    }
-
-    const firstQuiz = allQuizzes[0];
-
-    if (!firstQuiz?.quizId) {
-      console.error("Unable to start quiz: quizId is missing.", firstQuiz);
-      return;
-    }
-
-    navigate(`/learner/quizzes/${firstQuiz.quizId}/attempt`);
+    navigate(`/learner/quizzes/3/attempt`);
   };
 
   /* =======================================================
@@ -54,12 +42,9 @@ const Quizzes = () => {
       return;
     }
 
-    if (!quiz.quizId) {
-      console.error("Unable to open quiz: quizId is missing.", quiz);
-      return;
-    }
+    const targetQuizId = String(quiz.quizId || quiz.id || "3");
 
-    navigate(`/learner/quizzes/${quiz.quizId}/attempt`);
+    navigate(`/learner/quizzes/${targetQuizId}/attempt`);
   };
 
   /* =======================================================

@@ -1,112 +1,127 @@
-import React, { useCallback, useEffect, useMemo, useState } from "react";
-
+import React, { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 /* =========================================================
    QUIZ ATTEMPT COMPONENTS
 ========================================================= */
-
 import QuizHeader from "../../../Components/Learner/QuizAttempt/QuizHeader/QuizHeader";
-
 import QuizProgress from "../../../Components/Learner/QuizAttempt/QuizProgress/QuizProgress";
-
-
 import QuizSubmit from "../../../Components/Learner/QuizAttempt/QuizSubmit/QuizSubmit";
 
 /* =========================================================
-   QUIZ DATA
+   QUIZ API SERVICE
 ========================================================= */
-
-import { getQuizzes } from "../../../../data/mock/quiz";
+import {
+  getQuiz,
+  getQuizQuestions,
+  startQuiz,
+  submitQuiz,
+} from "../../../services/quizApi";
 
 import "./QuizAttempt.css";
-
-/* =========================================================
-   CONSTANTS
-========================================================= */
-
-const ATTEMPTS_STORAGE_KEY = "capacityConnectQuizAttempts";
-
-const ATTEMPT_HISTORY_STORAGE_KEY = "capacityConnectQuizAttemptHistory";
-
-const CURRENT_LEARNER_ID = "learner-001";
 
 /* =========================================================
    QUIZ ATTEMPT PAGE
    Capacity Connect - Learner
 ========================================================= */
-
 const QuizAttempt = () => {
   const navigate = useNavigate();
-
   const { quizId } = useParams();
-
-  /* =======================================================
-     QUIZ DATA
-  ======================================================= */
-
-  const quiz = useMemo(() => {
-    if (!quizId) {
-      return null;
-    }
-
-    const quizzes = getQuizzes();
-
-    return quizzes.find((item) => item.quizId === quizId) || null;
-  }, [quizId]);
-
-  /* =======================================================
-     QUESTIONS
-  ======================================================= */
-
-  const questions = useMemo(() => {
-    if (!quiz?.questions) {
-      return [];
-    }
-
-    return quiz.questions;
-  }, [quiz]);
 
   /* =======================================================
      STATE
   ======================================================= */
+  const [quiz, setQuiz] = useState(null);
+  const [questions, setQuestions] = useState([]);
+  const [attemptId, setAttemptId] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-
   const [answers, setAnswers] = useState({});
-
   const [reviewedQuestions, setReviewedQuestions] = useState([]);
-
   const [timeRemaining, setTimeRemaining] = useState(0);
-
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const isInitiatedRef = useRef(false);
+
+  /* =======================================================
+     FETCH QUIZ & START ATTEMPT (EXACTLY ONCE)
+  ======================================================= */
+  useEffect(() => {
+    if (!quizId || isInitiatedRef.current) {
+      return;
+    }
+    isInitiatedRef.current = true;
+
+    async function initAttempt() {
+      try {
+        setIsLoading(true);
+        setError(null);
+
+        // 1. Fetch metadata
+        const quizData = await getQuiz(quizId);
+
+        // 2. Fetch questions
+        const rawQuestions = await getQuizQuestions(quizId);
+
+        const formattedQuestions = rawQuestions.map((q) => ({
+          questionId: q.id,
+          question: q.question_text,
+          options: Array.isArray(q.options) ? q.options : [],
+          points: Number(q.marks) || 10,
+        }));
+
+        const formattedQuiz = {
+          quizId: String(quizData.id),
+          courseId: quizData.course_id,
+          courseTitle: quizData.course_title || "",
+          quizTitle: quizData.title || "",
+          description: quizData.description || "",
+          duration: Number(quizData.time_limit_minutes) || 20,
+          passingScore: Number(quizData.passing_score) || 60,
+          totalQuestions: formattedQuestions.length,
+          questions: formattedQuestions,
+        };
+
+        setQuiz(formattedQuiz);
+        setQuestions(formattedQuestions);
+
+        // 3. Start backend attempt
+        const attemptData = await startQuiz(quizId);
+        setAttemptId(attemptData.id);
+      } catch (err) {
+        console.error("Failed to initialize backend quiz attempt:", err);
+        setError(err.message || "Failed to load quiz attempt");
+      } finally {
+        setIsLoading(false);
+      }
+    }
+
+    initAttempt();
+  }, [quizId]);
 
   /* =======================================================
      TOTAL QUESTIONS
   ======================================================= */
-
   const totalQuestions = questions.length;
 
   /* =======================================================
      CURRENT QUESTION
   ======================================================= */
-
   const currentQuestion = questions[currentQuestionIndex] || null;
 
   /* =======================================================
      CURRENT QUESTION NUMBER
   ======================================================= */
-
   const currentQuestionNumber = currentQuestionIndex + 1;
 
   /* =======================================================
      ANSWERED QUESTIONS
   ======================================================= */
-
   const answeredQuestions = useMemo(() => {
     return Object.keys(answers).filter((questionId) => {
       const answer = answers[questionId];
-
       return answer !== undefined && answer !== null && answer !== "";
     }).length;
   }, [answers]);
@@ -114,13 +129,11 @@ const QuizAttempt = () => {
   /* =======================================================
      UNANSWERED QUESTIONS
   ======================================================= */
-
   const unansweredQuestions = Math.max(totalQuestions - answeredQuestions, 0);
 
   /* =======================================================
      PROGRESS PERCENTAGE
   ======================================================= */
-
   const progressPercentage =
     totalQuestions > 0
       ? Math.round((answeredQuestions / totalQuestions) * 100)
@@ -129,55 +142,41 @@ const QuizAttempt = () => {
   /* =======================================================
      MARKED QUESTIONS COUNT
   ======================================================= */
-
   const markedQuestions = reviewedQuestions.length;
 
   /* =======================================================
      GET QUIZ DURATION
   ======================================================= */
-
   const getQuizDurationMinutes = useCallback(() => {
     if (!quiz) {
       return 20;
     }
-
-    const rawDuration =
-      quiz.duration ?? quiz.durationMinutes ?? quiz.timeLimit ?? 20;
-
+    const rawDuration = quiz.duration ?? quiz.durationMinutes ?? quiz.timeLimit ?? 20;
     if (typeof rawDuration === "number") {
       return Math.max(rawDuration, 1);
     }
-
     const match = String(rawDuration).match(/\d+/);
-
     return match ? Math.max(Number(match[0]), 1) : 20;
   }, [quiz]);
 
   /* =======================================================
      INITIALIZE TIMER
   ======================================================= */
-
   useEffect(() => {
     if (!quiz) {
       return;
     }
-
     const durationMinutes = getQuizDurationMinutes();
-
     setTimeRemaining(durationMinutes * 60);
   }, [quiz, getQuizDurationMinutes]);
 
   /* =======================================================
      FORMAT TIME
   ======================================================= */
-
   const formatTime = useCallback((seconds) => {
     const safeSeconds = Math.max(Number(seconds) || 0, 0);
-
     const minutes = Math.floor(safeSeconds / 60);
-
     const remainingSeconds = safeSeconds % 60;
-
     return `${String(minutes).padStart(2, "0")}:${String(
       remainingSeconds,
     ).padStart(2, "0")}`;
@@ -186,13 +185,11 @@ const QuizAttempt = () => {
   /* =======================================================
      TIME RUNNING OUT
   ======================================================= */
-
   const isTimeRunningOut = timeRemaining > 0 && timeRemaining <= 60;
 
   /* =======================================================
      TIMER
   ======================================================= */
-
   useEffect(() => {
     if (!quiz || isSubmitting || timeRemaining <= 0) {
       return undefined;
@@ -210,7 +207,6 @@ const QuizAttempt = () => {
   /* =======================================================
      SELECT ANSWER
   ======================================================= */
-
   const handleAnswerSelect = useCallback(
     (questionId, answer) => {
       if (!questionId || isSubmitting) {
@@ -219,7 +215,6 @@ const QuizAttempt = () => {
 
       setAnswers((previousAnswers) => ({
         ...previousAnswers,
-
         [questionId]: answer,
       }));
     },
@@ -229,7 +224,6 @@ const QuizAttempt = () => {
   /* =======================================================
      CLEAR CURRENT ANSWER
   ======================================================= */
-
   const handleClearAnswer = useCallback(() => {
     if (!currentQuestion || isSubmitting) {
       return;
@@ -238,12 +232,8 @@ const QuizAttempt = () => {
     const questionId = currentQuestion.questionId;
 
     setAnswers((previousAnswers) => {
-      const updatedAnswers = {
-        ...previousAnswers,
-      };
-
+      const updatedAnswers = { ...previousAnswers };
       delete updatedAnswers[questionId];
-
       return updatedAnswers;
     });
   }, [currentQuestion, isSubmitting]);
@@ -251,7 +241,6 @@ const QuizAttempt = () => {
   /* =======================================================
      NEXT QUESTION
   ======================================================= */
-
   const handleNextQuestion = useCallback(() => {
     if (currentQuestionIndex < totalQuestions - 1) {
       setCurrentQuestionIndex((previousIndex) => previousIndex + 1);
@@ -261,7 +250,6 @@ const QuizAttempt = () => {
   /* =======================================================
      PREVIOUS QUESTION
   ======================================================= */
-
   const handlePreviousQuestion = useCallback(() => {
     if (currentQuestionIndex > 0) {
       setCurrentQuestionIndex((previousIndex) => previousIndex - 1);
@@ -271,13 +259,11 @@ const QuizAttempt = () => {
   /* =======================================================
      GO TO QUESTION
   ======================================================= */
-
   const handleQuestionSelect = useCallback(
     (index) => {
       if (index < 0 || index >= totalQuestions || isSubmitting) {
         return;
       }
-
       setCurrentQuestionIndex(index);
     },
     [totalQuestions, isSubmitting],
@@ -286,7 +272,6 @@ const QuizAttempt = () => {
   /* =======================================================
      MARK / UNMARK QUESTION
   ======================================================= */
-
   const handleMarkReview = useCallback(
     (index) => {
       if (index < 0 || index >= totalQuestions || isSubmitting) {
@@ -294,7 +279,6 @@ const QuizAttempt = () => {
       }
 
       const question = questions[index];
-
       if (!question?.questionId) {
         return;
       }
@@ -305,7 +289,6 @@ const QuizAttempt = () => {
         if (previousReviewed.includes(questionId)) {
           return previousReviewed.filter((id) => id !== questionId);
         }
-
         return [...previousReviewed, questionId];
       });
     },
@@ -315,11 +298,9 @@ const QuizAttempt = () => {
   /* =======================================================
      REVIEW UNANSWERED
   ======================================================= */
-
   const handleReviewUnanswered = useCallback(() => {
     const firstUnansweredIndex = questions.findIndex((question) => {
       const answer = answers[question.questionId];
-
       return answer === undefined || answer === null || answer === "";
     });
 
@@ -331,300 +312,49 @@ const QuizAttempt = () => {
   /* =======================================================
      CONTINUE REVIEWING
   ======================================================= */
-
   const handleContinueReviewing = useCallback(() => {
-    /*
-        The learner is already inside the
-        quiz attempt, so this action simply
-        closes the submit confirmation
-        inside QuizSubmit.
-
-        QuizSubmit handles its own modal
-        state and will call this callback
-        when needed.
-      */
-
     if (currentQuestionIndex < totalQuestions - 1) {
       setCurrentQuestionIndex(currentQuestionIndex);
     }
   }, [currentQuestionIndex, totalQuestions]);
 
   /* =======================================================
-     CALCULATE RESULT
+     SUBMIT QUIZ TO BACKEND
   ======================================================= */
-
-  const calculateResult = useCallback(() => {
-    if (!quiz || questions.length === 0) {
-      return null;
-    }
-
-    let totalPoints = 0;
-
-    let earnedPoints = 0;
-
-    let correctAnswers = 0;
-
-    let incorrectAnswers = 0;
-
-    let unanswered = 0;
-
-    const resultAnswers = questions.map((question) => {
-      const questionId = question.questionId;
-
-      const selectedAnswer = answers[questionId];
-
-      const points = Number(question.points) || 1;
-
-      totalPoints += points;
-
-      const isAnswered =
-        selectedAnswer !== undefined &&
-        selectedAnswer !== null &&
-        selectedAnswer !== "";
-
-      /* -----------------------------------------
-               UNANSWERED
-            ------------------------------------------ */
-
-      if (!isAnswered) {
-        unanswered += 1;
-
-        return {
-          questionId,
-
-          selectedAnswer: null,
-
-          correctAnswer: question.correctAnswer,
-
-          isCorrect: false,
-
-          points: 0,
-
-          maxPoints: points,
-        };
-      }
-
-      /* -----------------------------------------
-               CHECK ANSWER
-            ------------------------------------------ */
-
-      const isCorrect = selectedAnswer === question.correctAnswer;
-
-      if (isCorrect) {
-        correctAnswers += 1;
-
-        earnedPoints += points;
-      } else {
-        incorrectAnswers += 1;
-      }
-
-      return {
-        questionId,
-
-        selectedAnswer,
-
-        correctAnswer: question.correctAnswer,
-
-        isCorrect,
-
-        points: isCorrect ? points : 0,
-
-        maxPoints: points,
-      };
-    });
-
-    /* -----------------------------------------
-         SCORE
-      ------------------------------------------ */
-
-    const score =
-      totalPoints > 0 ? Math.round((earnedPoints / totalPoints) * 100) : 0;
-
-    /* -----------------------------------------
-         PASSING SCORE
-      ------------------------------------------ */
-
-    const passingScore = Number(quiz.passingScore) || 70;
-
-    const passed = score >= passingScore;
-
-    /* -----------------------------------------
-         TIME TAKEN
-      ------------------------------------------ */
-
-    const durationSeconds = getQuizDurationMinutes() * 60;
-
-    const timeTaken = Math.max(durationSeconds - timeRemaining, 0);
-
-    /* -----------------------------------------
-         RESULT
-      ------------------------------------------ */
-
-    return {
-      score,
-
-      passingScore,
-
-      passed,
-
-      correctAnswers,
-
-      incorrectAnswers,
-
-      unanswered,
-
-      totalQuestions: questions.length,
-
-      earnedPoints,
-
-      totalPoints,
-
-      timeTaken,
-
-      answers: resultAnswers,
-    };
-  }, [quiz, questions, answers, timeRemaining, getQuizDurationMinutes]);
-
-  /* =======================================================
-     SAVE ATTEMPT
-  ======================================================= */
-
-  const saveAttempt = useCallback(
-    (result) => {
-      if (!quiz || !result) {
-        return null;
-      }
-
-      const attemptId = `attempt-${quiz.quizId}-${Date.now()}`;
-
-      const attempt = {
-        attemptId,
-
-        learnerId: CURRENT_LEARNER_ID,
-
-        quizId: quiz.quizId,
-
-        quizTitle: quiz.quizTitle || quiz.title || "",
-
-        courseId: quiz.courseId || null,
-
-        courseTitle: quiz.courseTitle || quiz.course || "",
-
-        status: result.passed ? "passed" : "failed",
-
-        score: result.score,
-
-        passingScore: result.passingScore,
-
-        passed: result.passed,
-
-        correctAnswers: result.correctAnswers,
-
-        incorrectAnswers: result.incorrectAnswers,
-
-        unanswered: result.unanswered,
-
-        totalQuestions: result.totalQuestions,
-
-        earnedPoints: result.earnedPoints,
-
-        totalPoints: result.totalPoints,
-
-        timeTaken: result.timeTaken,
-
-        answers: result.answers,
-
-        completedAt: new Date().toISOString(),
-      };
-
-      /* ===============================================
-           SAVE LATEST ATTEMPT
-        ================================================ */
-
-      try {
-        const storedAttempts = JSON.parse(
-          localStorage.getItem(ATTEMPTS_STORAGE_KEY) || "{}",
-        );
-
-        storedAttempts[quiz.quizId] = attempt;
-
-        localStorage.setItem(
-          ATTEMPTS_STORAGE_KEY,
-          JSON.stringify(storedAttempts),
-        );
-      } catch (error) {
-        console.error("Unable to save latest quiz attempt:", error);
-      }
-
-      /* ===============================================
-           SAVE ATTEMPT HISTORY
-        ================================================ */
-
-      try {
-        const storedHistory = JSON.parse(
-          localStorage.getItem(ATTEMPT_HISTORY_STORAGE_KEY) || "[]",
-        );
-
-        storedHistory.push(attempt);
-
-        localStorage.setItem(
-          ATTEMPT_HISTORY_STORAGE_KEY,
-          JSON.stringify(storedHistory),
-        );
-      } catch (error) {
-        console.error("Unable to save quiz attempt history:", error);
-      }
-
-      return attempt;
-    },
-    [quiz],
-  );
-
-  /* =======================================================
-     SUBMIT QUIZ
-  ======================================================= */
-
-  const handleSubmitQuiz = useCallback(() => {
-    if (!quiz || isSubmitting) {
+  const handleSubmitQuiz = useCallback(async () => {
+    if (!quiz || !attemptId || isSubmitting) {
       return;
     }
 
     setIsSubmitting(true);
 
-    const result = calculateResult();
+    try {
+      const formattedAnswers = Object.entries(answers).map(([qId, val]) => ({
+        questionId: Number(qId),
+        selectedOption: val,
+      }));
 
-    if (!result) {
+      const submitResult = await submitQuiz(attemptId, formattedAnswers);
+
+      if (submitResult?.attemptId) {
+        navigate(
+          `/learner/quizzes/${quiz.quizId}/result/${submitResult.attemptId}`,
+          { replace: true },
+        );
+      }
+    } catch (err) {
+      console.error("Failed to submit backend quiz attempt:", err);
       setIsSubmitting(false);
-
-      return;
     }
-
-    const attempt = saveAttempt(result);
-
-    if (!attempt) {
-      setIsSubmitting(false);
-
-      return;
-    }
-
-    navigate(`/learner/quizzes/${quiz.quizId}/result/${attempt.attemptId}`, {
-      replace: true,
-    });
-  }, [quiz, isSubmitting, calculateResult, saveAttempt, navigate]);
+  }, [quiz, attemptId, isSubmitting, answers, navigate]);
 
   /* =======================================================
      AUTO SUBMIT WHEN TIME ENDS
   ======================================================= */
-
   useEffect(() => {
-    if (!quiz || isSubmitting || timeRemaining !== 0) {
+    if (!quiz || !attemptId || isSubmitting || timeRemaining !== 0) {
       return;
     }
-
-    /*
-      Prevent automatic submission
-      during initial timer setup.
-    */
 
     if (answeredQuestions === 0 && currentQuestionIndex === 0) {
       return;
@@ -633,6 +363,7 @@ const QuizAttempt = () => {
     handleSubmitQuiz();
   }, [
     quiz,
+    attemptId,
     timeRemaining,
     isSubmitting,
     answeredQuestions,
@@ -643,7 +374,6 @@ const QuizAttempt = () => {
   /* =======================================================
      EXIT QUIZ
   ======================================================= */
-
   const handleExitQuiz = useCallback(() => {
     if (isSubmitting) {
       return;
@@ -661,23 +391,15 @@ const QuizAttempt = () => {
   /* =======================================================
      PROGRESS DATA
   ======================================================= */
-
   const progressData = useMemo(
     () => ({
       currentQuestion: currentQuestionNumber,
-
       totalQuestions,
-
       answeredQuestions,
-
       unansweredQuestions,
-
       percentage: progressPercentage,
-
       timeRemaining,
-
       formattedTime: formatTime(timeRemaining),
-
       isTimeRunningOut,
     }),
     [
@@ -693,30 +415,29 @@ const QuizAttempt = () => {
   );
 
   /* =======================================================
-     CURRENT SELECTED ANSWER
+     LOADING / ERROR / INVALID STATES
   ======================================================= */
+  if (isLoading) {
+    return (
+      <main className="quiz-attempt quiz-attempt--not-found">
+        <div className="quiz-attempt__not-found">
+          <h1>Loading Quiz...</h1>
+          <p>Connecting to backend and preparing questions.</p>
+        </div>
+      </main>
+    );
+  }
 
-  const selectedAnswer = currentQuestion?.questionId
-    ? (answers[currentQuestion.questionId] ?? null)
-    : null;
-
-  /* =======================================================
-     INVALID QUIZ
-  ======================================================= */
-
-  if (!quiz) {
+  if (error || !quiz) {
     return (
       <main className="quiz-attempt quiz-attempt--not-found">
         <div className="quiz-attempt__not-found">
           <div className="quiz-attempt__not-found-icon">?</div>
-
           <h1>Quiz Not Found</h1>
-
           <p>
-            The quiz you are trying to access does not exist or is no longer
-            available.
+            {error ||
+              "The quiz you are trying to access does not exist or is no longer available."}
           </p>
-
           <button type="button" onClick={() => navigate("/learner/quizzes")}>
             Back to Quizzes
           </button>
@@ -725,20 +446,13 @@ const QuizAttempt = () => {
     );
   }
 
-  /* =======================================================
-     QUIZ WITHOUT QUESTIONS
-  ======================================================= */
-
   if (questions.length === 0) {
     return (
       <main className="quiz-attempt quiz-attempt--not-found">
         <div className="quiz-attempt__not-found">
           <div className="quiz-attempt__not-found-icon">!</div>
-
           <h1>Quiz Unavailable</h1>
-
           <p>This quiz does not contain any questions yet.</p>
-
           <button type="button" onClick={() => navigate("/learner/quizzes")}>
             Back to Quizzes
           </button>
@@ -750,20 +464,17 @@ const QuizAttempt = () => {
   /* =======================================================
      RENDER
   ======================================================= */
-
   return (
     <main className="quiz-attempt">
       <div className="quiz-attempt__container">
         {/* =================================================
             QUIZ HEADER
         ================================================== */}
-
         <QuizHeader quiz={quiz} />
 
         {/* =================================================
             QUIZ PROGRESS
         ================================================== */}
-
         <QuizProgress
           progress={progressData}
           questions={questions}
@@ -779,13 +490,8 @@ const QuizAttempt = () => {
         />
 
         {/* =================================================
-            CURRENT QUESTION
-        ================================================== */}
-
-        {/* =================================================
             QUIZ SUBMISSION
         ================================================== */}
-
         <QuizSubmit
           answeredQuestions={answeredQuestions}
           unansweredQuestions={unansweredQuestions}
@@ -804,3 +510,4 @@ const QuizAttempt = () => {
 };
 
 export default QuizAttempt;
+

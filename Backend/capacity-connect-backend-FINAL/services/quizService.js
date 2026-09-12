@@ -1,7 +1,6 @@
 const pool = require('../config/db');
 
 class QuizService {
-
   // CREATE QUIZ
   async createQuiz({
     courseId,
@@ -9,6 +8,8 @@ class QuizService {
     title,
     description,
     passingScore,
+    totalMarks,
+    timeLimitMinutes,
     userId,
     userRole
   }) {
@@ -18,21 +19,23 @@ class QuizService {
 
     const result = await pool.query(
       `INSERT INTO quizzes
-       (course_id, module_id, title, description, passing_score)
-       VALUES ($1, $2, $3, $4, $5)
+       (course_id, module_id, title, description, passing_score, total_marks, time_limit_minutes, created_by)
+       VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
        RETURNING *`,
       [
         courseId,
         moduleId || null,
         title,
         description || null,
-        passingScore || 60
+        passingScore || 60,
+        totalMarks || 100,
+        timeLimitMinutes || 30,
+        userId
       ]
     );
 
     return result.rows[0];
   }
-
 
   // ADD QUESTION
   async addQuestion({
@@ -50,42 +53,35 @@ class QuizService {
       throw new Error('Only trainer or admin can add questions');
     }
 
-    const optionA = options?.A || options?.a || null;
-    const optionB = options?.B || options?.b || null;
-    const optionC = options?.C || options?.c || null;
-    const optionD = options?.D || options?.d || null;
+    const formattedOptions =
+      typeof options === 'object' ? JSON.stringify(options) : options;
 
     const result = await pool.query(
       `INSERT INTO quiz_questions
        (
          quiz_id,
          question_text,
-         option_a,
-         option_b,
-         option_c,
-         option_d,
-         correct_option,
+         question_type,
+         options,
+         correct_answer,
          marks,
-         question_order
+         order_index
        )
-       VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9)
+       VALUES ($1, $2, $3, $4, $5, $6, $7)
        RETURNING *`,
       [
         quizId,
         questionText,
-        optionA,
-        optionB,
-        optionC,
-        optionD,
+        questionType || 'MULTIPLE_CHOICE',
+        formattedOptions,
         correctAnswer,
-        marks || 1,
-        orderIndex || 0
+        marks || 10,
+        orderIndex || 1
       ]
     );
 
     return result.rows[0];
   }
-
 
   // GET QUIZ
   async getQuiz(quizId) {
@@ -108,49 +104,40 @@ class QuizService {
     return result.rows[0];
   }
 
-
   // GET QUESTIONS
   async getQuizQuestions(quizId, isTrainerOrAdmin = false) {
-
-    const correctColumn = isTrainerOrAdmin
-      ? 'correct_option,'
-      : '';
+    const selectFields = isTrainerOrAdmin
+      ? 'id, quiz_id, question_text, question_type, options, correct_answer, marks, order_index'
+      : 'id, quiz_id, question_text, question_type, options, marks, order_index';
 
     const result = await pool.query(
-      `SELECT
-         id,
-         quiz_id,
-         question_text,
-         option_a,
-         option_b,
-         option_c,
-         option_d,
-         ${correctColumn}
-         marks,
-         question_order
+      `SELECT ${selectFields}
        FROM quiz_questions
        WHERE quiz_id = $1
-       ORDER BY question_order ASC, id ASC`,
+       ORDER BY order_index ASC, id ASC`,
       [quizId]
     );
 
-    return result.rows;
+    return result.rows.map((q) => {
+      let parsedOptions = q.options;
+      if (typeof parsedOptions === 'string') {
+        try {
+          parsedOptions = JSON.parse(parsedOptions);
+        } catch (e) {
+          parsedOptions = [parsedOptions];
+        }
+      }
+      return {
+        ...q,
+        options: parsedOptions
+      };
+    });
   }
-
 
   // START QUIZ ATTEMPT
   async startQuizAttempt({ quizId, userId }) {
-
     const quizResult = await pool.query(
-      `SELECT
-         q.id,
-         q.passing_score,
-         COALESCE(SUM(qq.marks), 0) AS total_marks
-       FROM quizzes q
-       LEFT JOIN quiz_questions qq
-         ON qq.quiz_id = q.id
-       WHERE q.id = $1
-       GROUP BY q.id`,
+      `SELECT id, passing_score FROM quizzes WHERE id = $1`,
       [quizId]
     );
 
@@ -158,9 +145,7 @@ class QuizService {
       throw new Error('Quiz not found');
     }
 
-    const quiz = quizResult.rows[0];
-
-    // Check enrollment
+    // Check enrollment using user_id
     const enrollmentResult = await pool.query(
       `SELECT id
        FROM enrollments
@@ -169,7 +154,7 @@ class QuizService {
          FROM quizzes
          WHERE id = $1
        )
-       AND learner_id = $2
+       AND user_id = $2
        LIMIT 1`,
       [quizId, userId]
     );
@@ -178,50 +163,35 @@ class QuizService {
       throw new Error('You are not enrolled in this course');
     }
 
-    const enrollmentId = enrollmentResult.rows[0].id;
-
     const attemptResult = await pool.query(
       `INSERT INTO quiz_attempts
        (
          quiz_id,
-         learner_id,
+         user_id,
          score,
-         total_marks,
-         passed
+         percentage,
+         passed,
+         status
        )
-       VALUES ($1, $2, 0, $3, false)
+       VALUES ($1, $2, 0, 0, false, 'IN_PROGRESS')
        RETURNING *`,
-      [
-        quizId,
-        userId,
-        quiz.total_marks
-      ]
+      [quizId, userId]
     );
 
-    return {
-      ...attemptResult.rows[0],
-      enrollmentId
-    };
+    return attemptResult.rows[0];
   }
 
-
-  // SUBMIT QUIZ
-  async submitQuizAttempt({
-    attemptId,
-    answers,
-    userId
-  }) {
-
+  // SUBMIT QUIZ ATTEMPT
+  async submitQuizAttempt({ attemptId, answers, userId }) {
     // Get attempt
     const attemptResult = await pool.query(
       `SELECT
          qa.*,
          q.passing_score
        FROM quiz_attempts qa
-       JOIN quizzes q
-         ON q.id = qa.quiz_id
+       JOIN quizzes q ON q.id = qa.quiz_id
        WHERE qa.id = $1
-       AND qa.learner_id = $2`,
+       AND qa.user_id = $2`,
       [attemptId, userId]
     );
 
@@ -231,14 +201,12 @@ class QuizService {
 
     const attempt = attemptResult.rows[0];
 
-    // Get questions
+    // Get all questions
     const questionsResult = await pool.query(
-      `SELECT
-         id,
-         correct_option,
-         marks
+      `SELECT id, question_text, options, correct_answer, marks
        FROM quiz_questions
-       WHERE quiz_id = $1`,
+       WHERE quiz_id = $1
+       ORDER BY order_index ASC, id ASC`,
       [attempt.quiz_id]
     );
 
@@ -247,78 +215,70 @@ class QuizService {
     let score = 0;
     let totalMarks = 0;
 
-    // Delete previous answers if resubmitting
+    // Delete previous answers if re-submitting
     await pool.query(
-      `DELETE FROM quiz_attempt_answers
-       WHERE attempt_id = $1`,
+      `DELETE FROM quiz_attempt_answers WHERE attempt_id = $1`,
       [attemptId]
     );
 
+    const submittedAnswers = Array.isArray(answers) ? answers : [];
+
     for (const question of questions) {
+      const qMarks = Number(question.marks) || 0;
+      totalMarks += qMarks;
 
-      totalMarks += Number(question.marks);
-
-      const answer = answers.find(
-        a => Number(a.questionId) === Number(question.id)
+      const userAnsObj = submittedAnswers.find(
+        (a) => Number(a.questionId || a.question_id) === Number(question.id)
       );
 
-      const selectedOption = answer
-        ? String(answer.selectedOption).toUpperCase()
+      const userAnswer = userAnsObj
+        ? (userAnsObj.selectedOption ?? userAnsObj.user_answer ?? userAnsObj.selectedAnswer ?? '')
         : null;
 
-      const correctOption =
-        String(question.correct_option).toUpperCase();
+      let isCorrect = false;
+      if (userAnswer !== null && userAnswer !== undefined) {
+        const cleanUser = String(userAnswer).trim().toLowerCase();
+        const cleanCorrect = String(question.correct_answer).trim().toLowerCase();
+        isCorrect = cleanUser === cleanCorrect;
+      }
 
-      const isCorrect =
-        selectedOption === correctOption;
-
-      const marksObtained =
-        isCorrect ? Number(question.marks) : 0;
-
-      score += marksObtained;
+      const marksAwarded = isCorrect ? qMarks : 0;
+      score += marksAwarded;
 
       await pool.query(
         `INSERT INTO quiz_attempt_answers
          (
            attempt_id,
            question_id,
-           selected_option,
+           user_answer,
            is_correct,
-           marks_obtained
+           marks_awarded
          )
-         VALUES ($1,$2,$3,$4,$5)`,
+         VALUES ($1, $2, $3, $4, $5)`,
         [
           attemptId,
           question.id,
-          selectedOption,
+          userAnswer ? String(userAnswer) : null,
           isCorrect,
-          marksObtained
+          marksAwarded
         ]
       );
     }
 
-    const percentage =
-      totalMarks > 0
-        ? (score / totalMarks) * 100
-        : 0;
-
-    const passed =
-      percentage >= Number(attempt.passing_score);
+    const percentage = totalMarks > 0 ? (score / totalMarks) * 100 : 0;
+    const passed = percentage >= Number(attempt.passing_score);
 
     // Update attempt
     await pool.query(
       `UPDATE quiz_attempts
        SET
          score = $1,
-         total_marks = $2,
-         passed = $3
+         percentage = $2,
+         passed = $3,
+         status = 'SUBMITTED',
+         submitted_at = CURRENT_TIMESTAMP
        WHERE id = $4`,
-      [
-        score,
-        totalMarks,
-        passed,
-        attemptId
-      ]
+      [score, percentage, passed, attemptId]
     );
 
     return {
@@ -332,48 +292,37 @@ class QuizService {
     };
   }
 
-
   // GET ATTEMPT RESULT
-  async getAttemptResult(
-    attemptId,
-    userId,
-    userRole
-  ) {
-
-    let query;
+  async getAttemptResult(attemptId, userId, userRole) {
+    let queryStr;
     let params;
 
-    if (userRole === 'ADMIN' || userRole === 'TRAINER') {
-
-      query = `
+    if (['ADMIN', 'TRAINER'].includes(userRole)) {
+      queryStr = `
         SELECT
           qa.*,
-          q.title AS quiz_title
+          q.title AS quiz_title,
+          q.passing_score
         FROM quiz_attempts qa
-        JOIN quizzes q
-          ON q.id = qa.quiz_id
+        JOIN quizzes q ON q.id = qa.quiz_id
         WHERE qa.id = $1
       `;
-
       params = [attemptId];
-
     } else {
-
-      query = `
+      queryStr = `
         SELECT
           qa.*,
-          q.title AS quiz_title
+          q.title AS quiz_title,
+          q.passing_score
         FROM quiz_attempts qa
-        JOIN quizzes q
-          ON q.id = qa.quiz_id
+        JOIN quizzes q ON q.id = qa.quiz_id
         WHERE qa.id = $1
-        AND qa.learner_id = $2
+        AND qa.user_id = $2
       `;
-
       params = [attemptId, userId];
     }
 
-    const attemptResult = await pool.query(query, params);
+    const attemptResult = await pool.query(queryStr, params);
 
     if (attemptResult.rows.length === 0) {
       throw new Error('Attempt not found');
@@ -383,27 +332,42 @@ class QuizService {
 
     const answersResult = await pool.query(
       `SELECT
-         aaa.id,
-         aaa.question_id,
-         aaa.selected_option,
-         aaa.is_correct,
-         aaa.marks_obtained,
+         qaa.id,
+         qaa.question_id,
+         qaa.user_answer,
+         qaa.is_correct,
+         qaa.marks_awarded,
          qq.question_text,
-         qq.correct_option,
+         qq.options,
+         qq.correct_answer,
          qq.marks
-       FROM quiz_attempt_answers aaa
-       JOIN quiz_questions qq
-         ON qq.id = aaa.question_id
-       WHERE aaa.attempt_id = $1
-       ORDER BY qq.question_order ASC, qq.id ASC`,
+       FROM quiz_attempt_answers qaa
+       JOIN quiz_questions qq ON qq.id = qaa.question_id
+       WHERE qaa.attempt_id = $1
+       ORDER BY qq.order_index ASC, qq.id ASC`,
       [attemptId]
     );
 
+    const parsedAnswers = answersResult.rows.map((row) => {
+      let parsedOptions = row.options;
+      if (typeof parsedOptions === 'string') {
+        try {
+          parsedOptions = JSON.parse(parsedOptions);
+        } catch (e) {
+          parsedOptions = [parsedOptions];
+        }
+      }
+      return {
+        ...row,
+        options: parsedOptions
+      };
+    });
+
     return {
       attempt,
-      answers: answersResult.rows
+      answers: parsedAnswers
     };
   }
 }
 
-module.exports = new QuizService();
+module.exports = new QuizService();

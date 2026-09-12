@@ -334,7 +334,7 @@ const QuizResultHeader = ({ quiz = null, result = null }) => {
               </svg>
 
               <div className="quiz-result-header__score-value">
-                <strong>{score}%</strong>
+                <strong>{Number(score).toFixed(2)}%</strong>
 
                 <span>Score Achieved</span>
               </div>
@@ -363,7 +363,7 @@ const QuizResultHeader = ({ quiz = null, result = null }) => {
           </div>
 
           <p className="quiz-result-header__passing-score">
-            Passing Score: <strong>{passingScore}%</strong>
+            Passing Score: <strong>{Number(passingScore).toFixed(2)}%</strong>
           </p>
 
           {/* MINI RESULT DETAILS */}
@@ -376,7 +376,7 @@ const QuizResultHeader = ({ quiz = null, result = null }) => {
             </div>
 
             <div>
-              <strong>{accuracy}%</strong>
+              <strong>{Number(accuracy).toFixed(2)}%</strong>
 
               <span>Accuracy</span>
             </div>

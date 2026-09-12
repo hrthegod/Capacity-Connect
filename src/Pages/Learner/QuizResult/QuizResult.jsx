@@ -1,218 +1,161 @@
-import React, { useMemo } from "react";
-
+import React, { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
 /* =========================================================
    QUIZ RESULT COMPONENTS
 ========================================================= */
-
 import QuizResultHeader from "../../../Components/Learner/QuizResult/QuizResultHeader/QuizResultHeader";
-
 import QuizScore from "../../../Components/Learner/QuizResult/QuizScore/QuizScore";
-
 import QuizPerformance from "../../../Components/Learner/QuizResult/QuizPerformance/QuizPerformance";
-
 import QuizReview from "../../../Components/Learner/QuizResult/QuizReview/QuizReview";
-
 import QuizResultActions from "../../../Components/Learner/QuizResult/QuizResultActions/QuizResultActions";
 
 /* =========================================================
-   QUIZ DATA
+   QUIZ API SERVICE
 ========================================================= */
-
-import { getQuizzes } from "../../../../data/mock/quiz";
+import { getQuiz, getQuizResult } from "../../../services/quizApi";
 
 import "./QuizResult.css";
-
-/* =========================================================
-   CONSTANTS
-========================================================= */
-
-const ATTEMPTS_STORAGE_KEY = "capacityConnectQuizAttempts";
-
-const ATTEMPT_HISTORY_STORAGE_KEY = "capacityConnectQuizAttemptHistory";
-
-const CURRENT_LEARNER_ID = "learner-001";
 
 /* =========================================================
    QUIZ RESULT PAGE
    Capacity Connect - Learner
 ========================================================= */
-
 const QuizResult = () => {
   const navigate = useNavigate();
-
   const { quizId, attemptId } = useParams();
 
-  /* =======================================================
-     GET QUIZ
-  ======================================================= */
-
-  const quiz = useMemo(() => {
-    if (!quizId) {
-      return null;
-    }
-
-    const quizzes = getQuizzes();
-
-    return quizzes.find((item) => item.quizId === quizId) || null;
-  }, [quizId]);
+  const [quiz, setQuiz] = useState(null);
+  const [result, setResult] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   /* =======================================================
-     GET STORED ATTEMPT
+     FETCH RESULT FROM BACKEND API
   ======================================================= */
-
-  const attempt = useMemo(() => {
-    if (!quizId || !attemptId) {
-      return null;
+  useEffect(() => {
+    if (!attemptId) {
+      setIsLoading(false);
+      return;
     }
 
-    /* -------------------------------------------------------
-       FIRST: SEARCH ATTEMPT HISTORY
-    ------------------------------------------------------- */
+    async function fetchResult() {
+      try {
+        setIsLoading(true);
+        setError(null);
 
-    try {
-      const storedHistory = JSON.parse(
-        localStorage.getItem(ATTEMPT_HISTORY_STORAGE_KEY) || "[]",
-      );
+        // Fetch graded result from backend API
+        const res = await getQuizResult(attemptId);
+        const attemptData = res?.attempt;
+        const answersData = res?.answers || [];
 
-      if (Array.isArray(storedHistory)) {
-        const historyAttempt = storedHistory.find(
-          (item) =>
-            item.attemptId === attemptId &&
-            item.quizId === quizId &&
-            item.learnerId === CURRENT_LEARNER_ID,
-        );
-
-        if (historyAttempt) {
-          return historyAttempt;
+        if (!attemptData) {
+          throw new Error("Result data unavailable");
         }
+
+        // Fetch quiz metadata if quizId is present
+        let quizMeta = null;
+        const actualQuizId = attemptData.quiz_id || quizId;
+
+        if (actualQuizId) {
+          try {
+            quizMeta = await getQuiz(actualQuizId);
+          } catch (e) {
+            console.error("Quiz metadata unavailable:", e);
+          }
+        }
+
+        // Format questions array for QuizReview component
+        const formattedQuestions = answersData.map((ans, idx) => ({
+          questionId: ans.question_id || `q-${idx}`,
+          question: ans.question_text || "",
+          options: Array.isArray(ans.options) ? ans.options : [],
+          correctAnswer: ans.correct_answer || "",
+          points: Number(ans.marks) || 10,
+          explanation:
+            "Review the concept and try practicing a few more questions to strengthen your understanding.",
+        }));
+
+        const formattedQuiz = {
+          quizId: String(actualQuizId),
+          quizTitle: attemptData.quiz_title || quizMeta?.title || "Quiz",
+          courseTitle: quizMeta?.course_title || "",
+          passingScore: Number(
+            attemptData.passing_score || quizMeta?.passing_score || 60,
+          ),
+          totalQuestions: formattedQuestions.length,
+          questions: formattedQuestions,
+        };
+
+        // Format result stats for header/score/review components
+        const correctCount = answersData.filter((a) => a.is_correct).length;
+        const totalCount = answersData.length;
+        const incorrectCount = answersData.filter(
+          (a) => a.user_answer && !a.is_correct,
+        ).length;
+        const unansweredCount = totalCount - correctCount - incorrectCount;
+
+        const formattedAnswers = answersData.map((ans) => ({
+          questionId: ans.question_id,
+          selectedAnswer: ans.user_answer,
+          user_answer: ans.user_answer,
+          correctAnswer: ans.correct_answer,
+          isCorrect: Boolean(ans.is_correct),
+          is_correct: Boolean(ans.is_correct),
+          marksAwarded: Number(ans.marks_awarded || 0),
+          maxPoints: Number(ans.marks || 10),
+        }));
+
+        const formattedResult = {
+          attemptId: String(attemptData.id),
+          quizId: String(actualQuizId),
+          score: Number(attemptData.percentage ?? attemptData.score ?? 0),
+          passingScore: Number(
+            attemptData.passing_score || quizMeta?.passing_score || 60,
+          ),
+          passed: Boolean(attemptData.passed),
+          totalQuestions: totalCount,
+          correctAnswers: correctCount,
+          incorrectAnswers: incorrectCount,
+          unanswered: Math.max(unansweredCount, 0),
+          earnedPoints: Number(attemptData.score || 0),
+          totalPoints: answersData.reduce(
+            (acc, a) => acc + (Number(a.marks) || 0),
+            0,
+          ),
+          completedAt: attemptData.submitted_at || attemptData.created_at,
+          answers: formattedAnswers,
+        };
+
+        setQuiz(formattedQuiz);
+        setResult(formattedResult);
+      } catch (err) {
+        console.error("Failed to load backend attempt result:", err);
+        setError(err.message || "Failed to load quiz result");
+      } finally {
+        setIsLoading(false);
       }
-    } catch (error) {
-      console.error("Unable to read quiz attempt history:", error);
     }
 
-    /* -------------------------------------------------------
-       SECOND: SEARCH LATEST ATTEMPT
-    ------------------------------------------------------- */
-
-    try {
-      const storedAttempts = JSON.parse(
-        localStorage.getItem(ATTEMPTS_STORAGE_KEY) || "{}",
-      );
-
-      const latestAttempt = storedAttempts?.[quizId];
-
-      if (
-        latestAttempt &&
-        latestAttempt.attemptId === attemptId &&
-        latestAttempt.learnerId === CURRENT_LEARNER_ID
-      ) {
-        return latestAttempt;
-      }
-    } catch (error) {
-      console.error("Unable to read latest quiz attempt:", error);
-    }
-
-    return null;
+    fetchResult();
   }, [quizId, attemptId]);
 
   /* =======================================================
-     NORMALIZED RESULT
+     NAVIGATION ACTIONS
   ======================================================= */
-
-  const result = useMemo(() => {
-    if (!attempt) {
-      return null;
-    }
-
-    const totalQuestions = Number(
-      attempt.totalQuestions ??
-        quiz?.totalQuestions ??
-        quiz?.questionCount ??
-        quiz?.questions?.length ??
-        0,
-    );
-
-    const correctAnswers = Number(attempt.correctAnswers ?? 0);
-
-    const incorrectAnswers = Number(attempt.incorrectAnswers ?? 0);
-
-    const unanswered = Number(
-      attempt.unanswered ??
-        Math.max(totalQuestions - correctAnswers - incorrectAnswers, 0),
-    );
-
-    const score = Number(attempt.score ?? 0);
-
-    const passingScore = Number(
-      attempt.passingScore ?? quiz?.passingScore ?? 70,
-    );
-
-    const passed =
-      typeof attempt.passed === "boolean"
-        ? attempt.passed
-        : score >= passingScore;
-
-    return {
-      ...attempt,
-
-      score,
-
-      passingScore,
-
-      passed,
-
-      totalQuestions,
-
-      correctAnswers,
-
-      incorrectAnswers,
-
-      unanswered,
-
-      completedAt: attempt.completedAt || attempt.completionDate || null,
-
-      timeTaken: Number(attempt.timeTaken ?? 0),
-
-      earnedPoints: Number(attempt.earnedPoints ?? 0),
-
-      totalPoints: Number(attempt.totalPoints ?? 0),
-
-      answers: Array.isArray(attempt.answers) ? attempt.answers : [],
-    };
-  }, [attempt, quiz]);
-
-  /* =======================================================
-     BACK TO QUIZZES
-  ======================================================= */
-
   const handleBackToQuizzes = () => {
     navigate("/learner/quizzes");
   };
-
-  /* =======================================================
-     TAKE QUIZ AGAIN
-  ======================================================= */
 
   const handleTakeQuizAgain = () => {
     if (!quiz?.quizId) {
       return;
     }
-
     navigate(`/learner/quizzes/${quiz.quizId}/attempt`);
   };
 
-  /* =======================================================
-     REVIEW PERFORMANCE
-     
-     QuizReview is already rendered above QuizResultActions.
-     This smoothly moves the learner back to the review area.
-  ======================================================= */
-
   const handleReviewPerformance = () => {
     const reviewSection = document.querySelector(".quiz-review");
-
     if (reviewSection) {
       reviewSection.scrollIntoView({
         behavior: "smooth",
@@ -221,77 +164,50 @@ const QuizResult = () => {
     }
   };
 
-  /* =======================================================
-     EXPLORE MORE QUIZZES
-     
-     We already have a confirmed quizzes route, so this
-     safely uses the existing quizzes page.
-  ======================================================= */
-
   const handleExploreMoreQuizzes = () => {
     navigate("/learner/quizzes");
   };
 
   /* =======================================================
-     INVALID QUIZ
+     LOADING / INVALID STATES
   ======================================================= */
-
-  if (!quiz) {
+  if (isLoading) {
     return (
       <main className="quiz-result quiz-result--not-found">
         <div className="quiz-result__not-found">
-          <div className="quiz-result__not-found-icon">?</div>
-
-          <span className="quiz-result__not-found-eyebrow">QUIZ RESULT</span>
-
-          <h1>Quiz Not Found</h1>
-
-          <p>
-            The quiz you are trying to view does not exist or is no longer
-            available.
-          </p>
-
-          <button type="button" onClick={handleBackToQuizzes}>
-            Back to Quizzes
-          </button>
+          <h1>Loading Result...</h1>
+          <p>Fetching your graded score and performance review.</p>
         </div>
       </main>
     );
   }
 
-  /* =======================================================
-     INVALID ATTEMPT
-  ======================================================= */
-
-  if (!attempt || !result) {
+  if (error || !quiz || !result) {
     return (
       <main className="quiz-result quiz-result--not-found">
         <div className="quiz-result__not-found">
           <div className="quiz-result__not-found-icon">!</div>
-
           <span className="quiz-result__not-found-eyebrow">
             RESULT UNAVAILABLE
           </span>
-
           <h1>Result Not Found</h1>
-
           <p>
-            We couldn&apos;t find this quiz attempt. It may have expired, been
-            removed, or may not belong to the current learner.
+            {error ||
+              "We couldn't find this quiz attempt. It may have expired or been removed."}
           </p>
-
           <div className="quiz-result__not-found-actions">
             <button type="button" onClick={handleBackToQuizzes}>
               Back to Quizzes
             </button>
-
-            <button
-              type="button"
-              className="quiz-result__secondary-button"
-              onClick={handleTakeQuizAgain}
-            >
-              Take Quiz Again
-            </button>
+            {quiz?.quizId && (
+              <button
+                type="button"
+                className="quiz-result__secondary-button"
+                onClick={handleTakeQuizAgain}
+              >
+                Take Quiz Again
+              </button>
+            )}
           </div>
         </div>
       </main>
@@ -301,38 +217,32 @@ const QuizResult = () => {
   /* =======================================================
      RENDER
   ======================================================= */
-
   return (
     <main className="quiz-result">
       <div className="quiz-result__container">
         {/* =================================================
             RESULT HEADER
         ================================================== */}
-
         <QuizResultHeader quiz={quiz} result={result} />
 
         {/* =================================================
             QUIZ SCORE
         ================================================== */}
-
         <QuizScore quiz={quiz} result={result} />
 
         {/* =================================================
             QUIZ PERFORMANCE
         ================================================== */}
-
         <QuizPerformance quiz={quiz} result={result} />
 
         {/* =================================================
             QUIZ REVIEW
         ================================================== */}
-
         <QuizReview quiz={quiz} result={result} />
 
         {/* =================================================
             RESULT ACTIONS
         ================================================== */}
-
         <QuizResultActions
           quiz={quiz}
           result={result}
@@ -347,3 +257,4 @@ const QuizResult = () => {
 };
 
 export default QuizResult;
+
