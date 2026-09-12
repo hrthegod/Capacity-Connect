@@ -17,7 +17,7 @@ import {
 
 import "./PerformanceStats.css";
 
-const PerformanceStats = () => {
+const PerformanceStats = ({ stats: realStats = {} }) => {
   const [period, setPeriod] = useState("This Month");
   const [periodOpen, setPeriodOpen] = useState(false);
   const [activeInfo, setActiveInfo] = useState(null);
@@ -32,13 +32,19 @@ const PerformanceStats = () => {
     "This Year",
   ];
 
+  const totalLearnersVal = realStats.totalLearners !== undefined ? realStats.totalLearners : 0;
+  const averageScoreVal = realStats.averageScore !== undefined ? `${realStats.averageScore}%` : "0%";
+  const completionRateVal = realStats.completionRate !== undefined ? `${realStats.completionRate}%` : "0%";
+  const assignmentRateVal = realStats.assignmentRate !== undefined ? `${realStats.assignmentRate}%` : "0%";
+  const overallPerformanceVal = realStats.overallPerformance !== undefined ? `${realStats.overallPerformance}%` : "0%";
+
   const stats = [
     {
       id: "learners",
       title: "Total Learners",
       subtitle: "Active in this period",
-      value: "124",
-      change: "+12%",
+      value: String(totalLearnersVal),
+      change: "+0%",
       theme: "blue",
       icon: <LuUsersRound size={17} strokeWidth={1.75} />,
       info:
@@ -49,8 +55,8 @@ const PerformanceStats = () => {
       id: "score",
       title: "Average Score",
       subtitle: "Across all assessments",
-      value: "78%",
-      change: "+6%",
+      value: averageScoreVal,
+      change: "+0%",
       theme: "mint",
       icon: <LuTarget size={17} strokeWidth={1.75} />,
       info:
@@ -61,8 +67,8 @@ const PerformanceStats = () => {
       id: "completion",
       title: "Completion Rate",
       subtitle: "Course completion",
-      value: "85%",
-      change: "+10%",
+      value: completionRateVal,
+      change: "+0%",
       theme: "peach",
       icon: <LuGraduationCap size={17} strokeWidth={1.75} />,
       info:
@@ -73,8 +79,8 @@ const PerformanceStats = () => {
       id: "assignments",
       title: "Assignments",
       subtitle: "Submission rate",
-      value: "92%",
-      change: "+8%",
+      value: assignmentRateVal,
+      change: "+0%",
       theme: "lavender",
       icon: <LuFileCheck2 size={17} strokeWidth={1.75} />,
       info:
@@ -422,7 +428,7 @@ const PerformanceStats = () => {
 
             <div className="performance-overall-content">
               <div className="performance-stat-value-area">
-                <strong>82%</strong>
+                <strong>{overallPerformanceVal}</strong>
 
                 <div className="performance-stat-change">
                   <LuTrendingUp
@@ -430,7 +436,7 @@ const PerformanceStats = () => {
                     strokeWidth={2}
                   />
 
-                  <span>+6.4%</span>
+                  <span>+0%</span>
                 </div>
 
                 <small>vs last period</small>
@@ -456,7 +462,7 @@ const PerformanceStats = () => {
                   />
                 </svg>
 
-                <span>82%</span>
+                <span>{overallPerformanceVal}</span>
               </div>
             </div>
           </article>

@@ -25,7 +25,7 @@ class EnrollmentService {
 
     // Check existing enrollment
     const existing = await db.query(
-      'SELECT id, status FROM enrollments WHERE learner_id = $1 AND course_id = $2',
+      'SELECT id, status FROM enrollments WHERE user_id = $1 AND course_id = $2',
       [userId, courseId]
     );
 
@@ -37,7 +37,7 @@ class EnrollmentService {
 
     // Create enrollment
     const insertRes = await db.query(`
-      INSERT INTO enrollments (learner_id, course_id, status)
+      INSERT INTO enrollments (user_id, course_id, status)
       VALUES ($1, $2, 'ACTIVE')
       RETURNING *
     `, [userId, courseId]);
@@ -69,7 +69,7 @@ class EnrollmentService {
     const res = await db.query(`
       SELECT
         e.id,
-        e.learner_id,
+        e.user_id,
         e.course_id,
         e.status,
         e.enrolled_at,
@@ -80,7 +80,7 @@ class EnrollmentService {
         c.level
       FROM enrollments e
       JOIN courses c ON e.course_id = c.id
-      WHERE e.learner_id = $1
+      WHERE e.user_id = $1
       ORDER BY e.enrolled_at DESC
     `, [userId]);
 
@@ -137,7 +137,7 @@ class EnrollmentService {
     const res = await db.query(`
       SELECT
         e.id,
-        e.learner_id,
+        e.user_id,
         e.course_id,
         e.status,
         e.enrolled_at,
@@ -148,7 +148,7 @@ class EnrollmentService {
         u.email AS learner_email
       FROM enrollments e
       JOIN courses c ON e.course_id = c.id
-      JOIN users u ON e.learner_id = u.id
+      JOIN users u ON e.user_id = u.id
       WHERE e.id = $1
     `, [enrollmentId]);
 
@@ -163,7 +163,7 @@ class EnrollmentService {
     if (
       userRole !== 'ADMIN' &&
       userRole !== 'TRAINER' &&
-      enrollment.learner_id !== userId
+      enrollment.user_id !== userId
     ) {
       const error = new Error(
         'Unauthorized: You cannot access another user enrollment'

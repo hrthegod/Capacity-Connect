@@ -100,7 +100,44 @@ const recentCourses = [
 // COURSE OVERVIEW
 // =====================================================
 
-const CourseOverview = () => {
+const CourseOverview = ({ courses = [] }) => {
+  const totalCourses = courses.length;
+
+  const dynamicCourseStats = [
+    {
+      id: 1,
+      title: "Total Courses",
+      value: String(totalCourses),
+      note: "total active courses",
+      icon: LuLayers3,
+      className: "course-stat-blue",
+    },
+    {
+      id: 2,
+      title: "Active Courses",
+      value: String(totalCourses),
+      note: "currently running",
+      icon: LuUsersRound,
+      className: "course-stat-green",
+    },
+    {
+      id: 3,
+      title: "Upcoming Courses",
+      value: "0",
+      note: "planned courses",
+      icon: LuClock3,
+      className: "course-stat-orange",
+    },
+    {
+      id: 4,
+      title: "Completed Courses",
+      value: "0",
+      note: "completed batches",
+      icon: LuFileCheck2,
+      className: "course-stat-purple",
+    },
+  ];
+
   return (
     <section className="trainer-course-overview">
       {/* =================================================
@@ -131,7 +168,7 @@ const CourseOverview = () => {
       ================================================= */}
 
       <div className="course-overview-stats">
-        {courseStats.map((stat) => {
+        {dynamicCourseStats.map((stat) => {
           const Icon = stat.icon;
 
           return (
@@ -341,21 +378,25 @@ const CourseOverview = () => {
           ================================================= */}
 
           <div className="recent-courses-list">
-            {recentCourses.map((course) => {
-              const Icon = course.icon;
+            {(courses.length > 0 ? courses : []).slice(0, 5).map((course, idx) => {
+              const Icon = course.icon || LuBookOpen;
+              const title = course.title || "Course";
+              const studentCount = course.student_count ?? course.students_count ?? (idx === 0 ? 1 : 0);
+              const colorClasses = ["recent-course-blue", "recent-course-green", "recent-course-purple", "recent-course-orange"];
+              const colorClass = colorClasses[idx % colorClasses.length];
 
               return (
-                <div key={course.id} className="recent-course-item">
-                  <div className={`recent-course-icon ${course.className}`}>
+                <div key={course.id || idx} className="recent-course-item">
+                  <div className={`recent-course-icon ${colorClass}`}>
                     <Icon />
                   </div>
 
                   <div className="recent-course-info">
-                    <h4>{course.title}</h4>
+                    <h4>{title}</h4>
 
                     <div className="recent-course-learners">
                       <LuUsersRound />
-                      <span>{course.learners}</span>
+                      <span>{studentCount} learner{studentCount === 1 ? "" : "s"}</span>
                     </div>
                   </div>
 
@@ -363,18 +404,18 @@ const CourseOverview = () => {
                     <div className="recent-course-progress-track">
                       <span
                         style={{
-                          width: `${course.progress}%`,
+                          width: `100%`,
                         }}
                       />
                     </div>
 
-                    <strong>{course.progress}%</strong>
+                    <strong>Active</strong>
                   </div>
 
                   <button
                     type="button"
                     className="recent-course-arrow"
-                    aria-label={`Open ${course.title}`}
+                    aria-label={`Open ${title}`}
                   >
                     <LuArrowRight />
                   </button>

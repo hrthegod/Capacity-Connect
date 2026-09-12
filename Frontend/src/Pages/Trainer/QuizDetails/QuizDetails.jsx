@@ -21,7 +21,6 @@ import QuizPerformance from "../../../Components/Trainer/TrainerQuizzes/QuizDeta
    QUIZ DATA & API
 ========================================================= */
 
-import { quizzes as mockQuizzes } from "../../../Components/Trainer/TrainerQuizzes/QuizList/QuizList";
 import { getQuiz, getQuizAttempts, getQuizQuestions } from "../../../services/quizApi";
 
 import "./QuizDetails.css";
@@ -75,12 +74,7 @@ const QuizDetails = () => {
       .catch((err) => {
         console.error("Failed to load real quiz details from backend:", err);
         if (isMounted) {
-          const mockQuiz = mockQuizzes.find(
-            (item) => String(item.id) === String(quizId),
-          );
-          if (mockQuiz) {
-            setQuiz(mockQuiz);
-          }
+          setQuiz(null);
         }
       })
       .finally(() => {

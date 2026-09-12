@@ -27,212 +27,7 @@ import "./LearnerPerformance.css";
    LEARNER PERFORMANCE DATA
    ========================================================= */
 
-export const learnerPerformanceData = [
-  {
-    id: 1,
-    name: "Rohan Sharma",
-    learnerId: "CC001",
-    email: "rohan.sharma@example.com",
-    course: "Web Development",
-    batch: "Batch A",
-    score: 92,
-    completion: 100,
-    assignments: 100,
-    assignmentsCompleted: 12,
-    assignmentsTotal: 12,
-    status: "Excellent",
-    lastActive: "2 hours ago",
-    avatar: "RS",
-    theme: "blue",
-  },
-  {
-    id: 2,
-    name: "Aisha Patel",
-    learnerId: "CC002",
-    email: "aisha.patel@example.com",
-    course: "Data Structures",
-    batch: "Batch B",
-    score: 78,
-    completion: 85,
-    assignments: 83,
-    assignmentsCompleted: 10,
-    assignmentsTotal: 12,
-    status: "Good",
-    lastActive: "1 day ago",
-    avatar: "AP",
-    theme: "rose",
-  },
-  {
-    id: 3,
-    name: "Karan Mehta",
-    learnerId: "CC003",
-    email: "karan.mehta@example.com",
-    course: "Database Management",
-    batch: "Batch A",
-    score: 84,
-    completion: 90,
-    assignments: 92,
-    assignmentsCompleted: 11,
-    assignmentsTotal: 12,
-    status: "Good",
-    lastActive: "5 hours ago",
-    avatar: "KM",
-    theme: "peach",
-  },
-  {
-    id: 4,
-    name: "Sneha Prakash",
-    learnerId: "CC004",
-    email: "sneha.prakash@example.com",
-    course: "Artificial Intelligence",
-    batch: "Batch C",
-    score: 71,
-    completion: 80,
-    assignments: 75,
-    assignmentsCompleted: 9,
-    assignmentsTotal: 12,
-    status: "Average",
-    lastActive: "1 day ago",
-    avatar: "SP",
-    theme: "lavender",
-  },
-  {
-    id: 5,
-    name: "Arjun Desai",
-    learnerId: "CC005",
-    email: "arjun.desai@example.com",
-    course: "Web Development",
-    batch: "Batch B",
-    score: 88,
-    completion: 95,
-    assignments: 100,
-    assignmentsCompleted: 12,
-    assignmentsTotal: 12,
-    status: "Excellent",
-    lastActive: "3 hours ago",
-    avatar: "AD",
-    theme: "mint",
-  },
-  {
-    id: 6,
-    name: "Priya Kapoor",
-    learnerId: "CC006",
-    email: "priya.kapoor@example.com",
-    course: "Data Structures",
-    batch: "Batch C",
-    score: 65,
-    completion: 70,
-    assignments: 67,
-    assignmentsCompleted: 8,
-    assignmentsTotal: 12,
-    status: "Needs Attention",
-    lastActive: "2 days ago",
-    avatar: "PK",
-    theme: "blue",
-  },
-  {
-    id: 7,
-    name: "Nikhil Verma",
-    learnerId: "CC007",
-    email: "nikhil.verma@example.com",
-    course: "Database Management",
-    batch: "Batch D",
-    score: 79,
-    completion: 85,
-    assignments: 83,
-    assignmentsCompleted: 10,
-    assignmentsTotal: 12,
-    status: "Good",
-    lastActive: "6 hours ago",
-    avatar: "NV",
-    theme: "rose",
-  },
-  {
-    id: 8,
-    name: "Tanvi Chowdhury",
-    learnerId: "CC008",
-    email: "tanvi.chowdhury@example.com",
-    course: "Artificial Intelligence",
-    batch: "Batch A",
-    score: 90,
-    completion: 92,
-    assignments: 92,
-    assignmentsCompleted: 11,
-    assignmentsTotal: 12,
-    status: "Excellent",
-    lastActive: "4 hours ago",
-    avatar: "TC",
-    theme: "lavender",
-  },
-  {
-    id: 9,
-    name: "Dev Malhotra",
-    learnerId: "CC009",
-    email: "dev.malhotra@example.com",
-    course: "Web Development",
-    batch: "Batch D",
-    score: 74,
-    completion: 82,
-    assignments: 75,
-    assignmentsCompleted: 9,
-    assignmentsTotal: 12,
-    status: "Average",
-    lastActive: "8 hours ago",
-    avatar: "DM",
-    theme: "mint",
-  },
-  {
-    id: 10,
-    name: "Meera Joshi",
-    learnerId: "CC010",
-    email: "meera.joshi@example.com",
-    course: "Artificial Intelligence",
-    batch: "Batch B",
-    score: 94,
-    completion: 98,
-    assignments: 100,
-    assignmentsCompleted: 12,
-    assignmentsTotal: 12,
-    status: "Excellent",
-    lastActive: "1 hour ago",
-    avatar: "MJ",
-    theme: "peach",
-  },
-  {
-    id: 11,
-    name: "Aditya Rao",
-    learnerId: "CC011",
-    email: "aditya.rao@example.com",
-    course: "Data Structures",
-    batch: "Batch A",
-    score: 69,
-    completion: 76,
-    assignments: 67,
-    assignmentsCompleted: 8,
-    assignmentsTotal: 12,
-    status: "Average",
-    lastActive: "2 days ago",
-    avatar: "AR",
-    theme: "blue",
-  },
-  {
-    id: 12,
-    name: "Kavya Shah",
-    learnerId: "CC012",
-    email: "kavya.shah@example.com",
-    course: "Database Management",
-    batch: "Batch C",
-    score: 58,
-    completion: 63,
-    assignments: 58,
-    assignmentsCompleted: 7,
-    assignmentsTotal: 12,
-    status: "Needs Attention",
-    lastActive: "3 days ago",
-    avatar: "KS",
-    theme: "rose",
-  },
-];
+export const learnerPerformanceData = [];
 
 /* =========================================================
    CONSTANTS
@@ -251,7 +46,9 @@ const STATUS_ORDER = {
    COMPONENT
    ========================================================= */
 
-const LearnerPerformance = ({ filters = {}, onViewLearner, onExport }) => {
+const LearnerPerformance = ({ learners: realLearners = null, filters = {}, onViewLearner, onExport }) => {
+  const learnersList = Array.isArray(realLearners) ? realLearners : [];
+
   const {
     course: filterCourse = "All Courses",
     batch: filterBatch = "All Batches",
@@ -322,7 +119,7 @@ const LearnerPerformance = ({ filters = {}, onViewLearner, onExport }) => {
   const filteredLearners = useMemo(() => {
     const normalizedSearch = searchValue.trim().toLowerCase();
 
-    return learnerPerformanceData.filter((learner) => {
+    return learnersList.filter((learner) => {
       const matchesCourse =
         filterCourse === "All Courses" || learner.course === filterCourse;
 
@@ -334,13 +131,13 @@ const LearnerPerformance = ({ filters = {}, onViewLearner, onExport }) => {
 
       const matchesSearch =
         !normalizedSearch ||
-        learner.name.toLowerCase().includes(normalizedSearch) ||
-        learner.email.toLowerCase().includes(normalizedSearch) ||
-        learner.learnerId.toLowerCase().includes(normalizedSearch);
+        (learner.name || "").toLowerCase().includes(normalizedSearch) ||
+        (learner.email || "").toLowerCase().includes(normalizedSearch) ||
+        (learner.learnerId || "").toLowerCase().includes(normalizedSearch);
 
       return matchesCourse && matchesBatch && matchesStatus && matchesSearch;
     });
-  }, [searchValue, filterCourse, filterBatch, filterStatus]);
+  }, [learnersList, searchValue, filterCourse, filterBatch, filterStatus]);
 
   /* =====================================================
      SORT

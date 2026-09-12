@@ -83,6 +83,21 @@ class QuizService {
     return result.rows[0];
   }
 
+  // GET ALL QUIZZES
+  async getQuizzes() {
+    const result = await pool.query(
+      `SELECT
+         q.*,
+         c.title AS course_title,
+         m.title AS module_title
+       FROM quizzes q
+       LEFT JOIN courses c ON c.id = q.course_id
+       LEFT JOIN modules m ON m.id = q.module_id
+       ORDER BY q.id ASC`
+    );
+    return result.rows;
+  }
+
   // GET QUIZ
   async getQuiz(quizId) {
     const result = await pool.query(

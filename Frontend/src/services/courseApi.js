@@ -201,6 +201,11 @@ export async function deleteTopicMaterial(materialId, role = 'TRAINER') {
   return response.data || response.material;
 }
 
+export async function getTrainerPerformanceAnalytics(role = 'TRAINER') {
+  const response = await fetchWithAuth('/trainer/performance-analytics', {}, role);
+  return response.data || { stats: {}, learners: [] };
+}
+
 export default {
   getCourses,
   getCourseById,
@@ -219,4 +224,5 @@ export default {
   getTopicMaterials,
   uploadTopicMaterial,
   deleteTopicMaterial,
+  getTrainerPerformanceAnalytics,
 };

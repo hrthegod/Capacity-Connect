@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { apiFetch } from "../../../api/apiClient";
+
 import WelcomeBanner from "../../../Components/Learner/WelcomeBanner/WelcomeBanner";
 import StatCard from "../../../Components/Learner/StatCard/StatCard";
 import LearningProgress from "../../../Components/Learner/LearningProgress/LearningProgress";
@@ -10,46 +13,80 @@ import ResourceCard from "../../../Components/Learner/ResourceCard/ResourceCard"
 
 import "./Dashboard.css";
 
-const dashboardStats = [
-  {
-    id: 1,
-    title: "Courses Completed",
-    value: "12",
-    description: "Courses successfully completed",
-    icon: "completed",
-    variant: "success",
-  },
-  {
-    id: 2,
-    title: "Learning Progress",
-    value: "68%",
-    description: "Overall learning progress",
-    icon: "progress",
-    variant: "ocean",
-    trend: "+8%",
-    trendType: "positive",
-  },
-  {
-    id: 3,
-    title: "Certificates",
-    value: "8",
-    description: "Certificates earned",
-    icon: "certificates",
-    variant: "achievement",
-    trend: "+2",
-    trendType: "positive",
-  },
-  {
-    id: 4,
-    title: "Active Learning",
-    value: "4",
-    description: "Courses currently in progress",
-    icon: "learning",
-    variant: "navy",
-  },
-];
-
 const Dashboard = () => {
+  const [user, setUser] = useState(null);
+  const [certificateCount, setCertificateCount] = useState(0);
+  const [enrollments, setEnrollments] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        const userData = await apiFetch("/auth/me");
+        setUser(userData.data || userData);
+
+        const certificateData = await apiFetch("/certificates/my");
+        setCertificateCount(certificateData.count || certificateData.data?.length || 0);
+
+        const enrollData = await apiFetch("/enrollments/my");
+        setEnrollments(enrollData.data || []);
+      } catch (error) {
+        console.error("Failed to fetch dashboard data:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchDashboardData();
+  }, []);
+
+  const completedCourses = enrollments.filter(
+    (e) => e.status === "COMPLETED" || e.completionPercentage === 100
+  ).length;
+  const activeCourses = enrollments.filter((e) => e.status === "ACTIVE").length;
+
+  const totalProgressSum = enrollments.reduce(
+    (sum, e) => sum + (e.completionPercentage || 0),
+    0
+  );
+  const avgProgress =
+    enrollments.length > 0 ? Math.round(totalProgressSum / enrollments.length) : 0;
+
+  const dashboardStats = [
+    {
+      id: 1,
+      title: "Courses Completed",
+      value: completedCourses.toString(),
+      description: "Courses successfully completed",
+      icon: "completed",
+      variant: "success",
+    },
+    {
+      id: 2,
+      title: "Learning Progress",
+      value: `${avgProgress}%`,
+      description: "Overall learning progress",
+      icon: "progress",
+      variant: "ocean",
+    },
+    {
+      id: 3,
+      title: "Certificates",
+      value: certificateCount.toString(),
+      description: "Certificates earned",
+      icon: "certificates",
+      variant: "achievement",
+    },
+    {
+      id: 4,
+      title: "Active Learning",
+      value: activeCourses.toString(),
+      description: "Courses currently in progress",
+      icon: "learning",
+      variant: "navy",
+    },
+  ];
+
   return (
     <div className="learner-dashboard">
       {/* ==========================================================
@@ -57,7 +94,7 @@ const Dashboard = () => {
       ========================================================== */}
 
       <WelcomeBanner
-        name="Dev"
+        name={user?.name || "Learner"}
         onProfileClick={() => {
           console.log("Navigate to profile");
         }}
@@ -101,7 +138,11 @@ const Dashboard = () => {
           LEARNING PROGRESS
       ========================================================== */}
 
-      <LearningProgress progress={68} totalCourses={18} completedCourses={12} />
+      <LearningProgress
+        progress={avgProgress}
+        totalCourses={enrollments.length}
+        completedCourses={completedCourses}
+      />
 
       {/* ==========================================================
           MY SKILL PROFILE
@@ -137,6 +178,7 @@ const Dashboard = () => {
         }}
       />
       <ContinueLearningCard
+        courseData={enrollments[0]}
         onContinueLearning={() => {
           console.log("Continue Learning");
         }}

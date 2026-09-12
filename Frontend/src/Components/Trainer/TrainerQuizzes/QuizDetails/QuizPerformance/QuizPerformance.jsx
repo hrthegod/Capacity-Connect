@@ -428,13 +428,13 @@ const QuizPerformance = () => {
           </div>
 
           <div className="performance-top-performer">
-            <div className="performance-avatar">AM</div>
+            <div className="performance-avatar">—</div>
 
             <div className="performance-performer-info">
-              <strong>Aarav Mehta</strong>
+              <strong>—</strong>
 
               <span>
-                96% <i>•</i> 18m 12s
+                — <i>•</i> —
               </span>
             </div>
           </div>

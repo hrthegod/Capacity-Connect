@@ -4,9 +4,7 @@ import CoursesHeader from "../../../Components/Trainer/TrainerCourses/CoursesHea
 import CourseStats from "../../../Components/Trainer/TrainerCourses/CourseStats/CourseStats";
 import CourseFilters from "../../../Components/Trainer/TrainerCourses/CourseFilters/CourseFilters";
 
-import CourseList, {
-  courses as fallbackCourses,
-} from "../../../Components/Trainer/TrainerCourses/CourseList/CourseList";
+import CourseList from "../../../Components/Trainer/TrainerCourses/CourseList/CourseList";
 import { getCourses, createCourse } from "../../../services/courseApi";
 
 import "./TrainerCourses.css";
@@ -104,7 +102,7 @@ const TrainerCourses = () => {
   ========================================================== */
 
   const filteredCourses = useMemo(() => {
-    let result = [...(realCourses || fallbackCourses)];
+    let result = [...(realCourses || [])];
 
     const search = searchValue.trim().toLowerCase();
 

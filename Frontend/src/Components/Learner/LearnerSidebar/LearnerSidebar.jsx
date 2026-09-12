@@ -4,6 +4,7 @@ import {
   FiHome,
   FiBookOpen,
   FiGrid,
+  FiCheckSquare,
   FiTarget,
   FiTrendingUp,
   FiCompass,
@@ -47,6 +48,12 @@ const navigationGroups = [
         label: "Course Catalog",
         path: "/learner/courses",
         icon: FiGrid,
+      },
+
+      {
+        label: "Quizzes",
+        path: "/learner/quizzes",
+        icon: FiCheckSquare,
       },
     ],
   },

@@ -19,87 +19,39 @@ import "./LearnerOverview.css";
 // LEARNER OVERVIEW
 // =====================================================
 
-const LearnerOverview = () => {
-  // ===================================================
-  // STAT CARDS
-  // ===================================================
+const LearnerOverview = ({ learners: realLearners = [] }) => {
+  const learnerItems = Array.isArray(realLearners) ? realLearners : [];
+  const totalCount = learnerItems.length;
 
   const stats = [
     {
       title: "Total Learners",
-      value: "248",
-      growth: "12%",
+      value: String(totalCount),
+      growth: "+0%",
       icon: LuUsersRound,
       type: "blue",
     },
     {
       title: "Active Learners",
-      value: "216",
-      growth: "8%",
+      value: String(totalCount),
+      growth: "+0%",
       icon: LuUsersRound,
       type: "green",
     },
     {
       title: "At Risk Learners",
-      value: "12",
-      growth: "2%",
+      value: "0",
+      growth: "0%",
       icon: LuTriangleAlert,
       type: "orange",
       negative: true,
     },
     {
       title: "Completed Learners",
-      value: "94",
-      growth: "18%",
+      value: "0",
+      growth: "0%",
       icon: LuGraduationCap,
       type: "purple",
-    },
-  ];
-
-  // ===================================================
-  // RECENT LEARNERS
-  // ===================================================
-
-  const learners = [
-    {
-      name: "Sarah Johnson",
-      email: "sarah.johnson@example.com",
-      initials: "SJ",
-      avatar: "https://i.pravatar.cc/80?img=47",
-      progress: 80,
-      active: "2 hours ago",
-      status: "Active",
-      statusType: "active",
-    },
-    {
-      name: "Michael Chen",
-      email: "michael.chen@example.com",
-      initials: "MC",
-      avatar: "https://i.pravatar.cc/80?img=12",
-      progress: 45,
-      active: "1 day ago",
-      status: "At Risk",
-      statusType: "risk",
-    },
-    {
-      name: "Emily Davis",
-      email: "emily.davis@example.com",
-      initials: "ED",
-      avatar: "https://i.pravatar.cc/80?img=44",
-      progress: 100,
-      active: "3 hours ago",
-      status: "Completed",
-      statusType: "completed",
-    },
-    {
-      name: "James Wilson",
-      email: "james.wilson@example.com",
-      initials: "JW",
-      avatar: "https://i.pravatar.cc/80?img=11",
-      progress: 20,
-      active: "2 days ago",
-      status: "Inactive",
-      statusType: "inactive",
     },
   ];
 
@@ -436,72 +388,78 @@ const LearnerOverview = () => {
             </thead>
 
             <tbody>
-              {learners.map((learner) => (
-                <tr key={learner.email}>
-                  {/* Learner */}
-                  <td>
-                    <div className="learner-table-user">
-                      <div className="learner-table-avatar">
-                        <img src={learner.avatar} alt={learner.name} />
+              {learnerItems.map((learner, idx) => {
+                const name = learner.name || "Learner";
+                const email = learner.email || "—";
+                const completion = learner.completion ?? 25;
+                const avatar = learner.avatar || (name ? name.substring(0, 2).toUpperCase() : "L");
+                const status = learner.status || "Active";
 
-                        <span>{learner.initials}</span>
+                return (
+                  <tr key={learner.email || idx}>
+                    {/* Learner */}
+                    <td>
+                      <div className="learner-table-user">
+                        <div className="learner-table-avatar">
+                          <span>{avatar}</span>
+                        </div>
+
+                        <strong>{name}</strong>
                       </div>
+                    </td>
 
-                      <strong>{learner.name}</strong>
-                    </div>
-                  </td>
+                    {/* Email */}
+                    <td>
+                      <span className="learner-email">{email}</span>
+                    </td>
 
-                  {/* Email */}
-                  <td>
-                    <span className="learner-email">{learner.email}</span>
-                  </td>
+                    {/* Progress */}
+                    <td>
+                      <div className="learner-progress">
+                        <strong>{completion}%</strong>
 
-                  {/* Progress */}
-                  <td>
-                    <div className="learner-progress">
-                      <strong>{learner.progress}%</strong>
-
-                      <div className="learner-progress-track">
-                        <span
-                          className={`learner-progress-fill progress-${learner.statusType}`}
-                          style={{
-                            width: `${learner.progress}%`,
-                          }}
-                        ></span>
+                        <div className="learner-progress-track">
+                          <span
+                            className="learner-progress-fill progress-active"
+                            style={{
+                              width: `${completion}%`,
+                            }}
+                          ></span>
+                        </div>
                       </div>
-                    </div>
-                  </td>
+                    </td>
 
-                  {/* Last Active */}
-                  <td>
-                    <span className="learner-last-active">
-                      {learner.active}
-                    </span>
-                  </td>
+                    {/* Last Active */}
+                    <td>
+                      <span className="learner-last-active">
+                        {learner.lastActive || "—"}
+                      </span>
+                    </td>
 
-                  {/* Status */}
-                  <td>
-                    <span
-                      className={`learner-status-badge status-${learner.statusType}`}
-                    >
-                      <span></span>
+                    {/* Status */}
+                    <td>
+                      <span
+                        className="learner-status-badge status-active"
+                      >
+                        <span></span>
 
-                      {learner.status}
-                    </span>
-                  </td>
+                        {status}
+                      </span>
+                    </td>
 
-                  {/* Actions */}
-                  <td>
-                    <button
-                      type="button"
-                      className="learner-table-action"
-                      aria-label={`Actions for ${learner.name}`}
-                    >
-                      <LuEllipsis />
-                    </button>
-                  </td>
-                </tr>
-              ))}
+                    {/* Actions */}
+                    <td>
+                      <button
+                        type="button"
+                        className="learner-table-action"
+                        aria-label={`Actions for ${name}`}
+                      >
+                        <LuEllipsis />
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
             </tbody>
           </table>
         </div>

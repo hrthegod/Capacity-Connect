@@ -164,19 +164,19 @@ class CompetencyService {
       `
       SELECT
         lc.id,
-        lc.learner_id,
+        lc.user_id AS learner_id,
         lc.competency_id,
-        lc.current_level,
-        lc.target_level,
-        lc.progress_percentage,
-        lc.last_updated,
+        lc.proficiency_level AS current_level,
+        3 AS target_level,
+        100 AS progress_percentage,
+        lc.updated_at AS last_updated,
         c.name,
         c.description,
         c.category
       FROM learner_competencies lc
       JOIN competencies c
         ON lc.competency_id = c.id
-      WHERE lc.learner_id = $1
+      WHERE lc.user_id = $1
       ORDER BY c.name ASC
       `,
       [userId]

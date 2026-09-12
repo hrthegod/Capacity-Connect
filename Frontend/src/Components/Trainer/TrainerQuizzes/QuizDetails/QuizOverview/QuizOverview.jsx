@@ -30,59 +30,9 @@ import {
 
 import "./QuizOverview.css";
 
-/* =========================================================
-   DEFAULT QUIZ
-========================================================= */
-
-const defaultQuiz = {
-  id: 1,
-  title: "React Basics Quiz",
-  description: "Test your knowledge of React fundamentals and core concepts.",
-  course: "React for Beginners",
-  type: "Assessment",
-  status: "Published",
-  questions: 20,
-  attempts: 245,
-  duration: "30 min",
-  score: 82,
-  icon: "react",
-  theme: "blue",
-};
-
-/* =========================================================
-   DEFAULT OVERVIEW DATA
-
-   These values can later come from your backend.
-========================================================= */
-
-const defaultOverviewData = {
-  passingScore: "70%",
-  attemptsAllowed: "3",
-  difficulty: "Medium",
-  targetAudience: "Beginners",
-  uniqueLearners: "198",
-  completionRate: "76%",
-  createdBy: "Alex Johnson",
-  createdDate: "Mar 15, 2024, 10:30 AM",
-  updatedDate: "Mar 20, 2024, 02:45 PM",
-
-  instructions: [
-    "Read each question carefully before selecting your answer.",
-    "You can attempt the quiz up to 3 times.",
-    "Each question carries equal marks.",
-    "You must score at least 70% to pass.",
-    "The quiz will be automatically submitted when the time is over.",
-    "Make sure you have a stable internet connection.",
-  ],
-};
-
-/* =========================================================
-   COMPONENT
-========================================================= */
-
 const QuizOverview = ({
-  quiz = defaultQuiz,
-  overviewData = defaultOverviewData,
+  quiz = {},
+  overviewData = {},
   onEditInfo,
   onEditSettings,
   onEditInstructions,
@@ -96,7 +46,20 @@ const QuizOverview = ({
   ======================================================= */
 
   const data = {
-    ...defaultOverviewData,
+    passingScore: quiz.passing_score ?? quiz.passingScore ? `${quiz.passing_score ?? quiz.passingScore}%` : "60%",
+    attemptsAllowed: "—",
+    difficulty: "Medium",
+    targetAudience: "All Learners",
+    uniqueLearners: "—",
+    completionRate: "—",
+    createdBy: quiz.createdBy || "—",
+    createdDate: quiz.createdOn || "—",
+    updatedDate: quiz.lastUpdated || "—",
+    instructions: [
+      "Read each question carefully before selecting your answer.",
+      "Each question carries equal marks.",
+      "Submit before the time limit expires.",
+    ],
     ...overviewData,
   };
 

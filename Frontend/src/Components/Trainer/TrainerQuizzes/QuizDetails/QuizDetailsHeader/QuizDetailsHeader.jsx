@@ -18,33 +18,7 @@ import {
 
 import "./QuizDetailsHeader.css";
 
-/* =========================================================
-   DEFAULT QUIZ DATA
-
-   Later this can come from API / QuizDetails page.
-========================================================= */
-
-const defaultQuiz = {
-  id: 1,
-  title: "React Basics Quiz",
-  description: "Test your knowledge of React fundamentals and core concepts.",
-  course: "React for Beginners",
-  type: "Assessment",
-  status: "Published",
-  questions: 20,
-  attempts: 245,
-  duration: "30 min",
-  score: 82,
-  createdBy: "John Smith",
-  createdOn: "Jan 15, 2024",
-  lastUpdated: "Mar 10, 2024",
-};
-
-/* =========================================================
-   COMPONENT
-========================================================= */
-
-const QuizDetailsHeader = ({ quiz = defaultQuiz, onEditQuiz }) => {
+const QuizDetailsHeader = ({ quiz = {}, onEditQuiz }) => {
   const navigate = useNavigate();
 
   const [openActions, setOpenActions] = useState(false);
@@ -268,7 +242,7 @@ const QuizDetailsHeader = ({ quiz = defaultQuiz, onEditQuiz }) => {
               <div>
                 <span>Created by</span>
 
-                <strong>{quiz.createdBy || "John Smith"}</strong>
+                <strong>{quiz.createdBy || "—"}</strong>
               </div>
             </div>
 
@@ -284,7 +258,7 @@ const QuizDetailsHeader = ({ quiz = defaultQuiz, onEditQuiz }) => {
               <div>
                 <span>Created on</span>
 
-                <strong>{quiz.createdOn || "Jan 15, 2024"}</strong>
+                <strong>{quiz.createdOn || "—"}</strong>
               </div>
             </div>
 
@@ -300,7 +274,7 @@ const QuizDetailsHeader = ({ quiz = defaultQuiz, onEditQuiz }) => {
               <div>
                 <span>Last updated</span>
 
-                <strong>{quiz.lastUpdated || "Mar 10, 2024"}</strong>
+                <strong>{quiz.lastUpdated || "—"}</strong>
               </div>
             </div>
           </div>
@@ -390,7 +364,7 @@ const QuizDetailsHeader = ({ quiz = defaultQuiz, onEditQuiz }) => {
             <div className="quiz-details-learning-users">
               <LuUsersRound size={15} strokeWidth={1.8} />
 
-              <span>{quiz.attempts || 245} attempts</span>
+              <span>{quiz.attempts ?? 0} attempts</span>
             </div>
           </div>
         </div>
@@ -411,7 +385,7 @@ const QuizDetailsHeader = ({ quiz = defaultQuiz, onEditQuiz }) => {
           </div>
 
           <div className="quiz-details-metric-content">
-            <strong>{quiz.questions || 20}</strong>
+            <strong>{quiz.questions ?? 0}</strong>
 
             <span>Questions</span>
           </div>
@@ -431,7 +405,7 @@ const QuizDetailsHeader = ({ quiz = defaultQuiz, onEditQuiz }) => {
           </div>
 
           <div className="quiz-details-metric-content">
-            <strong>{quiz.attempts || 245}</strong>
+            <strong>{quiz.attempts ?? 0}</strong>
 
             <span>Total Attempts</span>
           </div>
@@ -451,7 +425,7 @@ const QuizDetailsHeader = ({ quiz = defaultQuiz, onEditQuiz }) => {
           </div>
 
           <div className="quiz-details-metric-content">
-            <strong>{quiz.duration || "30 min"}</strong>
+            <strong>{quiz.duration || (quiz.time_limit_minutes ? `${quiz.time_limit_minutes} min` : "—")}</strong>
 
             <span>Duration</span>
           </div>
@@ -471,9 +445,9 @@ const QuizDetailsHeader = ({ quiz = defaultQuiz, onEditQuiz }) => {
           </div>
 
           <div className="quiz-details-metric-content">
-            <strong>{quiz.score || 82}%</strong>
+            <strong>{quiz.score ?? quiz.passing_score ?? 60}%</strong>
 
-            <span>Average Score</span>
+            <span>Passing Score</span>
           </div>
 
           <div className="quiz-details-metric-arrow">

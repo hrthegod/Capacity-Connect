@@ -73,6 +73,20 @@ class TrainerController {
       next(error);
     }
   }
+
+  // GET /api/trainer/performance-analytics
+  async getPerformanceAnalytics(req, res, next) {
+    try {
+      const trainerId = req.user.id;
+      const data = await trainerService.getTrainerPerformanceAnalytics(trainerId);
+      return res.status(200).json({
+        success: true,
+        data
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
 }
 
 module.exports = new TrainerController();

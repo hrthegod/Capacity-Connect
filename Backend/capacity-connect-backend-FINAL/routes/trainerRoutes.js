@@ -38,4 +38,11 @@ router.get(
     trainerController.getAnalytics(req, res, next)
 );
 
+// Get trainer performance analytics
+router.get(
+  '/performance-analytics',
+  (req, res, next) =>
+    trainerController.getPerformanceAnalytics(req, res, next)
+);
+
 module.exports = router;

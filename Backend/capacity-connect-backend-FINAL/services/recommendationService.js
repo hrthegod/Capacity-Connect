@@ -18,7 +18,7 @@ class RecommendationService {
       `
       SELECT course_id, status
       FROM enrollments
-      WHERE learner_id = $1
+      WHERE user_id = $1
       `,
       [userId]
     );
@@ -34,11 +34,11 @@ class RecommendationService {
       `
       SELECT
         competency_id,
-        current_level,
-        target_level,
-        progress_percentage
+        proficiency_level AS current_level,
+        3 AS target_level,
+        100 AS progress_percentage
       FROM learner_competencies
-      WHERE learner_id = $1
+      WHERE user_id = $1
       `,
       [userId]
     );
@@ -76,7 +76,7 @@ class RecommendationService {
       SELECT
         cc.course_id,
         cc.competency_id,
-        cc.target_level,
+        cc.required_level AS target_level,
         c.name AS competency_name
       FROM course_competencies cc
       JOIN competencies c

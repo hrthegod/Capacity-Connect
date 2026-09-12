@@ -17,18 +17,30 @@ const MOES_COURSES = [
 ];
 
 const TrainerQuizzes = () => {
-  const [realQuizzes, setRealQuizzes] = useState(null);
+  const [realQuizzes, setRealQuizzes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
+    setLoading(true);
+    setError(null);
     getQuizzes("TRAINER")
       .then((data) => {
-        if (isMounted && Array.isArray(data) && data.length > 0) {
-          setRealQuizzes(data);
+        if (isMounted) {
+          setRealQuizzes(Array.isArray(data) ? data : []);
         }
       })
       .catch((err) => {
         console.error("Failed to fetch trainer quizzes:", err);
+        if (isMounted) {
+          setError("Failed to load quizzes from backend.");
+        }
+      })
+      .finally(() => {
+        if (isMounted) {
+          setLoading(false);
+        }
       });
 
     return () => {
@@ -244,12 +256,18 @@ const TrainerQuizzes = () => {
         onCreateQuiz={handleCreateQuiz}
       />
 
+      {error && (
+        <div style={{ padding: "1rem", margin: "1rem 0", background: "#fee2e2", border: "1px solid #fca5a5", color: "#991b1b", borderRadius: "8px" }}>
+          {error}
+        </div>
+      )}
+
       {/* ========================================
           Quiz List
       ======================================== */}
 
       <QuizList
-        quizzes={realQuizzes || undefined}
+        quizzes={realQuizzes}
         searchValue={searchValue}
         course={course}
         status={status}

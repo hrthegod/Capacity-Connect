@@ -23,7 +23,7 @@ import "./ContinueLearningCard.css";
 |--------------------------------------------------------------------------
 */
 
-const currentLearning = {
+const defaultLearning = {
   courseTitle: "Backend Development Fundamentals",
   category: "Backend Development",
   level: "Intermediate",
@@ -38,34 +38,22 @@ const currentLearning = {
     "Continue where you left off and strengthen your backend development fundamentals through practical learning.",
 };
 
-const upcomingModules = [
-  {
-    id: 1,
-    number: 4,
-    title: "REST API & Server Architecture",
-    duration: "42 min",
-    status: "Current",
-    variant: "current",
-  },
-  {
-    id: 2,
-    number: 5,
-    title: "Database Integration",
-    duration: "38 min",
-    status: "Next",
-    variant: "next",
-  },
-  {
-    id: 3,
-    number: 6,
-    title: "Authentication & Security",
-    duration: "45 min",
-    status: "Locked",
-    variant: "locked",
-  },
-];
-
-const ContinueLearningCard = ({ onContinueLearning, onViewCourse }) => {
+const ContinueLearningCard = ({ courseData, onContinueLearning, onViewCourse }) => {
+  const currentLearning = courseData
+    ? {
+        courseTitle: courseData.course_title || courseData.title || defaultLearning.courseTitle,
+        category: courseData.category || defaultLearning.category,
+        level: courseData.level || defaultLearning.level,
+        moduleNumber: (courseData.completed_modules || 0) + 1,
+        totalModules: courseData.total_modules || 5,
+        moduleTitle: courseData.description ? courseData.description.substring(0, 45) + "..." : "Current Course Module",
+        progress: courseData.completionPercentage || 0,
+        completedModules: courseData.completed_modules || 0,
+        remainingModules: (courseData.total_modules || 5) - (courseData.completed_modules || 0),
+        remainingTime: "—",
+        description: courseData.course_description || courseData.description || defaultLearning.description,
+      }
+    : defaultLearning;
   return (
     <section
       className="continue-learning-section"

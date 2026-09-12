@@ -24,189 +24,7 @@ import "./QuizList.css";
    QUIZ DATA
 ========================================================= */
 
-export const quizzes = [
-  {
-    id: 1,
-    title: "React Basics Quiz",
-    description: "Test your knowledge of React fundamentals and core concepts.",
-    course: "React for Beginners",
-    type: "Assessment",
-    status: "Published",
-    questions: 20,
-    attempts: 245,
-    duration: "30 min",
-    score: 82,
-    icon: "react",
-    theme: "blue",
-  },
-
-  {
-    id: 2,
-    title: "JavaScript Fundamentals",
-    description: "A quick quiz to practice JavaScript basics and syntax.",
-    course: "React for Beginners",
-    type: "Practice",
-    status: "Draft",
-    questions: 15,
-    attempts: 186,
-    duration: "20 min",
-    score: 76,
-    icon: "javascript",
-    theme: "green",
-  },
-
-  {
-    id: 3,
-    title: "Python for Data Science",
-    description: "Test your Python skills for data analysis and visualization.",
-    course: "Python for Data Science",
-    type: "Assessment",
-    status: "Published",
-    questions: 25,
-    attempts: 320,
-    duration: "40 min",
-    score: 88,
-    icon: "python",
-    theme: "lavender",
-  },
-
-  {
-    id: 4,
-    title: "UI/UX Design Principles",
-    description: "Check your understanding of modern UI/UX design concepts.",
-    course: "UI/UX Design Fundamentals",
-    type: "Practice",
-    status: "Archived",
-    questions: 18,
-    attempts: 142,
-    duration: "25 min",
-    score: 74,
-    icon: "design",
-    theme: "pink",
-  },
-
-  {
-    id: 5,
-    title: "Cloud Computing Basics",
-    description: "Assess your knowledge of cloud services and architecture.",
-    course: "Cloud Computing Basics",
-    type: "Final",
-    status: "Published",
-    questions: 30,
-    attempts: 210,
-    duration: "45 min",
-    score: 79,
-    icon: "cloud",
-    theme: "violet",
-  },
-
-  {
-    id: 6,
-    title: "Data Analytics Quiz",
-    description: "Test your data analysis and visualization skills.",
-    course: "Python for Data Science",
-    type: "Assessment",
-    status: "Draft",
-    questions: 22,
-    attempts: 175,
-    duration: "35 min",
-    score: 81,
-    icon: "analytics",
-    theme: "sky",
-  },
-
-  {
-    id: 7,
-    title: "Node.js Essentials",
-    description: "Practice key Node.js concepts and backend development.",
-    course: "Node.js Backend Development",
-    type: "Practice",
-    status: "Published",
-    questions: 20,
-    attempts: 198,
-    duration: "30 min",
-    score: 85,
-    icon: "node",
-    theme: "mint",
-  },
-
-  {
-    id: 8,
-    title: "Database Management",
-    description: "Test your knowledge of database design and SQL.",
-    course: "Node.js Backend Development",
-    type: "Final",
-    status: "Unpublished",
-    questions: 28,
-    attempts: 156,
-    duration: "40 min",
-    score: 73,
-    icon: "database",
-    theme: "rose",
-  },
-
-  {
-    id: 9,
-    title: "AI Fundamentals",
-    description:
-      "Evaluate your understanding of artificial intelligence concepts.",
-    course: "AI for Everyone",
-    type: "Assessment",
-    status: "Published",
-    questions: 24,
-    attempts: 286,
-    duration: "35 min",
-    score: 91,
-    icon: "ai",
-    theme: "blue",
-  },
-
-  {
-    id: 10,
-    title: "Digital Marketing Strategy",
-    description:
-      "Practice essential digital marketing strategies and concepts.",
-    course: "Digital Marketing Strategy",
-    type: "Practice",
-    status: "Published",
-    questions: 16,
-    attempts: 164,
-    duration: "25 min",
-    score: 78,
-    icon: "marketing",
-    theme: "peach",
-  },
-
-  {
-    id: 11,
-    title: "Flutter Development Quiz",
-    description: "Test your knowledge of cross-platform Flutter development.",
-    course: "Flutter App Development",
-    type: "Assessment",
-    status: "Draft",
-    questions: 21,
-    attempts: 132,
-    duration: "30 min",
-    score: 84,
-    icon: "mobile",
-    theme: "sky",
-  },
-
-  {
-    id: 12,
-    title: "Advanced React Patterns",
-    description: "Evaluate your understanding of advanced React patterns.",
-    course: "React for Beginners",
-    type: "Final",
-    status: "Published",
-    questions: 32,
-    attempts: 298,
-    duration: "50 min",
-    score: 89,
-    icon: "react",
-    theme: "lavender",
-  },
-];
+export const quizzes = [];
 
 /* =========================================================
    QUIZ VISUAL ICON
@@ -239,7 +57,7 @@ const QuizVisualIcon = ({ type }) => {
 ========================================================= */
 
 const QuizList = ({
-  quizzes: quizItems = quizzes,
+  quizzes: quizItems = [],
 
   /* ======================================================
      SHARED FILTER VALUES
@@ -335,11 +153,13 @@ const QuizList = ({
   ====================================================== */
 
   const filteredQuizzes = useMemo(() => {
-    let result = quizItems.map((quiz) => ({
+    let result = (quizItems || []).map((quiz) => ({
       ...quiz,
-      course: quiz.course_title || quiz.course || "General",
+      title: quiz.title || "Untitled Quiz",
+      description: quiz.description || "",
+      course: quiz.course_title || quiz.course_name || quiz.course || "General",
       type: quiz.type || "Assessment",
-      status: quiz.status || "Published",
+      status: quiz.status || (quiz.is_published === 0 ? "Draft" : "Published"),
       questions: quiz.questions ?? quiz.question_count ?? 15,
       attempts: quiz.attempts ?? quiz.attempt_count ?? 0,
       duration:
@@ -359,10 +179,10 @@ const QuizList = ({
     if (search) {
       result = result.filter((quiz) => {
         return (
-          quiz.title.toLowerCase().includes(search) ||
-          quiz.description.toLowerCase().includes(search) ||
-          quiz.course.toLowerCase().includes(search) ||
-          quiz.type.toLowerCase().includes(search)
+          (quiz.title || "").toLowerCase().includes(search) ||
+          (quiz.description || "").toLowerCase().includes(search) ||
+          (quiz.course || "").toLowerCase().includes(search) ||
+          (quiz.type || "").toLowerCase().includes(search)
         );
       });
     }
@@ -397,15 +217,15 @@ const QuizList = ({
 
     switch (sortValue) {
       case "Oldest First":
-        result.sort((a, b) => b.id - a.id);
+        result.sort((a, b) => a.id - b.id);
         break;
 
       case "Name: A → Z":
-        result.sort((a, b) => a.title.localeCompare(b.title));
+        result.sort((a, b) => (a.title || "").localeCompare(b.title || ""));
         break;
 
       case "Name: Z → A":
-        result.sort((a, b) => b.title.localeCompare(a.title));
+        result.sort((a, b) => (b.title || "").localeCompare(a.title || ""));
         break;
 
       case "Most Attempts":
@@ -418,7 +238,7 @@ const QuizList = ({
 
       case "Latest First":
       default:
-        result.sort((a, b) => a.id - b.id);
+        result.sort((a, b) => b.id - a.id);
         break;
     }
 
@@ -435,13 +255,13 @@ const QuizList = ({
   );
 
   /* ------------------------------------------------------
-     Reset page whenever filters change
+     Reset page whenever filters or items change
   ------------------------------------------------------ */
 
   useEffect(() => {
     setCurrentPage(1);
     setOpenMenu(null);
-  }, [searchValue, course, status, type, sortValue]);
+  }, [searchValue, course, status, type, sortValue, quizItems.length]);
 
   /* ------------------------------------------------------
      Protect against invalid page
@@ -453,7 +273,9 @@ const QuizList = ({
     }
   }, [currentPage, totalPages]);
 
-  const startIndex = (currentPage - 1) * rowsPerPage;
+  const safeCurrentPage = Math.min(Math.max(1, currentPage), totalPages);
+
+  const startIndex = (safeCurrentPage - 1) * rowsPerPage;
 
   const visibleQuizzes = filteredQuizzes.slice(
     startIndex,

@@ -9,11 +9,20 @@ import LearnerLayout from "../Layouts/LearnerLayout/LearnerLayout";
 import Dashboard from "../Pages/Learner/Dashboard/Dashboard";
 
 import CourseCatalog from "../Pages/Learner/CourseCatalog/CourseCatalog";
+import Quizzes from "../Pages/Learner/Quizzes/Quizzes";
+import QuizAttempt from "../Pages/Learner/QuizAttempt/QuizAttempt";
+import QuizResult from "../Pages/Learner/QuizResult/QuizResult";
+
+import MyLearning from "../Pages/Learner/MyLearning/MyLearning";
+import CourseDetails from "../Pages/Learner/CourseDetails/CourseDetails";
+import MySkills from "../Pages/Learner/Skills/MySkills";
+import SkillGaps from "../Pages/Learner/SkillGaps/SkillGaps";
+import Recommendations from "../Pages/Learner/Recommendations/Recommendations";
+import Certificates from "../Pages/Learner/Certificates/Certificates";
+import Knowledge from "../Pages/Learner/KnowledgeHub/Knowledge";
 
 /* =========================================================
    TEMPORARY PLACEHOLDER PAGE
-
-   We will replace these with real pages later.
 ========================================================= */
 
 const PlaceholderPage = ({ title }) => {
@@ -58,10 +67,6 @@ const LearnerRoutes = () => {
       <Route path="/" element={<LearnerLayout />}>
         {/* ===================================================
             DEFAULT LEARNER ROUTE
-
-            /learner
-                 ↓
-            /learner/dashboard
         =================================================== */}
 
         <Route index element={<Navigate to="dashboard" replace />} />
@@ -76,10 +81,7 @@ const LearnerRoutes = () => {
             LEARNING
         =================================================== */}
 
-        <Route
-          path="learning"
-          element={<PlaceholderPage title="My Learning" />}
-        />
+        <Route path="learning" element={<MyLearning />} />
 
         {/* ===================================================
             COURSE CATALOG
@@ -88,13 +90,26 @@ const LearnerRoutes = () => {
         <Route path="courses" element={<CourseCatalog />} />
 
         {/* ===================================================
+            QUIZZES
+        =================================================== */}
+
+        <Route path="quizzes" element={<Quizzes />} />
+
+        <Route
+          path="quizzes/:quizId/attempt"
+          element={<QuizAttempt />}
+        />
+
+        <Route
+          path="quizzes/:quizId/result/:attemptId"
+          element={<QuizResult />}
+        />
+
+        {/* ===================================================
             COURSE JOURNEY
         =================================================== */}
 
-        <Route
-          path="courses/:courseId"
-          element={<PlaceholderPage title="Course Details" />}
-        />
+        <Route path="courses/:courseId" element={<CourseDetails />} />
 
         <Route
           path="courses/:courseId/learn"
@@ -115,35 +130,23 @@ const LearnerRoutes = () => {
             COMPETENCY
         =================================================== */}
 
-        <Route path="skills" element={<PlaceholderPage title="My Skills" />} />
+        <Route path="skills" element={<MySkills />} />
 
-        <Route
-          path="skill-gaps"
-          element={<PlaceholderPage title="Skill Gaps" />}
-        />
+        <Route path="skill-gaps" element={<SkillGaps />} />
 
-        <Route
-          path="recommendations"
-          element={<PlaceholderPage title="Recommendations" />}
-        />
+        <Route path="recommendations" element={<Recommendations />} />
 
         {/* ===================================================
             ACHIEVEMENTS
         =================================================== */}
 
-        <Route
-          path="certificates"
-          element={<PlaceholderPage title="Certificates" />}
-        />
+        <Route path="certificates" element={<Certificates />} />
 
         {/* ===================================================
             KNOWLEDGE HUB
         =================================================== */}
 
-        <Route
-          path="knowledge-hub"
-          element={<PlaceholderPage title="Knowledge Hub" />}
-        />
+        <Route path="knowledge-hub" element={<Knowledge />} />
 
         <Route
           path="knowledge-hub/:resourceId"

@@ -56,6 +56,19 @@ class QuizController {
     }
   }
 
+  async getQuizzes(req, res, next) {
+    try {
+      const quizzes = await quizService.getQuizzes();
+      return res.status(200).json({
+        success: true,
+        count: quizzes.length,
+        data: quizzes
+      });
+    } catch (error) {
+      next(error);
+    }
+  }
+
   async getQuiz(req, res, next) {
     try {
       const quizId = parseInt(req.params.id, 10);

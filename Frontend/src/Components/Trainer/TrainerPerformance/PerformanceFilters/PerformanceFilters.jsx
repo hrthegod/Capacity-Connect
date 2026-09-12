@@ -56,10 +56,12 @@ const PerformanceFilters = ({
 
   const courseOptions = [
     "All Courses",
-    "Web Development",
-    "Data Structures",
-    "Database Management",
-    "Artificial Intelligence",
+    "Fundamentals of Meteorological Observations",
+    "Weather Forecasting Techniques",
+    "Doppler Weather Radar (DWR) Operations and Maintenance",
+    "Climate Data Analysis and Management",
+    "Disaster Warning and Dissemination Systems",
+    "Full Stack Web Development & Microservices",
   ];
 
   const batchOptions = [

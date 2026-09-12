@@ -173,8 +173,8 @@ class CertificateService {
     const res = await db.query(`
       SELECT
         cert.id,
-        cert.certificate_number,
-        cert.issued_at,
+        cert.certificate_code AS certificate_number,
+        cert.issue_date AS issued_at,
         cert.certificate_url,
         c.id AS course_id,
         c.title AS course_title,
@@ -185,9 +185,9 @@ class CertificateService {
       JOIN courses c
         ON cert.course_id = c.id
       JOIN users u
-        ON cert.learner_id = u.id
-      WHERE cert.learner_id = $1
-      ORDER BY cert.issued_at DESC
+        ON cert.user_id = u.id
+      WHERE cert.user_id = $1
+      ORDER BY cert.issue_date DESC
     `, [userId]);
 
     return res.rows;
@@ -214,8 +214,8 @@ class CertificateService {
     const res = await db.query(`
       SELECT
         cert.id,
-        cert.certificate_number,
-        cert.issued_at,
+        cert.certificate_code AS certificate_number,
+        cert.issue_date AS issued_at,
         cert.certificate_url,
         c.title AS course_title,
         c.category AS course_category,
@@ -225,8 +225,8 @@ class CertificateService {
       JOIN courses c
         ON cert.course_id = c.id
       JOIN users u
-        ON cert.learner_id = u.id
-      WHERE UPPER(cert.certificate_number) = $1
+        ON cert.user_id = u.id
+      WHERE UPPER(cert.certificate_code) = $1
     `, [cleanNumber]);
 
     // Certificate not found

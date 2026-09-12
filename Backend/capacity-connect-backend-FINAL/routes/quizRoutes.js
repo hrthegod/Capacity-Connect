@@ -12,6 +12,7 @@ const { authorizeRoles } = require('../middleware/roleMiddleware');
 router.use(authenticateToken);
 
 // Quiz metadata & questions
+router.get('/', (req, res, next) => quizController.getQuizzes(req, res, next));
 router.get('/:id', (req, res, next) => quizController.getQuiz(req, res, next));
 router.get('/:id/questions', (req, res, next) => quizController.getQuizQuestions(req, res, next));
 

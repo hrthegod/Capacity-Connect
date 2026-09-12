@@ -240,11 +240,66 @@ const StatsCard = ({ item }) => {
   );
 };
 
-const StatsCards = () => {
+const StatsCards = ({ totalLearners = 0, activeCourses = 0, quizzesCount = 0, avgPerformance = 0 }) => {
+  const dynamicStatsData = [
+    {
+      id: 1,
+      title: "Total Learners",
+      value: String(totalLearners),
+      growth: "+0%",
+      comparison: "enrolled",
+      icon: LuUsersRound,
+      bottomIcon: LuUsersRound,
+      bottomTitle: "Unique learners",
+      bottomText: "in your courses",
+      theme: "blue",
+      chart: "line",
+    },
+    {
+      id: 2,
+      title: "Active Courses",
+      value: String(activeCourses),
+      growth: "+0%",
+      comparison: "total",
+      icon: LuBookOpen,
+      bottomIcon: LuFileText,
+      bottomTitle: `${activeCourses} courses`,
+      bottomText: "MOES / platform courses",
+      theme: "green",
+      chart: "line",
+    },
+    {
+      id: 3,
+      title: "Quizzes",
+      value: String(quizzesCount),
+      growth: "+0%",
+      comparison: "total",
+      icon: LuClipboardCheck,
+      bottomIcon: LuClock3,
+      bottomTitle: `${quizzesCount} quizzes`,
+      bottomText: "created",
+      theme: "orange",
+      chart: "bars",
+    },
+    {
+      id: 4,
+      title: "Avg. Performance",
+      value: `${avgPerformance}%`,
+      growth: "+0%",
+      comparison: "score",
+      icon: LuChartNoAxesCombined,
+      bottomIcon: LuChartNoAxesCombined,
+      bottomTitle: "Overall performance",
+      bottomText: "based on evaluations",
+      theme: "navy",
+      chart: "circle",
+    },
+  ];
+
   return (
     <section className="trainer-stats-section">
       <div className="trainer-stats-grid">
-        {statsData.map((item) => (
+        {dynamicStatsData.map((item) => (
           <StatsCard key={item.id} item={item} />
         ))}
       </div>

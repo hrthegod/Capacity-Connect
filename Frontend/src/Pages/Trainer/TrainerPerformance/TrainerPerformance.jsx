@@ -1,18 +1,15 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import PerformanceHeader from "../../../Components/Trainer/TrainerPerformance/PerformanceHeader/PerformanceHeader";
 import PerformanceStats from "../../../Components/Trainer/TrainerPerformance/PerformanceStats/PerformanceStats";
 import PerformanceFilters from "../../../Components/Trainer/TrainerPerformance/PerformanceFilters/PerformanceFilters";
 import LearnerPerformance from "../../../Components/Trainer/TrainerPerformance/LearnerPerformance/LearnerPerformance";
 
+import { getTrainerPerformanceAnalytics } from "../../../services/courseApi";
+
 import "./TrainerPerformance.css";
 
 const TrainerPerformance = () => {
-  /* =====================================================
-     PERFORMANCE FILTER STATE
-     This is the single source of truth for filtering.
-  ===================================================== */
-
   const [performanceFilters, setPerformanceFilters] = useState({
     course: "All Courses",
     batch: "All Batches",
@@ -21,9 +18,37 @@ const TrainerPerformance = () => {
     searchValue: "",
   });
 
-  /* =====================================================
-     UPDATE FILTERS
-  ===================================================== */
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [analyticsData, setAnalyticsData] = useState({
+    stats: {},
+    learners: []
+  });
+
+  useEffect(() => {
+    let isMounted = true;
+    setLoading(true);
+    getTrainerPerformanceAnalytics("TRAINER")
+      .then((data) => {
+        if (isMounted && data) {
+          setAnalyticsData({
+            stats: data.stats || {},
+            learners: data.learners || []
+          });
+        }
+      })
+      .catch((err) => {
+        console.error("Failed to fetch performance analytics:", err);
+        if (isMounted) setError(err.message || "Failed to load performance analytics");
+      })
+      .finally(() => {
+        if (isMounted) setLoading(false);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
 
   const handleFiltersChange = (updatedFilters) => {
     setPerformanceFilters((currentFilters) => ({
@@ -31,10 +56,6 @@ const TrainerPerformance = () => {
       ...updatedFilters,
     }));
   };
-
-  /* =====================================================
-     RESET FILTERS
-  ===================================================== */
 
   const handleResetFilters = () => {
     setPerformanceFilters({
@@ -48,45 +69,23 @@ const TrainerPerformance = () => {
 
   return (
     <div className="trainer-performance-page">
-      {/* ========================================
-          DECORATIVE BACKGROUND
-      ======================================== */}
-
       <div
         className="trainer-performance-bg-orb trainer-performance-bg-orb-one"
         aria-hidden="true"
       />
-
       <div
         className="trainer-performance-bg-orb trainer-performance-bg-orb-two"
         aria-hidden="true"
       />
-
       <div
         className="trainer-performance-bg-orb trainer-performance-bg-orb-three"
         aria-hidden="true"
       />
 
-      {/* ========================================
-          MAIN PERFORMANCE CONTENT
-      ======================================== */}
-
       <main className="trainer-performance-content">
-        {/* ======================================
-            PERFORMANCE HEADER
-        ====================================== */}
-
         <PerformanceHeader />
 
-        {/* ======================================
-            PERFORMANCE STATS
-        ====================================== */}
-
-        <PerformanceStats />
-
-        {/* ======================================
-            PERFORMANCE FILTERS
-        ====================================== */}
+        <PerformanceStats stats={analyticsData.stats} />
 
         <PerformanceFilters
           filters={performanceFilters}
@@ -94,16 +93,7 @@ const TrainerPerformance = () => {
           onResetFilters={handleResetFilters}
         />
 
-        {/* ======================================
-            LEARNER PERFORMANCE LIST
-
-            The same filter state is passed here.
-            PerformanceFilters will update the state
-            above, and this component will receive
-            the updated values.
-        ====================================== */}
-
-        <LearnerPerformance filters={performanceFilters} />
+        <LearnerPerformance learners={analyticsData.learners} filters={performanceFilters} />
       </main>
     </div>
   );

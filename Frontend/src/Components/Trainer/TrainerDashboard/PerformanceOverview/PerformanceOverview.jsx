@@ -18,7 +18,12 @@ import "./PerformanceOverview.css";
 // PERFORMANCE OVERVIEW
 // =====================================================
 
-const PerformanceOverview = () => {
+const PerformanceOverview = ({ stats = {} }) => {
+  const totalLearners = stats.totalLearners ?? 0;
+  const completionRate = stats.completionRate !== undefined ? `${stats.completionRate}%` : "0%";
+  const averageScore = stats.averageScore !== undefined ? `${stats.averageScore}%` : "0%";
+  const overallPerformance = stats.overallPerformance !== undefined ? `${stats.overallPerformance}%` : "0%";
+
   return (
     <section className="trainer-performance-overview">
       {/* =================================================
@@ -175,7 +180,7 @@ const PerformanceOverview = () => {
               {/* Current Value */}
 
               <div className="performance-chart-tooltip">
-                <strong>78%</strong>
+                <strong>{completionRate}</strong>
               </div>
 
               {/* X Axis */}
@@ -212,14 +217,14 @@ const PerformanceOverview = () => {
                   Active Learners
                 </span>
 
-                <strong className="performance-metric-value">142</strong>
+                <strong className="performance-metric-value">{totalLearners}</strong>
 
                 <span className="performance-metric-growth performance-growth-green">
                   <LuArrowUpRight />
-                  +12%
+                  +0%
                 </span>
 
-                <small>from last month</small>
+                <small>enrolled</small>
               </div>
             </article>
 
@@ -235,14 +240,14 @@ const PerformanceOverview = () => {
                   Course Completion
                 </span>
 
-                <strong className="performance-metric-value">78%</strong>
+                <strong className="performance-metric-value">{completionRate}</strong>
 
                 <span className="performance-metric-growth performance-growth-orange">
                   <LuArrowUpRight />
-                  +8%
+                  +0%
                 </span>
 
-                <small>from last month</small>
+                <small>overall</small>
               </div>
             </article>
 
@@ -254,16 +259,16 @@ const PerformanceOverview = () => {
               </div>
 
               <div className="performance-metric-content">
-                <span className="performance-metric-title">Average Rating</span>
+                <span className="performance-metric-title">Average Score</span>
 
-                <strong className="performance-metric-value">4.7</strong>
+                <strong className="performance-metric-value">{averageScore}</strong>
 
                 <span className="performance-metric-growth performance-growth-green">
                   <LuArrowUpRight />
-                  +0.3
+                  +0%
                 </span>
 
-                <small>from last month</small>
+                <small>assessments</small>
               </div>
             </article>
           </div>
