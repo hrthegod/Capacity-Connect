@@ -1,3 +1,6 @@
+import { useEffect, useState } from "react";
+import { apiFetch } from "../../../api/apiClient";
+
 import WelcomeBanner from "../../../Components/Learner/WelcomeBanner/WelcomeBanner";
 import StatCard from "../../../Components/Learner/StatCard/StatCard";
 import LearningProgress from "../../../Components/Learner/LearningProgress/LearningProgress";
@@ -10,46 +13,62 @@ import ResourceCard from "../../../Components/Learner/ResourceCard/ResourceCard"
 
 import "./Dashboard.css";
 
-const dashboardStats = [
-  {
-    id: 1,
-    title: "Courses Completed",
-    value: "12",
-    description: "Courses successfully completed",
-    icon: "completed",
-    variant: "success",
-  },
-  {
-    id: 2,
-    title: "Learning Progress",
-    value: "68%",
-    description: "Overall learning progress",
-    icon: "progress",
-    variant: "ocean",
-    trend: "+8%",
-    trendType: "positive",
-  },
-  {
-    id: 3,
-    title: "Certificates",
-    value: "8",
-    description: "Certificates earned",
-    icon: "certificates",
-    variant: "achievement",
-    trend: "+2",
-    trendType: "positive",
-  },
-  {
-    id: 4,
-    title: "Active Learning",
-    value: "4",
-    description: "Courses currently in progress",
-    icon: "learning",
-    variant: "navy",
-  },
-];
-
 const Dashboard = () => {
+  const [user, setUser] = useState(null);
+  const [certificateCount, setCertificateCount] = useState(0);
+  const dashboardStats = [
+    {
+      id: 1,
+      title: "Courses Completed",
+      value: "12",
+      description: "Courses successfully completed",
+      icon: "completed",
+      variant: "success",
+    },
+    {
+      id: 2,
+      title: "Learning Progress",
+      value: "68%",
+      description: "Overall learning progress",
+      icon: "progress",
+      variant: "ocean",
+      trend: "+8%",
+      trendType: "positive",
+    },
+    {
+      id: 3,
+      title: "Certificates",
+      value: certificateCount.toString(),
+      description: "Certificates earned",
+      icon: "certificates",
+      variant: "achievement",
+      trend: "+2",
+      trendType: "positive",
+    },
+    {
+      id: 4,
+      title: "Active Learning",
+      value: "4",
+      description: "Courses currently in progress",
+      icon: "learning",
+      variant: "navy",
+    },
+  ];
+  useEffect(() => {
+    const fetchDashboardData = async () => {
+      try {
+        const userData = await apiFetch("/auth/me");
+        setUser(userData.data);
+
+        const certificateData = await apiFetch("/certificates/my");
+        setCertificateCount(certificateData.count);
+      } catch (error) {
+        console.error("Failed to fetch dashboard data:", error);
+      }
+    };
+
+    fetchDashboardData();
+  }, []);
   return (
     <div className="learner-dashboard">
       {/* ==========================================================
@@ -57,7 +76,7 @@ const Dashboard = () => {
       ========================================================== */}
 
       <WelcomeBanner
-        name="Dev"
+        name={user?.name || "Learner"}
         onProfileClick={() => {
           console.log("Navigate to profile");
         }}

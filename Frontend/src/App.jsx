@@ -7,7 +7,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Landing from "./Pages/Landing/Landing";
 import Register from "./Pages/Auth/Register/Register";
 import Login from "./Pages/Auth/Login/Login";
-
+import TrainerRoutes from "./routes/TrainerRoutes";
 // ================================
 // LEARNER ROUTES
 // ================================
@@ -68,6 +68,7 @@ function App() {
           /learner/settings
         */}
         <Route path="/learner/*" element={<LearnerRoutes />} />
+        <Route path="/trainer/*" element={<TrainerRoutes />} />
       </Routes>
     </BrowserRouter>
   );

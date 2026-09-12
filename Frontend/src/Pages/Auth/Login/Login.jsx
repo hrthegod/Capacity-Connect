@@ -1,7 +1,7 @@
 import { useState } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
-
+import { apiFetch } from "../../../api/apiClient";
 // Zero-dependency SVG Icons for complete reusability across any React project
 const Icons = {
   Logo: () => (
@@ -253,14 +253,14 @@ export default function Login({
     return newErrors;
   };
 
- const handleSubmit = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
     const validationErrors = validate();
 
     if (Object.keys(validationErrors).length > 0) {
-        setErrors(validationErrors);
-        return;
+      setErrors(validationErrors);
+      return;
     }
 
     setErrors({});
@@ -268,42 +268,49 @@ export default function Login({
     setSubmitSuccess(false);
 
     try {
-        const response = await fetch("http://localhost:5000/api/auth/login", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            body: JSON.stringify({
-                email: formData.email,
-                password: formData.password
-            })
-        });
+      const data = await apiFetch("/auth/login", {
+        method: "POST",
+        body: JSON.stringify({
+          email: formData.email,
+          password: formData.password,
+        }),
+      });
 
-        const data = await response.json();
+      localStorage.setItem("token", data.data.token);
+      localStorage.setItem("user", JSON.stringify(data.data.user));
 
-        if (!response.ok) {
-            throw new Error(data.message || "Login failed");
-        }
+      console.log("Login successful:", data);
 
-        console.log("Login successful:", data);
+      setSubmitSuccess(true);
 
-        setSubmitSuccess(true);
+      if (onLoginSuccess) {
+        onLoginSuccess(data);
+        return;
+      }
 
-        if (onLoginSuccess) {
-            onLoginSuccess(data);
-        }
+      const role = data?.data?.user?.role?.toUpperCase();
 
-    } catch (error) {
-        console.error("Login error:", error);
-
+      if (role === "LEARNER") {
+        navigate("/learner/dashboard");
+      } else if (role === "TRAINER") {
+        navigate("/trainer");
+      } else if (role === "ADMIN") {
+        navigate("/admin");
+      } else {
         setErrors({
-            general: error.message || "Unable to login"
+          general: "Login successful, but your account role is invalid.",
         });
+      }
+    } catch (error) {
+      console.error("Login error:", error);
 
+      setErrors({
+        general: error.message || "Unable to login",
+      });
     } finally {
-        setIsSubmitting(false);
+      setIsSubmitting(false);
     }
-};
+  };
 
   const handleSocialClick = (provider) => {
     window.alert(`Sign in with ${provider} is ready for integration.`);

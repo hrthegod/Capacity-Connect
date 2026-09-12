@@ -1,0 +1,200 @@
+/* =========================================================
+   TRAINER LAYOUT
+   Capacity Connect
+========================================================= */
+
+.trainer-layout {
+  --trainer-sidebar-width: 252px;
+
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  margin: 0;
+  padding: 0;
+
+  background: #f4f7fb;
+
+  overflow-x: hidden;
+}
+
+/* =========================================================
+   MAIN APPLICATION AREA
+========================================================= */
+
+.trainer-main {
+  position: relative;
+
+  width: calc(100% - var(--trainer-sidebar-width));
+
+  min-width: 0;
+
+  min-height: 100vh;
+  min-height: 100dvh;
+
+  margin: 0;
+  margin-left: var(--trainer-sidebar-width);
+
+  padding: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   PAGE CONTENT
+========================================================= */
+
+.trainer-content {
+  flex: 1 1 auto;
+
+  width: 100%;
+  min-width: 0;
+
+  margin: 0;
+  padding: 88px 20px 20px;
+
+  box-sizing: border-box;
+
+  overflow-x: hidden;
+}
+
+/* =========================================================
+   LARGE LAPTOP
+========================================================= */
+
+@media (max-width: 1200px) {
+  .trainer-layout {
+    --trainer-sidebar-width: 232px;
+  }
+
+  .trainer-main {
+    width: calc(100% - var(--trainer-sidebar-width));
+
+    margin-left: var(--trainer-sidebar-width);
+  }
+
+  .trainer-content {
+    padding: 86px 18px 18px;
+  }
+}
+
+/* =========================================================
+   TABLET
+   Sidebar = 76px
+========================================================= */
+
+@media (max-width: 900px) {
+  .trainer-layout {
+    --trainer-sidebar-width: 76px;
+  }
+
+  .trainer-main {
+    width: calc(100% - var(--trainer-sidebar-width));
+
+    margin-left: var(--trainer-sidebar-width);
+  }
+
+  .trainer-content {
+    padding: 82px 16px 16px;
+  }
+}
+
+/* =========================================================
+   SMALL TABLET
+========================================================= */
+
+@media (max-width: 768px) {
+  .trainer-content {
+    padding: 82px 14px 14px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   Sidebar = 68px
+========================================================= */
+
+@media (max-width: 640px) {
+  .trainer-layout {
+    --trainer-sidebar-width: 68px;
+
+    width: 100%;
+
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .trainer-main {
+    width: calc(100% - var(--trainer-sidebar-width));
+
+    min-height: 100vh;
+    min-height: 100dvh;
+
+    margin: 0;
+    margin-left: var(--trainer-sidebar-width);
+
+    padding: 0;
+  }
+
+  .trainer-content {
+    width: 100%;
+
+    margin: 0;
+
+    padding: 76px 13px 20px;
+
+    box-sizing: border-box;
+
+    overflow-x: hidden;
+  }
+}
+
+/* =========================================================
+   VERY SMALL MOBILE
+   Sidebar = 62px
+========================================================= */
+
+@media (max-width: 420px) {
+  .trainer-layout {
+    --trainer-sidebar-width: 62px;
+  }
+
+  .trainer-main {
+    width: calc(100% - var(--trainer-sidebar-width));
+
+    margin-left: var(--trainer-sidebar-width);
+  }
+
+  .trainer-content {
+    padding: 76px 11px 20px;
+  }
+}
+
+/* =========================================================
+   EXTRA SMALL MOBILE
+   Sidebar = 58px
+========================================================= */
+
+@media (max-width: 340px) {
+  .trainer-layout {
+    --trainer-sidebar-width: 58px;
+  }
+
+  .trainer-main {
+    width: calc(100% - var(--trainer-sidebar-width));
+
+    margin-left: var(--trainer-sidebar-width);
+  }
+
+  .trainer-content {
+    padding: 74px 9px 18px;
+  }
+}
