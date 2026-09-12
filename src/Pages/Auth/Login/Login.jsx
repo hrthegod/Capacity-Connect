@@ -2,7 +2,10 @@ import { useState } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 
-// Zero-dependency SVG Icons for complete reusability across any React project
+// ============================================================
+// ZERO-DEPENDENCY SVG ICONS
+// ============================================================
+
 const Icons = {
   Logo: () => (
     <svg
@@ -16,6 +19,7 @@ const Icons = {
       <circle cx="11" cy="11" r="3.5" fill="#FFD45A" />
       <circle cx="21" cy="11" r="3.5" fill="#FFFFFF" />
       <circle cx="16" cy="21" r="3.5" fill="#FFD45A" />
+
       <path
         d="M11 11L21 11M11 11L16 21M21 11L16 21"
         stroke="#FFFFFF"
@@ -25,6 +29,7 @@ const Icons = {
       />
     </svg>
   ),
+
   Mail: () => (
     <svg
       width="18"
@@ -40,6 +45,7 @@ const Icons = {
       <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
     </svg>
   ),
+
   Lock: () => (
     <svg
       width="18"
@@ -55,6 +61,7 @@ const Icons = {
       <path d="M7 11V7a5 5 0 0 1 10 0v4" />
     </svg>
   ),
+
   Eye: () => (
     <svg
       width="18"
@@ -70,6 +77,7 @@ const Icons = {
       <circle cx="12" cy="12" r="3" />
     </svg>
   ),
+
   EyeOff: () => (
     <svg
       width="18"
@@ -87,6 +95,7 @@ const Icons = {
       <line x1="2" y1="2" x2="22" y2="22" />
     </svg>
   ),
+
   Check: () => (
     <svg
       width="12"
@@ -101,31 +110,37 @@ const Icons = {
       <polyline points="20 6 9 17 4 12" />
     </svg>
   ),
+
   Google: () => (
     <svg width="18" height="18" viewBox="0 0 24 24">
       <path
         fill="#4285F4"
         d="M23.745 12.27c0-.7-.06-1.4-.19-2.07H12v4.51h6.6c-.29 1.52-1.14 2.82-2.4 3.68v3.05h3.88c2.27-2.09 3.66-5.17 3.66-9.17z"
       />
+
       <path
         fill="#34A853"
         d="M12 24c3.24 0 5.95-1.08 7.93-2.91l-3.88-3.05c-1.08.72-2.45 1.16-4.05 1.16-3.12 0-5.77-2.1-6.72-4.93H1.25v3.15C3.26 21.36 7.34 24 12 24z"
       />
+
       <path
         fill="#FBBC05"
         d="M5.28 14.27c-.25-.72-.38-1.49-.38-2.27s.13-1.55.38-2.27V6.58H1.25C.45 8.16 0 9.94 0 12s.45 3.84 1.25 5.42l4.03-3.15z"
       />
+
       <path
         fill="#EA4335"
         d="M12 4.75c1.77 0 3.35.61 4.6 1.8l3.42-3.42C17.95 1.19 15.24 0 12 0 7.34 0 3.26 2.64 1.25 6.58l4.03 3.15c.95-2.83 3.6-4.98 6.72-4.98z"
       />
     </svg>
   ),
+
   Apple: () => (
     <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.38c.62-.75 1.04-1.8 0.93-2.85-.9.04-1.98.6-2.61 1.34-.56.64-1.05 1.69-.92 2.71 1 .08 2.02-.45 2.6-1.2" />
+      <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.38c.62-.75 1.04-1.8.93-2.85-.9.04-1.98.6-2.61 1.34-.56.64-1.05 1.69-.92 2.71 1 .08 2.02-.45 2.6-1.2" />
     </svg>
   ),
+
   Calendar: () => (
     <svg
       width="14"
@@ -143,6 +158,7 @@ const Icons = {
       <line x1="3" y1="10" x2="21" y2="10" />
     </svg>
   ),
+
   Clock: () => (
     <svg
       width="14"
@@ -158,6 +174,7 @@ const Icons = {
       <polyline points="12 6 12 12 16 14" />
     </svg>
   ),
+
   TrendingUp: () => (
     <svg
       width="14"
@@ -173,6 +190,7 @@ const Icons = {
       <polyline points="16 7 22 7 22 13" />
     </svg>
   ),
+
   Users: () => (
     <svg
       width="14"
@@ -191,6 +209,10 @@ const Icons = {
     </svg>
   ),
 };
+
+// ============================================================
+// LOGIN COMPONENT
+// ============================================================
 
 export default function Login({
   onNavigateToRegister,
@@ -211,13 +233,21 @@ export default function Login({
 
   const navigate = useNavigate();
 
-  // Email format validation helper
+  // ============================================================
+  // EMAIL VALIDATION
+  // ============================================================
+
   const isValidEmail = (email) => {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   };
 
+  // ============================================================
+  // HANDLE INPUT CHANGE
+  // ============================================================
+
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
+
     const fieldValue = type === "checkbox" ? checked : value;
 
     setFormData((prev) => ({
@@ -225,7 +255,7 @@ export default function Login({
       [name]: fieldValue,
     }));
 
-    // Clear specific field error as user types
+    // Clear only the error belonging to the field being edited.
     if (errors[name]) {
       setErrors((prev) => {
         const updated = { ...prev };
@@ -233,17 +263,29 @@ export default function Login({
         return updated;
       });
     }
+
+    // If the user starts editing after a failed login,
+    // hide the success message.
+    if (submitSuccess) {
+      setSubmitSuccess(false);
+    }
   };
+
+  // ============================================================
+  // FRONTEND VALIDATION
+  // ============================================================
 
   const validate = () => {
     const newErrors = {};
 
+    // Email validation
     if (!formData.email.trim()) {
       newErrors.email = "Email address is required";
     } else if (!isValidEmail(formData.email.trim())) {
       newErrors.email = "Please enter a valid email address";
     }
 
+    // Password validation
     if (!formData.password) {
       newErrors.password = "Password is required";
     } else if (formData.password.length < 6) {
@@ -253,8 +295,17 @@ export default function Login({
     return newErrors;
   };
 
+  // ============================================================
+  // LOGIN SUBMIT
+  // ============================================================
+
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    // ----------------------------------------------------------
+    // STEP 1: Validate basic form fields
+    // ----------------------------------------------------------
+
     const validationErrors = validate();
 
     if (Object.keys(validationErrors).length > 0) {
@@ -262,30 +313,118 @@ export default function Login({
       return;
     }
 
+    // Clear old errors before checking credentials.
     setErrors({});
+    setSubmitSuccess(false);
     setIsSubmitting(true);
 
-    // Simulate authentication API call
+    // ----------------------------------------------------------
+    // STEP 2: Simulate authentication API
+    // ----------------------------------------------------------
+
     setTimeout(() => {
+      // Get registered users from localStorage.
+      const users = JSON.parse(
+        localStorage.getItem("capacityConnectUsers") || "[]",
+      );
+
+      const enteredEmail = formData.email.trim().toLowerCase();
+
+      // --------------------------------------------------------
+      // STEP 3: Find user by email
+      // --------------------------------------------------------
+
+      const registeredUser = users.find(
+        (user) => user.email?.trim().toLowerCase() === enteredEmail,
+      );
+
+      // --------------------------------------------------------
+      // EMAIL DOES NOT EXIST
+      // --------------------------------------------------------
+
+      if (!registeredUser) {
+        setIsSubmitting(false);
+
+        setErrors({
+          email: "No account found with this email address",
+        });
+
+        return;
+      }
+
+      // --------------------------------------------------------
+      // STEP 4: CHECK PASSWORD
+      // --------------------------------------------------------
+
+      if (registeredUser.password !== formData.password) {
+        setIsSubmitting(false);
+
+        setErrors({
+          password: "Incorrect password. Please try again.",
+        });
+
+        return;
+      }
+
+      // --------------------------------------------------------
+      // STEP 5: LOGIN SUCCESSFUL
+      // --------------------------------------------------------
+
       setIsSubmitting(false);
       setSubmitSuccess(true);
+      setErrors({});
+
+      // Send logged-in user information to parent if provided.
       if (onLoginSuccess) {
-        onLoginSuccess(formData);
+        onLoginSuccess(registeredUser);
+      }
+
+      // --------------------------------------------------------
+      // STEP 6: ROLE-BASED ROUTING
+      // --------------------------------------------------------
+
+      const roleRoutes = {
+        learner: "/learner",
+        trainer: "/trainer",
+        admin: "/admin",
+      };
+
+      const destination = roleRoutes[registeredUser.profession];
+
+      if (destination) {
+        setTimeout(() => {
+          navigate(destination);
+        }, 500);
       }
     }, 600);
   };
+
+  // ============================================================
+  // SOCIAL LOGIN
+  // ============================================================
 
   const handleSocialClick = (provider) => {
     window.alert(`Sign in with ${provider} is ready for integration.`);
   };
 
+  // ============================================================
+  // HERO IMAGE
+  // ============================================================
+
   const heroImage =
     imageSrc ||
     "https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=80";
 
+  // ============================================================
+  // JSX
+  // ============================================================
+
   return (
     <div className="cc-log-page-wrapper">
+      {/* Backdrop */}
       <div className="cc-log-backdrop" aria-hidden="true" />
+
+      {/* Back Button */}
       <button
         type="button"
         className="cc-log-back-link"
@@ -295,27 +434,40 @@ export default function Login({
         <span aria-hidden="true">←</span>
         <span>Back to Capacity Connect</span>
       </button>
+
+      {/* ========================================================
+          AUTH CONTAINER
+      ======================================================== */}
+
       <div className="cc-log-auth-container">
-        {/* Left Side: Authentication Form */}
+        {/* ======================================================
+            LEFT SIDE — LOGIN FORM
+        ====================================================== */}
+
         <div className="cc-log-form-pane">
-          {/* Capacity Connect Branding */}
+          {/* Branding */}
           <div className="cc-log-brand">
             <Icons.Logo />
+
             <div className="cc-log-brand-text">
               <span className="cc-log-brand-name">Capacity</span>
               <span className="cc-log-brand-highlight">Connect</span>
             </div>
           </div>
 
-          {/* Heading & Subtitle */}
+          {/* Heading */}
           <div className="cc-log-header-block">
             <h1 className="cc-log-heading">Welcome back</h1>
+
             <p className="cc-log-subtitle">
               Sign in to continue to Capacity Connect.
             </p>
           </div>
 
-          {/* Social Sign-In Buttons */}
+          {/* ====================================================
+              SOCIAL LOGIN
+          ==================================================== */}
+
           <div className="cc-log-social-group">
             <button
               type="button"
@@ -326,6 +478,7 @@ export default function Login({
               <Icons.Google />
               <span>Google</span>
             </button>
+
             <button
               type="button"
               className="cc-log-social-btn"
@@ -340,29 +493,43 @@ export default function Login({
           {/* Divider */}
           <div className="cc-log-divider">
             <span className="cc-log-divider-line" />
+
             <span className="cc-log-divider-text">or sign in with email</span>
+
             <span className="cc-log-divider-line" />
           </div>
 
-          {/* Submission Success Alert */}
+          {/* ====================================================
+              SUCCESS MESSAGE
+          ==================================================== */}
+
           {submitSuccess && (
             <div className="cc-log-success-banner">
               <span className="cc-log-success-icon">✓</span>
+
               <span>Welcome back! Signing you into your dashboard...</span>
             </div>
           )}
 
-          {/* Login Form */}
+          {/* ====================================================
+              LOGIN FORM
+          ==================================================== */}
+
           <form className="cc-log-form" onSubmit={handleSubmit} noValidate>
-            {/* Email Input */}
+            {/* ==================================================
+                EMAIL
+            ================================================== */}
+
             <div className="cc-log-field-group">
               <label className="cc-log-label" htmlFor="log-email">
                 Email Address
               </label>
+
               <div className="cc-log-input-wrapper">
                 <span className="cc-log-input-icon">
                   <Icons.Mail />
                 </span>
+
                 <input
                   id="log-email"
                   name="email"
@@ -373,20 +540,26 @@ export default function Login({
                   className={`cc-log-input ${errors.email ? "has-error" : ""}`}
                 />
               </div>
+
               {errors.email && (
                 <span className="cc-log-error-text">{errors.email}</span>
               )}
             </div>
 
-            {/* Password Input */}
+            {/* ==================================================
+                PASSWORD
+            ================================================== */}
+
             <div className="cc-log-field-group">
               <label className="cc-log-label" htmlFor="log-password">
                 Password
               </label>
+
               <div className="cc-log-input-wrapper">
                 <span className="cc-log-input-icon">
                   <Icons.Lock />
                 </span>
+
                 <input
                   id="log-password"
                   name="password"
@@ -394,23 +567,30 @@ export default function Login({
                   placeholder="Enter your password"
                   value={formData.password}
                   onChange={handleChange}
-                  className={`cc-log-input ${errors.password ? "has-error" : ""}`}
+                  className={`cc-log-input ${
+                    errors.password ? "has-error" : ""
+                  }`}
                 />
+
                 <button
                   type="button"
                   className="cc-log-eye-btn"
-                  onClick={() => setShowPassword(!showPassword)}
+                  onClick={() => setShowPassword((prev) => !prev)}
                   aria-label={showPassword ? "Hide password" : "Show password"}
                 >
                   {showPassword ? <Icons.EyeOff /> : <Icons.Eye />}
                 </button>
               </div>
+
               {errors.password && (
                 <span className="cc-log-error-text">{errors.password}</span>
               )}
             </div>
 
-            {/* Remember Me & Forgot Password Row */}
+            {/* ==================================================
+                REMEMBER ME + FORGOT PASSWORD
+            ================================================== */}
+
             <div className="cc-log-options-row">
               <label className="cc-log-checkbox-label">
                 <input
@@ -420,11 +600,15 @@ export default function Login({
                   onChange={handleChange}
                   className="cc-log-checkbox-hidden"
                 />
+
                 <span
-                  className={`cc-log-custom-checkbox ${formData.rememberMe ? "checked" : ""}`}
+                  className={`cc-log-custom-checkbox ${
+                    formData.rememberMe ? "checked" : ""
+                  }`}
                 >
                   {formData.rememberMe && <Icons.Check />}
                 </span>
+
                 <span className="cc-log-remember-text">Remember Me</span>
               </label>
 
@@ -442,7 +626,10 @@ export default function Login({
               </a>
             </div>
 
-            {/* Submit Button */}
+            {/* ==================================================
+                SUBMIT BUTTON
+            ================================================== */}
+
             <button
               type="submit"
               className="cc-log-submit-btn"
@@ -452,7 +639,10 @@ export default function Login({
             </button>
           </form>
 
-          {/* Switch to Register Text */}
+          {/* ====================================================
+              REGISTER SWITCH
+          ==================================================== */}
+
           <p className="cc-log-auth-switch">
             Don't have an account?{" "}
             <a
@@ -470,7 +660,10 @@ export default function Login({
           </p>
         </div>
 
-        {/* Right Side: Professional Teamwork Visual with Floating UI Cards */}
+        {/* ======================================================
+            RIGHT SIDE — VISUAL
+        ====================================================== */}
+
         <div className="cc-log-visual-pane">
           <img
             src={heroImage}
@@ -481,44 +674,59 @@ export default function Login({
                 "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&w=1200&q=80";
             }}
           />
+
           <div className="cc-log-hero-overlay" />
 
-          {/* Live Status Pill */}
+          {/* ==================================================
+              LIVE STATUS
+          ================================================== */}
+
           <div className="cc-log-live-pill">
             <span className="cc-log-pulse-dot" />
             <span>Capacity Hub • Live</span>
           </div>
 
-          {/* Floating UI Cards */}
+          {/* ==================================================
+              FLOATING CARDS
+          ================================================== */}
+
           <div className="cc-log-floating-cards">
-            {/* Card 1: Meeting Card */}
+            {/* Card 1 */}
             <div className="cc-log-float-card cc-log-float-card-1">
               <div className="cc-log-card-header">
                 <span className="cc-log-card-icon">
                   <Icons.Clock />
                 </span>
+
                 <span className="cc-log-card-label">Upcoming Sync</span>
               </div>
+
               <h4 className="cc-log-card-title">
                 Sprint Architecture & Planning
               </h4>
+
               <p className="cc-log-card-sub">
-                <Icons.Calendar /> Today, 10:30 AM • Conf Room A
+                <Icons.Calendar />
+                Today, 10:30 AM • Conf Room A
               </p>
             </div>
 
-            {/* Card 2: Task / Productivity Card */}
+            {/* Card 2 */}
             <div className="cc-log-float-card cc-log-float-card-2">
               <div className="cc-log-card-header">
                 <span className="cc-log-card-icon">
                   <Icons.TrendingUp />
                 </span>
+
                 <span className="cc-log-card-label">Capacity Utilization</span>
               </div>
+
               <div className="cc-log-stat-row">
                 <span className="cc-log-stat-val">94.2%</span>
+
                 <span className="cc-log-stat-badge">+18.4%</span>
               </div>
+
               <div className="cc-log-progress-track">
                 <div
                   className="cc-log-progress-fill"
@@ -527,44 +735,52 @@ export default function Login({
               </div>
             </div>
 
-            {/* Card 3: Calendar / Milestone Card */}
+            {/* Card 3 */}
             <div className="cc-log-float-card cc-log-float-card-3">
               <div className="cc-log-card-header">
                 <span className="cc-log-card-icon">
                   <Icons.Calendar />
                 </span>
+
                 <span className="cc-log-card-label">Milestone Active</span>
               </div>
+
               <h4 className="cc-log-card-title">SIH Hackathon Phase 1</h4>
+
               <p className="cc-log-card-sub">
                 All deliverables submitted on track
               </p>
             </div>
 
-            {/* Card 4: Small Avatar Circles */}
+            {/* Card 4 */}
             <div className="cc-log-float-card cc-log-float-card-4">
               <div className="cc-log-card-header">
                 <span className="cc-log-card-icon">
                   <Icons.Users />
                 </span>
+
                 <span className="cc-log-card-label">Collaborators</span>
               </div>
+
               <div className="cc-log-avatar-cluster">
                 <img
                   src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80"
                   alt="Avatar"
                   className="cc-log-avatar-circle"
                 />
+
                 <img
                   src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80"
                   alt="Avatar"
                   className="cc-log-avatar-circle"
                 />
+
                 <img
                   src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80"
                   alt="Avatar"
                   className="cc-log-avatar-circle"
                 />
+
                 <span className="cc-log-avatar-counter">+12</span>
               </div>
             </div>
