@@ -81,25 +81,44 @@ async function seedMoesData(poolInstance) {
         );
       }
 
-      // Process Units / Modules
-      for (const unit of course.units) {
-        let moduleDbId;
-        const existingModule = await poolInstance.query(
-          "SELECT id FROM modules WHERE course_id = $1 AND title = $2 LIMIT 1",
-          [courseDbId, unit.title]
-        );
-
-        if (existingModule.rows.length > 0) {
-          moduleDbId = existingModule.rows[0].id;
-        } else {
-          const moduleRes = await poolInstance.query(
-            `INSERT INTO modules (course_id, title, description, order_index)
-             VALUES ($1, $2, $3, $4)
-             RETURNING id`,
-            [courseDbId, unit.title, unit.summary, unit.unit_number]
+        // Process Units / Modules
+        for (const unit of course.units) {
+          let moduleDbId;
+          const existingModule = await poolInstance.query(
+            "SELECT id FROM modules WHERE course_id = $1 AND title = $2 LIMIT 1",
+            [courseDbId, unit.title]
           );
-          moduleDbId = moduleRes.rows[0].id;
-        }
+
+          if (existingModule.rows.length > 0) {
+            moduleDbId = existingModule.rows[0].id;
+          } else {
+            const moduleRes = await poolInstance.query(
+              `INSERT INTO modules (course_id, title, description, order_index)
+               VALUES ($1, $2, $3, $4)
+               RETURNING id`,
+              [courseDbId, unit.title, unit.summary, unit.unit_number]
+            );
+            moduleDbId = moduleRes.rows[0].id;
+          }
+
+          // Ensure unit entry exists in units table
+          let unitDbId;
+          const existingUnit = await poolInstance.query(
+            "SELECT id FROM units WHERE course_id = $1 AND unit_number = $2 LIMIT 1",
+            [courseDbId, unit.unit_number]
+          );
+
+          if (existingUnit.rows.length > 0) {
+            unitDbId = existingUnit.rows[0].id;
+          } else {
+            const unitRes = await poolInstance.query(
+              `INSERT INTO units (course_id, unit_number, title, description)
+               VALUES ($1, $2, $3, $4)
+               RETURNING id`,
+              [courseDbId, unit.unit_number, unit.title, unit.summary]
+            );
+            unitDbId = unitRes.rows[0].id;
+          }
 
         // Process Quiz (1 per module/unit)
         const quizTitle = `${unit.title} Assessment`;
@@ -145,6 +164,21 @@ async function seedMoesData(poolInstance) {
           unitTitle: unit.title,
           quizDbId
         });
+      }
+    }
+
+    // Seed Topics from seedTopics.sql if topics table is empty
+    const topicCheck = await poolInstance.query("SELECT COUNT(*) AS count FROM topics");
+    if (parseInt(topicCheck.rows[0].count, 10) === 0) {
+      const seedTopicsPath = path.resolve(__dirname, 'seedTopics.sql');
+      if (fs.existsSync(seedTopicsPath)) {
+        const seedTopicsSql = fs.readFileSync(seedTopicsPath, 'utf8');
+        try {
+          await poolInstance.query(seedTopicsSql);
+          console.log('[DB-MOES] Seeded topics from seedTopics.sql');
+        } catch (sErr) {
+          console.error('[DB-MOES] Error running seedTopics.sql:', sErr.message);
+        }
       }
     }
 

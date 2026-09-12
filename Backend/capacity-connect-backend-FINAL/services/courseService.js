@@ -160,20 +160,142 @@ class CourseService {
   }
 
   async deleteCourse(courseId, userId, userRole) {
-    const existing = await db.query('SELECT trainer_id FROM courses WHERE id = $1', [courseId]);
+    const numericId = Number(courseId);
+
+    const existing = await db.query('SELECT id, title, trainer_id FROM courses WHERE id = $1', [numericId]);
     if (existing.rows.length === 0) {
       const error = new Error('Course not found');
       error.statusCode = 404;
       throw error;
     }
 
-    if (userRole !== 'ADMIN' && existing.rows[0].trainer_id !== userId) {
+    const course = existing.rows[0];
+
+    // Prevent accidental deletion of seeded MOES/IMD reference courses (IDs 1-8)
+    const SEEDED_COURSE_IDS = [1, 2, 3, 4, 5, 6, 7, 8];
+    if (SEEDED_COURSE_IDS.includes(numericId)) {
+      const error = new Error('System/Seeded MOES/IMD reference courses cannot be deleted. You can only delete custom trainer-created courses.');
+      error.statusCode = 400;
+      throw error;
+    }
+
+    if (userRole !== 'ADMIN' && course.trainer_id !== userId) {
       const error = new Error('Forbidden: You can only delete your own courses');
       error.statusCode = 403;
       throw error;
     }
 
-    await db.query('DELETE FROM courses WHERE id = $1', [courseId]);
+    // Controlled ordered deletion of dependent records
+    await db.query(`
+      DELETE FROM topic_materials
+      WHERE topic_id IN (
+        SELECT t.id FROM topics t
+        JOIN units u ON t.unit_id = u.id
+        WHERE u.course_id = $1
+      )
+    `, [numericId]);
+
+    await db.query(`
+      DELETE FROM topic_progress
+      WHERE topic_id IN (
+        SELECT t.id FROM topics t
+        JOIN units u ON t.unit_id = u.id
+        WHERE u.course_id = $1
+      )
+    `, [numericId]);
+
+    await db.query(`
+      DELETE FROM topics
+      WHERE unit_id IN (
+        SELECT id FROM units WHERE course_id = $1
+      )
+    `, [numericId]);
+
+    await db.query(`
+      DELETE FROM units
+      WHERE course_id = $1
+    `, [numericId]);
+
+    await db.query(`
+      DELETE FROM module_contents
+      WHERE module_id IN (
+        SELECT id FROM modules WHERE course_id = $1
+      )
+    `, [numericId]);
+
+    await db.query(`
+      DELETE FROM learning_progress
+      WHERE module_id IN (
+        SELECT id FROM modules WHERE course_id = $1
+      ) OR enrollment_id IN (
+        SELECT id FROM enrollments WHERE course_id = $1
+      )
+    `, [numericId]);
+
+    await db.query(`
+      DELETE FROM modules
+      WHERE course_id = $1
+    `, [numericId]);
+
+    await db.query(`
+      DELETE FROM quiz_attempt_answers
+      WHERE attempt_id IN (
+        SELECT id FROM quiz_attempts
+        WHERE quiz_id IN (SELECT id FROM quizzes WHERE course_id = $1)
+      ) OR question_id IN (
+        SELECT id FROM quiz_questions
+        WHERE quiz_id IN (SELECT id FROM quizzes WHERE course_id = $1)
+      )
+    `, [numericId]);
+
+    await db.query(`
+      DELETE FROM quiz_attempts
+      WHERE quiz_id IN (
+        SELECT id FROM quizzes WHERE course_id = $1
+      )
+    `, [numericId]);
+
+    await db.query(`
+      DELETE FROM quiz_questions
+      WHERE quiz_id IN (
+        SELECT id FROM quizzes WHERE course_id = $1
+      )
+    `, [numericId]);
+
+    await db.query(`
+      DELETE FROM quizzes
+      WHERE course_id = $1
+    `, [numericId]);
+
+    await db.query(`
+      DELETE FROM assignment_submissions
+      WHERE assignment_id IN (
+        SELECT id FROM assignments WHERE course_id = $1
+      )
+    `, [numericId]);
+
+    await db.query(`
+      DELETE FROM assignments
+      WHERE course_id = $1
+    `, [numericId]);
+
+    await db.query(`
+      DELETE FROM certificates
+      WHERE course_id = $1
+    `, [numericId]);
+
+    await db.query(`
+      DELETE FROM course_competencies
+      WHERE course_id = $1
+    `, [numericId]);
+
+    await db.query(`
+      DELETE FROM enrollments
+      WHERE course_id = $1
+    `, [numericId]);
+
+    await db.query('DELETE FROM courses WHERE id = $1', [numericId]);
+
     return { success: true, message: 'Course deleted successfully' };
   }
 }

@@ -6,6 +6,8 @@
 const express = require('express');
 const cors = require('cors');
 
+const path = require('path');
+
 // Route imports
 const authRoutes = require('./routes/authRoutes');
 const courseRoutes = require('./routes/courseRoutes');
@@ -22,6 +24,9 @@ const trainerRoutes = require('./routes/trainerRoutes');
 const adminRoutes = require('./routes/adminRoutes');
 const assignmentRoutes = require('./routes/assignmentRoutes');
 const notificationRoutes = require('./routes/notificationRoutes');
+const uploadRoutes = require('./routes/uploadRoutes');
+const unitRoutes = require('./routes/unitRoutes');
+const topicRoutes = require('./routes/topicRoutes');
 
 const app = express();
 
@@ -29,6 +34,9 @@ const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+// Serve uploaded files
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // Health check endpoint
 app.get('/api/health', async (req, res) => {
@@ -56,6 +64,9 @@ app.use('/api/trainer', trainerRoutes);
 app.use('/api/admin', adminRoutes);
 app.use('/api/assignments', assignmentRoutes);
 app.use('/api/notifications', notificationRoutes);
+app.use('/api/units', unitRoutes);
+app.use('/api/topics', topicRoutes);
+app.use('/api/upload', uploadRoutes);
 
 // Global 404 Handler for API routes
 // Express 5 compatible wildcard syntax

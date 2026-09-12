@@ -1,0 +1,367 @@
+/* =========================================================
+   TRAINER PROFILE SETTINGS PAGE
+   ========================================================= */
+
+.trainer-profile-settings-page {
+  width: 100%;
+  min-height: 100%;
+
+  position: relative;
+
+  isolation: isolate;
+
+  overflow: visible;
+
+  padding: 4px 0 32px;
+}
+
+/* =========================================================
+   BACKGROUND GLASS ORBS
+   ========================================================= */
+
+.trainer-profile-settings-bg {
+  position: absolute;
+
+  z-index: -2;
+
+  pointer-events: none;
+
+  border-radius: 50%;
+
+  filter: blur(2px);
+
+  opacity: 0.65;
+}
+
+.trainer-profile-settings-bg-one {
+  width: 300px;
+  height: 300px;
+
+  top: 40px;
+  right: 4%;
+
+  background: rgba(184, 220, 247, 0.22);
+}
+
+.trainer-profile-settings-bg-two {
+  width: 240px;
+  height: 240px;
+
+  top: 430px;
+  left: 3%;
+
+  background: rgba(219, 197, 244, 0.18);
+}
+
+.trainer-profile-settings-bg-three {
+  width: 220px;
+  height: 220px;
+
+  right: 12%;
+  bottom: 30px;
+
+  background: rgba(193, 232, 211, 0.18);
+}
+
+/* =========================================================
+   BACKGROUND GRID
+   ========================================================= */
+
+.trainer-profile-settings-grid {
+  position: absolute;
+
+  z-index: -3;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.22;
+
+  background-image:
+    linear-gradient(rgba(116, 145, 171, 0.075) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(116, 145, 171, 0.075) 1px, transparent 1px);
+
+  background-size: 34px 34px;
+
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent 88%);
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.7),
+    transparent 88%
+  );
+}
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.trainer-profile-settings-content {
+  width: 100%;
+  max-width: 1500px;
+
+  margin: 0 auto;
+
+  position: relative;
+
+  padding: 0 4px;
+}
+
+/* =========================================================
+   GLASS PAGE SURFACE
+   ========================================================= */
+
+.trainer-profile-settings-content::before {
+  content: "";
+
+  position: absolute;
+
+  z-index: -1;
+
+  inset: -8px -4px;
+
+  border: 1px solid rgba(207, 221, 233, 0.28);
+
+  border-radius: 24px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.34),
+    rgba(248, 251, 254, 0.12)
+  );
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.55);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   SMOOTH CONTENT ANIMATION
+   ========================================================= */
+
+.trainer-profile-settings-content > * {
+  animation: trainerProfileSettingsReveal 420ms cubic-bezier(0.22, 1, 0.36, 1)
+    both;
+}
+
+@keyframes trainerProfileSettingsReveal {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* =========================================================
+   1200px
+   ========================================================= */
+
+@media (max-width: 1200px) {
+  .trainer-profile-settings-page {
+    padding-bottom: 28px;
+  }
+
+  .trainer-profile-settings-content {
+    padding: 0 2px;
+  }
+
+  .trainer-profile-settings-bg-one {
+    width: 250px;
+    height: 250px;
+
+    right: 2%;
+  }
+
+  .trainer-profile-settings-bg-two {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+/* =========================================================
+   900px
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .trainer-profile-settings-page {
+    padding-top: 2px;
+    padding-bottom: 24px;
+  }
+
+  .trainer-profile-settings-content {
+    padding: 0;
+  }
+
+  .trainer-profile-settings-content::before {
+    inset: -5px 0;
+
+    border-radius: 20px;
+  }
+
+  .trainer-profile-settings-bg-one {
+    width: 210px;
+    height: 210px;
+  }
+
+  .trainer-profile-settings-bg-two {
+    width: 180px;
+    height: 180px;
+
+    left: -30px;
+  }
+
+  .trainer-profile-settings-bg-three {
+    width: 170px;
+    height: 170px;
+
+    right: -20px;
+  }
+}
+
+/* =========================================================
+   700px
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .trainer-profile-settings-page {
+    padding: 0 0 22px;
+  }
+
+  .trainer-profile-settings-grid {
+    background-size: 28px 28px;
+  }
+
+  .trainer-profile-settings-bg {
+    opacity: 0.45;
+  }
+
+  .trainer-profile-settings-bg-one {
+    width: 170px;
+    height: 170px;
+
+    top: 80px;
+    right: -35px;
+  }
+
+  .trainer-profile-settings-bg-two {
+    width: 150px;
+    height: 150px;
+
+    top: 480px;
+    left: -45px;
+  }
+
+  .trainer-profile-settings-bg-three {
+    width: 140px;
+    height: 140px;
+
+    right: -40px;
+    bottom: 60px;
+  }
+}
+
+/* =========================================================
+   560px
+   ========================================================= */
+
+@media (max-width: 560px) {
+  .trainer-profile-settings-page {
+    padding-bottom: 18px;
+  }
+
+  .trainer-profile-settings-content::before {
+    display: none;
+  }
+
+  .trainer-profile-settings-grid {
+    opacity: 0.15;
+  }
+
+  .trainer-profile-settings-bg-one {
+    width: 135px;
+    height: 135px;
+
+    top: 100px;
+  }
+
+  .trainer-profile-settings-bg-two {
+    width: 120px;
+    height: 120px;
+
+    top: 500px;
+  }
+
+  .trainer-profile-settings-bg-three {
+    width: 110px;
+    height: 110px;
+  }
+}
+
+/* =========================================================
+   430px
+   ========================================================= */
+
+@media (max-width: 430px) {
+  .trainer-profile-settings-page {
+    padding-bottom: 16px;
+  }
+
+  .trainer-profile-settings-bg {
+    filter: blur(4px);
+
+    opacity: 0.32;
+  }
+
+  .trainer-profile-settings-grid {
+    display: none;
+  }
+}
+
+/* =========================================================
+   360px
+   ========================================================= */
+
+@media (max-width: 360px) {
+  .trainer-profile-settings-page {
+    padding-bottom: 14px;
+  }
+
+  .trainer-profile-settings-bg-one {
+    width: 105px;
+    height: 105px;
+
+    right: -30px;
+  }
+
+  .trainer-profile-settings-bg-two {
+    width: 95px;
+    height: 95px;
+
+    left: -35px;
+  }
+
+  .trainer-profile-settings-bg-three {
+    width: 90px;
+    height: 90px;
+
+    right: -30px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .trainer-profile-settings-content > * {
+    animation: none;
+  }
+}

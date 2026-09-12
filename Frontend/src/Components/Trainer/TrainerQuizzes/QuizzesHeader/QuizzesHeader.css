@@ -1,0 +1,250 @@
+.quizzes-header {
+  width: 100%;
+  min-width: 0;
+  margin-bottom: 14px;
+  padding: 15px 16px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+
+  background: rgba(255, 255, 255, 0.76);
+  border: 1px solid rgba(148, 163, 184, 0.18);
+  border-radius: 13px;
+
+  box-shadow:
+    0 4px 16px rgba(15, 23, 42, 0.035),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  box-sizing: border-box;
+}
+
+.quizzes-header-left {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.quizzes-header-icon {
+  width: 40px;
+  height: 40px;
+  flex: 0 0 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #315f91;
+  background: linear-gradient(
+    145deg,
+    rgba(224, 242, 254, 0.9),
+    rgba(219, 234, 254, 0.7)
+  );
+
+  border: 1px solid rgba(96, 165, 250, 0.15);
+  border-radius: 10px;
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.quizzes-header:hover .quizzes-header-icon {
+  transform: translateY(-1px);
+  box-shadow:
+    0 5px 12px rgba(59, 130, 246, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.quizzes-header-content {
+  min-width: 0;
+}
+
+.quizzes-header-title-row {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.quizzes-header-title-row h1 {
+  margin: 0;
+
+  color: #172033;
+  font-size: 21px;
+  font-weight: 600;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+}
+
+.quizzes-header-badge {
+  padding: 4px 8px;
+
+  color: #47617d;
+  background: #f1f6fa;
+  border: 1px solid #e2ebf2;
+  border-radius: 999px;
+
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.quizzes-header-content p {
+  margin: 4px 0 0;
+
+  color: #687789;
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.45;
+}
+
+.quizzes-create-button {
+  flex: 0 0 auto;
+
+  min-height: 37px;
+  padding: 0 13px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+
+  color: #ffffff;
+  background: #183b63;
+
+  border: 1px solid #183b63;
+  border-radius: 8px;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  box-shadow: 0 4px 10px rgba(24, 59, 99, 0.12);
+
+  transition:
+    transform 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.quizzes-create-button:hover {
+  background: #214d7d;
+  box-shadow: 0 7px 16px rgba(24, 59, 99, 0.17);
+  transform: translateY(-1px);
+}
+
+.quizzes-create-button:active {
+  transform: translateY(0);
+  box-shadow: 0 3px 8px rgba(24, 59, 99, 0.12);
+}
+
+.quizzes-create-button:focus-visible {
+  outline: 2px solid rgba(59, 130, 246, 0.35);
+  outline-offset: 2px;
+}
+
+/* --------------------------------
+   Tablet
+--------------------------------- */
+
+@media (max-width: 700px) {
+  .quizzes-header {
+    padding: 14px;
+    gap: 12px;
+  }
+
+  .quizzes-header-icon {
+    width: 37px;
+    height: 37px;
+    flex-basis: 37px;
+  }
+
+  .quizzes-header-title-row h1 {
+    font-size: 19px;
+  }
+
+  .quizzes-header-content p {
+    font-size: 16px;
+  }
+
+  .quizzes-create-button {
+    min-height: 35px;
+    padding: 0 11px;
+    font-size: 13px;
+  }
+}
+
+/* --------------------------------
+   Mobile
+--------------------------------- */
+
+@media (max-width: 520px) {
+  .quizzes-header {
+    align-items: flex-start;
+  }
+
+  .quizzes-header-left {
+    align-items: flex-start;
+  }
+
+  .quizzes-header-content p {
+    max-width: 230px;
+  }
+
+  .quizzes-create-button span {
+    display: none;
+  }
+
+  .quizzes-create-button {
+    width: 35px;
+    height: 35px;
+    padding: 0;
+  }
+}
+
+/* --------------------------------
+   Small Mobile
+--------------------------------- */
+
+@media (max-width: 380px) {
+  .quizzes-header {
+    padding: 12px;
+  }
+
+  .quizzes-header-left {
+    gap: 8px;
+  }
+
+  .quizzes-header-icon {
+    width: 35px;
+    height: 35px;
+    flex-basis: 35px;
+  }
+
+  .quizzes-header-title-row h1 {
+    font-size: 18px;
+  }
+
+  .quizzes-header-content p {
+    font-size: 16px;
+  }
+
+  .quizzes-header-badge {
+    font-size: 11px;
+    padding: 4px 7px;
+  }
+}

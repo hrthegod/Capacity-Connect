@@ -1,0 +1,346 @@
+/* =========================================================
+   TRAINER SCHEDULE PAGE
+   ========================================================= */
+
+.trainer-schedule-page {
+  width: 100%;
+  min-height: 100%;
+
+  position: relative;
+
+  padding: 4px 0 30px;
+
+  overflow: hidden;
+
+  isolation: isolate;
+
+  background: linear-gradient(145deg, #f7fbff 0%, #f5f9fc 46%, #f8f9fd 100%);
+}
+
+/* =========================================================
+   PAGE BACKGROUND ORBS
+   ========================================================= */
+
+.trainer-schedule-bg {
+  position: absolute;
+
+  z-index: -2;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  filter: blur(4px);
+
+  opacity: 0.55;
+
+  animation: trainerScheduleFloat 12s ease-in-out infinite;
+}
+
+.trainer-schedule-bg-one {
+  width: 280px;
+  height: 280px;
+
+  top: 40px;
+  left: -145px;
+
+  background: radial-gradient(
+    circle,
+    rgba(186, 228, 255, 0.42),
+    rgba(186, 228, 255, 0)
+  );
+}
+
+.trainer-schedule-bg-two {
+  width: 300px;
+  height: 300px;
+
+  top: 350px;
+  right: -165px;
+
+  background: radial-gradient(
+    circle,
+    rgba(224, 213, 255, 0.34),
+    rgba(224, 213, 255, 0)
+  );
+
+  animation-delay: -4s;
+}
+
+.trainer-schedule-bg-three {
+  width: 220px;
+  height: 220px;
+
+  left: 37%;
+  bottom: -120px;
+
+  background: radial-gradient(
+    circle,
+    rgba(190, 242, 225, 0.28),
+    rgba(190, 242, 225, 0)
+  );
+
+  animation-delay: -8s;
+}
+
+@keyframes trainerScheduleFloat {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0);
+  }
+
+  50% {
+    transform: translate3d(0, -13px, 0);
+  }
+}
+
+/* =========================================================
+   SUBTLE BACKGROUND GRID
+   ========================================================= */
+
+.trainer-schedule-grid {
+  position: absolute;
+
+  z-index: -3;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  opacity: 0.24;
+
+  background-image:
+    linear-gradient(rgba(126, 153, 180, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(126, 153, 180, 0.045) 1px, transparent 1px);
+
+  background-size: 34px 34px;
+
+  mask-image: linear-gradient(to bottom, black, transparent 75%);
+
+  -webkit-mask-image: linear-gradient(to bottom, black, transparent 75%);
+}
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
+
+.trainer-schedule-content {
+  width: 100%;
+
+  position: relative;
+
+  margin: 0 auto;
+
+  padding: 0;
+
+  z-index: 1;
+}
+
+/* =========================================================
+   PAGE MESSAGE
+   ========================================================= */
+
+.trainer-schedule-message {
+  position: fixed;
+
+  z-index: 100;
+
+  right: 25px;
+  bottom: 24px;
+
+  max-width: min(340px, calc(100vw - 32px));
+
+  display: flex;
+  align-items: center;
+
+  gap: 9px;
+
+  padding: 10px 14px;
+
+  border: 1px solid rgba(186, 208, 228, 0.75);
+  border-radius: 12px;
+
+  color: #294562;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.94),
+    rgba(244, 249, 253, 0.9)
+  );
+
+  box-shadow:
+    0 18px 40px rgba(28, 65, 101, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96);
+
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  font-size: 11px;
+  font-weight: 450;
+  line-height: 1.4;
+
+  animation: trainerScheduleMessageIn 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@keyframes trainerScheduleMessageIn {
+  from {
+    opacity: 0;
+
+    transform: translateY(10px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0) scale(1);
+  }
+}
+
+.trainer-schedule-message-dot {
+  width: 7px;
+  height: 7px;
+
+  flex: 0 0 7px;
+
+  border-radius: 50%;
+
+  background: #46ae91;
+
+  box-shadow: 0 0 0 4px rgba(70, 174, 145, 0.1);
+}
+
+/* =========================================================
+   1200px
+   ========================================================= */
+
+@media (max-width: 1200px) {
+  .trainer-schedule-page {
+    padding-bottom: 25px;
+  }
+}
+
+/* =========================================================
+   900px
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .trainer-schedule-page {
+    padding-top: 2px;
+  }
+
+  .trainer-schedule-bg-one {
+    width: 220px;
+    height: 220px;
+
+    left: -120px;
+  }
+
+  .trainer-schedule-bg-two {
+    width: 240px;
+    height: 240px;
+
+    right: -130px;
+  }
+
+  .trainer-schedule-message {
+    right: 18px;
+    bottom: 18px;
+  }
+}
+
+/* =========================================================
+   700px
+   ========================================================= */
+
+@media (max-width: 700px) {
+  .trainer-schedule-page {
+    padding-bottom: 20px;
+  }
+
+  .trainer-schedule-grid {
+    background-size: 28px 28px;
+  }
+
+  .trainer-schedule-message {
+    right: 14px;
+    bottom: 14px;
+
+    max-width: calc(100vw - 28px);
+  }
+}
+
+/* =========================================================
+   520px
+   ========================================================= */
+
+@media (max-width: 520px) {
+  .trainer-schedule-page {
+    padding-bottom: 16px;
+  }
+
+  .trainer-schedule-bg {
+    opacity: 0.4;
+  }
+
+  .trainer-schedule-message {
+    right: 10px;
+    bottom: 10px;
+
+    max-width: calc(100vw - 20px);
+
+    padding: 9px 12px;
+
+    font-size: 10px;
+  }
+}
+
+/* =========================================================
+   390px
+   ========================================================= */
+
+@media (max-width: 390px) {
+  .trainer-schedule-page {
+    padding-top: 1px;
+  }
+
+  .trainer-schedule-grid {
+    background-size: 24px 24px;
+  }
+
+  .trainer-schedule-message {
+    left: 10px;
+    right: 10px;
+
+    width: auto;
+  }
+}
+
+/* =========================================================
+   VERY SMALL DEVICES
+   ========================================================= */
+
+@media (max-width: 320px) {
+  .trainer-schedule-page {
+    padding-bottom: 12px;
+  }
+
+  .trainer-schedule-message {
+    padding: 8px 10px;
+
+    font-size: 9px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .trainer-schedule-page *,
+  .trainer-schedule-page *::before,
+  .trainer-schedule-page *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

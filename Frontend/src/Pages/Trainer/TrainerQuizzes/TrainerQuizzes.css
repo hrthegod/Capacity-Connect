@@ -1,0 +1,45 @@
+.trainer-quizzes {
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Keep every direct section inside the page within the available width */
+.trainer-quizzes > * {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+/* --------------------------------
+   Tablet
+--------------------------------- */
+
+@media (max-width: 900px) {
+  .trainer-quizzes {
+    width: 100%;
+  }
+}
+
+/* --------------------------------
+   Mobile
+--------------------------------- */
+
+@media (max-width: 640px) {
+  .trainer-quizzes {
+    width: 100%;
+  }
+}
+
+/* --------------------------------
+   Small Mobile
+--------------------------------- */
+
+@media (max-width: 380px) {
+  .trainer-quizzes {
+    width: 100%;
+  }
+}

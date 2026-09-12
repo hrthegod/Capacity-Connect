@@ -1,0 +1,1762 @@
+/* =========================================================
+   QUIZ PERFORMANCE
+========================================================= */
+
+.quiz-performance {
+  --performance-navy: #12264a;
+  --performance-navy-soft: #1b3562;
+
+  --performance-text: #162746;
+  --performance-text-soft: #657492;
+  --performance-text-muted: #8490a7;
+
+  --performance-border: rgba(132, 151, 184, 0.18);
+  --performance-border-strong: rgba(132, 151, 184, 0.28);
+
+  --performance-white: rgba(255, 255, 255, 0.78);
+
+  width: 100%;
+  min-width: 0;
+  margin-top: 18px;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.quiz-performance-header {
+  width: 100%;
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 14px;
+}
+
+.quiz-performance-heading-group {
+  min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 11px;
+}
+
+.quiz-performance-heading-icon {
+  width: 38px;
+  height: 38px;
+  flex: 0 0 38px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(133, 111, 230, 0.17);
+  border-radius: 11px;
+
+  color: #6848d8;
+
+  background: linear-gradient(
+    145deg,
+    rgba(238, 233, 255, 0.96),
+    rgba(248, 245, 255, 0.78)
+  );
+
+  box-shadow:
+    0 8px 20px rgba(96, 79, 170, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.quiz-performance-heading {
+  min-width: 0;
+}
+
+.quiz-performance-heading h2 {
+  margin: 0;
+
+  color: var(--performance-text);
+
+  font-size: 17px;
+  line-height: 1.3;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.quiz-performance-heading p {
+  max-width: 570px;
+
+  margin: 3px 0 0;
+
+  color: var(--performance-text-soft);
+
+  font-size: 12px;
+  line-height: 1.5;
+  font-weight: 400;
+}
+
+/* =========================================================
+   HEADER ACTIONS
+========================================================= */
+
+.quiz-performance-header-actions {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+
+  flex-shrink: 0;
+}
+
+.quiz-performance-dropdown,
+.performance-period-dropdown {
+  position: relative;
+}
+
+.quiz-performance-date-trigger,
+.quiz-performance-export-button,
+.quiz-performance-reset-button,
+.performance-period-trigger {
+  min-height: 34px;
+
+  border: 1px solid rgba(117, 145, 193, 0.22);
+  border-radius: 9px;
+
+  color: var(--performance-text);
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.82),
+    rgba(247, 250, 255, 0.64)
+  );
+
+  box-shadow:
+    0 5px 16px rgba(62, 84, 126, 0.045),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  font-family: inherit;
+  font-size: 11.5px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.quiz-performance-date-trigger {
+  min-width: 135px;
+
+  padding: 0 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+}
+
+.quiz-performance-date-trigger:hover,
+.performance-period-trigger:hover {
+  border-color: rgba(73, 108, 164, 0.36);
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(241, 246, 255, 0.82)
+  );
+
+  box-shadow: 0 8px 20px rgba(54, 83, 130, 0.09);
+}
+
+.quiz-performance-date-trigger:active,
+.performance-period-trigger:active,
+.quiz-performance-export-button:active,
+.quiz-performance-reset-button:active {
+  transform: translateY(1px);
+}
+
+.quiz-performance-date-trigger.is-open,
+.performance-period-trigger.is-open {
+  border-color: rgba(55, 98, 164, 0.38);
+}
+
+.quiz-performance-date-trigger svg:first-child {
+  color: #526e9e;
+  flex-shrink: 0;
+}
+
+.quiz-performance-date-trigger svg:last-child,
+.performance-period-trigger svg {
+  flex-shrink: 0;
+
+  transition: transform 180ms ease;
+}
+
+.quiz-performance-date-trigger .is-rotated,
+.performance-period-trigger .is-rotated {
+  transform: rotate(180deg);
+}
+
+/* =========================================================
+   DROPDOWN MENU
+========================================================= */
+
+.quiz-performance-dropdown-menu,
+.performance-period-menu {
+  position: absolute;
+
+  top: calc(100% + 7px);
+  right: 0;
+  z-index: 30;
+
+  min-width: 150px;
+
+  padding: 5px;
+
+  border: 1px solid rgba(126, 146, 181, 0.22);
+  border-radius: 11px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.94),
+    rgba(247, 250, 255, 0.88)
+  );
+
+  box-shadow:
+    0 18px 38px rgba(38, 57, 90, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  animation: performanceDropdownIn 160ms ease both;
+}
+
+@keyframes performanceDropdownIn {
+  from {
+    opacity: 0;
+    transform: translateY(-4px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.quiz-performance-dropdown-menu button,
+.performance-period-menu button {
+  width: 100%;
+
+  padding: 8px 9px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+
+  border: 0;
+  border-radius: 7px;
+
+  color: #4d5e7a;
+
+  background: transparent;
+
+  font-family: inherit;
+  font-size: 11px;
+  font-weight: 400;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    transform 160ms ease;
+}
+
+.quiz-performance-dropdown-menu button:hover,
+.performance-period-menu button:hover {
+  color: var(--performance-navy);
+
+  background: rgba(226, 234, 247, 0.58);
+
+  transform: translateX(1px);
+}
+
+.quiz-performance-dropdown-menu button.selected,
+.performance-period-menu button.selected {
+  color: #284b83;
+  background: rgba(218, 229, 247, 0.62);
+}
+
+.quiz-performance-dropdown-menu button svg,
+.performance-period-menu button svg {
+  color: #3b6eb4;
+}
+
+/* =========================================================
+   EXPORT
+========================================================= */
+
+.quiz-performance-export-button {
+  padding: 0 11px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+
+  color: #205f50;
+
+  border-color: rgba(45, 151, 124, 0.24);
+
+  background: linear-gradient(
+    145deg,
+    rgba(241, 255, 250, 0.86),
+    rgba(235, 250, 246, 0.68)
+  );
+}
+
+.quiz-performance-export-button:hover {
+  color: #155343;
+
+  border-color: rgba(45, 151, 124, 0.42);
+
+  background: linear-gradient(
+    145deg,
+    rgba(235, 255, 248, 0.98),
+    rgba(224, 248, 241, 0.86)
+  );
+
+  box-shadow: 0 9px 22px rgba(45, 151, 124, 0.11);
+
+  transform: translateY(-1px);
+}
+
+.quiz-performance-reset-button {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #687896;
+}
+
+.quiz-performance-reset-button:hover {
+  color: #385c91;
+
+  border-color: rgba(73, 108, 164, 0.34);
+
+  box-shadow: 0 8px 20px rgba(54, 83, 130, 0.09);
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   PERFORMANCE CARDS
+========================================================= */
+
+.quiz-performance-cards {
+  width: 100%;
+  min-width: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    repeat(4, minmax(0, 1fr))
+    minmax(220px, 1.15fr);
+
+  gap: 10px;
+
+  margin-bottom: 12px;
+}
+
+/* =========================================================
+   COMMON STAT CARD
+========================================================= */
+
+.performance-stat-card {
+  position: relative;
+
+  min-width: 0;
+  min-height: 112px;
+
+  padding: 13px;
+
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  overflow: hidden;
+
+  border: 1px solid var(--performance-border);
+  border-radius: 13px;
+
+  box-sizing: border-box;
+
+  box-shadow:
+    0 8px 24px rgba(48, 69, 106, 0.055),
+    inset 0 1px 0 rgba(255, 255, 255, 0.82);
+
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+
+  transition:
+    transform 220ms cubic-bezier(0.2, 0.75, 0.3, 1),
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+}
+
+.performance-stat-card::before {
+  content: "";
+
+  position: absolute;
+
+  width: 95px;
+  height: 95px;
+
+  right: -40px;
+  bottom: -50px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.42);
+
+  filter: blur(1px);
+
+  pointer-events: none;
+}
+
+.performance-stat-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 15px 30px rgba(48, 69, 106, 0.105),
+    inset 0 1px 0 rgba(255, 255, 255, 0.94);
+
+  border-color: var(--performance-border-strong);
+}
+
+/* =========================================================
+   CARD COLORS
+========================================================= */
+
+.performance-stat-blue {
+  background: linear-gradient(
+    145deg,
+    rgba(238, 247, 255, 0.94),
+    rgba(247, 251, 255, 0.74)
+  );
+}
+
+.performance-stat-mint {
+  background: linear-gradient(
+    145deg,
+    rgba(235, 251, 246, 0.94),
+    rgba(247, 253, 250, 0.74)
+  );
+}
+
+.performance-stat-peach {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 244, 232, 0.94),
+    rgba(255, 249, 242, 0.74)
+  );
+}
+
+.performance-stat-lavender {
+  background: linear-gradient(
+    145deg,
+    rgba(245, 241, 255, 0.94),
+    rgba(251, 249, 255, 0.74)
+  );
+}
+
+/* =========================================================
+   STAT ICON
+========================================================= */
+
+.performance-stat-icon {
+  width: 35px;
+  height: 35px;
+  min-width: 35px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: #326dc0;
+
+  background: linear-gradient(
+    145deg,
+    rgba(216, 235, 255, 0.95),
+    rgba(234, 244, 255, 0.76)
+  );
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.performance-stat-mint .performance-stat-icon {
+  color: #13956f;
+
+  background: linear-gradient(
+    145deg,
+    rgba(211, 245, 232, 0.96),
+    rgba(233, 252, 244, 0.8)
+  );
+}
+
+.performance-stat-peach .performance-stat-icon {
+  color: #e57d38;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 226, 202, 0.96),
+    rgba(255, 242, 229, 0.8)
+  );
+}
+
+.performance-stat-lavender .performance-stat-icon {
+  color: #7351d9;
+
+  background: linear-gradient(
+    145deg,
+    rgba(229, 219, 255, 0.96),
+    rgba(245, 240, 255, 0.8)
+  );
+}
+
+/* =========================================================
+   STAT CONTENT
+========================================================= */
+
+.performance-stat-content {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.performance-stat-label {
+  color: #61708b;
+
+  font-size: 10.5px;
+  line-height: 1.3;
+  font-weight: 400;
+
+  white-space: nowrap;
+}
+
+.performance-stat-value {
+  margin-top: 3px;
+
+  color: var(--performance-text);
+
+  font-size: 22px;
+  line-height: 1.15;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+
+  white-space: nowrap;
+}
+
+.performance-stat-change {
+  margin-top: 4px;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+
+  font-size: 10px;
+  line-height: 1.2;
+  font-weight: 500;
+}
+
+.performance-stat-change.positive {
+  color: #14956e;
+}
+
+.performance-stat-helper {
+  margin-top: 4px;
+
+  color: #8591a7;
+
+  font-size: 9.5px;
+  line-height: 1.35;
+  font-weight: 400;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   DARK TOP PERFORMER
+========================================================= */
+
+.performance-stat-dark {
+  position: relative;
+
+  color: #fff;
+
+  border-color: rgba(118, 150, 203, 0.24);
+
+  background:
+    radial-gradient(
+      circle at 90% 15%,
+      rgba(83, 122, 188, 0.22),
+      transparent 35%
+    ),
+    linear-gradient(145deg, #12264a, #172f59 60%, #10213f);
+
+  box-shadow:
+    0 13px 30px rgba(19, 39, 75, 0.19),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+}
+
+.performance-stat-dark::after {
+  content: "";
+
+  position: absolute;
+
+  width: 100px;
+  height: 100px;
+
+  right: -25px;
+  top: -45px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(148, 181, 235, 0.09);
+
+  box-shadow:
+    0 0 0 14px rgba(148, 181, 235, 0.025),
+    0 0 0 28px rgba(148, 181, 235, 0.018);
+
+  pointer-events: none;
+}
+
+.performance-stat-dark:hover {
+  border-color: rgba(133, 169, 225, 0.38);
+
+  box-shadow:
+    0 18px 38px rgba(19, 39, 75, 0.25),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+}
+
+.performance-dark-top {
+  position: absolute;
+
+  top: 12px;
+  left: 13px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.performance-stat-dark .performance-stat-icon {
+  width: 33px;
+  height: 33px;
+  min-width: 33px;
+
+  color: #eac75a;
+
+  background: rgba(255, 255, 255, 0.075);
+
+  border: 1px solid rgba(255, 255, 255, 0.09);
+}
+
+.performance-dark-label {
+  color: rgba(255, 255, 255, 0.92);
+
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.performance-top-performer {
+  position: absolute;
+
+  left: 13px;
+  bottom: 14px;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.performance-avatar {
+  width: 34px;
+  height: 34px;
+  min-width: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 50%;
+
+  color: #17325c;
+
+  background: linear-gradient(145deg, #f5f7fb, #cbd8e9);
+
+  font-size: 9px;
+  font-weight: 600;
+}
+
+.performance-performer-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.performance-performer-info strong {
+  color: #fff;
+
+  font-size: 11px;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+.performance-performer-info span {
+  color: rgba(231, 239, 250, 0.7);
+
+  font-size: 9.5px;
+  line-height: 1.3;
+}
+
+.performance-performer-info i {
+  margin: 0 2px;
+  font-style: normal;
+}
+
+.performance-dark-badge {
+  position: absolute;
+
+  right: 12px;
+  bottom: 14px;
+
+  padding: 6px 8px;
+
+  border: 1px solid rgba(110, 169, 226, 0.3);
+  border-radius: 7px;
+
+  color: #e6f2ff;
+
+  background: rgba(63, 132, 205, 0.24);
+
+  font-size: 9px;
+  line-height: 1;
+  font-weight: 500;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* =========================================================
+   GRAPH SECTION
+========================================================= */
+
+.quiz-performance-graphs {
+  width: 100%;
+  min-width: 0;
+
+  display: grid;
+
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+
+  gap: 12px;
+}
+
+/* =========================================================
+   CHART CARD
+========================================================= */
+
+.performance-chart-card {
+  position: relative;
+
+  min-width: 0;
+  min-height: 300px;
+
+  padding: 15px;
+
+  overflow: hidden;
+
+  border: 1px solid var(--performance-border);
+  border-radius: 14px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.82),
+    rgba(247, 250, 255, 0.68)
+  );
+
+  box-shadow:
+    0 9px 26px rgba(47, 68, 104, 0.055),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    border-color 220ms ease;
+}
+
+.performance-chart-card:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(115, 143, 183, 0.27);
+
+  box-shadow:
+    0 15px 32px rgba(47, 68, 104, 0.085),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96);
+}
+
+/* =========================================================
+   CHART HEADER
+========================================================= */
+
+.performance-chart-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+
+  min-width: 0;
+}
+
+.performance-chart-title-row {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.performance-chart-icon {
+  width: 27px;
+  height: 27px;
+  min-width: 27px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+}
+
+.score-icon {
+  color: #7455d4;
+
+  background: rgba(232, 225, 255, 0.72);
+}
+
+.trend-icon {
+  color: #3c6fb1;
+
+  background: rgba(221, 235, 255, 0.72);
+}
+
+.performance-chart-title-row h3 {
+  margin: 0;
+
+  color: var(--performance-text);
+
+  font-size: 13px;
+  line-height: 1.3;
+  font-weight: 600;
+}
+
+.performance-chart-header p {
+  margin: 4px 0 0 34px;
+
+  color: var(--performance-text-soft);
+
+  font-size: 10px;
+  line-height: 1.45;
+  font-weight: 400;
+}
+
+.performance-chart-total {
+  min-width: 88px;
+
+  padding: 7px 9px;
+
+  border: 1px solid rgba(128, 149, 187, 0.15);
+  border-radius: 8px;
+
+  background: rgba(248, 250, 255, 0.58);
+
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.performance-chart-total span {
+  color: #8893a8;
+
+  font-size: 8.5px;
+  line-height: 1.2;
+}
+
+.performance-chart-total strong {
+  color: #415779;
+
+  font-size: 10px;
+  line-height: 1.3;
+  font-weight: 500;
+}
+
+/* =========================================================
+   SCORE BAR CHART
+========================================================= */
+
+.score-chart {
+  height: 215px;
+
+  margin-top: 13px;
+
+  display: flex;
+  gap: 7px;
+}
+
+.score-chart-y-axis {
+  width: 23px;
+  flex: 0 0 23px;
+
+  padding: 2px 0 25px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.score-chart-y-axis span {
+  color: #8995aa;
+
+  font-size: 8.5px;
+  line-height: 1;
+}
+
+.score-chart-main {
+  position: relative;
+
+  flex: 1;
+  min-width: 0;
+
+  padding-bottom: 28px;
+}
+
+.score-chart-grid {
+  position: absolute;
+
+  inset: 0 0 28px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.score-chart-grid span {
+  width: 100%;
+  height: 1px;
+
+  border-top: 1px dashed rgba(125, 146, 181, 0.17);
+}
+
+.score-bars {
+  position: absolute;
+
+  inset: 0 3px 0;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-around;
+  gap: 7px;
+}
+
+.score-bar-column {
+  position: relative;
+
+  height: 100%;
+  min-width: 35px;
+
+  flex: 1;
+
+  padding: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-direction: column;
+  gap: 7px;
+
+  border: 0;
+
+  background: transparent;
+
+  cursor: pointer;
+}
+
+.score-bar {
+  position: relative;
+
+  width: min(48px, 70%);
+
+  min-height: 7px;
+
+  border-radius: 6px 6px 3px 3px;
+
+  box-shadow: 0 5px 12px rgba(74, 98, 145, 0.1);
+
+  transition:
+    width 180ms ease,
+    filter 180ms ease,
+    transform 180ms ease;
+}
+
+.score-bar-column:hover .score-bar,
+.score-bar-column.is-active .score-bar {
+  width: min(54px, 78%);
+
+  filter: brightness(1.04);
+
+  transform: translateY(-2px);
+}
+
+.score-bar-0 {
+  background: linear-gradient(180deg, #f6a0a0, #f4b2ae);
+}
+
+.score-bar-1 {
+  background: linear-gradient(180deg, #f6b174, #f9c38f);
+}
+
+.score-bar-2 {
+  background: linear-gradient(180deg, #f3cb65, #f6d989);
+}
+
+.score-bar-3 {
+  background: linear-gradient(180deg, #a69be8, #bbb3f0);
+}
+
+.score-bar-4 {
+  background: linear-gradient(180deg, #63a7eb, #86baf0);
+}
+
+.score-bar-label {
+  height: 18px;
+
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+
+  color: #71809b;
+
+  font-size: 8.5px;
+  line-height: 1.2;
+  font-weight: 400;
+
+  white-space: nowrap;
+}
+
+.score-bar-tooltip {
+  position: absolute;
+
+  left: 50%;
+  bottom: calc(100% + 6px);
+
+  transform: translateX(-50%);
+
+  padding: 5px 7px;
+
+  border: 1px solid rgba(120, 145, 185, 0.18);
+  border-radius: 6px;
+
+  color: #263c61;
+
+  background: rgba(255, 255, 255, 0.93);
+
+  box-shadow: 0 8px 18px rgba(44, 65, 103, 0.13);
+
+  font-size: 8.5px;
+  line-height: 1;
+  font-weight: 500;
+
+  white-space: nowrap;
+
+  z-index: 4;
+}
+
+/* =========================================================
+   PERIOD DROPDOWN
+========================================================= */
+
+.performance-period-trigger {
+  min-width: 78px;
+
+  padding: 0 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 7px;
+}
+
+.performance-period-menu {
+  min-width: 105px;
+}
+
+/* =========================================================
+   LEGEND
+========================================================= */
+
+.performance-chart-legend {
+  margin-top: 10px;
+
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 13px;
+}
+
+.performance-chart-legend span {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+
+  color: #71809a;
+
+  font-size: 8.5px;
+  line-height: 1.3;
+}
+
+.legend-dot {
+  width: 6px;
+  height: 6px;
+
+  border-radius: 50%;
+}
+
+.score-dot {
+  background: #6374e9;
+}
+
+.pass-dot {
+  background: #20a47c;
+}
+
+/* =========================================================
+   TREND CHART
+========================================================= */
+
+.trend-chart {
+  height: 205px;
+
+  margin-top: 4px;
+
+  display: flex;
+  gap: 8px;
+}
+
+.trend-y-axis {
+  width: 28px;
+  flex: 0 0 28px;
+
+  padding: 10px 0 23px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.trend-y-axis span {
+  color: #8995aa;
+
+  font-size: 8px;
+  line-height: 1;
+}
+
+.trend-chart-main {
+  position: relative;
+
+  flex: 1;
+  min-width: 0;
+
+  padding-bottom: 24px;
+}
+
+.trend-grid {
+  position: absolute;
+
+  inset: 10px 0 24px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.trend-grid span {
+  width: 100%;
+  height: 1px;
+
+  border-top: 1px dashed rgba(125, 146, 181, 0.17);
+}
+
+.trend-area {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  bottom: 24px;
+
+  height: 180px;
+
+  pointer-events: none;
+}
+
+.trend-area.score-area {
+  background: linear-gradient(
+    180deg,
+    rgba(99, 116, 233, 0.08),
+    rgba(99, 116, 233, 0)
+  );
+
+  clip-path: polygon(
+    0 65%,
+    15% 52%,
+    30% 45%,
+    45% 30%,
+    60% 38%,
+    75% 20%,
+    90% 27%,
+    100% 12%,
+    100% 100%,
+    0 100%
+  );
+}
+
+.trend-area.pass-area {
+  background: linear-gradient(
+    180deg,
+    rgba(32, 164, 124, 0.07),
+    rgba(32, 164, 124, 0)
+  );
+
+  clip-path: polygon(
+    0 75%,
+    15% 66%,
+    30% 58%,
+    45% 47%,
+    60% 53%,
+    75% 38%,
+    90% 45%,
+    100% 31%,
+    100% 100%,
+    0 100%
+  );
+}
+
+.trend-svg {
+  position: absolute;
+
+  inset: 10px 0 24px;
+
+  width: 100%;
+  height: 180px;
+
+  overflow: visible;
+}
+
+.trend-score-line,
+.trend-pass-line {
+  fill: none;
+
+  stroke-linecap: round;
+  stroke-linejoin: round;
+
+  vector-effect: non-scaling-stroke;
+
+  transition:
+    stroke-width 180ms ease,
+    opacity 180ms ease;
+}
+
+.trend-score-line {
+  stroke: #6475ed;
+  stroke-width: 2;
+}
+
+.trend-pass-line {
+  stroke: #20a47c;
+  stroke-width: 1.8;
+}
+
+.trend-score-point,
+.trend-pass-point {
+  cursor: pointer;
+
+  transition:
+    r 160ms ease,
+    opacity 160ms ease;
+}
+
+.trend-score-point {
+  fill: #6475ed;
+  stroke: #fff;
+  stroke-width: 1.7;
+}
+
+.trend-pass-point {
+  fill: #20a47c;
+  stroke: #fff;
+  stroke-width: 1.7;
+}
+
+.trend-score-point:hover,
+.trend-pass-point:hover {
+  opacity: 0.78;
+}
+
+.trend-x-axis {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.trend-x-axis span {
+  color: #7b88a0;
+
+  font-size: 8.5px;
+  line-height: 1.2;
+
+  white-space: nowrap;
+}
+
+.trend-tooltip {
+  position: absolute;
+
+  top: 13px;
+  right: 7px;
+  z-index: 8;
+
+  min-width: 105px;
+
+  padding: 7px 8px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+
+  border: 1px solid rgba(118, 143, 183, 0.18);
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.93);
+
+  box-shadow: 0 9px 22px rgba(47, 67, 104, 0.13);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.trend-tooltip strong {
+  color: #30476d;
+
+  font-size: 9.5px;
+  font-weight: 600;
+}
+
+.trend-tooltip span {
+  color: #71809a;
+
+  font-size: 8.5px;
+  line-height: 1.3;
+}
+
+/* =========================================================
+   PERFORMANCE NOTE
+========================================================= */
+
+.quiz-performance-note {
+  width: 100%;
+  min-width: 0;
+
+  margin-top: 11px;
+  padding: 10px 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  box-sizing: border-box;
+
+  border: 1px solid rgba(100, 143, 211, 0.2);
+  border-radius: 11px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(237, 246, 255, 0.75),
+    rgba(247, 250, 255, 0.58)
+  );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.88),
+    0 6px 18px rgba(58, 83, 126, 0.035);
+
+  backdrop-filter: blur(13px);
+  -webkit-backdrop-filter: blur(13px);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.quiz-performance-note:hover {
+  transform: translateY(-1px);
+
+  border-color: rgba(85, 127, 195, 0.3);
+
+  box-shadow: 0 10px 22px rgba(58, 83, 126, 0.07);
+}
+
+.quiz-performance-note-icon {
+  width: 29px;
+  height: 29px;
+  min-width: 29px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  color: #3b6eb4;
+
+  background: rgba(220, 235, 255, 0.75);
+}
+
+.quiz-performance-note-content {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.quiz-performance-note-content strong {
+  color: #34527d;
+
+  font-size: 9.5px;
+  line-height: 1.4;
+  font-weight: 600;
+}
+
+.quiz-performance-note-content span {
+  color: #73819b;
+
+  font-size: 9px;
+  line-height: 1.45;
+  font-weight: 400;
+}
+
+/* =========================================================
+   RESPONSIVE — 1200px
+========================================================= */
+
+@media (max-width: 1200px) {
+  .quiz-performance-cards {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+
+  .performance-stat-dark {
+    grid-column: span 4;
+    min-height: 96px;
+  }
+
+  .quiz-performance-graphs {
+    grid-template-columns: 1fr;
+  }
+
+  .performance-chart-card {
+    min-height: 285px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — 900px
+========================================================= */
+
+@media (max-width: 900px) {
+  .quiz-performance-header {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .quiz-performance-header-actions {
+    width: 100%;
+
+    justify-content: flex-start;
+  }
+
+  .quiz-performance-cards {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .performance-stat-dark {
+    grid-column: span 2;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — 650px
+========================================================= */
+
+@media (max-width: 650px) {
+  .quiz-performance {
+    margin-top: 14px;
+  }
+
+  .quiz-performance-heading-icon {
+    width: 35px;
+    height: 35px;
+    flex-basis: 35px;
+  }
+
+  .quiz-performance-heading h2 {
+    font-size: 15px;
+  }
+
+  .quiz-performance-heading p {
+    font-size: 10.5px;
+  }
+
+  .quiz-performance-header-actions {
+    display: grid;
+
+    grid-template-columns: minmax(0, 1fr) 34px minmax(0, 1fr);
+
+    width: 100%;
+  }
+
+  .quiz-performance-dropdown {
+    width: 100%;
+  }
+
+  .quiz-performance-date-trigger {
+    width: 100%;
+  }
+
+  .quiz-performance-export-button {
+    width: 100%;
+  }
+
+  .quiz-performance-cards {
+    grid-template-columns: 1fr;
+    gap: 8px;
+  }
+
+  .performance-stat-dark {
+    grid-column: auto;
+  }
+
+  .performance-stat-card {
+    min-height: 100px;
+  }
+
+  .performance-chart-card {
+    padding: 12px;
+
+    min-height: 275px;
+  }
+
+  .performance-chart-header {
+    gap: 8px;
+  }
+
+  .performance-chart-total {
+    display: none;
+  }
+
+  .performance-chart-header p {
+    margin-left: 0;
+  }
+
+  .performance-chart-legend {
+    justify-content: flex-start;
+  }
+
+  .quiz-performance-note-content {
+    display: block;
+  }
+
+  .quiz-performance-note-content span {
+    display: block;
+    margin-top: 2px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — 480px
+========================================================= */
+
+@media (max-width: 480px) {
+  .quiz-performance-header-actions {
+    grid-template-columns: minmax(0, 1fr) 34px;
+  }
+
+  .quiz-performance-export-button {
+    grid-column: 1 / -1;
+    min-height: 35px;
+  }
+
+  .quiz-performance-date-trigger {
+    min-width: 0;
+  }
+
+  .performance-chart-title-row h3 {
+    font-size: 12px;
+  }
+
+  .performance-chart-header p {
+    font-size: 9px;
+  }
+
+  .performance-chart-icon {
+    width: 25px;
+    height: 25px;
+    min-width: 25px;
+  }
+
+  .score-chart {
+    height: 195px;
+  }
+
+  .trend-chart {
+    height: 190px;
+  }
+
+  .trend-svg {
+    height: 165px;
+  }
+
+  .trend-area {
+    height: 165px;
+  }
+
+  .performance-stat-value {
+    font-size: 20px;
+  }
+
+  .performance-dark-badge {
+    right: 10px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — 380px
+========================================================= */
+
+@media (max-width: 380px) {
+  .quiz-performance-heading-group {
+    align-items: flex-start;
+  }
+
+  .quiz-performance-heading h2 {
+    font-size: 14px;
+  }
+
+  .quiz-performance-heading p {
+    font-size: 9.5px;
+  }
+
+  .quiz-performance-header-actions {
+    gap: 6px;
+  }
+
+  .performance-stat-card {
+    padding: 11px;
+  }
+
+  .performance-stat-icon {
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+  }
+
+  .performance-stat-value {
+    font-size: 19px;
+  }
+
+  .performance-stat-helper {
+    font-size: 8.5px;
+  }
+
+  .performance-performer-info strong {
+    font-size: 10px;
+  }
+
+  .performance-dark-badge {
+    padding: 5px 6px;
+
+    font-size: 8px;
+  }
+
+  .score-bar-label {
+    font-size: 7.5px;
+  }
+
+  .trend-x-axis span {
+    font-size: 7.5px;
+  }
+
+  .quiz-performance-note {
+    align-items: flex-start;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .performance-stat-card,
+  .performance-chart-card,
+  .quiz-performance-note,
+  .quiz-performance-date-trigger,
+  .quiz-performance-export-button,
+  .quiz-performance-reset-button,
+  .performance-period-trigger,
+  .score-bar,
+  .trend-score-point,
+  .trend-pass-point {
+    transition: none;
+  }
+
+  .quiz-performance-dropdown-menu,
+  .performance-period-menu {
+    animation: none;
+  }
+}

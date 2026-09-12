@@ -1,0 +1,2057 @@
+/* =========================================================
+   TRAINER RECENT ACTIVITY
+   Capacity Connect
+========================================================= */
+
+.trainer-recent-activity {
+  --activity-text: #142844;
+  --activity-soft: #627694;
+  --activity-muted: #8292a9;
+  --activity-border: rgba(148, 163, 184, 0.16);
+
+  width: 100%;
+  min-width: 0;
+
+  margin: 0 0 20px;
+
+  box-sizing: border-box;
+
+  position: relative;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.recent-activity-header {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 18px;
+
+  margin-bottom: 15px;
+
+  position: relative;
+
+  z-index: 50;
+}
+
+.recent-activity-heading {
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 12px;
+}
+
+.recent-activity-title-icon {
+  width: 42px;
+  height: 42px;
+
+  flex: 0 0 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(95, 151, 215, 0.15);
+
+  border-radius: 13px;
+
+  color: #2677c9;
+
+  background: linear-gradient(
+    145deg,
+    rgba(228, 240, 255, 0.96),
+    rgba(214, 231, 255, 0.72)
+  );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 7px 18px rgba(37, 99, 235, 0.05);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    transform 260ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 260ms ease;
+}
+
+.recent-activity-title-icon svg {
+  width: 21px;
+  height: 21px;
+
+  stroke-width: 1.7;
+}
+
+.recent-activity-heading:hover .recent-activity-title-icon {
+  transform: translateY(-2px) scale(1.04);
+
+  box-shadow:
+    0 10px 23px rgba(37, 99, 235, 0.09),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.recent-activity-heading-text {
+  min-width: 0;
+}
+
+.recent-activity-heading-text h2 {
+  margin: 0;
+
+  color: var(--activity-text);
+
+  font-size: 20px;
+  line-height: 1.2;
+
+  font-weight: 570;
+
+  letter-spacing: -0.4px;
+}
+
+.recent-activity-heading-text p {
+  margin: 4px 0 0;
+
+  color: var(--activity-soft);
+
+  font-size: 11px;
+  line-height: 1.35;
+
+  font-weight: 400;
+}
+
+/* =========================================================
+   PERIOD DROPDOWN
+========================================================= */
+
+.activity-period-wrapper {
+  position: relative;
+
+  z-index: 1000;
+
+  flex: 0 0 auto;
+
+  width: max-content;
+}
+
+.activity-period-button {
+  min-height: 38px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  padding: 8px 12px;
+
+  border: 1px solid rgba(103, 148, 197, 0.18);
+
+  border-radius: 10px;
+
+  color: #214d7d;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.82),
+    rgba(240, 247, 255, 0.7)
+  );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 5px 15px rgba(15, 23, 42, 0.035);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  font-family: inherit;
+
+  font-size: 10px;
+  line-height: 1;
+
+  font-weight: 500;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    transform 220ms ease,
+    border-color 220ms ease,
+    background 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.activity-period-button:hover,
+.activity-period-active {
+  transform: translateY(-1px);
+
+  border-color: rgba(67, 135, 202, 0.3);
+
+  background: rgba(255, 255, 255, 0.95);
+
+  box-shadow:
+    0 9px 21px rgba(15, 23, 42, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.activity-period-button svg {
+  width: 15px;
+  height: 15px;
+
+  stroke-width: 1.8;
+}
+
+.activity-period-button > svg:last-child {
+  transition: transform 200ms ease;
+}
+
+.activity-period-arrow-up {
+  transform: rotate(180deg);
+}
+
+/* =========================================================
+   PERIOD MENU
+   IMPORTANT:
+   Opens DIRECTLY below button
+========================================================= */
+
+.activity-period-menu {
+  position: absolute;
+
+  top: calc(100% + 8px);
+
+  right: 0;
+  left: auto;
+
+  z-index: 99999;
+
+  width: 158px;
+
+  margin: 0;
+  padding: 6px;
+
+  box-sizing: border-box;
+
+  border: 1px solid rgba(148, 163, 184, 0.17);
+
+  border-radius: 13px;
+
+  background: rgba(255, 255, 255, 0.95);
+
+  box-shadow:
+    0 20px 42px rgba(15, 23, 42, 0.13),
+    0 5px 16px rgba(15, 23, 42, 0.055),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  overflow: hidden;
+
+  animation: recentActivityDropdownIn 180ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.activity-period-menu button {
+  width: 100%;
+
+  min-height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  padding: 8px 10px;
+
+  border: 0;
+
+  border-radius: 8px;
+
+  color: #536b88;
+
+  background: transparent;
+
+  font-family: inherit;
+
+  font-size: 10px;
+  line-height: 1.2;
+
+  font-weight: 450;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.activity-period-menu button:hover {
+  color: #18598f;
+
+  background: rgba(226, 239, 255, 0.72);
+
+  transform: translateX(2px);
+}
+
+.activity-period-menu button.activity-period-selected {
+  color: #1763aa;
+
+  background: rgba(225, 239, 255, 0.9);
+}
+
+.activity-period-menu button svg {
+  width: 14px;
+  height: 14px;
+
+  flex: 0 0 14px;
+
+  stroke-width: 1.9;
+}
+
+@keyframes recentActivityDropdownIn {
+  from {
+    opacity: 0;
+
+    transform: translateY(-5px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* =========================================================
+   MAIN GRID
+========================================================= */
+
+.recent-activity-grid {
+  width: 100%;
+  min-width: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.72fr)
+    minmax(300px, 0.86fr);
+
+  gap: 15px;
+
+  position: relative;
+
+  z-index: 1;
+}
+
+/* =========================================================
+   MAIN ACTIVITY AREA
+========================================================= */
+
+.recent-activity-main {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 10px;
+}
+
+/* =========================================================
+   ACTIVITY LIST CARD
+========================================================= */
+
+.activity-list-card {
+  min-width: 0;
+
+  border: 1px solid var(--activity-border);
+
+  border-radius: 16px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.97),
+    rgba(248, 251, 255, 0.82)
+  );
+
+  box-shadow:
+    0 9px 28px rgba(15, 23, 42, 0.045),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  overflow: visible;
+
+  transition:
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 280ms ease;
+}
+
+.activity-list-card:hover {
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 15px 32px rgba(15, 23, 42, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* =========================================================
+   ACTIVITY LIST
+========================================================= */
+
+.activity-list {
+  width: 100%;
+
+  min-width: 0;
+}
+
+/* =========================================================
+   ACTIVITY ITEM
+========================================================= */
+
+.activity-item {
+  position: relative;
+
+  min-width: 0;
+
+  min-height: 88px;
+
+  display: grid;
+
+  grid-template-columns:
+    28px
+    45px
+    minmax(0, 1fr)
+    auto
+    48px
+    30px;
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 10px 13px;
+
+  border-bottom: 1px solid rgba(148, 163, 184, 0.095);
+
+  transition:
+    background 220ms ease,
+    transform 220ms ease;
+}
+
+.activity-item:last-child {
+  border-bottom: 0;
+}
+
+.activity-item:hover {
+  background: rgba(242, 248, 255, 0.54);
+}
+
+/* =========================================================
+   TIMELINE
+========================================================= */
+
+.activity-timeline {
+  position: relative;
+
+  align-self: stretch;
+
+  width: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.activity-timeline-dot {
+  position: relative;
+
+  z-index: 2;
+
+  width: 9px;
+  height: 9px;
+
+  border-radius: 50%;
+
+  box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.75);
+
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.activity-item:hover .activity-timeline-dot {
+  transform: scale(1.25);
+
+  box-shadow:
+    0 0 0 5px rgba(255, 255, 255, 0.82),
+    0 3px 8px rgba(15, 23, 42, 0.1);
+}
+
+.activity-timeline-line {
+  position: absolute;
+
+  top: calc(50% + 7px);
+  bottom: -1px;
+
+  left: 50%;
+
+  width: 1px;
+
+  background: linear-gradient(
+    180deg,
+    rgba(154, 174, 197, 0.3),
+    rgba(154, 174, 197, 0.08)
+  );
+}
+
+.activity-dot-course,
+.activity-dot-learner {
+  background: #17b584;
+}
+
+.activity-dot-assignment {
+  background: #7966df;
+}
+
+.activity-dot-quiz {
+  background: #ef9a3d;
+}
+
+.activity-dot-session {
+  background: #3588e5;
+}
+
+.activity-dot-performance {
+  background: #ec6870;
+}
+
+/* =========================================================
+   ACTIVITY ICON
+========================================================= */
+
+.activity-icon {
+  width: 43px;
+  height: 43px;
+
+  flex: 0 0 43px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.72);
+
+  transition:
+    transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 250ms ease;
+}
+
+.activity-icon svg {
+  width: 20px;
+  height: 20px;
+
+  stroke-width: 1.65;
+}
+
+.activity-item:hover .activity-icon {
+  transform: translateY(-2px) scale(1.045);
+
+  box-shadow:
+    0 8px 18px rgba(15, 23, 42, 0.065),
+    inset 0 1px 0 rgba(255, 255, 255, 0.92);
+}
+
+.activity-icon-course,
+.activity-icon-learner {
+  color: #0a9f75;
+
+  background: linear-gradient(
+    145deg,
+    rgba(220, 250, 239, 0.95),
+    rgba(204, 244, 228, 0.68)
+  );
+}
+
+.activity-icon-assignment {
+  color: #7463d7;
+
+  background: linear-gradient(
+    145deg,
+    rgba(237, 232, 255, 0.95),
+    rgba(224, 218, 255, 0.68)
+  );
+}
+
+.activity-icon-quiz {
+  color: #e78b1e;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 242, 215, 0.96),
+    rgba(255, 228, 179, 0.7)
+  );
+}
+
+.activity-icon-session {
+  color: #277bd2;
+
+  background: linear-gradient(
+    145deg,
+    rgba(226, 240, 255, 0.95),
+    rgba(211, 230, 255, 0.7)
+  );
+}
+
+.activity-icon-performance {
+  color: #df5e68;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 232, 235, 0.95),
+    rgba(255, 214, 220, 0.68)
+  );
+}
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.activity-content {
+  min-width: 0;
+}
+
+.activity-title-row {
+  min-width: 0;
+
+  display: block;
+
+  color: #213958;
+
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+.activity-title-row strong {
+  color: #182d4b;
+
+  font-weight: 560;
+}
+
+.activity-title-row span {
+  margin-left: 4px;
+
+  color: #334e70;
+
+  font-weight: 450;
+}
+
+.activity-content p {
+  min-width: 0;
+
+  margin: 4px 0 0;
+
+  overflow: hidden;
+
+  color: #6a7e9b;
+
+  font-size: 9.5px;
+  line-height: 1.35;
+
+  font-weight: 400;
+
+  white-space: nowrap;
+
+  text-overflow: ellipsis;
+}
+
+/* =========================================================
+   ACTIVITY TAG
+========================================================= */
+
+.activity-tag {
+  min-height: 25px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 5px 8px;
+
+  border-radius: 999px;
+
+  font-size: 8.5px;
+  line-height: 1;
+
+  font-weight: 500;
+
+  white-space: nowrap;
+}
+
+.activity-tag-green {
+  color: #07936a;
+
+  background: rgba(218, 249, 237, 0.82);
+}
+
+.activity-tag-purple {
+  color: #6d5cd1;
+
+  background: rgba(235, 230, 255, 0.84);
+}
+
+.activity-tag-orange {
+  color: #d67d17;
+
+  background: rgba(255, 239, 210, 0.88);
+}
+
+.activity-tag-blue {
+  color: #2677ce;
+
+  background: rgba(224, 239, 255, 0.88);
+}
+
+.activity-tag-red {
+  color: #db5d66;
+
+  background: rgba(255, 228, 232, 0.88);
+}
+
+/* =========================================================
+   TIME
+========================================================= */
+
+.activity-time {
+  color: #71849e;
+
+  font-size: 9px;
+
+  line-height: 1;
+
+  white-space: nowrap;
+
+  text-align: right;
+}
+
+/* =========================================================
+   ACTIVITY ACTION
+========================================================= */
+
+.activity-actions {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.activity-menu-button {
+  width: 28px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+
+  border: 1px solid transparent;
+
+  border-radius: 8px;
+
+  color: #72849d;
+
+  background: transparent;
+
+  cursor: pointer;
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease;
+}
+
+.activity-menu-button svg {
+  width: 16px;
+  height: 16px;
+
+  stroke-width: 1.8;
+}
+
+.activity-menu-button:hover {
+  color: #285a88;
+
+  background: rgba(228, 239, 251, 0.7);
+
+  border-color: rgba(113, 151, 189, 0.13);
+
+  transform: translateY(-1px);
+}
+
+/* =========================================================
+   ACTIVITY ACTION MENU
+========================================================= */
+
+.activity-action-menu {
+  position: absolute;
+
+  top: calc(100% + 5px);
+
+  right: 0;
+
+  z-index: 9999;
+
+  width: 145px;
+
+  padding: 5px;
+
+  border: 1px solid rgba(148, 163, 184, 0.16);
+
+  border-radius: 11px;
+
+  background: rgba(255, 255, 255, 0.96);
+
+  box-shadow:
+    0 15px 32px rgba(15, 23, 42, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+
+  backdrop-filter: blur(17px);
+  -webkit-backdrop-filter: blur(17px);
+}
+
+.activity-action-menu button {
+  width: 100%;
+
+  min-height: 32px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 7px 8px;
+
+  border: 0;
+
+  border-radius: 7px;
+
+  color: #506987;
+
+  background: transparent;
+
+  font-family: inherit;
+
+  font-size: 9px;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    background 170ms ease,
+    color 170ms ease,
+    transform 170ms ease;
+}
+
+.activity-action-menu button:hover {
+  color: #1e5b91;
+
+  background: rgba(227, 239, 253, 0.72);
+
+  transform: translateX(2px);
+}
+
+.activity-action-menu button svg {
+  width: 14px;
+  height: 14px;
+
+  flex: 0 0 14px;
+}
+
+.activity-action-menu button.activity-remove-action:hover {
+  color: #d85660;
+
+  background: rgba(255, 231, 234, 0.72);
+}
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.activity-empty-state {
+  min-height: 270px;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  gap: 7px;
+
+  text-align: center;
+}
+
+.activity-empty-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  color: #5f81a6;
+
+  background: rgba(228, 238, 250, 0.75);
+}
+
+.activity-empty-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.activity-empty-state strong {
+  color: #263e5e;
+
+  font-size: 12px;
+
+  font-weight: 550;
+}
+
+.activity-empty-state span {
+  color: #71839c;
+
+  font-size: 9px;
+}
+
+/* =========================================================
+   VIEW ALL
+========================================================= */
+
+.activity-view-all {
+  width: 100%;
+
+  min-height: 53px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 9px 13px;
+
+  border: 1px solid rgba(104, 159, 218, 0.13);
+
+  border-radius: 13px;
+
+  color: #245b92;
+
+  background: linear-gradient(
+    145deg,
+    rgba(232, 242, 255, 0.78),
+    rgba(218, 235, 255, 0.58)
+  );
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.78);
+
+  font-family: inherit;
+
+  font-size: 10px;
+
+  font-weight: 500;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform 240ms cubic-bezier(0.22, 1, 0.36, 1),
+    background 240ms ease,
+    box-shadow 240ms ease;
+}
+
+.activity-view-all:hover {
+  transform: translateY(-2px);
+
+  background: linear-gradient(
+    145deg,
+    rgba(241, 248, 255, 0.94),
+    rgba(226, 239, 255, 0.82)
+  );
+
+  box-shadow:
+    0 9px 22px rgba(37, 99, 235, 0.07),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.activity-view-all-icon {
+  width: 31px;
+  height: 31px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.activity-view-all-icon svg {
+  width: 16px;
+  height: 16px;
+}
+
+.activity-view-all > svg {
+  width: 16px;
+  height: 16px;
+
+  margin-left: auto;
+
+  transition: transform 220ms ease;
+}
+
+.activity-view-all:hover > svg {
+  transform: translateX(3px);
+}
+
+.activity-view-arrow-active {
+  transform: rotate(90deg);
+}
+
+/* =========================================================
+   RIGHT SIDEBAR
+========================================================= */
+
+.recent-activity-sidebar {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+/* =========================================================
+   PROGRESS CARD
+   DARK NAVY — LIMITED DARK SECTION
+========================================================= */
+
+.activity-progress-card {
+  position: relative;
+
+  min-width: 0;
+
+  padding: 18px;
+
+  border: 1px solid rgba(108, 184, 239, 0.14);
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  background:
+    radial-gradient(
+      circle at 86% 12%,
+      rgba(70, 161, 231, 0.16),
+      transparent 29%
+    ),
+    linear-gradient(145deg, #12365f 0%, #0d2d54 52%, #092441 100%);
+
+  box-shadow:
+    0 12px 31px rgba(8, 31, 60, 0.14),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+
+  transition:
+    transform 280ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 280ms ease;
+}
+
+.activity-progress-card::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.08),
+    transparent 42%,
+    rgba(255, 255, 255, 0.025)
+  );
+
+  pointer-events: none;
+}
+
+.activity-progress-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 18px 38px rgba(8, 31, 60, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+}
+
+/* =========================================================
+   PROGRESS HEADER
+========================================================= */
+
+.activity-progress-header {
+  position: relative;
+
+  display: flex;
+  align-items: flex-start;
+
+  gap: 12px;
+}
+
+.activity-progress-icon {
+  width: 46px;
+  height: 46px;
+
+  flex: 0 0 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+  font-size: 21px;
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.activity-progress-header h3 {
+  margin: 1px 0 0;
+
+  color: #ffffff;
+
+  font-size: 16px;
+
+  line-height: 1.2;
+
+  font-weight: 550;
+}
+
+.activity-progress-header p {
+  margin: 5px 0 0;
+
+  color: rgba(225, 240, 255, 0.67);
+
+  font-size: 9.5px;
+
+  line-height: 1.45;
+
+  font-weight: 400;
+}
+
+/* =========================================================
+   PROGRESS STATS
+========================================================= */
+
+.activity-progress-stats {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 7px;
+
+  margin-top: 16px;
+}
+
+.activity-progress-stat {
+  min-width: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 10px;
+
+  border: 1px solid rgba(255, 255, 255, 0.1);
+
+  border-radius: 11px;
+
+  background: rgba(255, 255, 255, 0.93);
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.95);
+
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.activity-progress-stat:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 8px 17px rgba(0, 0, 0, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.progress-stat-icon {
+  width: 27px;
+  height: 27px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  margin-bottom: 6px;
+}
+
+.progress-stat-icon svg {
+  width: 14px;
+  height: 14px;
+}
+
+.progress-stat-green {
+  color: #0ca578;
+
+  background: #dcf8ec;
+}
+
+.progress-stat-purple {
+  color: #7766d9;
+
+  background: #eeeaff;
+}
+
+.progress-stat-orange {
+  color: #e18a28;
+
+  background: #fff0d8;
+}
+
+.activity-progress-stat strong {
+  color: #1b3150;
+
+  font-size: 20px;
+
+  line-height: 1;
+
+  font-weight: 600;
+}
+
+.activity-progress-stat span {
+  margin-top: 4px;
+
+  color: #647995;
+
+  font-size: 8px;
+
+  line-height: 1.25;
+}
+
+.activity-progress-stat small {
+  margin-top: 6px;
+
+  color: #0ba879;
+
+  font-size: 8px;
+
+  font-weight: 550;
+}
+
+/* =========================================================
+   TIP CARD
+========================================================= */
+
+.activity-tip-card {
+  width: 100%;
+
+  min-width: 0;
+
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 13px;
+
+  border: 1px solid rgba(131, 122, 221, 0.13);
+
+  border-radius: 15px;
+
+  background:
+    radial-gradient(
+      circle at 90% 20%,
+      rgba(255, 255, 255, 0.45),
+      transparent 30%
+    ),
+    linear-gradient(
+      145deg,
+      rgba(242, 239, 255, 0.95),
+      rgba(228, 239, 255, 0.78)
+    );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.86),
+    0 7px 21px rgba(76, 73, 160, 0.045);
+
+  font-family: inherit;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform 250ms cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 250ms ease,
+    border-color 220ms ease;
+}
+
+.activity-tip-card:hover {
+  transform: translateY(-3px);
+
+  border-color: rgba(113, 104, 211, 0.22);
+
+  box-shadow:
+    0 13px 27px rgba(76, 73, 160, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+.activity-tip-icon {
+  width: 40px;
+  height: 40px;
+
+  flex: 0 0 40px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 50%;
+
+  color: #e98220;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 242, 211, 0.95),
+    rgba(255, 225, 172, 0.65)
+  );
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.activity-tip-icon svg {
+  width: 20px;
+  height: 20px;
+
+  stroke-width: 1.7;
+}
+
+.activity-tip-content {
+  min-width: 0;
+
+  flex: 1;
+}
+
+.activity-tip-content strong {
+  display: block;
+
+  color: #203756;
+
+  font-size: 11px;
+
+  line-height: 1.2;
+
+  font-weight: 550;
+}
+
+.activity-tip-content span {
+  display: block;
+
+  margin-top: 4px;
+
+  color: #667b99;
+
+  font-size: 8.5px;
+
+  line-height: 1.4;
+
+  font-weight: 400;
+}
+
+.activity-tip-arrow {
+  width: 17px;
+  height: 17px;
+
+  flex: 0 0 17px;
+
+  color: #54708f;
+
+  transition:
+    transform 220ms ease,
+    color 220ms ease;
+}
+
+.activity-tip-card:hover .activity-tip-arrow {
+  color: #244f7e;
+
+  transform: translateX(3px);
+}
+
+/* =========================================================
+   QUICK FILTERS
+========================================================= */
+
+.activity-filters-card {
+  min-width: 0;
+
+  padding: 15px;
+
+  border: 1px solid var(--activity-border);
+
+  border-radius: 15px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.97),
+    rgba(249, 251, 255, 0.83)
+  );
+
+  box-shadow:
+    0 8px 25px rgba(15, 23, 42, 0.045),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  backdrop-filter: blur(17px);
+  -webkit-backdrop-filter: blur(17px);
+}
+
+.activity-filters-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  margin-bottom: 11px;
+}
+
+.activity-filters-header h3 {
+  margin: 0;
+
+  color: #213958;
+
+  font-size: 13px;
+
+  line-height: 1.2;
+
+  font-weight: 550;
+}
+
+.activity-filters-header > svg {
+  width: 16px;
+  height: 16px;
+
+  color: #7186a0;
+
+  stroke-width: 1.7;
+}
+
+.activity-filter-grid {
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 7px;
+}
+
+.activity-filter-button {
+  min-width: 0;
+
+  min-height: 48px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 8px 9px;
+
+  border: 1px solid rgba(148, 163, 184, 0.13);
+
+  border-radius: 10px;
+
+  color: #516b8a;
+
+  background: rgba(255, 255, 255, 0.58);
+
+  font-family: inherit;
+
+  font-size: 9px;
+
+  font-weight: 450;
+
+  text-align: left;
+
+  cursor: pointer;
+
+  transition:
+    transform 210ms ease,
+    background 210ms ease,
+    border-color 210ms ease,
+    box-shadow 210ms ease,
+    color 210ms ease;
+}
+
+.activity-filter-button:hover {
+  transform: translateY(-2px);
+
+  color: #23598d;
+
+  background: rgba(241, 247, 255, 0.9);
+
+  border-color: rgba(92, 145, 205, 0.2);
+
+  box-shadow: 0 7px 15px rgba(15, 23, 42, 0.055);
+}
+
+.activity-filter-button > svg {
+  width: 17px;
+  height: 17px;
+
+  flex: 0 0 17px;
+
+  stroke-width: 1.7;
+}
+
+.activity-filter-active {
+  color: #1768b2;
+
+  border-color: rgba(79, 150, 224, 0.42);
+
+  background: linear-gradient(
+    145deg,
+    rgba(232, 243, 255, 0.94),
+    rgba(220, 237, 255, 0.8)
+  );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 4px 12px rgba(37, 99, 235, 0.045);
+}
+
+.activity-filter-check {
+  width: 13px !important;
+  height: 13px !important;
+
+  margin-left: auto;
+}
+
+/* =========================================================
+   BUTTON FOCUS
+========================================================= */
+
+.trainer-recent-activity button:focus-visible {
+  outline: 2px solid rgba(39, 126, 211, 0.38);
+
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1100px) {
+  .recent-activity-grid {
+    grid-template-columns:
+      minmax(0, 1.45fr)
+      minmax(270px, 0.9fr);
+  }
+
+  .activity-item {
+    grid-template-columns:
+      24px
+      42px
+      minmax(0, 1fr)
+      auto
+      43px
+      28px;
+
+    gap: 8px;
+
+    padding: 9px 10px;
+  }
+
+  .activity-icon {
+    width: 40px;
+    height: 40px;
+
+    flex-basis: 40px;
+  }
+
+  .activity-tag {
+    display: none;
+  }
+
+  .activity-content p {
+    font-size: 9px;
+  }
+}
+
+/* =========================================================
+   SMALL TABLET
+========================================================= */
+
+@media (max-width: 900px) {
+  .recent-activity-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .recent-activity-sidebar {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    align-items: start;
+  }
+
+  .activity-progress-card {
+    grid-column: 1 / -1;
+  }
+
+  .activity-tip-card,
+  .activity-filters-card {
+    min-width: 0;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+  .recent-activity-header {
+    align-items: flex-start;
+
+    gap: 10px;
+  }
+
+  .recent-activity-heading {
+    gap: 8px;
+  }
+
+  .recent-activity-title-icon {
+    width: 37px;
+    height: 37px;
+
+    flex-basis: 37px;
+
+    border-radius: 11px;
+  }
+
+  .recent-activity-title-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .recent-activity-heading-text h2 {
+    font-size: 17px;
+  }
+
+  .recent-activity-heading-text p {
+    font-size: 9px;
+  }
+
+  .activity-period-button {
+    min-height: 34px;
+
+    padding: 7px 9px;
+
+    font-size: 9px;
+  }
+
+  .activity-period-button svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .activity-period-menu {
+    width: 145px;
+  }
+
+  /* ================================================
+     ACTIVITY ROW BECOMES VERTICAL
+  ================================================ */
+
+  .activity-item {
+    min-height: auto;
+
+    display: grid;
+
+    grid-template-columns:
+      24px
+      40px
+      minmax(0, 1fr)
+      28px;
+
+    grid-template-rows:
+      auto
+      auto
+      auto;
+
+    column-gap: 8px;
+
+    row-gap: 7px;
+
+    padding: 12px 10px;
+  }
+
+  .activity-timeline {
+    grid-column: 1;
+
+    grid-row: 1 / span 3;
+
+    align-self: stretch;
+  }
+
+  .activity-icon {
+    grid-column: 2;
+
+    grid-row: 1;
+
+    width: 38px;
+    height: 38px;
+
+    flex-basis: 38px;
+
+    border-radius: 10px;
+  }
+
+  .activity-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .activity-content {
+    grid-column: 3;
+
+    grid-row: 1;
+
+    align-self: center;
+  }
+
+  .activity-title-row {
+    font-size: 10px;
+  }
+
+  .activity-content p {
+    margin-top: 3px;
+
+    font-size: 8.5px;
+
+    white-space: normal;
+  }
+
+  .activity-actions {
+    grid-column: 4;
+
+    grid-row: 1;
+
+    align-self: start;
+  }
+
+  .activity-time {
+    grid-column: 2 / span 2;
+
+    grid-row: 2;
+
+    text-align: left;
+
+    padding-left: 1px;
+
+    font-size: 8.5px;
+  }
+
+  .activity-tag {
+    grid-column: 2 / span 2;
+
+    grid-row: 3;
+
+    width: max-content;
+
+    display: inline-flex;
+
+    min-height: 22px;
+
+    font-size: 8px;
+  }
+
+  .activity-action-menu {
+    top: calc(100% + 4px);
+
+    right: 0;
+  }
+
+  .recent-activity-sidebar {
+    grid-template-columns: 1fr;
+  }
+
+  .activity-progress-card {
+    grid-column: auto;
+  }
+
+  .activity-progress-stats {
+    gap: 6px;
+  }
+
+  .activity-progress-stat {
+    padding: 8px;
+  }
+
+  .activity-progress-stat strong {
+    font-size: 18px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 430px) {
+  .recent-activity-header {
+    flex-direction: column;
+  }
+
+  .activity-period-wrapper {
+    width: 100%;
+  }
+
+  .activity-period-button {
+    width: 100%;
+  }
+
+  .activity-period-menu {
+    right: 0;
+    left: 0;
+
+    width: 100%;
+  }
+
+  .activity-item {
+    grid-template-columns:
+      20px
+      37px
+      minmax(0, 1fr)
+      25px;
+
+    column-gap: 7px;
+
+    padding: 11px 8px;
+  }
+
+  .activity-timeline {
+    width: 20px;
+  }
+
+  .activity-icon {
+    width: 35px;
+    height: 35px;
+
+    flex-basis: 35px;
+  }
+
+  .activity-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  .activity-title-row {
+    font-size: 9px;
+  }
+
+  .activity-content p {
+    font-size: 8px;
+  }
+
+  .activity-time {
+    font-size: 8px;
+  }
+
+  .activity-tag {
+    font-size: 7.5px;
+  }
+
+  .activity-progress-header h3 {
+    font-size: 14px;
+  }
+
+  .activity-progress-header p {
+    font-size: 8.5px;
+  }
+
+  .activity-progress-stats {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .activity-progress-stat span {
+    font-size: 7px;
+  }
+
+  .activity-progress-stat small {
+    font-size: 7px;
+  }
+
+  .activity-tip-content strong {
+    font-size: 10px;
+  }
+
+  .activity-tip-content span {
+    font-size: 8px;
+  }
+
+  .activity-filter-button {
+    min-height: 44px;
+
+    font-size: 8px;
+  }
+}
+
+/* =========================================================
+   EXTRA SMALL
+========================================================= */
+
+@media (max-width: 340px) {
+  .recent-activity-heading-text h2 {
+    font-size: 16px;
+  }
+
+  .recent-activity-heading-text p {
+    font-size: 8px;
+  }
+
+  .activity-item {
+    grid-template-columns:
+      18px
+      34px
+      minmax(0, 1fr)
+      23px;
+
+    column-gap: 6px;
+
+    padding: 10px 7px;
+  }
+
+  .activity-timeline {
+    width: 18px;
+  }
+
+  .activity-timeline-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  .activity-icon {
+    width: 32px;
+    height: 32px;
+
+    flex-basis: 32px;
+
+    border-radius: 9px;
+  }
+
+  .activity-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .activity-title-row {
+    font-size: 8.5px;
+  }
+
+  .activity-content p {
+    font-size: 7.5px;
+  }
+
+  .activity-menu-button {
+    width: 23px;
+    height: 23px;
+  }
+
+  .activity-menu-button svg {
+    width: 14px;
+    height: 14px;
+  }
+
+  .activity-progress-stats {
+    gap: 4px;
+  }
+
+  .activity-progress-stat {
+    padding: 7px;
+  }
+
+  .activity-progress-stat strong {
+    font-size: 16px;
+  }
+
+  .activity-progress-stat span {
+    font-size: 6.5px;
+  }
+
+  .activity-progress-stat small {
+    font-size: 6.5px;
+  }
+
+  .activity-filter-grid {
+    gap: 5px;
+  }
+
+  .activity-filter-button {
+    min-height: 40px;
+
+    gap: 5px;
+
+    padding: 7px;
+
+    font-size: 7.5px;
+  }
+
+  .activity-filter-button > svg {
+    width: 15px;
+    height: 15px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .trainer-recent-activity *,
+  .trainer-recent-activity *::before,
+  .trainer-recent-activity *::after {
+    animation: none !important;
+
+    transition-duration: 0.01ms !important;
+  }
+}

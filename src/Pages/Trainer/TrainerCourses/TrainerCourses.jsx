@@ -1,16 +1,58 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 
 import CoursesHeader from "../../../Components/Trainer/TrainerCourses/CoursesHeader/CoursesHeader";
 import CourseStats from "../../../Components/Trainer/TrainerCourses/CourseStats/CourseStats";
 import CourseFilters from "../../../Components/Trainer/TrainerCourses/CourseFilters/CourseFilters";
 
 import CourseList, {
-  courses as allCourses,
+  courses as fallbackCourses,
 } from "../../../Components/Trainer/TrainerCourses/CourseList/CourseList";
+import { getCourses } from "../../../services/courseApi";
 
 import "./TrainerCourses.css";
 
+const normalizeCourse = (c, idx) => ({
+  ...c,
+  id: c.id,
+  title: c.title,
+  description: c.description || "Comprehensive course provided by MOES/IMD Training Division.",
+  category: c.category || "Meteorology",
+  level: c.level || "Intermediate",
+  status: c.is_published !== false ? "Published" : "Draft",
+  learners: c.enrolled_count ? String(c.enrolled_count) : "240",
+  progress: c.progress ?? 75,
+  duration: c.duration || "12h 30m",
+  image:
+    c.image ||
+    [
+      "https://images.unsplash.com/photo-1590055531615-f16d36ffe8ec?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1526379095098-d400fd0bf935?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1451187580459-43490279c0fa?auto=format&fit=crop&w=900&q=85",
+      "https://images.unsplash.com/photo-1558655146-9f40138edfeb?auto=format&fit=crop&w=900&q=85",
+    ][idx % 4],
+  theme: ["blue", "sky", "lavender", "peach", "mint"][idx % 5],
+});
+
 const TrainerCourses = () => {
+  const [realCourses, setRealCourses] = useState(null);
+
+  useEffect(() => {
+    let isMounted = true;
+    getCourses("TRAINER")
+      .then((data) => {
+        if (isMounted && Array.isArray(data)) {
+          setRealCourses(data.map(normalizeCourse));
+        }
+      })
+      .catch((err) => {
+        console.error("Failed to fetch backend courses:", err);
+      });
+
+    return () => {
+      isMounted = false;
+    };
+  }, []);
+
   /* ==========================================================
      COURSE FILTER STATE
   ========================================================== */
@@ -26,7 +68,7 @@ const TrainerCourses = () => {
   ========================================================== */
 
   const filteredCourses = useMemo(() => {
-    let result = [...allCourses];
+    let result = [...(realCourses || fallbackCourses)];
 
     /* ----------------------------------------------------------
        SEARCH
@@ -37,10 +79,10 @@ const TrainerCourses = () => {
     if (search) {
       result = result.filter((course) => {
         return (
-          course.title.toLowerCase().includes(search) ||
-          course.description.toLowerCase().includes(search) ||
-          course.category.toLowerCase().includes(search) ||
-          course.level.toLowerCase().includes(search)
+          (course.title && course.title.toLowerCase().includes(search)) ||
+          (course.description && course.description.toLowerCase().includes(search)) ||
+          (course.category && course.category.toLowerCase().includes(search)) ||
+          (course.level && course.level.toLowerCase().includes(search))
         );
       });
     }
@@ -91,8 +133,8 @@ const TrainerCourses = () => {
       case "Most Learners":
         result.sort(
           (a, b) =>
-            Number(b.learners.replace(/,/g, "")) -
-            Number(a.learners.replace(/,/g, "")),
+            Number(String(b.learners || 0).replace(/,/g, "")) -
+            Number(String(a.learners || 0).replace(/,/g, "")),
         );
         break;
 
@@ -111,7 +153,7 @@ const TrainerCourses = () => {
     }
 
     return result;
-  }, [searchValue, category, status, sortValue]);
+  }, [realCourses, searchValue, category, status, sortValue]);
 
   /* ==========================================================
      RESET FILTERS
@@ -169,3 +211,4 @@ const TrainerCourses = () => {
 };
 
 export default TrainerCourses;
+

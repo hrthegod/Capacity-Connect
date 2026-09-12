@@ -1,0 +1,280 @@
+/* =========================================================
+   TRAINER PROFILE PAGE
+   ========================================================= */
+
+.trainer-profile-page {
+  width: 100%;
+  min-height: 100%;
+
+  position: relative;
+
+  padding: 24px;
+
+  overflow: visible;
+
+  isolation: isolate;
+
+  background: linear-gradient(
+    135deg,
+    #f7fbff 0%,
+    #f9fbfd 42%,
+    #faf8ff 72%,
+    #f7fcfa 100%
+  );
+}
+
+/* =========================================================
+   PAGE DECORATIVE BACKGROUND
+   ========================================================= */
+
+.trainer-profile-bg {
+  position: absolute;
+
+  z-index: -2;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  filter: blur(2px);
+
+  opacity: 0.7;
+}
+
+.trainer-profile-bg-one {
+  width: 340px;
+  height: 340px;
+
+  top: -150px;
+  right: 8%;
+
+  background: radial-gradient(
+    circle,
+    rgba(156, 211, 244, 0.2),
+    rgba(156, 211, 244, 0)
+  );
+}
+
+.trainer-profile-bg-two {
+  width: 300px;
+  height: 300px;
+
+  top: 35%;
+
+  left: -150px;
+
+  background: radial-gradient(
+    circle,
+    rgba(196, 176, 235, 0.17),
+    rgba(196, 176, 235, 0)
+  );
+}
+
+.trainer-profile-bg-three {
+  width: 330px;
+  height: 330px;
+
+  right: -130px;
+  bottom: -100px;
+
+  background: radial-gradient(
+    circle,
+    rgba(151, 215, 190, 0.16),
+    rgba(151, 215, 190, 0)
+  );
+}
+
+/* =========================================================
+   SUBTLE GRID
+   ========================================================= */
+
+.trainer-profile-grid {
+  position: absolute;
+
+  inset: 0;
+
+  z-index: -1;
+
+  pointer-events: none;
+
+  opacity: 0.25;
+
+  background-image:
+    linear-gradient(rgba(112, 142, 171, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(112, 142, 171, 0.045) 1px, transparent 1px);
+
+  background-size: 38px 38px;
+
+  mask-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.7), transparent 80%);
+
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.7),
+    transparent 80%
+  );
+}
+
+/* =========================================================
+   CONTENT
+   ========================================================= */
+
+.trainer-profile-content {
+  width: 100%;
+
+  max-width: 1600px;
+
+  position: relative;
+
+  margin: 0 auto;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 20px;
+}
+
+/* =========================================================
+   RESPONSIVE — 1200px
+   ========================================================= */
+
+@media (max-width: 1200px) {
+  .trainer-profile-page {
+    padding: 20px;
+  }
+
+  .trainer-profile-content {
+    gap: 18px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — 900px
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .trainer-profile-page {
+    padding: 16px;
+  }
+
+  .trainer-profile-content {
+    gap: 16px;
+  }
+
+  .trainer-profile-bg-one {
+    width: 280px;
+    height: 280px;
+  }
+
+  .trainer-profile-bg-two {
+    width: 240px;
+    height: 240px;
+  }
+
+  .trainer-profile-bg-three {
+    width: 260px;
+    height: 260px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — 650px
+   ========================================================= */
+
+@media (max-width: 650px) {
+  .trainer-profile-page {
+    padding: 12px;
+  }
+
+  .trainer-profile-content {
+    gap: 14px;
+  }
+
+  .trainer-profile-grid {
+    background-size: 30px 30px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — 480px
+   ========================================================= */
+
+@media (max-width: 480px) {
+  .trainer-profile-page {
+    padding: 9px;
+  }
+
+  .trainer-profile-content {
+    gap: 12px;
+  }
+
+  .trainer-profile-bg-one {
+    width: 220px;
+    height: 220px;
+
+    right: -100px;
+  }
+
+  .trainer-profile-bg-two {
+    width: 200px;
+    height: 200px;
+
+    left: -120px;
+  }
+
+  .trainer-profile-bg-three {
+    width: 210px;
+    height: 210px;
+
+    right: -100px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — 360px
+   ========================================================= */
+
+@media (max-width: 360px) {
+  .trainer-profile-page {
+    padding: 7px;
+  }
+
+  .trainer-profile-content {
+    gap: 10px;
+  }
+
+  .trainer-profile-grid {
+    background-size: 26px 26px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL DEVICES
+   ========================================================= */
+
+@media (max-width: 320px) {
+  .trainer-profile-page {
+    padding: 5px;
+  }
+
+  .trainer-profile-content {
+    gap: 8px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .trainer-profile-page *,
+  .trainer-profile-page *::before,
+  .trainer-profile-page *::after {
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+
+    transition-duration: 0.01ms !important;
+
+    scroll-behavior: auto !important;
+  }
+}

@@ -1,0 +1,1465 @@
+/* =========================================================
+   TRAINER SIDEBAR
+   Capacity Connect
+========================================================= */
+
+.trainer-sidebar {
+  position: fixed;
+
+  top: 0;
+  left: 0;
+
+  width: 252px;
+  min-width: 252px;
+
+  height: 100vh;
+  height: 100dvh;
+
+  display: flex;
+  flex-direction: column;
+
+  padding: 20px 14px 14px;
+
+  box-sizing: border-box;
+
+  background:
+    radial-gradient(
+      circle at 20% 8%,
+      rgba(55, 120, 210, 0.16),
+      transparent 28%
+    ),
+    linear-gradient(180deg, #102d55 0%, #0c2649 48%, #081f3c 100%);
+
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+
+  box-shadow: 10px 0 35px rgba(8, 31, 60, 0.08);
+
+  color: #ffffff;
+
+  overflow: hidden;
+
+  z-index: 1000;
+}
+
+/* =========================================================
+   SUBTLE GLASS OVERLAY
+========================================================= */
+
+.trainer-sidebar::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.045),
+    transparent 32%,
+    rgba(255, 255, 255, 0.018)
+  );
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   BRAND
+========================================================= */
+
+.trainer-sidebar-brand {
+  position: relative;
+
+  z-index: 1;
+
+  padding: 4px 5px 20px;
+
+  border-bottom: 1px solid rgba(255, 255, 255, 0.075);
+}
+
+.trainer-brand-link {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  width: 100%;
+
+  color: inherit;
+
+  text-decoration: none;
+}
+
+.trainer-brand-logo {
+  position: relative;
+
+  width: 42px;
+  height: 42px;
+
+  flex: 0 0 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 13px;
+
+  background: linear-gradient(135deg, #4d9df6 0%, #7167ed 48%, #a55ce6 100%);
+
+  box-shadow:
+    0 8px 22px rgba(77, 157, 246, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.24);
+
+  overflow: hidden;
+}
+
+.trainer-brand-logo::after {
+  content: "";
+
+  position: absolute;
+
+  width: 22px;
+  height: 22px;
+
+  border-radius: 50%;
+
+  background: rgba(255, 255, 255, 0.12);
+
+  top: -7px;
+  right: -7px;
+}
+
+.trainer-brand-logo span {
+  position: relative;
+
+  z-index: 1;
+
+  font-size: 24px;
+  line-height: 1;
+
+  font-weight: 600;
+
+  color: #ffffff;
+}
+
+.trainer-brand-content {
+  min-width: 0;
+}
+
+.trainer-brand-content h1 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 16px;
+  line-height: 1.25;
+
+  font-weight: 600;
+
+  letter-spacing: -0.2px;
+
+  white-space: nowrap;
+}
+
+.trainer-brand-content p {
+  margin: 4px 0 0;
+
+  color: rgba(224, 236, 250, 0.62);
+
+  font-size: 10px;
+  line-height: 1.2;
+
+  font-weight: 400;
+
+  letter-spacing: 0.2px;
+}
+
+/* =========================================================
+   NAVIGATION
+========================================================= */
+
+.trainer-sidebar-navigation {
+  position: relative;
+
+  z-index: 1;
+
+  flex: 1;
+
+  min-height: 0;
+
+  padding: 18px 0 12px;
+
+  overflow-y: auto;
+  overflow-x: hidden;
+
+  scrollbar-width: thin;
+
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+
+.trainer-sidebar-navigation::-webkit-scrollbar {
+  width: 4px;
+}
+
+.trainer-sidebar-navigation::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.trainer-sidebar-navigation::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+
+  border-radius: 10px;
+}
+
+.trainer-navigation-label {
+  margin: 0 9px 9px;
+
+  color: rgba(214, 229, 247, 0.42);
+
+  font-size: 9px;
+  line-height: 1;
+
+  font-weight: 500;
+
+  letter-spacing: 1.2px;
+
+  text-transform: uppercase;
+}
+
+.trainer-navigation-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+/* =========================================================
+   NAV ITEM
+========================================================= */
+
+.trainer-nav-item {
+  position: relative;
+
+  min-height: 43px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  padding: 8px 10px;
+
+  border: 1px solid transparent;
+
+  border-radius: 11px;
+
+  color: rgba(238, 246, 255, 0.74);
+
+  text-decoration: none;
+
+  background: transparent;
+
+  transition:
+    background 220ms ease,
+    border-color 220ms ease,
+    color 220ms ease,
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+.trainer-nav-item::before {
+  content: "";
+
+  position: absolute;
+
+  left: -1px;
+  top: 50%;
+
+  width: 3px;
+  height: 0;
+
+  border-radius: 0 5px 5px 0;
+
+  background: #71c7ff;
+
+  transform: translateY(-50%);
+
+  opacity: 0;
+
+  transition:
+    height 220ms ease,
+    opacity 220ms ease;
+}
+
+/* =========================================================
+   NAV ICON
+========================================================= */
+
+.trainer-nav-icon {
+  width: 28px;
+  height: 28px;
+
+  flex: 0 0 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  color: rgba(221, 236, 252, 0.7);
+
+  transition:
+    color 220ms ease,
+    background 220ms ease,
+    transform 220ms ease;
+}
+
+.trainer-nav-icon svg {
+  width: 17px;
+  height: 17px;
+
+  stroke-width: 1.75;
+}
+
+/* =========================================================
+   NAV LABEL
+========================================================= */
+
+.trainer-nav-label {
+  min-width: 0;
+
+  flex: 1;
+
+  font-size: 12px;
+  line-height: 1.2;
+
+  font-weight: 450;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  transition: color 220ms ease;
+}
+
+/* =========================================================
+   NAV ARROW
+========================================================= */
+
+.trainer-nav-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(214, 229, 247, 0.25);
+
+  opacity: 0;
+
+  transform: translateX(-4px);
+
+  transition:
+    opacity 220ms ease,
+    transform 220ms ease,
+    color 220ms ease;
+}
+
+.trainer-nav-arrow svg {
+  width: 13px;
+  height: 13px;
+
+  stroke-width: 1.8;
+}
+
+/* =========================================================
+   NAV BADGE
+========================================================= */
+
+.trainer-nav-badge {
+  min-width: 18px;
+  height: 18px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 5px;
+
+  border-radius: 20px;
+
+  background: #ff6b6b;
+
+  color: #ffffff;
+
+  font-size: 9px;
+  line-height: 1;
+
+  font-weight: 600;
+
+  box-shadow: 0 4px 12px rgba(255, 107, 107, 0.25);
+
+  transition:
+    transform 220ms ease,
+    box-shadow 220ms ease;
+}
+
+/* =========================================================
+   NAV HOVER
+========================================================= */
+
+.trainer-nav-item:hover {
+  color: #ffffff;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.085),
+    rgba(255, 255, 255, 0.035)
+  );
+
+  border-color: rgba(255, 255, 255, 0.085);
+
+  box-shadow: 0 7px 20px rgba(2, 17, 37, 0.12);
+
+  transform: translateX(2px);
+}
+
+.trainer-nav-item:hover .trainer-nav-icon {
+  color: #8fd5ff;
+
+  background: rgba(111, 198, 255, 0.09);
+
+  transform: translateY(-1px);
+}
+
+.trainer-nav-item:hover .trainer-nav-label {
+  color: #ffffff;
+}
+
+.trainer-nav-item:hover .trainer-nav-arrow {
+  opacity: 1;
+
+  color: rgba(223, 239, 255, 0.62);
+
+  transform: translateX(0);
+}
+
+.trainer-nav-item:hover .trainer-nav-badge {
+  transform: scale(1.04);
+
+  box-shadow: 0 5px 15px rgba(255, 107, 107, 0.34);
+}
+
+/* =========================================================
+   ACTIVE NAV ITEM
+========================================================= */
+
+.trainer-nav-item.active {
+  color: #ffffff;
+
+  background: linear-gradient(
+    135deg,
+    rgba(64, 143, 235, 0.32),
+    rgba(49, 108, 184, 0.19)
+  );
+
+  border-color: rgba(108, 183, 255, 0.18);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.075),
+    0 8px 24px rgba(3, 25, 55, 0.14);
+}
+
+.trainer-nav-item.active::before {
+  height: 22px;
+
+  opacity: 1;
+}
+
+.trainer-nav-item.active .trainer-nav-icon {
+  color: #ffffff;
+
+  background: rgba(105, 190, 255, 0.15);
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+.trainer-nav-item.active .trainer-nav-label {
+  color: #ffffff;
+
+  font-weight: 500;
+}
+
+.trainer-nav-item.active .trainer-nav-arrow {
+  opacity: 1;
+
+  color: rgba(230, 244, 255, 0.75);
+
+  transform: translateX(0);
+}
+
+/* =========================================================
+   SIDEBAR BOTTOM
+========================================================= */
+
+.trainer-sidebar-bottom {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 9px;
+
+  padding-top: 10px;
+}
+
+/* =========================================================
+   SUPPORT CARD
+========================================================= */
+
+.trainer-support-card {
+  position: relative;
+
+  padding: 13px;
+
+  border: 1px solid rgba(141, 199, 255, 0.14);
+
+  border-radius: 14px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(31, 70, 115, 0.88),
+    rgba(17, 48, 82, 0.74)
+  );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 9px 24px rgba(2, 16, 34, 0.14);
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  overflow: hidden;
+
+  transition:
+    transform 250ms ease,
+    border-color 250ms ease,
+    box-shadow 250ms ease;
+}
+
+.trainer-support-card::before {
+  content: "";
+
+  position: absolute;
+
+  width: 90px;
+  height: 90px;
+
+  right: -38px;
+  top: -44px;
+
+  border-radius: 50%;
+
+  background: rgba(112, 194, 255, 0.08);
+
+  pointer-events: none;
+}
+
+.trainer-support-card:hover {
+  transform: translateY(-2px);
+
+  border-color: rgba(141, 199, 255, 0.23);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 13px 30px rgba(2, 16, 34, 0.22);
+}
+
+/* =========================================================
+   SUPPORT ICON
+========================================================= */
+
+.trainer-support-icon {
+  width: 31px;
+  height: 31px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-bottom: 9px;
+
+  border: 1px solid rgba(119, 198, 255, 0.12);
+
+  border-radius: 9px;
+
+  color: #81caff;
+
+  background: rgba(105, 190, 255, 0.09);
+}
+
+.trainer-support-icon svg {
+  width: 17px;
+  height: 17px;
+
+  stroke-width: 1.7;
+}
+
+/* =========================================================
+   SUPPORT CONTENT
+========================================================= */
+
+.trainer-support-content h3 {
+  margin: 0;
+
+  color: #f3f8ff;
+
+  font-size: 12px;
+  line-height: 1.25;
+
+  font-weight: 500;
+}
+
+.trainer-support-content p {
+  margin: 4px 0 11px;
+
+  color: rgba(220, 235, 250, 0.55);
+
+  font-size: 10px;
+  line-height: 1.25;
+
+  font-weight: 400;
+}
+
+/* =========================================================
+   SUPPORT BUTTON
+========================================================= */
+
+.trainer-support-button {
+  width: 100%;
+  min-height: 30px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 6px 10px;
+
+  border: 1px solid rgba(126, 196, 255, 0.22);
+
+  border-radius: 8px;
+
+  color: rgba(239, 248, 255, 0.86);
+
+  background: rgba(255, 255, 255, 0.035);
+
+  font-family: inherit;
+
+  font-size: 10px;
+  line-height: 1.2;
+
+  font-weight: 450;
+
+  cursor: pointer;
+
+  transition:
+    background 220ms ease,
+    border-color 220ms ease,
+    transform 220ms ease,
+    box-shadow 220ms ease,
+    color 220ms ease;
+}
+
+.trainer-support-button:hover {
+  color: #ffffff;
+
+  background: rgba(107, 194, 255, 0.12);
+
+  border-color: rgba(126, 196, 255, 0.38);
+
+  box-shadow: 0 5px 15px rgba(60, 145, 216, 0.12);
+
+  transform: translateY(-1px);
+}
+
+.trainer-support-button:active {
+  transform: translateY(0);
+}
+
+/* =========================================================
+   SWITCH TO LEARNER
+========================================================= */
+
+.trainer-switch-button {
+  width: 100%;
+  min-height: 43px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 8px 10px;
+
+  border: 1px solid rgba(112, 190, 255, 0.13);
+
+  border-radius: 11px;
+
+  color: rgba(235, 246, 255, 0.86);
+
+  background: linear-gradient(
+    135deg,
+    rgba(51, 106, 169, 0.5),
+    rgba(26, 66, 111, 0.4)
+  );
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.045);
+
+  font-family: inherit;
+
+  cursor: pointer;
+
+  transition:
+    background 230ms ease,
+    border-color 230ms ease,
+    transform 230ms ease,
+    box-shadow 230ms ease;
+}
+
+.trainer-switch-icon {
+  width: 27px;
+  height: 27px;
+
+  flex: 0 0 27px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 8px;
+
+  color: #86ceff;
+
+  background: rgba(113, 199, 255, 0.09);
+
+  transition:
+    background 230ms ease,
+    color 230ms ease,
+    transform 230ms ease;
+}
+
+.trainer-switch-icon svg {
+  width: 15px;
+  height: 15px;
+
+  stroke-width: 1.8;
+}
+
+.trainer-switch-text {
+  flex: 1;
+
+  text-align: left;
+
+  font-size: 11px;
+  line-height: 1.2;
+
+  font-weight: 450;
+}
+
+.trainer-switch-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: rgba(221, 239, 255, 0.4);
+
+  transition:
+    transform 230ms ease,
+    color 230ms ease;
+}
+
+.trainer-switch-arrow svg {
+  width: 14px;
+  height: 14px;
+
+  stroke-width: 1.8;
+}
+
+.trainer-switch-button:hover {
+  color: #ffffff;
+
+  background: linear-gradient(
+    135deg,
+    rgba(61, 130, 202, 0.62),
+    rgba(33, 82, 135, 0.52)
+  );
+
+  border-color: rgba(112, 190, 255, 0.25);
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.065),
+    0 9px 22px rgba(3, 21, 43, 0.16);
+
+  transform: translateY(-1px);
+}
+
+.trainer-switch-button:hover .trainer-switch-icon {
+  color: #ffffff;
+
+  background: rgba(113, 199, 255, 0.16);
+
+  transform: rotate(-8deg);
+}
+
+.trainer-switch-button:hover .trainer-switch-arrow {
+  color: rgba(231, 245, 255, 0.75);
+
+  transform: translateX(2px);
+}
+
+.trainer-switch-button:active {
+  transform: translateY(0);
+}
+
+/* =========================================================
+   FOCUS ACCESSIBILITY
+========================================================= */
+
+.trainer-nav-item:focus-visible,
+.trainer-support-button:focus-visible,
+.trainer-switch-button:focus-visible,
+.trainer-brand-link:focus-visible {
+  outline: 2px solid rgba(117, 201, 255, 0.72);
+
+  outline-offset: 2px;
+}
+
+/* =========================================================
+   LARGE LAPTOP
+========================================================= */
+
+@media (max-width: 1200px) {
+  .trainer-sidebar {
+    width: 232px;
+    min-width: 232px;
+
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .trainer-nav-label {
+    font-size: 11.5px;
+  }
+}
+
+/* =========================================================
+   TABLET
+   Sidebar remains FIXED on the LEFT.
+   It becomes an icon rail.
+========================================================= */
+
+@media (max-width: 900px) {
+  .trainer-sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 76px;
+    min-width: 76px;
+
+    height: 100vh;
+    height: 100dvh;
+
+    padding: 18px 9px 12px;
+  }
+
+  /* -----------------------------------------
+     BRAND
+  ----------------------------------------- */
+
+  .trainer-sidebar-brand {
+    padding-left: 2px;
+    padding-right: 2px;
+
+    border-bottom: none;
+  }
+
+  .trainer-brand-link {
+    justify-content: center;
+  }
+
+  .trainer-brand-logo {
+    width: 40px;
+    height: 40px;
+
+    flex-basis: 40px;
+  }
+
+  .trainer-brand-content {
+    display: none;
+  }
+
+  /* -----------------------------------------
+     NAVIGATION LABEL
+  ----------------------------------------- */
+
+  .trainer-navigation-label {
+    display: none;
+  }
+
+  /* -----------------------------------------
+     NAVIGATION
+  ----------------------------------------- */
+
+  .trainer-navigation-list {
+    gap: 5px;
+  }
+
+  /* -----------------------------------------
+     NAV ITEM
+  ----------------------------------------- */
+
+  .trainer-nav-item {
+    min-height: 44px;
+
+    justify-content: center;
+
+    padding: 7px;
+
+    border-radius: 11px;
+  }
+
+  /* -----------------------------------------
+     ICON
+  ----------------------------------------- */
+
+  .trainer-nav-icon {
+    width: 31px;
+    height: 31px;
+
+    flex-basis: 31px;
+  }
+
+  /* -----------------------------------------
+     HIDE TEXT
+  ----------------------------------------- */
+
+  .trainer-nav-label,
+  .trainer-nav-arrow {
+    display: none;
+  }
+
+  /* -----------------------------------------
+     BADGE
+  ----------------------------------------- */
+
+  .trainer-nav-badge {
+    position: absolute;
+
+    top: 2px;
+    right: 1px;
+
+    min-width: 16px;
+    height: 16px;
+
+    padding: 0 4px;
+
+    font-size: 8px;
+  }
+
+  /* -----------------------------------------
+     SUPPORT CARD
+  ----------------------------------------- */
+
+  .trainer-support-card {
+    padding: 9px 7px;
+  }
+
+  .trainer-support-icon {
+    margin: 0 auto;
+  }
+
+  .trainer-support-content,
+  .trainer-support-button {
+    display: none;
+  }
+
+  /* -----------------------------------------
+     SWITCH BUTTON
+  ----------------------------------------- */
+
+  .trainer-switch-button {
+    min-height: 44px;
+
+    justify-content: center;
+
+    padding: 7px;
+  }
+
+  .trainer-switch-text,
+  .trainer-switch-arrow {
+    display: none;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+   Sidebar REMAINS FIXED ON LEFT.
+   NEVER becomes bottom navigation.
+========================================================= */
+
+@media (max-width: 640px) {
+  .trainer-sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 68px;
+    min-width: 68px;
+
+    height: 100vh;
+    height: 100dvh;
+
+    display: flex;
+    flex-direction: column;
+
+    padding: 12px 7px 9px;
+
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
+
+    border-top: none;
+
+    box-shadow: 7px 0 25px rgba(5, 25, 49, 0.15);
+  }
+
+  /* -----------------------------------------
+     BRAND
+  ----------------------------------------- */
+
+  .trainer-sidebar-brand {
+    padding: 2px 0 13px;
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.065);
+  }
+
+  .trainer-brand-link {
+    justify-content: center;
+  }
+
+  .trainer-brand-logo {
+    width: 37px;
+    height: 37px;
+
+    flex-basis: 37px;
+
+    border-radius: 11px;
+  }
+
+  .trainer-brand-logo span {
+    font-size: 21px;
+  }
+
+  /* -----------------------------------------
+     NAVIGATION
+  ----------------------------------------- */
+
+  .trainer-sidebar-navigation {
+    padding: 12px 0 8px;
+
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  .trainer-navigation-list {
+    width: 100%;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 4px;
+  }
+
+  /* -----------------------------------------
+     NAV ITEM
+  ----------------------------------------- */
+
+  .trainer-nav-item {
+    width: 100%;
+    min-width: 0;
+
+    min-height: 42px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 5px;
+
+    border-radius: 10px;
+  }
+
+  /* -----------------------------------------
+     ACTIVE INDICATOR
+  ----------------------------------------- */
+
+  .trainer-nav-item::before {
+    left: -1px;
+    top: 50%;
+
+    width: 3px;
+    height: 0;
+
+    transform: translateY(-50%);
+
+    border-radius: 0 5px 5px 0;
+  }
+
+  .trainer-nav-item.active::before {
+    width: 3px;
+    height: 21px;
+  }
+
+  /* -----------------------------------------
+     NAV ICON
+  ----------------------------------------- */
+
+  .trainer-nav-icon {
+    width: 30px;
+    height: 30px;
+
+    flex: 0 0 30px;
+  }
+
+  .trainer-nav-icon svg {
+    width: 17px;
+    height: 17px;
+  }
+
+  /* -----------------------------------------
+     KEEP LABELS HIDDEN
+  ----------------------------------------- */
+
+  .trainer-nav-label,
+  .trainer-nav-arrow {
+    display: none;
+  }
+
+  /* -----------------------------------------
+     NOTIFICATION BADGE
+  ----------------------------------------- */
+
+  .trainer-nav-badge {
+    top: 1px;
+    right: 0;
+
+    min-width: 15px;
+    height: 15px;
+
+    padding: 0 3px;
+
+    font-size: 7px;
+
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  /* -----------------------------------------
+     BOTTOM SECTION
+  ----------------------------------------- */
+
+  .trainer-sidebar-bottom {
+    padding-top: 7px;
+
+    gap: 6px;
+  }
+
+  /* -----------------------------------------
+     SUPPORT CARD
+  ----------------------------------------- */
+
+  .trainer-support-card {
+    padding: 7px 4px;
+
+    border-radius: 11px;
+  }
+
+  .trainer-support-icon {
+    width: 29px;
+    height: 29px;
+
+    margin: 0 auto;
+  }
+
+  .trainer-support-content,
+  .trainer-support-button {
+    display: none;
+  }
+
+  /* -----------------------------------------
+     SWITCH TO LEARNER
+  ----------------------------------------- */
+
+  .trainer-switch-button {
+    width: 100%;
+    min-height: 40px;
+
+    justify-content: center;
+
+    padding: 5px;
+
+    border-radius: 10px;
+  }
+
+  .trainer-switch-icon {
+    width: 28px;
+    height: 28px;
+
+    flex-basis: 28px;
+  }
+
+  .trainer-switch-text,
+  .trainer-switch-arrow {
+    display: none;
+  }
+}
+
+/* =========================================================
+   VERY SMALL MOBILE
+   Sidebar STILL remains FIXED on LEFT.
+========================================================= */
+
+@media (max-width: 420px) {
+  .trainer-sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 62px;
+    min-width: 62px;
+
+    height: 100vh;
+    height: 100dvh;
+
+    padding: 10px 5px 7px;
+  }
+
+  /* -----------------------------------------
+     BRAND
+  ----------------------------------------- */
+
+  .trainer-sidebar-brand {
+    padding: 2px 0 11px;
+  }
+
+  .trainer-brand-logo {
+    width: 34px;
+    height: 34px;
+
+    flex-basis: 34px;
+
+    border-radius: 10px;
+  }
+
+  .trainer-brand-logo span {
+    font-size: 19px;
+  }
+
+  /* -----------------------------------------
+     NAVIGATION
+  ----------------------------------------- */
+
+  .trainer-sidebar-navigation {
+    padding-top: 10px;
+  }
+
+  .trainer-navigation-list {
+    gap: 3px;
+  }
+
+  /* -----------------------------------------
+     NAV ITEM
+  ----------------------------------------- */
+
+  .trainer-nav-item {
+    min-height: 39px;
+
+    padding: 4px;
+
+    border-radius: 9px;
+  }
+
+  /* -----------------------------------------
+     ICON
+  ----------------------------------------- */
+
+  .trainer-nav-icon {
+    width: 28px;
+    height: 28px;
+
+    flex-basis: 28px;
+  }
+
+  .trainer-nav-icon svg {
+    width: 16px;
+    height: 16px;
+
+    stroke-width: 1.7;
+  }
+
+  /* -----------------------------------------
+     ACTIVE INDICATOR
+  ----------------------------------------- */
+
+  .trainer-nav-item.active::before {
+    width: 3px;
+    height: 19px;
+  }
+
+  /* -----------------------------------------
+     BADGE
+  ----------------------------------------- */
+
+  .trainer-nav-badge {
+    top: 0;
+    right: -1px;
+
+    min-width: 14px;
+    height: 14px;
+
+    font-size: 7px;
+  }
+
+  /* -----------------------------------------
+     SUPPORT
+  ----------------------------------------- */
+
+  .trainer-sidebar-bottom {
+    gap: 5px;
+
+    padding-top: 6px;
+  }
+
+  .trainer-support-card {
+    padding: 5px 3px;
+
+    border-radius: 9px;
+  }
+
+  .trainer-support-icon {
+    width: 27px;
+    height: 27px;
+  }
+
+  /* -----------------------------------------
+     SWITCH BUTTON
+  ----------------------------------------- */
+
+  .trainer-switch-button {
+    min-height: 37px;
+
+    padding: 4px;
+
+    border-radius: 9px;
+  }
+
+  .trainer-switch-icon {
+    width: 26px;
+    height: 26px;
+
+    flex-basis: 26px;
+  }
+
+  .trainer-switch-icon svg {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+/* =========================================================
+   EXTRA SMALL DEVICES
+   Around 320px
+========================================================= */
+
+@media (max-width: 340px) {
+  .trainer-sidebar {
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    width: 58px;
+    min-width: 58px;
+
+    height: 100vh;
+    height: 100dvh;
+
+    padding-left: 4px;
+    padding-right: 4px;
+  }
+
+  .trainer-brand-logo {
+    width: 32px;
+    height: 32px;
+
+    flex-basis: 32px;
+  }
+
+  .trainer-brand-logo span {
+    font-size: 18px;
+  }
+
+  .trainer-nav-item {
+    min-height: 37px;
+  }
+
+  .trainer-nav-icon {
+    width: 27px;
+    height: 27px;
+
+    flex-basis: 27px;
+  }
+
+  .trainer-nav-icon svg {
+    width: 15px;
+    height: 15px;
+  }
+
+  .trainer-support-icon {
+    width: 25px;
+    height: 25px;
+  }
+
+  .trainer-switch-button {
+    min-height: 35px;
+  }
+
+  .trainer-switch-icon {
+    width: 24px;
+    height: 24px;
+
+    flex-basis: 24px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .trainer-sidebar *,
+  .trainer-sidebar *::before,
+  .trainer-sidebar *::after {
+    transition-duration: 0.01ms !important;
+
+    animation-duration: 0.01ms !important;
+
+    animation-iteration-count: 1 !important;
+  }
+}
