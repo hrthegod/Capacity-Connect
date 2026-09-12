@@ -1,0 +1,1501 @@
+/* =========================================================
+   SKILL GAPS CLOSING
+   Premium Navy Glassmorphism
+   Full-width integrated layout
+   Responsive / No Overflow / No Text Clipping
+========================================================= */
+
+.skill-gaps-closing {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  margin: 0 0 36px;
+
+  box-sizing: border-box;
+
+  overflow: visible;
+}
+
+.skill-gaps-closing *,
+.skill-gaps-closing *::before,
+.skill-gaps-closing *::after {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   MAIN NAVY SURFACE
+========================================================= */
+
+.skill-gaps-closing__surface {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  overflow: hidden;
+
+  background: linear-gradient(135deg, #082d49 0%, #0b3b5b 48%, #0d4a68 100%);
+
+  border: 1px solid rgba(115, 196, 222, 0.28);
+
+  border-radius: 27px;
+
+  box-shadow:
+    0 28px 65px rgba(3, 31, 49, 0.2),
+    0 7px 20px rgba(3, 31, 49, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+}
+
+/* =========================================================
+   BACKGROUND GLOW
+========================================================= */
+
+.skill-gaps-closing__background-glow {
+  position: absolute;
+
+  pointer-events: none;
+
+  border-radius: 50%;
+
+  filter: blur(5px);
+}
+
+.skill-gaps-closing__background-glow--one {
+  top: -230px;
+  right: -140px;
+
+  width: 560px;
+  height: 560px;
+
+  background: radial-gradient(
+    circle,
+    rgba(67, 194, 226, 0.17) 0%,
+    rgba(67, 194, 226, 0.06) 43%,
+    transparent 72%
+  );
+}
+
+.skill-gaps-closing__background-glow--two {
+  bottom: -230px;
+  left: -160px;
+
+  width: 480px;
+  height: 480px;
+
+  background: radial-gradient(
+    circle,
+    rgba(122, 101, 222, 0.12) 0%,
+    rgba(122, 101, 222, 0.04) 45%,
+    transparent 72%
+  );
+}
+
+/* =========================================================
+   DECORATIVE LINES
+========================================================= */
+
+.skill-gaps-closing__background-line {
+  position: absolute;
+
+  width: 500px;
+  height: 500px;
+
+  border: 1px solid rgba(130, 205, 224, 0.08);
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.skill-gaps-closing__background-line--one {
+  top: -340px;
+  right: -190px;
+}
+
+.skill-gaps-closing__background-line--two {
+  bottom: -360px;
+  left: -220px;
+}
+
+/* =========================================================
+   MAIN GRID
+========================================================= */
+
+.skill-gaps-closing__main {
+  position: relative;
+  z-index: 5;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.15fr)
+    minmax(360px, 0.85fr);
+
+  width: 100%;
+  min-width: 0;
+}
+
+/* =========================================================
+   LEFT CONTENT
+========================================================= */
+
+.skill-gaps-closing__content {
+  position: relative;
+  z-index: 5;
+
+  min-width: 0;
+
+  padding: 43px 40px 35px;
+}
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.skill-gaps-closing__eyebrow {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  min-width: 0;
+
+  margin-bottom: 17px;
+}
+
+.skill-gaps-closing__eyebrow > span {
+  color: #9db9c8;
+
+  font-size: 14px;
+
+  line-height: 1.45;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.skill-gaps-closing__title {
+  display: flex;
+
+  flex-direction: column;
+
+  max-width: 720px;
+
+  margin: 0;
+
+  color: #f6fbfd;
+
+  font-size: clamp(34px, 4.1vw, 50px);
+
+  line-height: 1.08;
+
+  font-weight: 780;
+
+  letter-spacing: -0.04em;
+
+  overflow-wrap: anywhere;
+}
+
+.skill-gaps-closing__title span {
+  margin-top: 3px;
+
+  color: #5bc5e3;
+}
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.skill-gaps-closing__description {
+  max-width: 670px;
+
+  margin: 19px 0 0;
+
+  color: #a8c2ce;
+
+  font-size: 16px;
+
+  line-height: 1.68;
+
+  font-weight: 450;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.skill-gaps-closing__actions {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  width: 100%;
+  min-width: 0;
+
+  margin-top: 26px;
+}
+
+.skill-gaps-closing__primary-button,
+.skill-gaps-closing__secondary-button {
+  max-width: 100%;
+
+  white-space: nowrap;
+}
+/* =========================================================
+   BACK TO MY SKILLS — NAVY GLASS BUTTON
+========================================================= */
+
+.skill-gaps-closing__secondary-button {
+  color: #dff7ff !important;
+
+  background: rgba(255, 255, 255, 0.055) !important;
+
+  border: 1px solid rgba(105, 211, 235, 0.55) !important;
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 6px 18px rgba(0, 20, 35, 0.12);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    color 180ms ease,
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+
+/* Icon */
+
+.skill-gaps-closing__secondary-button svg {
+  width: 18px !important;
+  height: 18px !important;
+
+  color: #69d3eb !important;
+
+  flex-shrink: 0;
+}
+
+
+/* Hover */
+
+.skill-gaps-closing__secondary-button:hover {
+  color: #ffffff !important;
+
+  background: rgba(88, 201, 226, 0.12) !important;
+
+  border-color: #69d3eb !important;
+
+  box-shadow:
+    0 8px 22px rgba(0, 25, 42, 0.20),
+    inset 0 1px 0 rgba(255, 255, 255, 0.10);
+
+  transform: translateY(-2px);
+}
+
+
+/* Active */
+
+.skill-gaps-closing__secondary-button:active {
+  transform: translateY(0);
+}
+
+
+/* Keyboard focus */
+
+.skill-gaps-closing__secondary-button:focus-visible {
+  outline: 2px solid rgba(105, 211, 235, 0.55);
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   BENEFITS
+========================================================= */
+
+.skill-gaps-closing__benefits {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 12px 20px;
+
+  min-width: 0;
+
+  margin-top: 24px;
+}
+
+.skill-gaps-closing__benefit {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  min-width: 0;
+
+  color: #a7c0cb;
+
+  font-size: 13px;
+
+  line-height: 1.45;
+
+  font-weight: 500;
+}
+
+.skill-gaps-closing__benefit > span:last-child {
+  overflow-wrap: anywhere;
+}
+
+.skill-gaps-closing__benefit-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 27px;
+  height: 27px;
+
+  flex: 0 0 27px;
+
+  border-radius: 50%;
+}
+
+.skill-gaps-closing__benefit-icon svg {
+  display: block;
+
+  width: 15px;
+  height: 15px;
+}
+
+.skill-gaps-closing__benefit-icon--green {
+  color: #55d5ad;
+
+  background: rgba(62, 211, 164, 0.12);
+
+  border: 1px solid rgba(83, 214, 176, 0.22);
+}
+
+.skill-gaps-closing__benefit-icon--purple {
+  color: #aa98ff;
+
+  background: rgba(133, 111, 235, 0.13);
+
+  border: 1px solid rgba(157, 139, 241, 0.22);
+}
+
+.skill-gaps-closing__benefit-icon--amber {
+  color: #f3ca68;
+
+  background: rgba(240, 186, 67, 0.13);
+
+  border: 1px solid rgba(245, 197, 84, 0.22);
+}
+
+/* =========================================================
+   RIGHT PROGRESS AREA
+========================================================= */
+
+.skill-gaps-closing__progress-area {
+  position: relative;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: center;
+
+  min-width: 0;
+
+  padding: 38px 40px 35px;
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   RIGHT AREA GLASS LAYER
+========================================================= */
+
+.skill-gaps-closing__progress-area::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 20px;
+
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.055),
+    rgba(255, 255, 255, 0.018)
+  );
+
+  border: 1px solid rgba(145, 214, 231, 0.12);
+
+  border-radius: 24px;
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.055);
+
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   ORBITS
+========================================================= */
+
+.skill-gaps-closing__orbit {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  border: 1px solid rgba(80, 194, 220, 0.11);
+
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+}
+
+.skill-gaps-closing__orbit--outer {
+  width: 430px;
+  height: 430px;
+}
+
+.skill-gaps-closing__orbit--inner {
+  width: 330px;
+  height: 330px;
+
+  border-color: rgba(80, 194, 220, 0.15);
+}
+
+/* =========================================================
+   PROGRESS HEADER
+========================================================= */
+
+.skill-gaps-closing__progress-header {
+  position: relative;
+  z-index: 5;
+
+  margin-top: 20px;
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  min-width: 0;
+}
+
+.skill-gaps-closing__progress-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 44px;
+  height: 44px;
+
+  flex: 0 0 44px;
+
+  color: #5fd0e8;
+
+  background: rgba(57, 190, 222, 0.11);
+
+  border: 1px solid rgba(89, 202, 228, 0.2);
+
+  border-radius: 13px;
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.skill-gaps-closing__progress-icon svg {
+  display: block;
+
+  width: 21px;
+  height: 21px;
+}
+
+.skill-gaps-closing__progress-header-copy {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+
+  flex: 1;
+}
+
+.skill-gaps-closing__progress-header-copy span {
+  color: #76a8ba;
+
+  font-size: 10px;
+
+  line-height: 1.35;
+
+  font-weight: 700;
+
+  letter-spacing: 0.09em;
+}
+
+.skill-gaps-closing__progress-header-copy strong {
+  margin-top: 3px;
+
+  color: #edf8fb;
+
+  font-size: 16px;
+
+  line-height: 1.35;
+
+  font-weight: 700;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   PROGRESS SUMMARY
+========================================================= */
+
+.skill-gaps-closing__progress-summary {
+  position: relative;
+  z-index: 5;
+
+  margin-top: 23px;
+}
+
+.skill-gaps-closing__progress-summary > div {
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 12px;
+}
+
+.skill-gaps-closing__progress-summary span {
+  color: #a2bfcb;
+
+  font-size: 13px;
+
+  line-height: 1.45;
+}
+
+.skill-gaps-closing__progress-summary strong {
+  color: #ffffff;
+
+  font-size: 31px;
+
+  line-height: 1.1;
+
+  font-weight: 780;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   PROGRESS BAR
+========================================================= */
+
+.skill-gaps-closing__progress-bar {
+  position: relative;
+  z-index: 5;
+
+  width: 100%;
+
+  margin-top: 11px;
+}
+
+.skill-gaps-closing__progress-bar > * {
+  width: 100%;
+}
+
+/* =========================================================
+   PROGRESS META
+========================================================= */
+
+.skill-gaps-closing__progress-meta {
+  position: relative;
+  z-index: 5;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-top: 7px;
+
+  color: #789eaf;
+
+  font-size: 11px;
+
+  line-height: 1.4;
+}
+
+.skill-gaps-closing__progress-meta strong {
+  color: #a9c6d1;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   CIRCLE SECTION
+========================================================= */
+
+.skill-gaps-closing__circle-section {
+  position: relative;
+  z-index: 5;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 175px;
+
+  margin-top: 5px;
+}
+
+/* =========================================================
+   CIRCULAR PROGRESS
+========================================================= */
+
+.skill-gaps-closing__circle {
+  --progress: 75%;
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 154px;
+  height: 154px;
+
+  flex: 0 0 154px;
+
+  border-radius: 50%;
+
+  background: conic-gradient(
+    #4fc5e5 0 var(--progress),
+    rgba(255, 255, 255, 0.09) var(--progress) 100%
+  );
+
+  box-shadow: 0 0 35px rgba(63, 192, 224, 0.13);
+}
+
+.skill-gaps-closing__circle::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 6px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(105, 205, 228, 0.12);
+}
+
+.skill-gaps-closing__circle-track {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 134px;
+  height: 134px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(
+    145deg,
+    rgba(9, 57, 81, 0.98),
+    rgba(6, 43, 65, 0.98)
+  );
+
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.07),
+    0 10px 25px rgba(0, 20, 33, 0.18);
+}
+
+.skill-gaps-closing__circle-content {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.skill-gaps-closing__circle-content svg {
+  display: block;
+
+  width: 18px;
+  height: 18px;
+
+  margin-bottom: 3px;
+
+  color: #61cde8;
+}
+
+.skill-gaps-closing__circle-content strong {
+  color: #ffffff;
+
+  font-size: 29px;
+
+  line-height: 1.15;
+
+  font-weight: 800;
+}
+
+.skill-gaps-closing__circle-content span {
+  margin-top: 3px;
+
+  color: #89afbd;
+
+  font-size: 10px;
+
+  line-height: 1.4;
+}
+
+/* =========================================================
+   MINI STATS
+========================================================= */
+
+.skill-gaps-closing__mini-stats {
+  position: relative;
+  z-index: 5;
+
+  display: grid;
+
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+
+  gap: 8px;
+
+  width: 100%;
+
+  min-width: 0;
+
+  margin-top: 4px;
+}
+
+.skill-gaps-closing__mini-stat {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  min-width: 0;
+
+  padding: 9px;
+
+  background: rgba(255, 255, 255, 0.045);
+
+  border: 1px solid rgba(150, 211, 225, 0.1);
+
+  border-radius: 12px;
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.skill-gaps-closing__mini-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  flex: 0 0 28px;
+
+  border-radius: 8px;
+}
+
+.skill-gaps-closing__mini-icon svg {
+  display: block;
+
+  width: 14px;
+  height: 14px;
+}
+
+.skill-gaps-closing__mini-icon--blue {
+  color: #6bb6f5;
+
+  background: rgba(79, 163, 238, 0.13);
+}
+
+.skill-gaps-closing__mini-icon--green {
+  color: #5ed6ad;
+
+  background: rgba(63, 207, 163, 0.12);
+}
+
+.skill-gaps-closing__mini-icon--amber {
+  color: #f3c85d;
+
+  background: rgba(240, 189, 69, 0.12);
+}
+
+.skill-gaps-closing__mini-stat > div:last-child {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.skill-gaps-closing__mini-stat strong {
+  color: #f4fafc;
+
+  font-size: 15px;
+
+  line-height: 1.3;
+
+  font-weight: 700;
+}
+
+.skill-gaps-closing__mini-stat span {
+  margin-top: 1px;
+
+  color: #789dab;
+
+  font-size: 9px;
+
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   PROGRESS FOOTER
+========================================================= */
+
+.skill-gaps-closing__progress-footer {
+  position: relative;
+  z-index: 5;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 7px;
+
+  margin-top: 14px;
+
+  color: #72bfd3;
+
+  font-size: 11px;
+
+  line-height: 1.4;
+
+  font-weight: 600;
+}
+
+.skill-gaps-closing__progress-footer svg {
+  display: block;
+
+  width: 14px;
+  height: 14px;
+}
+
+/* =========================================================
+   BRAND FOOTER
+========================================================= */
+
+.skill-gaps-closing__brand {
+  position: relative;
+  z-index: 10;
+
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 9px;
+
+  min-width: 0;
+
+  padding: 15px 40px 18px;
+
+  color: #7597a6;
+
+  background: rgba(2, 28, 45, 0.3);
+
+  border-top: 1px solid rgba(132, 202, 221, 0.12);
+
+  font-size: 13px;
+
+  line-height: 1.45;
+}
+
+.skill-gaps-closing__brand-mark {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 29px;
+  height: 29px;
+
+  flex: 0 0 29px;
+
+  color: #ffffff;
+
+  background: linear-gradient(145deg, #126083, #0a4967);
+
+  border: 1px solid rgba(110, 202, 226, 0.18);
+
+  border-radius: 8px;
+}
+
+.skill-gaps-closing__brand-mark svg {
+  display: block;
+
+  width: 15px;
+  height: 15px;
+}
+
+.skill-gaps-closing__brand strong {
+  color: #b6d0da;
+
+  font-weight: 700;
+}
+
+.skill-gaps-closing__brand-divider {
+  width: 1px;
+  height: 17px;
+
+  background: rgba(130, 181, 195, 0.25);
+}
+
+.skill-gaps-closing__brand > span:last-child {
+  color: #7193a2;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+.skill-gaps-closing__mini-stat {
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    background 180ms ease;
+}
+
+.skill-gaps-closing__mini-stat:hover {
+  transform: translateY(-2px);
+
+  background: rgba(255, 255, 255, 0.07);
+
+  border-color: rgba(112, 202, 224, 0.19);
+}
+
+/* =========================================================
+   1100px
+========================================================= */
+
+@media (max-width: 1100px) {
+  .skill-gaps-closing__main {
+    grid-template-columns:
+      minmax(0, 1.05fr)
+      minmax(330px, 0.95fr);
+  }
+
+  .skill-gaps-closing__content {
+    padding-left: 30px;
+    padding-right: 25px;
+  }
+
+  .skill-gaps-closing__progress-area {
+    padding-left: 25px;
+    padding-right: 30px;
+  }
+
+  .skill-gaps-closing__brand {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+/* =========================================================
+   950px
+========================================================= */
+
+@media (max-width: 950px) {
+  .skill-gaps-closing__main {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-gaps-closing__content {
+    padding: 34px 30px 25px;
+  }
+
+  .skill-gaps-closing__progress-area {
+    padding: 10px 30px 32px;
+  }
+
+  .skill-gaps-closing__progress-area::before {
+    inset: 10px 20px 15px;
+  }
+
+  .skill-gaps-closing__progress-header {
+    max-width: 620px;
+
+    margin-left: auto;
+    margin-right: auto;
+
+    width: 100%;
+  }
+
+  .skill-gaps-closing__progress-summary,
+  .skill-gaps-closing__progress-bar,
+  .skill-gaps-closing__progress-meta,
+  .skill-gaps-closing__circle-section,
+  .skill-gaps-closing__mini-stats,
+  .skill-gaps-closing__progress-footer {
+    width: min(620px, 100%);
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .skill-gaps-closing__circle-section {
+    min-height: 180px;
+  }
+
+  .skill-gaps-closing__brand {
+    padding-left: 30px;
+    padding-right: 30px;
+  }
+}
+
+/* =========================================================
+   700px
+========================================================= */
+
+@media (max-width: 700px) {
+  .skill-gaps-closing {
+    margin-bottom: 30px;
+  }
+
+  .skill-gaps-closing__surface {
+    border-radius: 22px;
+  }
+
+  .skill-gaps-closing__content {
+    padding: 29px 23px 24px;
+  }
+
+  .skill-gaps-closing__title {
+    font-size: 36px;
+
+    line-height: 1.1;
+  }
+
+  .skill-gaps-closing__description {
+    font-size: 16px;
+
+    line-height: 1.62;
+  }
+
+  .skill-gaps-closing__actions {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 10px;
+  }
+
+  .skill-gaps-closing__primary-button,
+  .skill-gaps-closing__secondary-button {
+    width: 100%;
+
+    max-width: 100%;
+  }
+
+  .skill-gaps-closing__benefits {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 9px;
+  }
+
+  .skill-gaps-closing__progress-area {
+    padding: 12px 23px 30px;
+  }
+
+  .skill-gaps-closing__progress-area::before {
+    inset: 8px 15px 13px;
+  }
+
+  .skill-gaps-closing__orbit--outer {
+    width: 360px;
+    height: 360px;
+  }
+
+  .skill-gaps-closing__orbit--inner {
+    width: 280px;
+    height: 280px;
+  }
+
+  .skill-gaps-closing__brand {
+    padding-left: 23px;
+    padding-right: 23px;
+  }
+}
+
+/* =========================================================
+   600px
+========================================================= */
+
+@media (max-width: 600px) {
+  .skill-gaps-closing__content {
+    padding: 26px 19px 22px;
+  }
+
+  .skill-gaps-closing__eyebrow {
+    gap: 8px;
+
+    margin-bottom: 14px;
+  }
+
+  .skill-gaps-closing__eyebrow > span {
+    font-size: 13px;
+  }
+
+  .skill-gaps-closing__title {
+    font-size: 32px;
+
+    letter-spacing: -0.032em;
+  }
+
+  .skill-gaps-closing__description {
+    margin-top: 15px;
+
+    font-size: 16px;
+  }
+
+  .skill-gaps-closing__actions {
+    margin-top: 21px;
+  }
+
+  .skill-gaps-closing__progress-area {
+    padding: 10px 19px 26px;
+  }
+
+  .skill-gaps-closing__progress-area::before {
+    inset: 7px 12px 11px;
+  }
+
+  .skill-gaps-closing__progress-header {
+    gap: 9px;
+  }
+
+  .skill-gaps-closing__progress-icon {
+    width: 40px;
+    height: 40px;
+
+    flex-basis: 40px;
+  }
+
+  .skill-gaps-closing__progress-header-copy strong {
+    font-size: 15px;
+  }
+
+  .skill-gaps-closing__progress-summary {
+    margin-top: 20px;
+  }
+
+  .skill-gaps-closing__progress-summary strong {
+    font-size: 28px;
+  }
+
+  .skill-gaps-closing__circle-section {
+    min-height: 165px;
+  }
+
+  .skill-gaps-closing__circle {
+    width: 140px;
+    height: 140px;
+
+    flex-basis: 140px;
+  }
+
+  .skill-gaps-closing__circle-track {
+    width: 120px;
+    height: 120px;
+  }
+
+  .skill-gaps-closing__circle-content strong {
+    font-size: 26px;
+  }
+
+  .skill-gaps-closing__mini-stats {
+    gap: 7px;
+  }
+
+  .skill-gaps-closing__mini-stat {
+    padding: 8px;
+  }
+
+  .skill-gaps-closing__mini-icon {
+    width: 27px;
+    height: 27px;
+
+    flex-basis: 27px;
+  }
+
+  .skill-gaps-closing__mini-stat strong {
+    font-size: 14px;
+  }
+
+  .skill-gaps-closing__mini-stat span {
+    font-size: 9px;
+  }
+
+  .skill-gaps-closing__brand {
+    padding: 14px 19px 17px;
+  }
+}
+
+/* =========================================================
+   480px
+========================================================= */
+
+@media (max-width: 480px) {
+  .skill-gaps-closing__content {
+    padding: 24px 16px 21px;
+  }
+
+  .skill-gaps-closing__title {
+    font-size: 29px;
+
+    line-height: 1.1;
+  }
+
+  .skill-gaps-closing__description {
+    font-size: 16px;
+
+    line-height: 1.58;
+  }
+
+  .skill-gaps-closing__benefit {
+    font-size: 13px;
+  }
+
+  .skill-gaps-closing__progress-area {
+    padding: 9px 16px 24px;
+  }
+
+  .skill-gaps-closing__progress-area::before {
+    inset: 6px 9px 9px;
+  }
+
+  .skill-gaps-closing__progress-header {
+    align-items: flex-start;
+  }
+
+  .skill-gaps-closing__progress-header-copy span {
+    font-size: 9px;
+  }
+
+  .skill-gaps-closing__progress-header-copy strong {
+    font-size: 14px;
+  }
+
+  .skill-gaps-closing__progress-summary span {
+    font-size: 12px;
+  }
+
+  .skill-gaps-closing__progress-summary strong {
+    font-size: 26px;
+  }
+
+  .skill-gaps-closing__circle-section {
+    min-height: 155px;
+  }
+
+  .skill-gaps-closing__circle {
+    width: 128px;
+    height: 128px;
+
+    flex-basis: 128px;
+  }
+
+  .skill-gaps-closing__circle-track {
+    width: 110px;
+    height: 110px;
+  }
+
+  .skill-gaps-closing__circle-content strong {
+    font-size: 24px;
+  }
+
+  .skill-gaps-closing__mini-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-gaps-closing__mini-stat {
+    width: 100%;
+
+    padding: 9px;
+  }
+
+  .skill-gaps-closing__mini-stat span {
+    font-size: 10px;
+  }
+
+  .skill-gaps-closing__progress-footer {
+    justify-content: center;
+  }
+
+  .skill-gaps-closing__brand {
+    align-items: flex-start;
+
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .skill-gaps-closing__brand-divider {
+    display: none;
+  }
+
+  .skill-gaps-closing__brand > span:last-child {
+    width: 100%;
+
+    margin-left: 38px;
+
+    margin-top: -3px;
+  }
+}
+
+/* =========================================================
+   360px
+========================================================= */
+
+@media (max-width: 360px) {
+  .skill-gaps-closing__content {
+    padding: 22px 14px 19px;
+  }
+
+  .skill-gaps-closing__title {
+    font-size: 27px;
+
+    line-height: 1.12;
+  }
+
+  .skill-gaps-closing__description {
+    font-size: 16px;
+
+    line-height: 1.55;
+  }
+
+  .skill-gaps-closing__progress-area {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .skill-gaps-closing__progress-icon {
+    width: 37px;
+    height: 37px;
+
+    flex-basis: 37px;
+  }
+
+  .skill-gaps-closing__progress-icon svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .skill-gaps-closing__progress-header {
+    gap: 7px;
+  }
+
+  .skill-gaps-closing__progress-header-copy strong {
+    font-size: 13px;
+  }
+
+  .skill-gaps-closing__progress-summary strong {
+    font-size: 24px;
+  }
+
+  .skill-gaps-closing__circle {
+    width: 118px;
+    height: 118px;
+
+    flex-basis: 118px;
+  }
+
+  .skill-gaps-closing__circle-track {
+    width: 100px;
+    height: 100px;
+  }
+
+  .skill-gaps-closing__circle-content strong {
+    font-size: 22px;
+  }
+
+  .skill-gaps-closing__circle-content span {
+    font-size: 9px;
+  }
+
+  .skill-gaps-closing__brand {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-gaps-closing__mini-stat {
+    transition: none;
+  }
+
+  .skill-gaps-closing__mini-stat:hover {
+    transform: none;
+  }
+}

@@ -12,6 +12,7 @@ import {
   FiUser,
   FiSettings,
   FiLogOut,
+  FiCheckSquare,
 } from "react-icons/fi";
 
 import "./LearnerSidebar.css";
@@ -47,6 +48,12 @@ const navigationGroups = [
         label: "Course Catalog",
         path: "/learner/courses",
         icon: FiGrid,
+      },
+
+      {
+        label: "Quizzes",
+        path: "/learner/quizzes",
+        icon: FiCheckSquare,
       },
     ],
   },
@@ -125,6 +132,10 @@ const bottomNavigation = [
 const LearnerSidebar = () => {
   const navigate = useNavigate();
 
+  /* =======================================================
+     LOGOUT
+  ======================================================= */
+
   const handleLogout = () => {
     navigate("/");
   };
@@ -153,11 +164,15 @@ const LearnerSidebar = () => {
       <nav className="sidebar-navigation" aria-label="Learner navigation">
         {navigationGroups.map((group) => (
           <div className="sidebar-group" key={group.title}>
-            {/* Section Title */}
+            {/* =================================================
+                SECTION TITLE
+            ================================================= */}
 
             <div className="sidebar-group-title">{group.title}</div>
 
-            {/* Section Items */}
+            {/* =================================================
+                SECTION ITEMS
+            ================================================= */}
 
             <div className="sidebar-group-items">
               {group.items.map((item) => {
@@ -172,9 +187,13 @@ const LearnerSidebar = () => {
                     }
                     data-tooltip={item.label}
                   >
+                    {/* Icon */}
+
                     <span className="sidebar-nav-icon">
                       <Icon />
                     </span>
+
+                    {/* Label */}
 
                     <span className="sidebar-nav-label">{item.label}</span>
                   </NavLink>
@@ -191,6 +210,10 @@ const LearnerSidebar = () => {
 
       <div className="sidebar-bottom">
         <div className="sidebar-bottom-links">
+          {/* =================================================
+              PROFILE + SETTINGS
+          ================================================= */}
+
           {bottomNavigation.map((item) => {
             const Icon = item.icon;
 

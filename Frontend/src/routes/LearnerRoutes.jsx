@@ -1,7 +1,7 @@
 import { Navigate, Routes, Route } from "react-router-dom";
-
+import MyLearning from "../Pages/Learner/MyLearning/MyLearning";
 import LearnerLayout from "../Layouts/LearnerLayout/LearnerLayout";
-
+import MySkills from "../Pages/Learner/MySkills/MySkills";
 /* =========================================================
    LEARNER PAGES
 ========================================================= */
@@ -76,10 +76,7 @@ const LearnerRoutes = () => {
             LEARNING
         =================================================== */}
 
-        <Route
-          path="learning"
-          element={<PlaceholderPage title="My Learning" />}
-        />
+        <Route path="learning" element={<MyLearning />} />
 
         {/* ===================================================
             COURSE CATALOG
@@ -115,7 +112,7 @@ const LearnerRoutes = () => {
             COMPETENCY
         =================================================== */}
 
-        <Route path="skills" element={<PlaceholderPage title="My Skills" />} />
+        
 
         <Route
           path="skill-gaps"
@@ -155,8 +152,9 @@ const LearnerRoutes = () => {
         =================================================== */}
 
         <Route path="profile" element={<PlaceholderPage title="Profile" />} />
-
+          <Route path="skills" element={<MySkills />} />
         <Route path="settings" element={<PlaceholderPage title="Settings" />} />
+       
       </Route>
     </Routes>
   );

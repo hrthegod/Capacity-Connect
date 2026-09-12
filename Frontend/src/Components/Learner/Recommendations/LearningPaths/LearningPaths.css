@@ -1,0 +1,1999 @@
+/* =========================================================
+   LearningPaths
+   Capacity Connect — Learner Recommendations
+
+   DESIGN:
+   ✓ Light theme dominant
+   ✓ One navy featured section
+   ✓ Blue / green / purple / amber accents
+   ✓ Glassmorphism
+   ✓ Reusable Card / Badge / Button / ProgressBar
+   ✓ Responsive without aggressive squeezing
+   ✓ No clipped text
+   ✓ Proper SVG sizing
+   ✓ Full-width featured learning path
+========================================================= */
+
+/* =========================================================
+   ROOT
+========================================================= */
+
+.learning-paths {
+  --lp-navy: #12345a;
+  --lp-navy-dark: #09294c;
+  --lp-navy-deep: #071f3b;
+
+  --lp-text: #163d63;
+  --lp-text-soft: #5b7690;
+  --lp-border: rgba(48, 116, 169, 0.13);
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  padding: 12px 0 42px;
+
+  color: var(--lp-text);
+
+  box-sizing: border-box;
+
+  container-type: inline-size;
+  container-name: learning-paths;
+}
+
+.learning-paths *,
+.learning-paths *::before,
+.learning-paths *::after {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   SECTION HEADER
+========================================================= */
+
+.learning-paths__header {
+  width: 100%;
+  min-width: 0;
+
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 28px;
+
+  margin-bottom: 22px;
+}
+
+.learning-paths__heading {
+  min-width: 0;
+
+  flex: 1 1 auto;
+}
+
+.learning-paths__heading > .badge {
+  margin-bottom: 12px;
+}
+
+.learning-paths__heading h2 {
+  margin: 0;
+
+  color: #173d64;
+
+  font-size: clamp(28px, 2.6vw, 38px);
+
+  line-height: 1.16;
+
+  font-weight: 750;
+
+  letter-spacing: -0.7px;
+
+  overflow-wrap: anywhere;
+}
+
+.learning-paths__heading p {
+  width: 100%;
+  max-width: 900px;
+
+  margin: 10px 0 0;
+
+  color: var(--lp-text-soft);
+
+  font-size: 17px;
+
+  line-height: 1.55;
+
+  overflow-wrap: anywhere;
+}
+
+.learning-paths__view-all {
+  flex: 0 0 auto;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   FEATURED NAVY PATH
+
+   FULL-WIDTH DESKTOP LAYOUT
+========================================================= */
+
+.learning-paths__featured {
+  position: relative;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  min-height: 350px;
+
+  display: grid !important;
+
+  /*
+    Main section gets most of the width.
+    Milestone section also gets substantial width.
+  */
+  grid-template-columns:
+    minmax(0, 1.45fr)
+    minmax(350px, 0.75fr);
+
+  gap: 28px;
+
+  padding: 32px !important;
+
+  margin: 0;
+
+  overflow: hidden;
+
+  border: 1px solid rgba(112, 185, 226, 0.16) !important;
+
+  border-radius: 22px !important;
+
+  color: #ffffff;
+
+  background: linear-gradient(
+    145deg,
+    #123e67 0%,
+    #0b3155 50%,
+    #082844 100%
+  ) !important;
+
+  box-shadow:
+    0 20px 42px rgba(8, 43, 72, 0.17),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.learning-paths__featured:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 25px 48px rgba(8, 43, 72, 0.21),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09);
+}
+
+/* =========================================================
+   FEATURED DECORATION
+========================================================= */
+
+.learning-paths__featured::after {
+  content: "";
+
+  position: absolute;
+
+  inset: 0;
+
+  pointer-events: none;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.05),
+    transparent 35%,
+    rgba(0, 0, 0, 0.08)
+  );
+}
+
+.learning-paths__featured-glow {
+  position: absolute;
+
+  top: -130px;
+  right: -80px;
+
+  width: 300px;
+  height: 300px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(33, 190, 228, 0.18),
+    transparent 68%
+  );
+
+  pointer-events: none;
+}
+
+.learning-paths__featured-orb {
+  position: absolute;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+}
+
+.learning-paths__featured-orb--one {
+  width: 95px;
+  height: 95px;
+
+  left: -45px;
+  bottom: -45px;
+
+  background: rgba(23, 191, 181, 0.09);
+}
+
+.learning-paths__featured-orb--two {
+  width: 46px;
+  height: 46px;
+
+  right: 28%;
+  top: 34px;
+
+  background: rgba(245, 186, 66, 0.08);
+}
+
+/* =========================================================
+   FEATURED MAIN
+
+   IMPORTANT:
+   No artificial max-width here.
+   Everything uses available width.
+========================================================= */
+
+.learning-paths__featured-main {
+  position: relative;
+
+  z-index: 2;
+
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+}
+
+/* =========================================================
+   FEATURED TOP
+========================================================= */
+
+.learning-paths__featured-top {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  margin-bottom: 26px;
+}
+
+.learning-paths__featured-icon {
+  width: 56px;
+  height: 56px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 56px;
+
+  border: 1px solid rgba(100, 211, 237, 0.2);
+
+  border-radius: 15px;
+
+  background: rgba(32, 168, 218, 0.15);
+
+  color: #59d8f2;
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.learning-paths__featured-icon svg {
+  width: 27px;
+  height: 27px;
+
+  display: block;
+
+  flex: 0 0 27px;
+}
+
+/* =========================================================
+   FEATURED COPY
+
+   FULL AVAILABLE WIDTH
+========================================================= */
+
+.learning-paths__featured-copy {
+  width: 100%;
+  max-width: none;
+  min-width: 0;
+}
+
+.learning-paths__featured-label {
+  display: block;
+
+  width: 100%;
+
+  margin-bottom: 8px;
+
+  color: rgba(216, 238, 250, 0.68);
+
+  font-size: 14px;
+
+  line-height: 1.4;
+
+  font-weight: 600;
+
+  letter-spacing: 0.6px;
+
+  text-transform: uppercase;
+}
+
+.learning-paths__featured-copy h3 {
+  width: 100%;
+  max-width: none;
+
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: clamp(30px, 3vw, 46px);
+
+  line-height: 1.12;
+
+  font-weight: 750;
+
+  letter-spacing: -0.8px;
+
+  overflow-wrap: anywhere;
+}
+
+.learning-paths__featured-copy p {
+  width: 100%;
+  max-width: none;
+
+  margin: 12px 0 0;
+
+  color: rgba(229, 243, 251, 0.8);
+
+  font-size: 18px;
+
+  line-height: 1.65;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   FEATURED PROGRESS
+
+   FULL WIDTH
+========================================================= */
+
+.learning-paths__featured-progress {
+  width: 100%;
+  max-width: none;
+
+  margin-top: 28px;
+}
+
+.learning-paths__featured-progress-top {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  margin-bottom: 9px;
+}
+
+.learning-paths__featured-progress-top span {
+  color: rgba(226, 241, 250, 0.78);
+
+  font-size: 16px;
+
+  line-height: 1.4;
+
+  white-space: nowrap;
+}
+
+.learning-paths__featured-progress-top strong {
+  color: #ffffff;
+
+  font-size: 20px;
+
+  line-height: 1.3;
+
+  font-weight: 750;
+
+  white-space: nowrap;
+}
+
+/*
+   Make the reusable ProgressBar occupy the
+   complete available width.
+*/
+
+.learning-paths__featured-progress .progress-bar,
+.learning-paths__featured-progress .progress-bar__track,
+.learning-paths__featured-progress > div {
+  max-width: 100%;
+}
+
+/* =========================================================
+   FEATURED META
+========================================================= */
+
+.learning-paths__featured-meta {
+  width: 100%;
+
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 24px;
+
+  margin-top: 18px;
+}
+
+.learning-paths__featured-meta > div {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  min-width: 0;
+
+  color: rgba(224, 241, 250, 0.82);
+
+  font-size: 16px;
+
+  line-height: 1.4;
+}
+
+.learning-paths__featured-meta svg {
+  width: 18px;
+  height: 18px;
+
+  display: block;
+
+  flex: 0 0 18px;
+
+  color: #5bd7ec;
+}
+
+/* =========================================================
+   FEATURED BUTTON
+========================================================= */
+
+.learning-paths__featured-button {
+  width: fit-content;
+
+  max-width: 100%;
+
+  margin-top: 25px;
+
+  border-radius: 12px !important;
+}
+
+/* =========================================================
+   FEATURED SIDE / MILESTONE
+
+   Uses full available column width.
+========================================================= */
+
+.learning-paths__featured-side {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  max-width: auto;
+  min-width: 0;
+
+  display: flex;
+  margin-top: 20px;
+  flex-direction: column;
+
+  justify-content: center;
+
+  padding: 26px 26px 22px;
+
+  border: 1px solid rgba(155, 211, 237, 0.12);
+
+  border-radius: 18px;
+
+  background: rgba(255, 255, 255, 0.055);
+
+  backdrop-filter: blur(16px);
+
+  -webkit-backdrop-filter: blur(16px);
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+/* =========================================================
+   MILESTONE HEADING
+========================================================= */
+
+.learning-paths__milestone-heading {
+  width: 100%;
+
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 16px;
+
+  margin-bottom: 21px;
+}
+
+.learning-paths__milestone-heading > div:first-child {
+  min-width: 0;
+}
+
+.learning-paths__milestone-heading span {
+  display: block;
+
+  margin-bottom: 6px;
+
+  color: rgba(210, 236, 248, 0.62);
+
+  font-size: 12px;
+
+  line-height: 1.35;
+
+  font-weight: 700;
+
+  letter-spacing: 0.7px;
+}
+
+.learning-paths__milestone-heading h4 {
+  margin: 0;
+
+  color: #ffffff;
+
+  font-size: 20px;
+
+  line-height: 1.35;
+
+  font-weight: 700;
+
+  overflow-wrap: anywhere;
+}
+
+.learning-paths__milestone-icon {
+  width: 44px;
+  height: 44px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 44px;
+
+  border-radius: 12px;
+
+  background: rgba(246, 182, 58, 0.14);
+
+  color: #ffd275;
+}
+
+.learning-paths__milestone-icon svg {
+  width: 21px;
+  height: 21px;
+
+  display: block;
+
+  flex: 0 0 21px;
+}
+
+/* =========================================================
+   MILESTONE LINES
+========================================================= */
+
+.learning-paths__milestone-line {
+  position: relative;
+
+  width: 100%;
+
+  display: grid;
+
+  grid-template-columns:
+    38px
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  gap: 13px;
+
+  min-width: 0;
+
+  padding-bottom: 18px;
+}
+
+.learning-paths__milestone-line:not(:last-child)::after {
+  content: "";
+
+  position: absolute;
+
+  left: 18px;
+  top: 38px;
+
+  width: 1px;
+
+  height: calc(100% - 18px);
+
+  background: rgba(170, 216, 237, 0.15);
+}
+
+.learning-paths__milestone-line > span {
+  width: 38px;
+  height: 38px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 38px;
+
+  border-radius: 11px;
+
+  background: rgba(255, 255, 255, 0.06);
+
+  color: rgba(217, 237, 248, 0.55);
+}
+
+.learning-paths__milestone-line > span svg {
+  width: 18px;
+  height: 18px;
+
+  display: block;
+
+  flex: 0 0 18px;
+}
+
+.learning-paths__milestone-line > div {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 3px;
+}
+
+.learning-paths__milestone-line strong {
+  color: rgba(239, 248, 252, 0.84);
+
+  font-size: 16px;
+
+  line-height: 1.45;
+
+  font-weight: 650;
+
+  overflow-wrap: anywhere;
+}
+
+.learning-paths__milestone-line small {
+  color: rgba(204, 227, 239, 0.56);
+
+  font-size: 14px;
+
+  line-height: 1.4;
+}
+
+/* =========================================================
+   COMPLETE
+========================================================= */
+
+.learning-paths__milestone-line .is-complete {
+  background: rgba(36, 192, 153, 0.14);
+
+  color: #5ee2bb;
+}
+
+/* =========================================================
+   CURRENT
+========================================================= */
+
+.learning-paths__milestone-line.is-current > span {
+  background: rgba(40, 166, 225, 0.17);
+
+  color: #58d6f0;
+
+  box-shadow: 0 0 0 4px rgba(43, 171, 225, 0.06);
+}
+
+.learning-paths__milestone-line.is-current strong {
+  color: #ffffff;
+}
+
+/* =========================================================
+   LOCKED
+========================================================= */
+
+.learning-paths__milestone-line.is-locked {
+  opacity: 0.58;
+}
+
+/* =========================================================
+   EXPLORE HEADING
+========================================================= */
+
+.learning-paths__section-heading {
+  width: 100%;
+
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  margin: 32px 0 17px;
+}
+
+.learning-paths__section-heading > div {
+  min-width: 0;
+}
+
+.learning-paths__section-heading span {
+  display: block;
+
+  margin-bottom: 5px;
+
+  color: #7891a6;
+
+  font-size: 12px;
+
+  line-height: 1.4;
+
+  font-weight: 700;
+
+  letter-spacing: 0.7px;
+}
+
+.learning-paths__section-heading h3 {
+  margin: 0;
+
+  color: #193f64;
+
+  font-size: 22px;
+
+  line-height: 1.3;
+
+  font-weight: 750;
+
+  overflow-wrap: anywhere;
+}
+
+.learning-paths__section-heading p {
+  margin: 0;
+
+  color: #68829a;
+
+  font-size: 15px;
+
+  line-height: 1.5;
+
+  text-align: right;
+}
+
+/* =========================================================
+   PATH GRID
+========================================================= */
+
+.learning-paths__grid {
+  width: 100%;
+  min-width: 0;
+
+  display: grid;
+
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+
+  gap: 17px;
+}
+
+/* =========================================================
+   PATH CARD
+========================================================= */
+
+.learning-paths__card {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  min-height: 510px;
+
+  display: flex !important;
+
+  flex-direction: column;
+
+  padding: 22px !important;
+
+  overflow: hidden;
+
+  border-radius: 19px !important;
+
+  border: 1px solid var(--lp-border) !important;
+
+  box-shadow:
+    0 10px 26px rgba(45, 91, 128, 0.055),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+
+  transition:
+    transform 0.28s ease,
+    box-shadow 0.28s ease,
+    border-color 0.28s ease;
+}
+
+.learning-paths__card:hover {
+  transform: translateY(-5px);
+
+  box-shadow:
+    0 18px 34px rgba(45, 91, 128, 0.11),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+}
+
+/* =========================================================
+   LIGHT THEMES
+========================================================= */
+
+.learning-paths__card--blue {
+  background: linear-gradient(
+    145deg,
+    #f4fbff 0%,
+    #ebf7ff 50%,
+    #f9fdff 100%
+  ) !important;
+
+  border-color: rgba(39, 143, 214, 0.18) !important;
+}
+
+.learning-paths__card--green {
+  background: linear-gradient(
+    145deg,
+    #f3fcf9 0%,
+    #eaf9f5 52%,
+    #fbfefd 100%
+  ) !important;
+
+  border-color: rgba(24, 159, 137, 0.17) !important;
+}
+
+.learning-paths__card--purple {
+  background: linear-gradient(
+    145deg,
+    #fbf9ff 0%,
+    #f2edff 52%,
+    #fdfbff 100%
+  ) !important;
+
+  border-color: rgba(113, 70, 224, 0.17) !important;
+}
+
+.learning-paths__card--amber {
+  background: linear-gradient(
+    145deg,
+    #fffaf1 0%,
+    #fff4df 52%,
+    #fffdf9 100%
+  ) !important;
+
+  border-color: rgba(225, 137, 12, 0.18) !important;
+}
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.learning-paths__card-top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  min-width: 0;
+
+  margin-bottom: 19px;
+}
+
+.learning-paths__card-icon {
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 50px;
+
+  border-radius: 14px;
+}
+
+.learning-paths__card-icon svg {
+  width: 23px;
+  height: 23px;
+
+  display: block;
+
+  flex: 0 0 23px;
+}
+
+/* =========================================================
+   INDIVIDUAL ICON THEMES
+========================================================= */
+
+.learning-paths__card--blue .learning-paths__card-icon {
+  background: #e1f3ff;
+  color: #157fc2;
+}
+
+.learning-paths__card--green .learning-paths__card-icon {
+  background: #dcf6ed;
+  color: #0a8c78;
+}
+
+.learning-paths__card--purple .learning-paths__card-icon {
+  background: #ebe3ff;
+  color: #6941d7;
+}
+
+.learning-paths__card--amber .learning-paths__card-icon {
+  background: #ffedc5;
+  color: #c97a00;
+}
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.learning-paths__card-content {
+  min-width: 0;
+}
+
+.learning-paths__card-content h4 {
+  margin: 0;
+
+  color: #173e64;
+
+  font-size: 21px;
+
+  line-height: 1.3;
+
+  font-weight: 750;
+
+  letter-spacing: -0.2px;
+
+  overflow-wrap: anywhere;
+}
+
+.learning-paths__card-subtitle {
+  display: block;
+
+  margin-top: 5px;
+
+  color: #5e7891;
+
+  font-size: 14px;
+
+  line-height: 1.45;
+
+  font-weight: 600;
+
+  overflow-wrap: anywhere;
+}
+
+.learning-paths__card-content p {
+  min-height: 74px;
+
+  margin: 10px 0 17px;
+
+  color: #5b748d;
+
+  font-size: 15px;
+
+  line-height: 1.55;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   SKILLS
+========================================================= */
+
+.learning-paths__skills {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 7px;
+
+  min-width: 0;
+
+  margin-bottom: 19px;
+}
+
+.learning-paths__skill {
+  max-width: 100%;
+
+  padding: 6px 10px;
+
+  border: 1px solid rgba(48, 117, 166, 0.1);
+
+  border-radius: 8px;
+
+  background: rgba(255, 255, 255, 0.63);
+
+  color: #4e6e89;
+
+  font-size: 12px;
+
+  line-height: 1.35;
+
+  font-weight: 600;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.learning-paths__card-progress {
+  width: 100%;
+
+  margin-bottom: 17px;
+}
+
+.learning-paths__card-progress-top {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-bottom: 8px;
+}
+
+.learning-paths__card-progress-top span {
+  color: #688199;
+
+  font-size: 14px;
+
+  line-height: 1.4;
+
+  font-weight: 500;
+}
+
+.learning-paths__card-progress-top strong {
+  color: #214a70;
+
+  font-size: 15px;
+
+  line-height: 1.3;
+
+  font-weight: 750;
+}
+
+/* =========================================================
+   META
+========================================================= */
+
+.learning-paths__card-meta {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 16px;
+
+  margin-bottom: 16px;
+}
+
+.learning-paths__card-meta > div {
+  display: flex;
+
+  align-items: center;
+
+  gap: 7px;
+
+  min-width: 0;
+
+  color: #607a92;
+
+  font-size: 13px;
+
+  line-height: 1.4;
+
+  font-weight: 550;
+}
+
+.learning-paths__card-meta svg {
+  width: 16px;
+  height: 16px;
+
+  display: block;
+
+  flex: 0 0 16px;
+}
+
+/* =========================================================
+   NEXT COURSE
+========================================================= */
+
+.learning-paths__next {
+  min-width: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    34px
+    minmax(0, 1fr);
+
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 11px 12px;
+
+  margin-bottom: 17px;
+
+  border: 1px solid rgba(44, 119, 174, 0.1);
+
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.52);
+}
+
+.learning-paths__next-icon {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 34px;
+
+  border-radius: 9px;
+
+  background: #eaf6ff;
+
+  color: #197bb9;
+}
+
+.learning-paths__next-icon svg {
+  width: 16px;
+  height: 16px;
+
+  display: block;
+
+  flex: 0 0 16px;
+}
+
+.learning-paths__next > div:last-child {
+  min-width: 0;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+}
+
+.learning-paths__next span {
+  color: #7990a4;
+
+  font-size: 10px;
+
+  line-height: 1.3;
+
+  font-weight: 750;
+
+  letter-spacing: 0.6px;
+}
+
+.learning-paths__next strong {
+  color: #315875;
+
+  font-size: 14px;
+
+  line-height: 1.4;
+
+  font-weight: 700;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   HIGHLIGHTS
+========================================================= */
+
+.learning-paths__highlights {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 7px;
+
+  padding: 12px 13px;
+
+  margin-bottom: 15px;
+
+  border-radius: 12px;
+
+  background: rgba(255, 255, 255, 0.55);
+
+  border: 1px solid rgba(50, 120, 171, 0.09);
+}
+
+.learning-paths__highlight {
+  display: flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  min-width: 0;
+
+  color: #55728b;
+
+  font-size: 13px;
+
+  line-height: 1.4;
+}
+
+.learning-paths__highlight svg {
+  width: 15px;
+  height: 15px;
+
+  display: block;
+
+  flex: 0 0 15px;
+
+  color: #15977f;
+}
+
+.learning-paths__highlight span {
+  min-width: 0;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   CARD ACTIONS
+========================================================= */
+
+.learning-paths__card-actions {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 12px;
+
+  min-width: 0;
+
+  margin-top: auto;
+}
+
+.learning-paths__details-button {
+  min-width: 0;
+
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  padding: 8px 3px;
+
+  border: 0;
+
+  background: transparent;
+
+  color: #52718c;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  line-height: 1.4;
+
+  font-weight: 650;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.learning-paths__details-button:hover {
+  color: #164d79;
+
+  transform: translateX(2px);
+}
+
+.learning-paths__details-button svg {
+  width: 16px;
+  height: 16px;
+
+  display: block;
+
+  flex: 0 0 16px;
+}
+
+.learning-paths__card-button {
+  flex: 0 0 auto;
+
+  min-width: 120px;
+
+  border-radius: 11px !important;
+}
+
+/* =========================================================
+   BOTTOM INSIGHT
+========================================================= */
+
+.learning-paths__insight {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  display: grid;
+
+  grid-template-columns:
+    48px
+    minmax(0, 1fr)
+    auto;
+
+  align-items: center;
+
+  gap: 16px;
+
+  margin-top: 19px;
+
+  padding: 20px 22px;
+
+  border: 1px solid rgba(49, 121, 175, 0.13);
+
+  border-radius: 17px;
+
+  background: linear-gradient(135deg, #f9fcff, #f1f8fc);
+
+  box-shadow: 0 8px 22px rgba(46, 101, 139, 0.055);
+}
+
+.learning-paths__insight-icon {
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 48px;
+
+  border-radius: 14px;
+
+  background: #e7f6ef;
+
+  color: #168c76;
+}
+
+.learning-paths__insight-icon svg {
+  width: 22px;
+  height: 22px;
+
+  display: block;
+
+  flex: 0 0 22px;
+}
+
+.learning-paths__insight-content {
+  min-width: 0;
+}
+
+.learning-paths__insight-content > span {
+  display: block;
+
+  margin-bottom: 4px;
+
+  color: #7b91a4;
+
+  font-size: 10px;
+
+  line-height: 1.35;
+
+  font-weight: 750;
+
+  letter-spacing: 0.7px;
+}
+
+.learning-paths__insight-content h3 {
+  margin: 0;
+
+  color: #1b4268;
+
+  font-size: 17px;
+
+  line-height: 1.4;
+
+  font-weight: 750;
+
+  overflow-wrap: anywhere;
+}
+
+.learning-paths__insight-content p {
+  margin: 4px 0 0;
+
+  color: #627d94;
+
+  font-size: 14px;
+
+  line-height: 1.5;
+
+  overflow-wrap: anywhere;
+}
+
+.learning-paths__insight-button {
+  flex: 0 0 auto;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   FOCUS
+========================================================= */
+
+.learning-paths__details-button:focus-visible,
+.learning-paths__card-button:focus-visible,
+.learning-paths__featured-button:focus-visible,
+.learning-paths__view-all:focus-visible {
+  outline: 3px solid rgba(33, 139, 213, 0.2);
+
+  outline-offset: 3px;
+}
+
+/* =========================================================
+   DESKTOP / NORMAL VIEW
+=========================================================
+
+   IMPORTANT:
+   The featured card stays FULL WIDTH.
+
+   We do NOT artificially limit the main content.
+========================================================= */
+
+@container learning-paths (min-width: 1101px) {
+  .learning-paths__featured {
+    width: 100%;
+
+    grid-template-columns:
+      minmax(0, 1.5fr)
+      minmax(360px, 0.75fr);
+
+    gap: 30px;
+
+    padding: 34px !important;
+  }
+
+  .learning-paths__featured-main {
+    width: 100%;
+  }
+
+  .learning-paths__featured-copy {
+    width: 100%;
+  }
+
+  .learning-paths__featured-copy h3 {
+    font-size: clamp(34px, 3vw, 48px);
+  }
+
+  .learning-paths__featured-copy p {
+    font-size: 18px;
+
+    max-width: none;
+  }
+
+  .learning-paths__featured-progress {
+    width: 100%;
+
+    max-width: none;
+  }
+
+  .learning-paths__featured-side {
+    width: 100%;
+
+    padding: 28px;
+  }
+}
+
+/* =========================================================
+   CONTAINER <= 1100px
+
+   Still horizontal.
+   Both sections use available width.
+========================================================= */
+
+@container learning-paths (max-width: 1100px) {
+  .learning-paths__featured {
+    width: 100%;
+
+    grid-template-columns:
+      minmax(0, 1.25fr)
+      minmax(310px, 0.8fr);
+
+    gap: 22px;
+
+    padding: 28px !important;
+  }
+
+  .learning-paths__featured-main {
+    width: 100%;
+
+    padding: 0;
+  }
+
+  .learning-paths__featured-copy h3 {
+    font-size: 31px;
+  }
+
+  .learning-paths__featured-copy p {
+    font-size: 17px;
+
+    max-width: none;
+  }
+
+  .learning-paths__featured-progress {
+    width: 100%;
+
+    max-width: none;
+  }
+
+  .learning-paths__featured-side {
+    width: 100%;
+
+    padding: 22px;
+  }
+
+  .learning-paths__card {
+    padding: 19px !important;
+  }
+}
+
+/* =========================================================
+   CONTAINER <= 900px
+
+   At this point the featured path becomes vertical.
+   This prevents the two columns from becoming cramped.
+========================================================= */
+
+@container learning-paths (max-width: 900px) {
+  .learning-paths__featured {
+    grid-template-columns: 1fr;
+
+    gap: 22px;
+
+    min-height: auto;
+
+    padding: 27px !important;
+  }
+
+  .learning-paths__featured-main {
+    width: 100%;
+  }
+
+  .learning-paths__featured-copy {
+    width: 100%;
+  }
+
+  .learning-paths__featured-copy h3 {
+    font-size: 32px;
+  }
+
+  .learning-paths__featured-copy p {
+    max-width: none;
+  }
+
+  .learning-paths__featured-progress {
+    width: 100%;
+
+    max-width: none;
+  }
+
+  .learning-paths__featured-side {
+    width: 100%;
+  }
+
+  .learning-paths__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 14px;
+  }
+
+  .learning-paths__card {
+    min-height: 520px;
+
+    padding: 18px !important;
+  }
+
+  .learning-paths__card-content h4 {
+    font-size: 19px;
+  }
+
+  .learning-paths__card-content p {
+    font-size: 14px;
+  }
+
+  .learning-paths__insight {
+    grid-template-columns:
+      44px
+      minmax(0, 1fr);
+
+    align-items: center;
+  }
+
+  .learning-paths__insight-icon {
+    width: 44px;
+    height: 44px;
+
+    flex-basis: 44px;
+  }
+
+  .learning-paths__insight-button {
+    grid-column: 2;
+
+    justify-self: start;
+
+    margin-top: 4px;
+  }
+}
+
+/* =========================================================
+   CONTAINER <= 650px
+
+   ONE PATH CARD PER ROW.
+
+   No aggressive squeezing.
+========================================================= */
+
+@container learning-paths (max-width: 650px) {
+  .learning-paths__header {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 17px;
+  }
+
+  .learning-paths__view-all {
+    width: fit-content;
+  }
+
+  .learning-paths__featured {
+    padding: 23px !important;
+  }
+
+  .learning-paths__featured-copy h3 {
+    font-size: 29px;
+  }
+
+  .learning-paths__featured-copy p {
+    font-size: 16px;
+  }
+
+  .learning-paths__featured-meta {
+    gap: 14px;
+  }
+
+  .learning-paths__grid {
+    grid-template-columns: 1fr;
+  }
+
+  .learning-paths__card {
+    min-height: 0;
+  }
+
+  .learning-paths__card-content p {
+    min-height: 0;
+  }
+
+  .learning-paths__section-heading {
+    align-items: flex-start;
+  }
+}
+
+/* =========================================================
+   CONTAINER <= 500px
+
+   MOBILE
+========================================================= */
+
+@container learning-paths (max-width: 500px) {
+  .learning-paths {
+    padding-bottom: 30px;
+  }
+
+  .learning-paths__heading h2 {
+    font-size: 29px;
+  }
+
+  .learning-paths__heading p {
+    font-size: 16px;
+  }
+
+  .learning-paths__featured {
+    padding: 21px !important;
+
+    border-radius: 18px !important;
+  }
+
+  .learning-paths__featured-top {
+    margin-bottom: 20px;
+  }
+
+  .learning-paths__featured-icon {
+    width: 52px;
+    height: 52px;
+
+    flex-basis: 52px;
+  }
+
+  .learning-paths__featured-icon svg {
+    width: 25px;
+    height: 25px;
+
+    flex-basis: 25px;
+  }
+
+  .learning-paths__featured-copy h3 {
+    font-size: 27px;
+  }
+
+  .learning-paths__featured-copy p {
+    font-size: 15px;
+  }
+
+  .learning-paths__featured-progress {
+    margin-top: 24px;
+  }
+
+  .learning-paths__featured-progress-top span {
+    font-size: 15px;
+  }
+
+  .learning-paths__featured-progress-top strong {
+    font-size: 18px;
+  }
+
+  .learning-paths__featured-button {
+    width: 100%;
+
+    justify-content: center;
+  }
+
+  .learning-paths__featured-side {
+    padding: 20px;
+  }
+
+  .learning-paths__milestone-heading h4 {
+    font-size: 19px;
+  }
+
+  .learning-paths__section-heading {
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    gap: 6px;
+
+    margin-top: 27px;
+  }
+
+  .learning-paths__section-heading p {
+    text-align: left;
+  }
+
+  .learning-paths__card-actions {
+    align-items: stretch;
+  }
+
+  .learning-paths__details-button {
+    padding: 9px 0;
+  }
+
+  .learning-paths__card-button {
+    min-width: 116px;
+  }
+
+  .learning-paths__insight {
+    grid-template-columns:
+      42px
+      minmax(0, 1fr);
+
+    padding: 18px;
+  }
+
+  .learning-paths__insight-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-basis: 42px;
+  }
+
+  .learning-paths__insight-button {
+    width: 100%;
+
+    grid-column: 1 / -1;
+
+    justify-self: stretch;
+
+    margin-top: 3px;
+  }
+}
+
+/* =========================================================
+   CONTAINER <= 380px
+========================================================= */
+
+@container learning-paths (max-width: 380px) {
+  .learning-paths__featured {
+    padding: 18px !important;
+  }
+
+  .learning-paths__featured-top {
+    align-items: flex-start;
+  }
+
+  .learning-paths__featured-copy h3 {
+    font-size: 25px;
+  }
+
+  .learning-paths__featured-copy p {
+    font-size: 15px;
+  }
+
+  .learning-paths__featured-meta {
+    display: grid;
+
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 10px;
+  }
+
+  .learning-paths__featured-meta > div {
+    font-size: 14px;
+  }
+
+  .learning-paths__featured-side {
+    padding: 17px;
+  }
+
+  .learning-paths__card {
+    padding: 17px !important;
+  }
+
+  .learning-paths__card-top {
+    align-items: flex-start;
+  }
+
+  .learning-paths__card-icon {
+    width: 46px;
+    height: 46px;
+
+    flex-basis: 46px;
+  }
+
+  .learning-paths__card-icon svg {
+    width: 21px;
+    height: 21px;
+
+    flex-basis: 21px;
+  }
+
+  .learning-paths__card-content h4 {
+    font-size: 19px;
+  }
+
+  .learning-paths__card-actions {
+    flex-direction: column;
+
+    align-items: stretch;
+  }
+
+  .learning-paths__details-button {
+    justify-content: center;
+  }
+
+  .learning-paths__card-button {
+    width: 100%;
+  }
+
+  .learning-paths__insight {
+    gap: 12px;
+
+    padding: 16px;
+  }
+}
+
+/* =========================================================
+   CONTAINER <= 320px
+========================================================= */
+
+@container learning-paths (max-width: 320px) {
+  .learning-paths__featured-copy h3 {
+    font-size: 23px;
+  }
+
+  .learning-paths__featured-copy p {
+    font-size: 14px;
+  }
+
+  .learning-paths__milestone-heading h4 {
+    font-size: 15px;
+  }
+
+  .learning-paths__milestone-line strong {
+    font-size: 13px;
+  }
+
+  .learning-paths__milestone-line small {
+    font-size: 11px;
+  }
+
+  .learning-paths__card-content h4 {
+    font-size: 18px;
+  }
+
+  .learning-paths__card-content p {
+    font-size: 14px;
+  }
+
+  .learning-paths__skill {
+    font-size: 11px;
+
+    padding: 5px 8px;
+  }
+}

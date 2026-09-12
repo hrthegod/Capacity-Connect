@@ -1,0 +1,2102 @@
+/* =========================================================
+   SKILL GAP DETAILS
+   Premium LMS
+   Light Glassmorphism + Limited Navy Glassmorphism
+   Responsive / No Overflow / No Text Clipping
+========================================================= */
+
+.skill-gap-details {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  margin: 0 0 36px;
+
+  box-sizing: border-box;
+
+  overflow: visible;
+}
+
+.skill-gap-details *,
+.skill-gap-details *::before,
+.skill-gap-details *::after {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   TOP STATE CARDS
+========================================================= */
+
+.skill-gap-details__state-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 14px;
+
+  width: 100%;
+  min-width: 0;
+
+  margin-bottom: 16px;
+}
+
+.skill-gap-details__state-card {
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  min-width: 0;
+
+  min-height: 112px;
+
+  padding: 17px !important;
+
+  border-radius: 18px !important;
+
+  overflow: hidden !important;
+
+  box-shadow:
+    0 10px 28px rgba(32, 78, 108, 0.055),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.skill-gap-details__state-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow:
+    0 15px 34px rgba(32, 78, 108, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+}
+
+/* =========================================================
+   STATE THEMES
+========================================================= */
+
+.skill-gap-details__state-card--red {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 246, 248, 0.97),
+    rgba(255, 235, 239, 0.91)
+  ) !important;
+
+  border: 1px solid #f1d5db !important;
+}
+
+.skill-gap-details__state-card--blue {
+  background: linear-gradient(
+    135deg,
+    rgba(241, 248, 255, 0.97),
+    rgba(230, 242, 255, 0.91)
+  ) !important;
+
+  border: 1px solid #cfe2f7 !important;
+}
+
+.skill-gap-details__state-card--green {
+  background: linear-gradient(
+    135deg,
+    rgba(241, 252, 248, 0.97),
+    rgba(229, 248, 239, 0.9)
+  ) !important;
+
+  border: 1px solid #cceadd !important;
+}
+
+.skill-gap-details__state-card--purple {
+  background: linear-gradient(
+    135deg,
+    rgba(249, 247, 255, 0.97),
+    rgba(239, 235, 255, 0.9)
+  ) !important;
+
+  border: 1px solid #ded8f5 !important;
+}
+
+/* =========================================================
+   STATE ICON
+========================================================= */
+
+.skill-gap-details__state-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+
+  flex: 0 0 48px;
+
+  border-radius: 50%;
+
+  line-height: 1;
+}
+
+.skill-gap-details__state-icon svg {
+  display: block;
+
+  width: 21px;
+  height: 21px;
+
+  flex: 0 0 21px;
+}
+
+.skill-gap-details__state-card--red .skill-gap-details__state-icon {
+  color: #e65d6a;
+  background: #ffe2e6;
+  border: 1px solid #f5ccd2;
+}
+
+.skill-gap-details__state-card--blue .skill-gap-details__state-icon {
+  color: #347fe6;
+  background: #e0efff;
+  border: 1px solid #cbe2fc;
+}
+
+.skill-gap-details__state-card--green .skill-gap-details__state-icon {
+  color: #159c72;
+  background: #dff5eb;
+  border: 1px solid #c7e9da;
+}
+
+.skill-gap-details__state-card--purple .skill-gap-details__state-icon {
+  color: #765bdd;
+  background: #ece8ff;
+  border: 1px solid #ddd5fa;
+}
+
+/* =========================================================
+   STATE CONTENT
+========================================================= */
+
+.skill-gap-details__state-content {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+
+  flex: 1 1 auto;
+}
+
+.skill-gap-details__state-content span {
+  color: #29486c;
+
+  font-size: 14px;
+
+  line-height: 1.4;
+
+  font-weight: 650;
+
+  overflow-wrap: anywhere;
+}
+
+.skill-gap-details__state-content strong {
+  margin-top: 3px;
+
+  color: #143b69;
+
+  font-size: 25px;
+
+  line-height: 1.2;
+
+  font-weight: 750;
+}
+
+.skill-gap-details__state-content small {
+  margin-top: 3px;
+
+  color: #7187a0;
+
+  font-size: 12px;
+
+  line-height: 1.45;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   STATE ARROW
+========================================================= */
+
+.skill-gap-details__state-arrow {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 31px;
+  height: 31px;
+
+  flex: 0 0 31px;
+
+  color: #e25c68;
+
+  background: rgba(255, 255, 255, 0.58);
+
+  border-radius: 50%;
+}
+
+.skill-gap-details__state-arrow svg {
+  width: 15px;
+  height: 15px;
+}
+
+/* =========================================================
+   TABLE + FOCUS
+========================================================= */
+
+.skill-gap-details__table-section {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.75fr)
+    minmax(310px, 0.75fr);
+
+  gap: 14px;
+
+  width: 100%;
+  min-width: 0;
+
+  margin-bottom: 16px;
+}
+
+/* =========================================================
+   TABLE CARD
+========================================================= */
+
+.skill-gap-details__table-card {
+  width: 100%;
+  min-width: 0;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  background: rgba(255, 255, 255, 0.92) !important;
+
+  border: 1px solid #dce7ef !important;
+
+  border-radius: 21px !important;
+
+  box-shadow:
+    0 13px 34px rgba(28, 72, 101, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+
+  overflow: hidden !important;
+
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+/* =========================================================
+   TABLE TOOLBAR
+========================================================= */
+
+.skill-gap-details__table-toolbar {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  min-width: 0;
+
+  padding: 12px 15px;
+
+  border-bottom: 1px solid #e3edf3;
+
+  background: rgba(248, 251, 254, 0.84);
+}
+
+/* =========================================================
+   FILTER TABS
+========================================================= */
+
+.skill-gap-details__tabs {
+  display: flex;
+
+  align-items: center;
+
+  gap: 4px;
+
+  min-width: 0;
+
+  overflow-x: auto;
+
+  scrollbar-width: none;
+}
+
+.skill-gap-details__tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.skill-gap-details__tab {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  flex: 0 0 auto;
+
+  min-height: 38px;
+
+  padding: 7px 14px;
+
+  color: #69809b;
+
+  background: transparent;
+
+  border: 1px solid transparent;
+
+  border-radius: 20px;
+
+  font-family: inherit;
+
+  font-size: 14px;
+
+  line-height: 1.35;
+
+  font-weight: 650;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+
+  transition:
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
+}
+
+.skill-gap-details__tab:hover {
+  color: #245b93;
+
+  background: rgba(231, 242, 253, 0.65);
+
+  border-color: #d4e6f7;
+}
+
+.skill-gap-details__tab--active {
+  color: #205eae;
+
+  background: linear-gradient(135deg, #e9f4ff, #deedff);
+
+  border-color: #c8def6;
+
+  box-shadow: 0 4px 12px rgba(49, 128, 208, 0.08);
+
+  font-weight: 700;
+}
+
+.skill-gap-details__tab--active:hover {
+  transform: none;
+}
+
+/* =========================================================
+   SORT
+========================================================= */
+
+.skill-gap-details__sort {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 9px;
+
+  flex: 0 0 auto;
+
+  min-height: 38px;
+
+  padding: 7px 13px;
+
+  color: #617997;
+
+  background: #ffffff;
+
+  border: 1px solid #dce8f0;
+
+  border-radius: 11px;
+
+  font-family: inherit;
+
+  font-size: 13px;
+
+  line-height: 1.35;
+
+  font-weight: 600;
+
+  white-space: nowrap;
+
+  cursor: pointer;
+}
+
+.skill-gap-details__sort svg {
+  width: 15px;
+  height: 15px;
+
+  transform: rotate(90deg);
+}
+
+/* =========================================================
+   TABLE SCROLL
+========================================================= */
+
+.skill-gap-details__table-scroll {
+  width: 100%;
+
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  scrollbar-width: thin;
+
+  scrollbar-color: #bfd2df transparent;
+}
+
+.skill-gap-details__table {
+  width: 100%;
+
+  min-width: 790px;
+}
+
+/* =========================================================
+   TABLE HEADER
+========================================================= */
+
+.skill-gap-details__table-head {
+  display: grid;
+
+  grid-template-columns:
+    minmax(180px, 1.5fr)
+    minmax(120px, 1fr)
+    minmax(120px, 1fr)
+    55px
+    90px
+    75px;
+
+  align-items: center;
+
+  gap: 11px;
+
+  min-height: 48px;
+
+  padding: 8px 18px;
+
+  color: #647b95;
+
+  background: rgba(242, 247, 251, 0.94);
+
+  border-bottom: 1px solid #e3edf3;
+
+  font-size: 13px;
+
+  line-height: 1.4;
+
+  font-weight: 650;
+}
+
+/* =========================================================
+   TABLE ROW
+========================================================= */
+
+.skill-gap-details__table-row {
+  display: grid;
+
+  grid-template-columns:
+    minmax(180px, 1.5fr)
+    minmax(120px, 1fr)
+    minmax(120px, 1fr)
+    55px
+    90px
+    75px;
+
+  align-items: center;
+
+  gap: 11px;
+
+  min-height: 76px;
+
+  padding: 10px 18px;
+
+  border-bottom: 1px solid rgba(216, 228, 237, 0.72);
+
+  transition: background 180ms ease;
+}
+
+.skill-gap-details__table-row:last-child {
+  border-bottom: 0;
+}
+
+.skill-gap-details__table-row--light {
+  background: rgba(255, 255, 255, 0.76);
+}
+
+.skill-gap-details__table-row--dark {
+  background: rgba(237, 246, 252, 0.82);
+}
+
+.skill-gap-details__table-row:hover {
+  background: rgba(222, 239, 252, 0.72);
+}
+
+/* =========================================================
+   SKILL CELL
+========================================================= */
+
+.skill-gap-details__skill-cell {
+  display: flex;
+
+  align-items: center;
+
+  gap: 12px;
+
+  min-width: 0;
+}
+
+.skill-gap-details__skill-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  flex: 0 0 40px;
+
+  color: #327edc;
+
+  background: linear-gradient(145deg, #edf6ff, #dceeff);
+
+  border: 1px solid #d1e5fa;
+
+  border-radius: 50%;
+
+  line-height: 1;
+}
+
+.skill-gap-details__skill-icon svg {
+  display: block;
+
+  width: 18px;
+  height: 18px;
+
+  flex: 0 0 18px;
+}
+
+.skill-gap-details__skill-copy {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+
+  padding-bottom: 1px;
+}
+
+.skill-gap-details__skill-copy strong {
+  color: #234568;
+
+  font-size: 15px;
+
+  line-height: 1.45;
+
+  font-weight: 650;
+
+  overflow-wrap: anywhere;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+.skill-gap-details__skill-copy span {
+  margin-top: 2px;
+
+  color: #8194aa;
+
+  font-size: 12px;
+
+  line-height: 1.45;
+
+  font-weight: 450;
+
+  overflow-wrap: anywhere;
+
+  white-space: nowrap;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+}
+
+/* =========================================================
+   LEVEL CELL
+========================================================= */
+
+.skill-gap-details__level-cell {
+  min-width: 0;
+
+  padding-bottom: 1px;
+}
+
+.skill-gap-details__level-cell strong {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #24486e;
+
+  font-size: 14px;
+
+  line-height: 1.4;
+
+  font-weight: 650;
+}
+
+.skill-gap-details__progress {
+  width: 100%;
+  max-width: 100%;
+
+  height: 8px;
+
+  overflow: hidden;
+
+  border-radius: 20px;
+
+  background: #e1ebf2;
+}
+
+.skill-gap-details__progress span {
+  display: block;
+
+  width: 0;
+
+  max-width: 100%;
+
+  height: 100%;
+
+  border-radius: inherit;
+
+  background: linear-gradient(90deg, #55a5f4, #3d91e9);
+}
+
+.skill-gap-details__progress--target span {
+  background: linear-gradient(90deg, #b9c9da, #94abc2);
+}
+
+/* =========================================================
+   GAP
+========================================================= */
+
+.skill-gap-details__gap {
+  color: #e96770;
+
+  font-size: 14px;
+
+  line-height: 1.45;
+
+  font-weight: 700;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   PRIORITY
+========================================================= */
+
+.skill-gap-details__priority {
+  display: flex;
+
+  align-items: center;
+
+  min-width: 0;
+
+  overflow: visible;
+}
+
+/*
+   Important:
+   We intentionally do NOT place an icon inside Badge.
+   Only High / Medium / Low text is displayed.
+*/
+
+.skill-gap-details__priority > * {
+  display: inline-flex !important;
+
+  align-items: center !important;
+  justify-content: center !important;
+
+  min-height: 34px;
+
+  padding: 6px 12px !important;
+
+  line-height: 1.4 !important;
+
+  white-space: nowrap;
+
+  overflow: visible !important;
+
+  font-size: 12px !important;
+
+  font-weight: 600 !important;
+}
+
+/* =========================================================
+   ACTION
+========================================================= */
+
+.skill-gap-details__action {
+  display: flex;
+
+  align-items: center;
+}
+
+.skill-gap-details__action button {
+  min-width: 0;
+
+  min-height: 39px;
+
+  padding-left: 12px !important;
+  padding-right: 12px !important;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   EMPTY STATE
+========================================================= */
+
+.skill-gap-details__empty {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  min-height: 260px;
+
+  padding: 32px;
+
+  color: #7890a8;
+
+  text-align: center;
+}
+
+.skill-gap-details__empty svg {
+  width: 36px;
+  height: 36px;
+
+  margin-bottom: 11px;
+
+  color: #31b987;
+}
+
+.skill-gap-details__empty strong {
+  color: #24466b;
+
+  font-size: 17px;
+
+  line-height: 1.45;
+
+  font-weight: 650;
+}
+
+.skill-gap-details__empty span {
+  max-width: 360px;
+
+  margin-top: 5px;
+
+  font-size: 13px;
+
+  line-height: 1.55;
+}
+
+/* =========================================================
+   NAVY FOCUS CARD
+========================================================= */
+
+.skill-gap-details__focus-card {
+  position: relative;
+
+  width: 100%;
+  min-width: 0;
+
+  min-height: 100%;
+
+  margin: 0 !important;
+
+  padding: 24px !important;
+
+  overflow: hidden !important;
+
+  color: #ffffff !important;
+
+  background: linear-gradient(
+    145deg,
+    #082c49 0%,
+    #0d4868 52%,
+    #154f6b 100%
+  ) !important;
+
+  border: 1px solid rgba(103, 190, 218, 0.27) !important;
+
+  border-radius: 21px !important;
+
+  box-shadow:
+    0 20px 45px rgba(5, 35, 55, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.09) !important;
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.skill-gap-details__focus-glow {
+  position: absolute;
+
+  top: -120px;
+  right: -100px;
+
+  width: 270px;
+  height: 270px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(54, 187, 219, 0.17),
+    transparent 70%
+  );
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   FOCUS HEADER
+========================================================= */
+
+.skill-gap-details__focus-header {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 12px;
+
+  min-width: 0;
+}
+
+.skill-gap-details__focus-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 43px;
+  height: 43px;
+
+  flex: 0 0 43px;
+
+  color: #ffcf4c;
+
+  background: rgba(255, 210, 78, 0.12);
+
+  border: 1px solid rgba(255, 213, 88, 0.2);
+
+  border-radius: 50%;
+}
+
+.skill-gap-details__focus-icon svg {
+  display: block;
+
+  width: 21px;
+  height: 21px;
+}
+
+.skill-gap-details__focus-header > div:last-child {
+  min-width: 0;
+}
+
+.skill-gap-details__focus-header h3 {
+  margin: 0;
+
+  color: #f7fcff;
+
+  font-size: 19px;
+
+  line-height: 1.35;
+
+  font-weight: 750;
+
+  overflow-wrap: anywhere;
+}
+
+.skill-gap-details__focus-header p {
+  margin: 7px 0 0;
+
+  color: #a7c5d3;
+
+  font-size: 13px;
+
+  line-height: 1.6;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   FOCUS DIVIDER
+========================================================= */
+
+.skill-gap-details__focus-divider {
+  position: relative;
+  z-index: 2;
+
+  width: 100%;
+  height: 1px;
+
+  margin: 18px 0;
+
+  background: rgba(169, 210, 225, 0.18);
+}
+
+/* =========================================================
+   FOCUS LIST
+========================================================= */
+
+.skill-gap-details__focus-list {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 15px;
+
+  width: 100%;
+}
+
+.skill-gap-details__focus-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  min-width: 0;
+}
+
+.skill-gap-details__focus-item-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 36px;
+  height: 36px;
+
+  flex: 0 0 36px;
+
+  border-radius: 50%;
+}
+
+.skill-gap-details__focus-item-icon svg {
+  display: block;
+
+  width: 17px;
+  height: 17px;
+}
+
+.skill-gap-details__focus-item-icon--green {
+  color: #48d1a4;
+  background: rgba(66, 207, 162, 0.12);
+}
+
+.skill-gap-details__focus-item-icon--purple {
+  color: #a493ff;
+  background: rgba(145, 127, 255, 0.12);
+}
+
+.skill-gap-details__focus-item-icon--amber {
+  color: #f7c652;
+  background: rgba(247, 198, 82, 0.12);
+}
+
+.skill-gap-details__focus-item > div:last-child {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.skill-gap-details__focus-item strong {
+  color: #f1f9fc;
+
+  font-size: 13px;
+
+  line-height: 1.4;
+
+  font-weight: 650;
+
+  overflow-wrap: anywhere;
+}
+
+.skill-gap-details__focus-item span {
+  margin-top: 2px;
+
+  color: #94b7c7;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   FOCUS QUOTE
+========================================================= */
+
+.skill-gap-details__focus-quote {
+  position: relative;
+  z-index: 2;
+
+  max-width: 250px;
+
+  margin: 0 auto 18px;
+
+  color: rgba(221, 240, 247, 0.78);
+
+  font-family: Georgia, "Times New Roman", serif;
+
+  font-size: 13px;
+
+  line-height: 1.5;
+
+  font-style: italic;
+
+  text-align: center;
+}
+
+/* =========================================================
+   FOCUS BUTTON
+========================================================= */
+
+.skill-gap-details__focus-button {
+  position: relative;
+  z-index: 4;
+
+  width: 100%;
+
+  min-height: 48px;
+
+  color: #15519e !important;
+
+  background: linear-gradient(135deg, #ffffff, #edf7ff) !important;
+
+  border: 1px solid rgba(255, 255, 255, 0.95) !important;
+
+  border-radius: 12px !important;
+
+  box-shadow: 0 9px 22px rgba(0, 0, 0, 0.14);
+}
+
+.skill-gap-details__focus-button:hover {
+  transform: translateY(-2px);
+
+  box-shadow: 0 13px 27px rgba(0, 0, 0, 0.19);
+}
+
+/* =========================================================
+   ANALYSIS GRID
+========================================================= */
+
+.skill-gap-details__analysis-grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.65fr)
+    minmax(280px, 0.75fr);
+
+  gap: 14px;
+
+  width: 100%;
+  min-width: 0;
+
+  margin-bottom: 16px;
+}
+
+/* =========================================================
+   ANALYSIS CARDS
+========================================================= */
+
+.skill-gap-details__analysis-card,
+.skill-gap-details__insights-card {
+  width: 100%;
+  min-width: 0;
+
+  min-height: 350px;
+
+  padding: 21px !important;
+
+  border-radius: 20px !important;
+
+  box-shadow:
+    0 11px 29px rgba(30, 77, 106, 0.055),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85) !important;
+
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.skill-gap-details__analysis-card {
+  background: linear-gradient(
+    135deg,
+    rgba(247, 254, 251, 0.97),
+    rgba(236, 249, 243, 0.9)
+  ) !important;
+
+  border: 1px solid #d0eadd !important;
+}
+
+.skill-gap-details__insights-card {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 252, 245, 0.97),
+    rgba(255, 247, 232, 0.9)
+  ) !important;
+
+  border: 1px solid #eedfbe !important;
+}
+
+/* =========================================================
+   ANALYSIS HEADER
+========================================================= */
+
+.skill-gap-details__analysis-header {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 12px;
+
+  min-width: 0;
+}
+
+.skill-gap-details__analysis-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 43px;
+  height: 43px;
+
+  flex: 0 0 43px;
+
+  border-radius: 50%;
+}
+
+.skill-gap-details__analysis-icon svg {
+  display: block;
+
+  width: 20px;
+  height: 20px;
+}
+
+.skill-gap-details__analysis-icon--green {
+  color: #159d73;
+  background: #ddf5e9;
+  border: 1px solid #c9eadd;
+}
+
+.skill-gap-details__analysis-icon--amber {
+  color: #dfa127;
+  background: #fff0d5;
+  border: 1px solid #f1ddba;
+}
+
+.skill-gap-details__analysis-header > div:last-child {
+  min-width: 0;
+}
+
+.skill-gap-details__analysis-header h3 {
+  margin: 0;
+
+  color: #17365f;
+
+  font-size: 19px;
+
+  line-height: 1.4;
+
+  font-weight: 700;
+
+  overflow-wrap: anywhere;
+}
+
+.skill-gap-details__analysis-header p {
+  margin: 5px 0 0;
+
+  color: #71869f;
+
+  font-size: 13px;
+
+  line-height: 1.55;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   LEGEND
+========================================================= */
+
+.skill-gap-details__legend {
+  display: flex;
+
+  align-items: center;
+  justify-content: flex-end;
+
+  flex-wrap: wrap;
+
+  gap: 16px;
+
+  margin-top: 15px;
+}
+
+.skill-gap-details__legend > div {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 6px;
+
+  color: #7288a0;
+
+  font-size: 11px;
+
+  line-height: 1.4;
+}
+
+.skill-gap-details__legend-dot {
+  width: 12px;
+  height: 12px;
+
+  flex: 0 0 12px;
+
+  border-radius: 3px;
+}
+
+.skill-gap-details__legend-dot--current {
+  background: #4b9cf1;
+}
+
+.skill-gap-details__legend-dot--target {
+  background: #c8d4e2;
+}
+
+/* =========================================================
+   GRAPH
+========================================================= */
+
+.skill-gap-details__graph-scroll {
+  width: 100%;
+
+  margin-top: 14px;
+
+  overflow-x: auto;
+
+  scrollbar-width: thin;
+
+  scrollbar-color: #bdd0da transparent;
+}
+
+.skill-gap-details__graph {
+  display: grid;
+
+  grid-template-columns:
+    30px
+    minmax(520px, 1fr);
+
+  width: 100%;
+
+  min-width: 550px;
+
+  height: 230px;
+}
+
+.skill-gap-details__graph-yaxis {
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  padding: 3px 0 27px;
+
+  color: #7a8fa5;
+
+  font-size: 10px;
+
+  line-height: 1;
+}
+
+.skill-gap-details__graph-area {
+  position: relative;
+
+  min-width: 0;
+
+  height: 100%;
+}
+
+.skill-gap-details__graph-grid {
+  position: absolute;
+
+  inset: 3px 0 27px;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  pointer-events: none;
+}
+
+.skill-gap-details__graph-grid span {
+  width: 100%;
+  height: 1px;
+
+  background: rgba(119, 158, 172, 0.14);
+}
+
+.skill-gap-details__graph-bars {
+  position: absolute;
+
+  left: 0;
+  right: 0;
+
+  bottom: 27px;
+  top: 3px;
+
+  display: flex;
+
+  align-items: stretch;
+
+  justify-content: space-around;
+
+  gap: 11px;
+}
+
+.skill-gap-details__graph-group {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: flex-end;
+
+  flex: 1 1 0;
+
+  min-width: 62px;
+
+  height: 100%;
+}
+
+.skill-gap-details__graph-columns {
+  display: flex;
+
+  align-items: flex-end;
+  justify-content: center;
+
+  gap: 5px;
+
+  width: 100%;
+  height: 100%;
+}
+
+.skill-gap-details__graph-bar {
+  display: block;
+
+  width: 17px;
+
+  min-height: 2px;
+
+  border-radius: 5px 5px 0 0;
+}
+
+.skill-gap-details__graph-bar--current {
+  background: linear-gradient(180deg, #55a5f4, #3d91e9);
+}
+
+.skill-gap-details__graph-bar--target {
+  background: linear-gradient(180deg, #d0dce8, #b7c7d8);
+}
+
+.skill-gap-details__graph-label {
+  display: block;
+
+  width: 100%;
+
+  min-height: 24px;
+
+  margin-top: 5px;
+
+  color: #58718f;
+
+  font-size: 9px;
+
+  line-height: 1.4;
+
+  text-align: center;
+
+  overflow: hidden;
+
+  text-overflow: ellipsis;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   INSIGHTS
+========================================================= */
+
+.skill-gap-details__insights-list {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 9px;
+
+  width: 100%;
+
+  margin-top: 17px;
+}
+
+.skill-gap-details__insight {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  min-width: 0;
+
+  min-height: 57px;
+
+  padding: 8px 10px;
+
+  background: rgba(255, 255, 255, 0.63);
+
+  border: 1px solid rgba(224, 232, 236, 0.82);
+
+  border-radius: 13px;
+}
+
+.skill-gap-details__insight-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 35px;
+  height: 35px;
+
+  flex: 0 0 35px;
+
+  border-radius: 50%;
+}
+
+.skill-gap-details__insight-icon svg {
+  width: 17px;
+  height: 17px;
+}
+
+.skill-gap-details__insight-icon--red {
+  color: #e7636e;
+  background: #ffe3e6;
+}
+
+.skill-gap-details__insight-icon--blue {
+  color: #327fe5;
+  background: #e4f0ff;
+}
+
+.skill-gap-details__insight-icon--green {
+  color: #18a075;
+  background: #dff5ea;
+}
+
+.skill-gap-details__insight-icon--purple {
+  color: #725ddd;
+  background: #ece9ff;
+}
+
+.skill-gap-details__insight > div:last-child {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+}
+
+.skill-gap-details__insight strong {
+  color: #29486c;
+
+  font-size: 13px;
+
+  line-height: 1.4;
+
+  font-weight: 650;
+
+  overflow-wrap: anywhere;
+}
+
+.skill-gap-details__insight span {
+  margin-top: 2px;
+
+  color: #7890a6;
+
+  font-size: 11px;
+
+  line-height: 1.45;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   RECOMMENDED ACTIONS
+========================================================= */
+
+.skill-gap-details__actions-card {
+  width: 100%;
+  min-width: 0;
+
+  padding: 21px !important;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.96),
+    rgba(248, 251, 254, 0.94)
+  ) !important;
+
+  border: 1px solid #dfe8ef !important;
+
+  border-radius: 21px !important;
+
+  box-shadow:
+    0 12px 31px rgba(28, 74, 104, 0.055),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9) !important;
+
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.skill-gap-details__actions-header {
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 15px;
+
+  min-width: 0;
+
+  margin-bottom: 18px;
+}
+
+.skill-gap-details__actions-title {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 12px;
+
+  min-width: 0;
+}
+
+.skill-gap-details__actions-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 43px;
+  height: 43px;
+
+  flex: 0 0 43px;
+
+  color: #e0a029;
+
+  background: #fff0d6;
+
+  border: 1px solid #f2dfbd;
+
+  border-radius: 50%;
+}
+
+.skill-gap-details__actions-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.skill-gap-details__actions-title > div:last-child {
+  min-width: 0;
+}
+
+.skill-gap-details__actions-title h3 {
+  margin: 0;
+
+  color: #17365e;
+
+  font-size: 19px;
+
+  line-height: 1.4;
+
+  font-weight: 700;
+}
+
+.skill-gap-details__actions-title p {
+  margin: 5px 0 0;
+
+  color: #7389a1;
+
+  font-size: 13px;
+
+  line-height: 1.55;
+
+  overflow-wrap: anywhere;
+}
+
+.skill-gap-details__action-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 10px;
+
+  width: 100%;
+  min-width: 0;
+}
+
+.skill-gap-details__action-card {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  min-width: 0;
+
+  min-height: 235px;
+
+  padding: 17px;
+
+  border: 1px solid transparent;
+
+  border-radius: 16px;
+
+  overflow: hidden;
+
+  transition:
+    transform 200ms ease,
+    box-shadow 200ms ease;
+}
+
+.skill-gap-details__action-card:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 12px 25px rgba(31, 77, 105, 0.08);
+}
+
+.skill-gap-details__action-card--blue {
+  background: linear-gradient(135deg, #f0f8ff, #e6f2ff);
+
+  border-color: #d1e6fa;
+}
+
+.skill-gap-details__action-card--purple {
+  background: linear-gradient(135deg, #f7f4ff, #eeeaff);
+
+  border-color: #e0d9f8;
+}
+
+.skill-gap-details__action-card--green {
+  background: linear-gradient(135deg, #effbf6, #e3f7ed);
+
+  border-color: #d0ebdd;
+}
+
+.skill-gap-details__action-card--amber {
+  background: linear-gradient(135deg, #fffaf0, #fff2dd);
+
+  border-color: #efdfc1;
+}
+
+.skill-gap-details__action-card-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 43px;
+  height: 43px;
+
+  flex: 0 0 43px;
+
+  margin-bottom: 14px;
+
+  border-radius: 50%;
+}
+
+.skill-gap-details__action-card-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.skill-gap-details__action-card--blue .skill-gap-details__action-card-icon {
+  color: #3282e7;
+  background: #e0efff;
+}
+
+.skill-gap-details__action-card--purple .skill-gap-details__action-card-icon {
+  color: #7259df;
+  background: #ece8ff;
+}
+
+.skill-gap-details__action-card--green .skill-gap-details__action-card-icon {
+  color: #179d72;
+  background: #dcf4e8;
+}
+
+.skill-gap-details__action-card--amber .skill-gap-details__action-card-icon {
+  color: #df9f26;
+  background: #fff0d4;
+}
+
+.skill-gap-details__action-card-content {
+  min-width: 0;
+
+  flex: 1 1 auto;
+}
+
+.skill-gap-details__action-card-content h4 {
+  margin: 0;
+
+  color: #29486c;
+
+  font-size: 15px;
+
+  line-height: 1.45;
+
+  font-weight: 650;
+
+  overflow-wrap: anywhere;
+}
+
+.skill-gap-details__action-card-content p {
+  margin: 5px 0 0;
+
+  color: #7187a0;
+
+  font-size: 12px;
+
+  line-height: 1.55;
+
+  overflow-wrap: anywhere;
+}
+
+.skill-gap-details__action-button {
+  width: 100%;
+
+  min-height: 40px;
+
+  margin-top: 15px;
+
+  background: rgba(255, 255, 255, 0.72) !important;
+
+  border-color: rgba(203, 218, 230, 0.8) !important;
+
+  border-radius: 10px !important;
+}
+
+/* =========================================================
+   1200px
+========================================================= */
+
+@media (max-width: 1200px) {
+  .skill-gap-details__state-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skill-gap-details__action-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+/* =========================================================
+   1050px
+========================================================= */
+
+@media (max-width: 1050px) {
+  .skill-gap-details__table-section {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-gap-details__focus-card {
+    min-height: auto;
+  }
+
+  .skill-gap-details__analysis-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   850px
+========================================================= */
+
+@media (max-width: 850px) {
+  .skill-gap-details__state-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .skill-gap-details__table-toolbar {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .skill-gap-details__tabs {
+    width: 100%;
+  }
+
+  .skill-gap-details__sort {
+    align-self: flex-start;
+  }
+}
+
+/* =========================================================
+   700px
+========================================================= */
+
+@media (max-width: 700px) {
+  .skill-gap-details__state-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .skill-gap-details__state-card {
+    min-height: 96px;
+  }
+
+  .skill-gap-details__actions-header {
+    align-items: flex-start;
+
+    flex-direction: column;
+  }
+
+  .skill-gap-details__actions-header > button {
+    width: 100%;
+  }
+
+  .skill-gap-details__action-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* =========================================================
+   600px
+========================================================= */
+
+@media (max-width: 600px) {
+  .skill-gap-details {
+    margin-bottom: 25px;
+  }
+
+  .skill-gap-details__state-card {
+    padding: 15px !important;
+
+    border-radius: 17px !important;
+  }
+
+  .skill-gap-details__table-card {
+    border-radius: 18px !important;
+  }
+
+  .skill-gap-details__focus-card {
+    padding: 19px !important;
+
+    border-radius: 18px !important;
+  }
+
+  .skill-gap-details__analysis-card,
+  .skill-gap-details__insights-card {
+    padding: 18px !important;
+
+    min-height: auto;
+
+    border-radius: 18px !important;
+  }
+
+  .skill-gap-details__actions-card {
+    padding: 18px !important;
+
+    border-radius: 18px !important;
+  }
+}
+
+/* =========================================================
+   480px
+========================================================= */
+
+@media (max-width: 480px) {
+  .skill-gap-details__state-card {
+    min-height: 92px;
+
+    padding: 13px !important;
+  }
+
+  .skill-gap-details__state-icon {
+    width: 42px;
+    height: 42px;
+
+    flex-basis: 42px;
+  }
+
+  .skill-gap-details__state-content span {
+    font-size: 13px;
+  }
+
+  .skill-gap-details__state-content strong {
+    font-size: 22px;
+  }
+
+  .skill-gap-details__state-content small {
+    font-size: 11px;
+  }
+
+  .skill-gap-details__tabs {
+    width: 100%;
+  }
+
+  .skill-gap-details__tab {
+    min-height: 36px;
+
+    padding: 7px 12px;
+
+    font-size: 13px;
+  }
+
+  .skill-gap-details__graph {
+    min-width: 500px;
+  }
+}
+
+/* =========================================================
+   400px
+========================================================= */
+
+@media (max-width: 400px) {
+  .skill-gap-details__state-card {
+    padding: 12px !important;
+  }
+
+  .skill-gap-details__state-icon {
+    width: 39px;
+    height: 39px;
+
+    flex-basis: 39px;
+  }
+
+  .skill-gap-details__state-content strong {
+    font-size: 20px;
+  }
+
+  .skill-gap-details__state-content small {
+    font-size: 10px;
+  }
+
+  .skill-gap-details__focus-card {
+    padding: 16px !important;
+  }
+
+  .skill-gap-details__graph {
+    min-width: 480px;
+  }
+}
+
+/* =========================================================
+   360px
+========================================================= */
+
+@media (max-width: 360px) {
+  .skill-gap-details__state-card {
+    gap: 8px;
+
+    padding: 11px !important;
+  }
+
+  .skill-gap-details__state-content span {
+    font-size: 12px;
+  }
+
+  .skill-gap-details__state-content strong {
+    font-size: 19px;
+  }
+
+  .skill-gap-details__state-arrow {
+    display: none;
+  }
+
+  .skill-gap-details__focus-header {
+    gap: 9px;
+  }
+
+  .skill-gap-details__focus-header h3 {
+    font-size: 17px;
+  }
+
+  .skill-gap-details__analysis-card,
+  .skill-gap-details__insights-card,
+  .skill-gap-details__actions-card {
+    padding: 15px !important;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .skill-gap-details__state-card,
+  .skill-gap-details__tab,
+  .skill-gap-details__focus-button,
+  .skill-gap-details__action-card {
+    transition: none;
+  }
+
+  .skill-gap-details__state-card:hover,
+  .skill-gap-details__focus-button:hover,
+  .skill-gap-details__action-card:hover {
+    transform: none;
+  }
+}

@@ -1,0 +1,318 @@
+/* =========================================================
+   MY SKILLS PAGE
+   Capacity Connect - Learner Dashboard
+   Page-level layout only
+   Responsive / No Horizontal Overflow
+========================================================= */
+
+/* =========================================================
+   PAGE ROOT
+========================================================= */
+
+.my-skills-page {
+  width: 100%;
+  max-width: 100%;
+
+  min-width: 0;
+  min-height: 100%;
+
+  height: auto;
+
+  margin: 0;
+  padding: 12px;
+
+  box-sizing: border-box;
+
+  /*
+    Important:
+    Prevent any child component from creating a
+    horizontal scrollbar on smaller screens.
+  */
+  overflow-x: hidden;
+  overflow-y: visible;
+
+  background: transparent;
+}
+
+/* =========================================================
+   GLOBAL BOX SIZING
+========================================================= */
+
+.my-skills-page *,
+.my-skills-page *::before,
+.my-skills-page *::after {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   MAIN CONTAINER
+========================================================= */
+
+.my-skills-page__container {
+  width: 100%;
+  max-width: 1280px;
+
+  min-width: 0;
+
+  margin: 0 auto;
+  padding: 18px 18px 42px;
+
+  box-sizing: border-box;
+
+  /*
+    Prevent long text, cards or icons from
+    forcing the page wider.
+  */
+  overflow-x: hidden;
+}
+
+/* =========================================================
+   DIRECT CHILD SAFETY
+========================================================= */
+
+.my-skills-page__container > * {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+}
+
+/* =========================================================
+   SECTION SPACING
+========================================================= */
+
+/*
+   MySkillsHeader
+          ↓
+   30px spacing
+          ↓
+   SkillsOverview
+*/
+
+.my-skills-page__container > * + * {
+  margin-top: 30px;
+}
+
+/* =========================================================
+   TEXT SAFETY
+========================================================= */
+
+.my-skills-page h1,
+.my-skills-page h2,
+.my-skills-page h3,
+.my-skills-page h4,
+.my-skills-page h5,
+.my-skills-page h6,
+.my-skills-page p,
+.my-skills-page span,
+.my-skills-page strong {
+  max-width: 100%;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   IMAGE SAFETY
+========================================================= */
+
+.my-skills-page img {
+  display: block;
+
+  max-width: 100%;
+  height: auto;
+}
+
+/* =========================================================
+   SVG SAFETY
+========================================================= */
+
+.my-skills-page svg {
+  display: block;
+
+  max-width: 100%;
+
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   BUTTON / INTERACTIVE ELEMENT SAFETY
+========================================================= */
+
+.my-skills-page button,
+.my-skills-page a {
+  max-width: 100%;
+}
+
+/* =========================================================
+   1200px
+========================================================= */
+
+@media (max-width: 1200px) {
+  .my-skills-page {
+    padding: 10px;
+  }
+
+  .my-skills-page__container {
+    padding: 16px 14px 38px;
+  }
+}
+
+/* =========================================================
+   1000px
+========================================================= */
+
+@media (max-width: 1000px) {
+  .my-skills-page__container {
+    padding: 15px 12px 36px;
+  }
+
+  .my-skills-page__container > * + * {
+    margin-top: 27px;
+  }
+}
+
+/* =========================================================
+   900px
+========================================================= */
+
+@media (max-width: 900px) {
+  .my-skills-page {
+    padding: 8px;
+  }
+
+  .my-skills-page__container {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 14px 10px 34px;
+  }
+
+  .my-skills-page__container > * + * {
+    margin-top: 26px;
+  }
+}
+
+/* =========================================================
+   760px
+========================================================= */
+
+@media (max-width: 760px) {
+  .my-skills-page {
+    padding: 6px;
+  }
+
+  .my-skills-page__container {
+    padding: 12px 8px 32px;
+  }
+
+  .my-skills-page__container > * + * {
+    margin-top: 24px;
+  }
+}
+
+/* =========================================================
+   600px
+========================================================= */
+
+@media (max-width: 600px) {
+  .my-skills-page {
+    padding: 4px;
+  }
+
+  .my-skills-page__container {
+    padding: 10px 6px 30px;
+  }
+
+  .my-skills-page__container > * + * {
+    margin-top: 22px;
+  }
+}
+
+/* =========================================================
+   480px
+========================================================= */
+
+@media (max-width: 480px) {
+  .my-skills-page {
+    padding: 2px;
+  }
+
+  .my-skills-page__container {
+    padding: 8px 4px 28px;
+  }
+
+  .my-skills-page__container > * + * {
+    margin-top: 20px;
+  }
+}
+
+/* =========================================================
+   400px
+========================================================= */
+
+@media (max-width: 400px) {
+  .my-skills-page__container {
+    padding: 7px 3px 26px;
+  }
+
+  .my-skills-page__container > * + * {
+    margin-top: 19px;
+  }
+}
+
+/* =========================================================
+   360px
+========================================================= */
+
+@media (max-width: 360px) {
+  .my-skills-page {
+    padding: 0;
+  }
+
+  .my-skills-page__container {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 6px 2px 24px;
+  }
+
+  .my-skills-page__container > * + * {
+    margin-top: 18px;
+  }
+}
+
+/* =========================================================
+   320px
+   Extra protection for very small screens
+========================================================= */
+
+@media (max-width: 320px) {
+  .my-skills-page {
+    width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+
+    overflow-x: hidden;
+  }
+
+  .my-skills-page__container {
+    width: 100%;
+    max-width: 100%;
+
+    min-width: 0;
+
+    padding: 5px 1px 22px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .my-skills-page *,
+  .my-skills-page *::before,
+  .my-skills-page *::after {
+    scroll-behavior: auto !important;
+  }
+}

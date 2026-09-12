@@ -1,0 +1,1984 @@
+/* =========================================================
+   MY LEARNING HEADER
+   Light Hero + Dark Snapshot
+   Responsive / Compact / No Overflow
+========================================================= */
+
+.my-learning-header {
+  width: 100%;
+  max-width: 1200px;
+
+  margin: 0 auto 32px;
+
+  min-width: 0;
+  max-width: 100%;
+
+  box-sizing: border-box;
+
+  overflow: visible;
+}
+
+/* =========================================================
+   TWO-PART HEADER GRID
+========================================================= */
+
+.my-learning-header__grid {
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1.55fr)
+    minmax(300px, 0.85fr);
+
+  width: 100%;
+  max-width: 100%;
+
+  min-width: 0;
+
+  align-items: stretch;
+
+  gap: 0;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   COMMON CARD RESET
+========================================================= */
+
+.my-learning-header__hero-card,
+.my-learning-header__snapshot-card {
+  position: relative;
+
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  margin: 0 !important;
+  padding: 0 !important;
+
+  box-sizing: border-box;
+
+  overflow: hidden;
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+/* =========================================================
+   LEFT CARD
+   LIGHT OCEAN THEME
+========================================================= */
+
+.my-learning-header__hero-card {
+  z-index: 2;
+
+  min-height: 400px;
+
+  background: linear-gradient(
+    135deg,
+    #f8fcfe 0%,
+    #eef8fb 52%,
+    #e5f4f8 100%
+  ) !important;
+
+  border: 1px solid #cfe4eb !important;
+
+  border-radius: 24px 0 0 24px !important;
+
+  color: #0b3550 !important;
+
+  box-shadow: 0 18px 45px rgba(20, 72, 95, 0.1) !important;
+
+  isolation: isolate;
+}
+
+.my-learning-header__hero-card:hover {
+  transform: translateY(-1px);
+
+  box-shadow: 0 22px 50px rgba(20, 72, 95, 0.14) !important;
+}
+
+/* =========================================================
+   LEFT CARD DECORATIVE VISUAL
+========================================================= */
+
+.my-learning-header__hero-visual {
+  position: absolute;
+
+  top: 50%;
+  right: -55px;
+
+  width: 350px;
+  height: 350px;
+
+  max-width: 350px;
+
+  transform: translateY(-50%);
+
+  pointer-events: none;
+
+  z-index: 0;
+
+  opacity: 0.2;
+
+  overflow: visible;
+}
+
+/* =========================================================
+   DECORATIVE GRID
+========================================================= */
+
+.my-learning-header__visual-grid {
+  position: absolute;
+
+  inset: 0;
+
+  opacity: 0.3;
+
+  background-image:
+    linear-gradient(rgba(18, 137, 165, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(18, 137, 165, 0.12) 1px, transparent 1px);
+
+  background-size: 32px 32px;
+
+  mask-image: radial-gradient(
+    circle at center,
+    black 0%,
+    rgba(0, 0, 0, 0.7) 38%,
+    transparent 72%
+  );
+
+  -webkit-mask-image: radial-gradient(
+    circle at center,
+    black 0%,
+    rgba(0, 0, 0, 0.7) 38%,
+    transparent 72%
+  );
+}
+
+/* =========================================================
+   DECORATIVE ORBIT
+========================================================= */
+
+.my-learning-header__visual-orbit {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 245px;
+  height: 245px;
+
+  transform: translate(-50%, -50%);
+
+  border: 1px solid rgba(21, 151, 180, 0.25);
+
+  border-radius: 50%;
+}
+
+.my-learning-header__visual-orbit::before,
+.my-learning-header__visual-orbit::after {
+  content: "";
+
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(21, 151, 180, 0.16);
+}
+
+.my-learning-header__visual-orbit::before {
+  width: 180px;
+  height: 180px;
+}
+
+.my-learning-header__visual-orbit::after {
+  width: 310px;
+  height: 310px;
+}
+
+/* =========================================================
+   ORBIT DOTS
+========================================================= */
+
+.my-learning-header__visual-orbit span {
+  position: absolute;
+
+  display: block;
+
+  width: 7px;
+  height: 7px;
+
+  border-radius: 50%;
+
+  background: #27a9c4;
+
+  box-shadow: 0 0 0 4px rgba(39, 169, 196, 0.07);
+}
+
+.my-learning-header__visual-orbit span:nth-child(1) {
+  top: 22px;
+  left: 76px;
+}
+
+.my-learning-header__visual-orbit span:nth-child(2) {
+  top: 139px;
+  right: 21px;
+}
+
+.my-learning-header__visual-orbit span:nth-child(3) {
+  bottom: 25px;
+  left: 76px;
+}
+
+/* =========================================================
+   VISUAL GLOW
+========================================================= */
+
+.my-learning-header__visual-glow {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  width: 170px;
+  height: 170px;
+
+  transform: translate(-50%, -50%);
+
+  border-radius: 50%;
+
+  background: rgba(46, 184, 211, 0.1);
+
+  filter: blur(14px);
+}
+
+/* =========================================================
+   CENTER VISUAL ICON
+========================================================= */
+
+.my-learning-header__visual-icon {
+  position: absolute;
+
+  top: 50%;
+  left: 50%;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 66px;
+  height: 66px;
+
+  transform: translate(-50%, -50%);
+
+  color: #1595b1;
+
+  background: rgba(222, 246, 250, 0.76);
+
+  border: 1px solid rgba(47, 173, 197, 0.22);
+
+  border-radius: 17px;
+
+  box-shadow: 0 15px 35px rgba(32, 105, 125, 0.12);
+
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+
+  font-size: 27px;
+
+  box-sizing: border-box;
+}
+
+/* IMPORTANT:
+   Explicit SVG dimensions prevent icons from
+   appearing tiny / stuck in the top-left.
+*/
+
+.my-learning-header__visual-icon svg {
+  display: block;
+
+  width: 28px;
+  height: 28px;
+
+  flex: 0 0 28px;
+}
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
+
+.my-learning-header__hero-content {
+  position: relative;
+
+  z-index: 5;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  width: 100%;
+  max-width: 720px;
+
+  min-width: 0;
+
+  padding: 36px 36px 32px;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.my-learning-header__eyebrow-row {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 10px;
+
+  width: 100%;
+  max-width: 100%;
+
+  min-width: 0;
+
+  margin-bottom: 16px;
+
+  box-sizing: border-box;
+}
+
+.my-learning-header__eyebrow-status {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  max-width: 100%;
+
+  color: #36566a;
+
+  font-size: 16px;
+
+  line-height: 1.4;
+
+  white-space: nowrap;
+}
+
+.my-learning-header__status-dot {
+  width: 8px;
+  height: 8px;
+
+  flex: 0 0 8px;
+
+  border-radius: 50%;
+
+  background: #39bd91;
+
+  box-shadow: 0 0 0 4px rgba(57, 189, 145, 0.1);
+}
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
+.my-learning-header__title {
+  position: relative;
+
+  width: 100%;
+  max-width: 620px;
+
+  margin: 0;
+
+  color: #073654 !important;
+
+  font-size: clamp(34px, 3.2vw, 46px);
+
+  line-height: 1.08;
+
+  font-weight: 750;
+
+  letter-spacing: -0.035em;
+
+  overflow-wrap: break-word;
+}
+
+/* =========================================================
+   HERO DESCRIPTION
+========================================================= */
+
+.my-learning-header__description {
+  position: relative;
+
+  width: 100%;
+  max-width: 620px;
+
+  margin: 14px 0 0;
+
+  color: #48677b !important;
+
+  font-size: 16px;
+
+  line-height: 1.62;
+
+  overflow-wrap: break-word;
+}
+
+/* =========================================================
+   CONTEXT STATISTICS
+========================================================= */
+
+.my-learning-header__context {
+  position: relative;
+
+  z-index: 5;
+
+  display: flex;
+
+  align-items: center;
+
+  width: fit-content;
+  max-width: 100%;
+
+  min-width: 0;
+
+  margin-top: 22px;
+
+  padding: 10px 12px;
+
+  box-sizing: border-box;
+
+  background: rgba(225, 243, 248, 0.78);
+
+  border: 1px solid #c6e1e9;
+
+  border-radius: 15px;
+
+  box-shadow: 0 8px 24px rgba(24, 89, 112, 0.07);
+
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+
+  overflow: hidden;
+}
+
+/* =========================================================
+   CONTEXT ITEM
+========================================================= */
+
+.my-learning-header__context-item {
+  display: grid;
+
+  grid-template-columns: 38px minmax(0, 1fr);
+
+  align-items: center;
+
+  column-gap: 10px;
+
+  flex: 1 1 auto;
+
+  min-width: 0;
+
+  padding: 5px 12px;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   CONTEXT DIVIDER
+========================================================= */
+
+.my-learning-header__context-divider {
+  width: 1px;
+
+  height: 34px;
+
+  flex: 0 0 1px;
+
+  background: #c7dfe6;
+}
+
+/* =========================================================
+   CONTEXT ICON
+========================================================= */
+
+.my-learning-header__context-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 38px;
+  height: 38px;
+
+  min-width: 38px;
+  min-height: 38px;
+
+  flex: 0 0 38px;
+
+  box-sizing: border-box;
+
+  color: #1478a1;
+
+  background: #e5f3fa;
+
+  border: 1px solid #c9e4ef;
+
+  border-radius: 11px;
+
+  box-shadow: 0 3px 8px rgba(26, 107, 135, 0.06);
+}
+
+/* IMPORTANT:
+   Force react-icons to stay centered and visible.
+*/
+
+.my-learning-header__context-icon svg {
+  display: block;
+
+  width: 20px;
+  height: 20px;
+
+  min-width: 20px;
+  min-height: 20px;
+
+  flex: 0 0 20px;
+}
+
+/* =========================================================
+   PROGRESS ICON
+========================================================= */
+
+.my-learning-header__context-icon--progress {
+  color: #c87513;
+
+  background: #fff2df;
+
+  border-color: #f2ddbd;
+
+  box-shadow: 0 3px 8px rgba(196, 116, 21, 0.06);
+}
+
+/* =========================================================
+   COMPLETED ICON
+========================================================= */
+
+.my-learning-header__context-icon--complete {
+  color: #148452;
+
+  background: #e5f7ee;
+
+  border-color: #cbe9d9;
+
+  box-shadow: 0 3px 8px rgba(20, 132, 82, 0.06);
+}
+
+/* =========================================================
+   CONTEXT COPY
+========================================================= */
+
+.my-learning-header__context-copy {
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: flex-start;
+
+  justify-content: center;
+
+  gap: 2px;
+
+  min-width: 0;
+
+  width: 100%;
+
+  overflow: visible;
+}
+
+/* =========================================================
+   CONTEXT NUMBER
+========================================================= */
+
+.my-learning-header__context-copy strong {
+  display: block;
+
+  margin: 0;
+
+  color: #073a56;
+
+  font-size: 19px;
+
+  line-height: 1.15;
+
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   CONTEXT LABEL
+========================================================= */
+
+.my-learning-header__context-copy span {
+  display: block;
+
+  width: 100%;
+  max-width: 100%;
+
+  margin: 0;
+
+  color: #587487;
+
+  font-size: 16px;
+
+  line-height: 1.35;
+
+  white-space: normal;
+
+  overflow-wrap: break-word;
+}
+
+/* =========================================================
+   HERO ACTIONS
+========================================================= */
+
+.my-learning-header__actions {
+  position: relative;
+
+  z-index: 5;
+
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 14px;
+
+  width: 100%;
+  max-width: 100%;
+
+  min-width: 0;
+
+  margin-top: 20px;
+
+  box-sizing: border-box;
+}
+
+.my-learning-header__explore-button {
+  flex: 0 0 auto;
+
+  max-width: 100%;
+}
+
+.my-learning-header__action-note {
+  max-width: 100%;
+
+  color: #567182;
+
+  font-size: 16px;
+
+  line-height: 1.45;
+
+  overflow-wrap: break-word;
+}
+
+/* =========================================================
+   RIGHT CARD
+   DARK THEME
+========================================================= */
+
+.my-learning-header__snapshot-card {
+  z-index: 3;
+
+  min-height: 400px;
+
+  background: linear-gradient(145deg, #173d52 0%, #15364b 100%) !important;
+
+  border: 1px solid #234e63 !important;
+
+  border-left: 1px solid #2a566b !important;
+
+  border-radius: 0 24px 24px 0 !important;
+
+  color: #ffffff !important;
+
+  box-shadow: 0 18px 45px rgba(9, 48, 68, 0.13) !important;
+
+  isolation: isolate;
+}
+
+.my-learning-header__snapshot-card:hover {
+  transform: translateY(-1px);
+
+  box-shadow: 0 22px 50px rgba(9, 48, 68, 0.18) !important;
+}
+
+/* =========================================================
+   SNAPSHOT TOP
+========================================================= */
+
+.my-learning-header__snapshot-top {
+  display: flex;
+
+  align-items: flex-start;
+
+  justify-content: space-between;
+
+  gap: 18px;
+
+  min-width: 0;
+
+  padding: 30px 28px 0;
+
+  box-sizing: border-box;
+}
+
+.my-learning-header__snapshot-heading {
+  min-width: 0;
+
+  flex: 1 1 auto;
+}
+
+.my-learning-header__snapshot-eyebrow {
+  display: block;
+
+  margin-bottom: 7px;
+
+  color: #9bb9c7;
+
+  font-size: 13px;
+
+  line-height: 1.3;
+
+  font-weight: 800;
+
+  letter-spacing: 0.12em;
+}
+
+.my-learning-header__snapshot-top h2 {
+  margin: 0;
+
+  color: #ffffff !important;
+
+  font-size: 26px;
+
+  line-height: 1.2;
+
+  font-weight: 750;
+
+  overflow-wrap: break-word;
+}
+
+/* =========================================================
+   SNAPSHOT ICON
+========================================================= */
+
+.my-learning-header__snapshot-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+
+  min-width: 48px;
+  min-height: 48px;
+
+  flex: 0 0 48px;
+
+  box-sizing: border-box;
+
+  color: #76d8e8;
+
+  background: rgba(65, 184, 211, 0.1);
+
+  border: 1px solid rgba(105, 208, 228, 0.18);
+
+  border-radius: 13px;
+
+  font-size: 21px;
+}
+
+/* FIX:
+   Icon is explicitly centered and sized.
+*/
+
+.my-learning-header__snapshot-icon svg {
+  display: block;
+
+  width: 22px;
+  height: 22px;
+
+  min-width: 22px;
+  min-height: 22px;
+
+  flex: 0 0 22px;
+}
+
+/* =========================================================
+   PROGRESS
+========================================================= */
+
+.my-learning-header__progress-block {
+  width: 100%;
+  max-width: 100%;
+
+  padding: 22px 28px 0;
+
+  box-sizing: border-box;
+}
+
+.my-learning-header__progress-heading {
+  display: flex;
+
+  align-items: center;
+
+  justify-content: space-between;
+
+  gap: 15px;
+
+  min-width: 0;
+
+  margin-bottom: 9px;
+}
+
+.my-learning-header__progress-heading span {
+  min-width: 0;
+
+  color: #a5bfca;
+
+  font-size: 16px;
+
+  line-height: 1.4;
+}
+
+.my-learning-header__progress-heading strong {
+  flex: 0 0 auto;
+
+  color: #ffffff;
+
+  font-size: 19px;
+
+  line-height: 1.3;
+
+  font-weight: 800;
+
+  white-space: nowrap;
+}
+
+.my-learning-header__progress-track {
+  width: 100%;
+  max-width: 100%;
+
+  height: 8px;
+
+  overflow: hidden;
+
+  background: rgba(191, 226, 235, 0.14);
+
+  border-radius: 999px;
+
+  box-sizing: border-box;
+}
+
+.my-learning-header__progress-value {
+  display: block;
+
+  width: 0;
+  height: 100%;
+
+  max-width: 100%;
+
+  background: linear-gradient(90deg, #27b6d3, #55d3a9);
+
+  border-radius: inherit;
+
+  transition: width 350ms ease;
+}
+
+.my-learning-header__progress-caption {
+  margin: 13px 0 0;
+
+  color: #9db9c6;
+
+  font-size: 16px;
+
+  line-height: 1.55;
+
+  overflow-wrap: break-word;
+}
+
+/* =========================================================
+   SNAPSHOT LIST
+========================================================= */
+
+.my-learning-header__snapshot-list {
+  display: grid;
+
+  gap: 9px;
+
+  width: 100%;
+  max-width: 100%;
+
+  padding: 20px 28px 0;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   SNAPSHOT ITEM
+========================================================= */
+
+.my-learning-header__snapshot-item {
+  display: flex;
+
+  align-items: center;
+
+  gap: 11px;
+
+  width: 100%;
+  max-width: 100%;
+
+  min-width: 0;
+
+  padding: 11px 12px;
+
+  background: rgba(255, 255, 255, 0.065);
+
+  border: 1px solid rgba(154, 218, 230, 0.11);
+
+  border-radius: 12px;
+
+  box-sizing: border-box;
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.my-learning-header__snapshot-item:hover {
+  transform: translateY(-1px);
+
+  background: rgba(255, 255, 255, 0.09);
+
+  border-color: rgba(154, 218, 230, 0.18);
+}
+
+/* =========================================================
+   SNAPSHOT ICONS
+========================================================= */
+
+.my-learning-header__snapshot-item-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 40px;
+  height: 40px;
+
+  min-width: 40px;
+  min-height: 40px;
+
+  flex: 0 0 40px;
+
+  border-radius: 10px;
+
+  font-size: 19px;
+
+  box-sizing: border-box;
+}
+
+/* IMPORTANT:
+   Prevent icons from shrinking or sitting at top-left.
+*/
+
+.my-learning-header__snapshot-item-icon svg {
+  display: block;
+
+  width: 20px;
+  height: 20px;
+
+  min-width: 20px;
+  min-height: 20px;
+
+  flex: 0 0 20px;
+}
+
+.my-learning-header__snapshot-item-icon--courses {
+  color: #71d8e9;
+
+  background: rgba(47, 180, 210, 0.12);
+}
+
+.my-learning-header__snapshot-item-icon--time {
+  color: #f2bb61;
+
+  background: rgba(232, 168, 65, 0.12);
+}
+
+.my-learning-header__snapshot-item-icon--award {
+  color: #62d5a5;
+
+  background: rgba(63, 194, 140, 0.12);
+}
+
+/* =========================================================
+   SNAPSHOT COPY
+========================================================= */
+
+.my-learning-header__snapshot-item-copy {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 2px;
+
+  min-width: 0;
+
+  flex: 1 1 auto;
+}
+
+.my-learning-header__snapshot-item-copy strong {
+  color: #ffffff;
+
+  font-size: 18px;
+
+  line-height: 1.2;
+
+  font-weight: 800;
+}
+
+.my-learning-header__snapshot-item-copy span {
+  color: #9db9c6;
+
+  font-size: 16px;
+
+  line-height: 1.35;
+
+  overflow-wrap: break-word;
+}
+
+/* =========================================================
+   SNAPSHOT FOOTER
+========================================================= */
+
+.my-learning-header__snapshot-footer {
+  display: flex;
+
+  align-items: flex-start;
+
+  gap: 9px;
+
+  width: auto;
+  max-width: calc(100% - 56px);
+
+  margin: 17px 28px 24px;
+
+  color: #9db9c6;
+
+  font-size: 16px;
+
+  line-height: 1.5;
+
+  box-sizing: border-box;
+}
+
+.my-learning-header__snapshot-footer-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 20px;
+  height: 20px;
+
+  min-width: 20px;
+
+  margin-top: 1px;
+
+  color: #55d3a8;
+}
+
+.my-learning-header__snapshot-footer-icon svg {
+  display: block;
+
+  width: 17px;
+  height: 17px;
+
+  flex: 0 0 17px;
+}
+
+.my-learning-header__snapshot-footer-text {
+  min-width: 0;
+
+  overflow-wrap: break-word;
+}
+
+/* =========================================================
+   1100px
+========================================================= */
+
+@media (max-width: 1100px) {
+  .my-learning-header__grid {
+    grid-template-columns:
+      minmax(0, 1.4fr)
+      minmax(290px, 0.9fr);
+  }
+
+  .my-learning-header__hero-content {
+    padding: 32px 30px;
+  }
+
+  .my-learning-header__snapshot-top,
+  .my-learning-header__progress-block,
+  .my-learning-header__snapshot-list {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .my-learning-header__snapshot-footer {
+    margin-left: 24px;
+    margin-right: 24px;
+
+    max-width: calc(100% - 48px);
+  }
+
+  .my-learning-header__hero-visual {
+    right: -85px;
+
+    width: 320px;
+    height: 320px;
+
+    opacity: 0.12;
+  }
+}
+
+/* =========================================================
+   1150px
+   CONTEXT STATS BECOME VERTICAL
+========================================================= */
+
+@media (max-width: 1150px) {
+  .my-learning-header__context {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    width: 100%;
+    max-width: 520px;
+
+    padding: 8px;
+
+    gap: 0;
+
+    box-sizing: border-box;
+  }
+
+  .my-learning-header__context-item {
+    display: grid;
+
+    grid-template-columns: 42px minmax(0, 1fr);
+
+    align-items: center;
+
+    width: 100%;
+
+    min-width: 0;
+
+    padding: 10px 9px;
+
+    column-gap: 12px;
+
+    box-sizing: border-box;
+  }
+
+  .my-learning-header__context-divider {
+    display: block;
+
+    width: 100%;
+
+    height: 1px;
+
+    flex: 0 0 1px;
+
+    background: #cbdfe5;
+  }
+
+  .my-learning-header__context-icon {
+    width: 42px;
+    height: 42px;
+
+    min-width: 42px;
+    min-height: 42px;
+
+    flex: 0 0 42px;
+
+    border-radius: 11px;
+  }
+
+  .my-learning-header__context-icon svg {
+    width: 21px;
+    height: 21px;
+
+    min-width: 21px;
+    min-height: 21px;
+
+    flex-basis: 21px;
+  }
+
+  .my-learning-header__context-copy {
+    width: 100%;
+
+    min-width: 0;
+
+    overflow: visible;
+  }
+
+  .my-learning-header__context-copy strong {
+    font-size: 18px;
+  }
+
+  .my-learning-header__context-copy span {
+    width: auto;
+
+    font-size: 16px;
+
+    line-height: 1.4;
+
+    white-space: normal;
+
+    overflow: visible;
+  }
+}
+
+/* =========================================================
+   900px
+   STACK THE TWO MAIN CARDS
+========================================================= */
+
+@media (max-width: 900px) {
+  .my-learning-header {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 0;
+  }
+
+  .my-learning-header__grid {
+    grid-template-columns: minmax(0, 1fr);
+
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .my-learning-header__hero-card {
+    min-height: 390px;
+
+    border-radius: 22px 22px 0 0 !important;
+  }
+
+  .my-learning-header__snapshot-card {
+    min-height: auto;
+
+    border-top: 0 !important;
+
+    border-left: 1px solid #2a566b !important;
+
+    border-radius: 0 0 22px 22px !important;
+  }
+
+  .my-learning-header__hero-content {
+    max-width: 700px;
+  }
+
+  .my-learning-header__hero-visual {
+    right: -65px;
+
+    width: 330px;
+    height: 330px;
+
+    opacity: 0.08;
+  }
+
+  .my-learning-header__snapshot-top {
+    padding-top: 25px;
+  }
+}
+
+/* =========================================================
+   760px
+========================================================= */
+
+@media (max-width: 760px) {
+  .my-learning-header__hero-card {
+    min-height: 0;
+  }
+
+  .my-learning-header__hero-content {
+    width: 100%;
+
+    padding: 28px 24px 27px;
+  }
+
+  .my-learning-header__title {
+    max-width: 600px;
+
+    font-size: 34px;
+
+    line-height: 1.1;
+  }
+
+  .my-learning-header__description {
+    max-width: 600px;
+
+    font-size: 16px;
+
+    line-height: 1.58;
+  }
+
+  .my-learning-header__hero-visual {
+    right: -110px;
+
+    width: 290px;
+    height: 290px;
+
+    opacity: 0.055;
+  }
+
+  .my-learning-header__actions {
+    width: 100%;
+  }
+
+  .my-learning-header__snapshot-top,
+  .my-learning-header__progress-block,
+  .my-learning-header__snapshot-list {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* =========================================================
+   600px
+========================================================= */
+
+/* =========================================================
+   MOBILE SKILL GROWTH VISUAL
+========================================================= */
+
+@media (max-width: 600px) {
+  .skill-growth-card {
+    overflow: hidden;
+    padding: 24px 18px;
+  }
+
+  .skill-growth-visual {
+    position: relative;
+
+    width: 100%;
+    max-width: 320px;
+
+    height: 380px;
+
+    margin: 0 auto;
+
+    overflow: hidden;
+  }
+
+  /* Growth Mindset */
+  .growth-mindset {
+    position: absolute;
+
+    top: 0;
+    left: 50%;
+
+    transform: translateX(-50%);
+
+    z-index: 5;
+
+    white-space: nowrap;
+  }
+
+  /* Center */
+  .growth-center {
+    position: absolute;
+
+    top: 85px;
+    left: 50%;
+
+    width: 145px;
+    height: 145px;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    border-radius: 50%;
+
+    z-index: 4;
+  }
+
+  /* Practice */
+  .growth-practice {
+    position: absolute;
+
+    top: 190px;
+    left: 12px;
+
+    width: 105px;
+    min-height: 76px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    z-index: 6;
+  }
+
+  /* Improve */
+  .growth-improve {
+    position: absolute;
+
+    top: 190px;
+    right: 12px;
+
+    width: 105px;
+    min-height: 76px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    z-index: 6;
+  }
+
+  /* Achieve */
+  .growth-achieve {
+    position: absolute;
+
+    top: 285px;
+    left: 50%;
+
+    width: 105px;
+    min-height: 76px;
+
+    transform: translateX(-50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-align: center;
+
+    z-index: 6;
+  }
+
+  /* Hide decorative orbit if it causes collisions */
+  .growth-orbit {
+    pointer-events: none;
+
+    opacity: 0.5;
+
+    transform: scale(0.8);
+  }
+
+  /* VERY IMPORTANT:
+     Completely remove the floating badge.
+  */
+  .better-skills-badge {
+    display: none !important;
+  }
+}
+
+/* =========================================================
+   480px
+========================================================= */
+
+@media (max-width: 480px) {
+  .my-learning-header__hero-card {
+    border-radius: 18px 18px 0 0 !important;
+  }
+
+  .my-learning-header__snapshot-card {
+    border-radius: 0 0 18px 18px !important;
+  }
+
+  .my-learning-header__hero-content {
+    padding: 23px 18px 22px;
+  }
+
+  .my-learning-header__eyebrow-row {
+    gap: 8px;
+  }
+
+  .my-learning-header__eyebrow-status {
+    font-size: 16px;
+  }
+
+  .my-learning-header__title {
+    font-size: 29px;
+
+    line-height: 1.1;
+  }
+
+  .my-learning-header__description {
+    font-size: 16px;
+
+    line-height: 1.55;
+  }
+
+  .my-learning-header__context {
+    width: 100%;
+
+    max-width: 100%;
+
+    padding: 6px;
+
+    border-radius: 14px;
+  }
+
+  .my-learning-header__context-item {
+    grid-template-columns: 42px minmax(0, 1fr);
+
+    column-gap: 11px;
+
+    padding: 10px 8px;
+  }
+
+  .my-learning-header__context-icon {
+    width: 42px;
+    height: 42px;
+
+    min-width: 42px;
+    min-height: 42px;
+
+    flex-basis: 42px;
+
+    border-radius: 11px;
+  }
+
+  .my-learning-header__context-copy {
+    min-width: 0;
+  }
+
+  .my-learning-header__context-copy strong {
+    font-size: 18px;
+  }
+
+  .my-learning-header__context-copy span {
+    font-size: 16px;
+
+    line-height: 1.4;
+
+    white-space: normal;
+  }
+
+  .my-learning-header__snapshot-top {
+    padding-top: 23px;
+
+    gap: 12px;
+  }
+
+  .my-learning-header__snapshot-top h2 {
+    font-size: 24px;
+  }
+
+  .my-learning-header__snapshot-icon {
+    width: 44px;
+    height: 44px;
+
+    min-width: 44px;
+    min-height: 44px;
+
+    flex-basis: 44px;
+
+    border-radius: 12px;
+  }
+
+  .my-learning-header__snapshot-icon svg {
+    width: 21px;
+    height: 21px;
+
+    min-width: 21px;
+    min-height: 21px;
+
+    flex-basis: 21px;
+  }
+
+  .my-learning-header__snapshot-item {
+    padding: 10px;
+  }
+
+  .my-learning-header__snapshot-item-icon {
+    width: 42px;
+    height: 42px;
+
+    min-width: 42px;
+    min-height: 42px;
+
+    flex-basis: 42px;
+  }
+
+  .my-learning-header__snapshot-item-copy span {
+    font-size: 16px;
+  }
+}
+
+/* =========================================================
+   400px
+   EXTRA SMALL PHONE PROTECTION
+========================================================= */
+
+@media (max-width: 400px) {
+  .my-learning-header__hero-content {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .my-learning-header__title {
+    font-size: 28px;
+
+    letter-spacing: -0.025em;
+  }
+
+  .my-learning-header__description {
+    font-size: 16px;
+  }
+
+  .my-learning-header__context {
+    padding: 5px;
+  }
+
+  .my-learning-header__context-item {
+    grid-template-columns: 40px minmax(0, 1fr);
+
+    column-gap: 10px;
+
+    padding: 9px 7px;
+  }
+
+  .my-learning-header__context-icon {
+    width: 40px;
+    height: 40px;
+
+    min-width: 40px;
+    min-height: 40px;
+
+    flex-basis: 40px;
+  }
+
+  .my-learning-header__context-icon svg {
+    width: 20px;
+    height: 20px;
+
+    min-width: 20px;
+    min-height: 20px;
+
+    flex-basis: 20px;
+  }
+
+  .my-learning-header__context-copy strong {
+    font-size: 17px;
+  }
+
+  .my-learning-header__context-copy span {
+    font-size: 16px;
+  }
+
+  .my-learning-header__snapshot-top,
+  .my-learning-header__progress-block,
+  .my-learning-header__snapshot-list {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+
+  .my-learning-header__snapshot-footer {
+    margin-left: 16px;
+    margin-right: 16px;
+
+    max-width: calc(100% - 32px);
+  }
+}
+
+/* =========================================================
+   360px
+========================================================= */
+
+@media (max-width: 360px) {
+  .my-learning-header__hero-content {
+    padding: 21px 14px;
+  }
+
+  .my-learning-header__title {
+    font-size: 27px;
+  }
+
+  .my-learning-header__description {
+    font-size: 16px;
+
+    line-height: 1.55;
+  }
+
+  .my-learning-header__eyebrow-status {
+    font-size: 16px;
+  }
+
+  .my-learning-header__context {
+    padding: 5px;
+
+    border-radius: 13px;
+  }
+
+  .my-learning-header__context-item {
+    grid-template-columns: 40px minmax(0, 1fr);
+
+    column-gap: 9px;
+
+    padding: 9px 6px;
+  }
+
+  .my-learning-header__context-icon {
+    width: 40px;
+    height: 40px;
+
+    min-width: 40px;
+    min-height: 40px;
+
+    flex-basis: 40px;
+
+    border-radius: 10px;
+  }
+
+  .my-learning-header__context-copy strong {
+    font-size: 17px;
+  }
+
+  .my-learning-header__context-copy span {
+    font-size: 16px;
+
+    line-height: 1.4;
+
+    white-space: normal;
+  }
+
+  .my-learning-header__snapshot-top,
+  .my-learning-header__progress-block,
+  .my-learning-header__snapshot-list {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+
+  .my-learning-header__snapshot-footer {
+    margin-left: 14px;
+    margin-right: 14px;
+
+    max-width: calc(100% - 28px);
+  }
+
+  .my-learning-header__snapshot-top {
+    gap: 9px;
+  }
+
+  .my-learning-header__snapshot-icon {
+    width: 40px;
+    height: 40px;
+
+    min-width: 40px;
+    min-height: 40px;
+
+    flex-basis: 40px;
+  }
+
+  .my-learning-header__snapshot-icon svg {
+    width: 20px;
+    height: 20px;
+
+    min-width: 20px;
+    min-height: 20px;
+
+    flex-basis: 20px;
+  }
+
+  .my-learning-header__snapshot-item {
+    gap: 9px;
+
+    padding: 9px;
+  }
+
+  .my-learning-header__snapshot-item-icon {
+    width: 40px;
+    height: 40px;
+
+    min-width: 40px;
+    min-height: 40px;
+
+    flex-basis: 40px;
+  }
+
+  .my-learning-header__snapshot-item-icon svg {
+    width: 20px;
+    height: 20px;
+
+    min-width: 20px;
+    min-height: 20px;
+
+    flex-basis: 20px;
+  }
+
+  .my-learning-header__snapshot-item-copy strong {
+    font-size: 17px;
+  }
+
+  .my-learning-header__snapshot-item-copy span {
+    font-size: 16px;
+  }
+}
+
+/* =========================================================
+   320px
+   FINAL MOBILE SAFETY
+========================================================= */
+
+@media (max-width: 320px) {
+  .my-learning-header__hero-content {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .my-learning-header__title {
+    font-size: 25px;
+  }
+
+  .my-learning-header__description {
+    font-size: 16px;
+  }
+
+  .my-learning-header__context-item {
+    grid-template-columns: 38px minmax(0, 1fr);
+
+    column-gap: 8px;
+
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  .my-learning-header__context-icon {
+    width: 38px;
+    height: 38px;
+
+    min-width: 38px;
+    min-height: 38px;
+
+    flex-basis: 38px;
+  }
+
+  .my-learning-header__context-icon svg {
+    width: 19px;
+    height: 19px;
+
+    min-width: 19px;
+    min-height: 19px;
+
+    flex-basis: 19px;
+  }
+
+  .my-learning-header__context-copy strong {
+    font-size: 16px;
+  }
+
+  .my-learning-header__context-copy span {
+    font-size: 16px;
+  }
+
+  .my-learning-header__snapshot-top,
+  .my-learning-header__progress-block,
+  .my-learning-header__snapshot-list {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .my-learning-header__snapshot-footer {
+    margin-left: 12px;
+    margin-right: 12px;
+
+    max-width: calc(100% - 24px);
+  }
+
+  .my-learning-header__snapshot-item-icon {
+    width: 38px;
+    height: 38px;
+
+    min-width: 38px;
+    min-height: 38px;
+
+    flex-basis: 38px;
+  }
+
+  .my-learning-header__snapshot-item-icon svg {
+    width: 19px;
+    height: 19px;
+
+    min-width: 19px;
+    min-height: 19px;
+
+    flex-basis: 19px;
+  }
+}
+
+/* =========================================================
+   GLOBAL SVG SAFETY FOR THIS COMPONENT
+   Prevents React Icons from collapsing.
+========================================================= */
+
+.my-learning-header svg {
+  display: block;
+
+  max-width: 100%;
+
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .my-learning-header__hero-card,
+  .my-learning-header__snapshot-card,
+  .my-learning-header__snapshot-item,
+  .my-learning-header__progress-value {
+    transition: none;
+  }
+
+  .my-learning-header__hero-card:hover,
+  .my-learning-header__snapshot-card:hover,
+  .my-learning-header__snapshot-item:hover {
+    transform: none;
+  }
+}

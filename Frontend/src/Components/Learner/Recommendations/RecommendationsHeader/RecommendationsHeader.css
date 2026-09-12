@@ -1,0 +1,1951 @@
+/* =========================================================
+   RECOMMENDATIONS HEADER
+   Premium LMS Recommendation Hero
+   Light Glassmorphism + Navy Glassmorphism
+   Responsive / No Overflow / No Text Clipping
+========================================================= */
+
+.recommendations-header {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  margin: 0 0 36px;
+
+  box-sizing: border-box;
+
+  overflow: visible;
+}
+
+.recommendations-header *,
+.recommendations-header *::before,
+.recommendations-header *::after {
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   MAIN HERO
+========================================================= */
+
+.recommendations-header__hero {
+  position: relative;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(0, 1fr)
+    minmax(410px, 0.92fr);
+
+  gap: 28px;
+
+  width: 100%;
+  min-width: 0;
+
+  padding: 38px;
+
+  overflow: hidden;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.97),
+    rgba(241, 249, 253, 0.92)
+  );
+
+  border: 1px solid rgba(178, 210, 224, 0.55);
+
+  border-radius: 27px;
+
+  box-shadow:
+    0 24px 55px rgba(24, 71, 91, 0.08),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+/* =========================================================
+   HERO GLOWS
+========================================================= */
+
+.recommendations-header__glow {
+  position: absolute;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  filter: blur(5px);
+}
+
+.recommendations-header__glow--one {
+  top: -250px;
+  left: 28%;
+
+  width: 500px;
+  height: 500px;
+
+  background: radial-gradient(
+    circle,
+    rgba(74, 180, 225, 0.13),
+    transparent 70%
+  );
+}
+
+.recommendations-header__glow--two {
+  right: -180px;
+  bottom: -240px;
+
+  width: 450px;
+  height: 450px;
+
+  background: radial-gradient(
+    circle,
+    rgba(135, 108, 226, 0.09),
+    transparent 70%
+  );
+}
+
+/* =========================================================
+   DECORATIVE ORBS
+========================================================= */
+
+.recommendations-header__orb {
+  position: absolute;
+
+  border-radius: 50%;
+
+  pointer-events: none;
+
+  opacity: 0.55;
+}
+
+.recommendations-header__orb--one {
+  top: 35px;
+  left: 35%;
+
+  width: 85px;
+  height: 85px;
+
+  background: rgba(83, 190, 226, 0.07);
+}
+
+.recommendations-header__orb--two {
+  right: 42%;
+  bottom: 15px;
+
+  width: 130px;
+  height: 130px;
+
+  background: rgba(139, 112, 235, 0.06);
+}
+
+/* =========================================================
+   LEFT CONTENT
+========================================================= */
+
+.recommendations-header__content {
+  position: relative;
+
+  z-index: 5;
+
+  min-width: 0;
+
+  padding: 10px 0 5px;
+}
+
+/* =========================================================
+   EYEBROW
+========================================================= */
+
+.recommendations-header__eyebrow {
+  display: flex;
+
+  align-items: center;
+
+  min-width: 0;
+
+  margin-bottom: 17px;
+}
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.recommendations-header__title {
+  display: flex;
+
+  flex-direction: column;
+
+  max-width: 690px;
+
+  margin: 0;
+
+  color: #112f54;
+
+  font-size: clamp(38px, 4.3vw, 56px);
+
+  line-height: 1.03;
+
+  font-weight: 750;
+
+  letter-spacing: -0.045em;
+
+  overflow-wrap: anywhere;
+}
+
+.recommendations-header__title span {
+  margin-top: 4px;
+
+  color: #168bb5;
+}
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.recommendations-header__description {
+  max-width: 650px;
+
+  margin: 21px 0 0;
+
+  color: #627f99;
+
+  font-size: 16px;
+
+  line-height: 1.68;
+
+  font-weight: 450;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   ACTIONS
+========================================================= */
+
+.recommendations-header__actions {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 12px;
+
+  width: 100%;
+  min-width: 0;
+
+  margin-top: 27px;
+}
+
+.recommendations-header__primary-button,
+.recommendations-header__secondary-button {
+  max-width: 100%;
+
+  white-space: nowrap;
+}
+
+/* =========================================================
+   SECONDARY BUTTON
+========================================================= */
+
+.recommendations-header__secondary-button {
+  color: #205188 !important;
+
+  background: rgba(255, 255, 255, 0.72) !important;
+
+  border: 1px solid rgba(67, 132, 196, 0.45) !important;
+
+  box-shadow: 0 5px 15px rgba(31, 89, 135, 0.06);
+
+  transition:
+    transform 180ms ease,
+    color 180ms ease,
+    background 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.recommendations-header__secondary-button svg {
+  display: block;
+
+  width: 18px !important;
+  height: 18px !important;
+
+  color: #2778d2 !important;
+
+  flex-shrink: 0;
+}
+
+.recommendations-header__secondary-button:hover {
+  color: #174474 !important;
+
+  background: rgba(239, 248, 253, 0.95) !important;
+
+  border-color: rgba(39, 120, 210, 0.68) !important;
+
+  box-shadow: 0 9px 22px rgba(31, 89, 135, 0.1);
+
+  transform: translateY(-2px);
+}
+
+/* =========================================================
+   BENEFITS
+========================================================= */
+
+.recommendations-header__benefits {
+  display: flex;
+
+  align-items: center;
+
+  flex-wrap: wrap;
+
+  gap: 12px 21px;
+
+  min-width: 0;
+
+  margin-top: 25px;
+}
+
+.recommendations-header__benefit {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  min-width: 0;
+
+  color: #617e96;
+
+  font-size: 13px;
+
+  line-height: 1.45;
+
+  font-weight: 550;
+}
+
+.recommendations-header__benefit > span:last-child {
+  min-width: 0;
+
+  overflow-wrap: anywhere;
+}
+
+.recommendations-header__benefit-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  flex: 0 0 28px;
+
+  border-radius: 50%;
+}
+
+.recommendations-header__benefit-icon svg {
+  display: block;
+
+  width: 15px;
+  height: 15px;
+
+  flex: 0 0 auto;
+}
+
+.recommendations-header__benefit-icon--green {
+  color: #12a57b;
+
+  background: #ddf6ed;
+
+  border: 1px solid #c2e8da;
+}
+
+.recommendations-header__benefit-icon--purple {
+  color: #7258dd;
+
+  background: #eee9ff;
+
+  border: 1px solid #ddd3ff;
+}
+
+.recommendations-header__benefit-icon--amber {
+  color: #d99316;
+
+  background: #fff2d7;
+
+  border: 1px solid #f1ddb3;
+}
+
+/* =========================================================
+   NAVY LEARNING JOURNEY
+========================================================= */
+
+.recommendations-header__journey {
+  position: relative;
+
+  display: flex !important;
+
+  flex-direction: column !important;
+
+  min-width: 0;
+
+  min-height: 395px;
+
+  padding: 28px !important;
+
+  overflow: hidden;
+
+  color: #ffffff;
+
+  background: linear-gradient(
+    145deg,
+    #082f4c 0%,
+    #0b3c5b 48%,
+    #104e6a 100%
+  ) !important;
+
+  border: 1px solid rgba(108, 203, 227, 0.28) !important;
+
+  border-radius: 23px !important;
+
+  box-shadow:
+    0 22px 48px rgba(4, 38, 59, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+/* =========================================================
+   JOURNEY GLOW
+========================================================= */
+
+.recommendations-header__journey-glow {
+  position: absolute;
+
+  top: -140px;
+  right: -120px;
+
+  width: 370px;
+  height: 370px;
+
+  border-radius: 50%;
+
+  background: radial-gradient(
+    circle,
+    rgba(55, 195, 226, 0.16),
+    transparent 70%
+  );
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   JOURNEY ORBITS
+========================================================= */
+
+.recommendations-header__journey-orbit {
+  position: absolute;
+
+  top: 50%;
+  left: 32%;
+
+  border: 1px solid rgba(87, 198, 226, 0.1);
+
+  border-radius: 50%;
+
+  transform: translate(-50%, -50%);
+
+  pointer-events: none;
+}
+
+.recommendations-header__journey-orbit--one {
+  width: 300px;
+  height: 300px;
+}
+
+.recommendations-header__journey-orbit--two {
+  width: 220px;
+  height: 220px;
+
+  border-color: rgba(87, 198, 226, 0.14);
+}
+
+/* =========================================================
+   JOURNEY TOP
+========================================================= */
+
+.recommendations-header__journey-top {
+  position: relative;
+
+  z-index: 5;
+
+  display: flex;
+
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  min-width: 0;
+}
+
+.recommendations-header__journey-heading {
+  display: flex;
+
+  align-items: center;
+
+  gap: 13px;
+
+  min-width: 0;
+}
+
+.recommendations-header__journey-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 47px;
+  height: 47px;
+
+  flex: 0 0 47px;
+
+  color: #63d1e8;
+
+  background: rgba(71, 193, 223, 0.12);
+
+  border: 1px solid rgba(101, 207, 231, 0.2);
+
+  border-radius: 50%;
+}
+
+.recommendations-header__journey-icon svg {
+  display: block;
+
+  width: 23px;
+  height: 23px;
+
+  flex: 0 0 auto;
+}
+
+.recommendations-header__journey-heading h2 {
+  margin: 0;
+
+  color: #f4fbfd;
+
+  font-size: 23px;
+
+  line-height: 1.2;
+
+  font-weight: 750;
+
+  overflow-wrap: anywhere;
+}
+
+.recommendations-header__journey-heading p {
+  margin: 5px 0 0;
+
+  color: #91b5c3;
+
+  font-size: 13px;
+
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   JOURNEY BODY
+========================================================= */
+
+.recommendations-header__journey-body {
+  position: relative;
+
+  z-index: 5;
+
+  display: grid;
+
+  grid-template-columns:
+    minmax(170px, 0.9fr)
+    minmax(0, 1.1fr);
+
+  align-items: center;
+
+  gap: 22px;
+
+  flex: 1;
+
+  min-width: 0;
+
+  margin-top: 18px;
+}
+
+/* =========================================================
+   CIRCULAR PROGRESS
+========================================================= */
+
+.recommendations-header__progress-circle {
+  --progress: 75%;
+
+  position: relative;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 164px;
+  height: 164px;
+
+  margin: 0 auto;
+
+  border-radius: 50%;
+
+  background: conic-gradient(
+    #4cc8e6 0 var(--progress),
+    rgba(255, 255, 255, 0.09) var(--progress) 100%
+  );
+
+  box-shadow: 0 0 35px rgba(67, 198, 226, 0.12);
+}
+
+.recommendations-header__progress-circle::before {
+  content: "";
+
+  position: absolute;
+
+  inset: 6px;
+
+  border-radius: 50%;
+
+  border: 1px solid rgba(112, 210, 230, 0.12);
+}
+
+.recommendations-header__progress-circle-inner {
+  position: relative;
+
+  z-index: 2;
+
+  display: flex;
+
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 142px;
+  height: 142px;
+
+  border-radius: 50%;
+
+  background: linear-gradient(145deg, #0b3d5b, #072e48);
+
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.recommendations-header__progress-circle-inner strong {
+  color: #ffffff;
+
+  font-size: 31px;
+
+  line-height: 1.1;
+
+  font-weight: 800;
+}
+
+.recommendations-header__progress-circle-inner span {
+  margin-top: 5px;
+
+  color: #90b5c4;
+
+  font-size: 11px;
+
+  line-height: 1.35;
+}
+
+/* =========================================================
+   JOURNEY POINTS
+========================================================= */
+
+.recommendations-header__journey-points {
+  display: flex;
+
+  flex-direction: column;
+
+  gap: 13px;
+
+  min-width: 0;
+}
+
+.recommendations-header__journey-point {
+  display: flex;
+
+  align-items: center;
+
+  gap: 10px;
+
+  min-width: 0;
+
+  color: #c3d8e0;
+
+  font-size: 13px;
+
+  line-height: 1.45;
+}
+
+.recommendations-header__journey-point > span:last-child {
+  min-width: 0;
+
+  overflow-wrap: anywhere;
+}
+
+.recommendations-header__journey-point-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 29px;
+  height: 29px;
+
+  flex: 0 0 29px;
+
+  color: #76d4e8;
+
+  background: rgba(76, 201, 229, 0.11);
+
+  border: 1px solid rgba(96, 207, 230, 0.15);
+
+  border-radius: 50%;
+}
+
+.recommendations-header__journey-point-icon svg {
+  display: block;
+
+  width: 14px;
+  height: 14px;
+
+  flex: 0 0 auto;
+}
+
+/* =========================================================
+   JOURNEY FOOTER
+========================================================= */
+
+.recommendations-header__journey-footer {
+  position: relative;
+
+  z-index: 5;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  min-width: 0;
+
+  margin-top: 13px;
+
+  padding-top: 14px;
+
+  border-top: 1px solid rgba(138, 203, 219, 0.11);
+
+  color: #8fb7c5;
+
+  font-size: 12px;
+
+  line-height: 1.5;
+
+  font-style: italic;
+}
+
+.recommendations-header__journey-footer span {
+  min-width: 0;
+
+  overflow-wrap: anywhere;
+}
+
+.recommendations-header__journey-footer svg {
+  display: block;
+
+  width: 17px;
+  height: 17px;
+
+  flex: 0 0 17px;
+
+  color: #5ecde5;
+}
+
+/* =========================================================
+   FOUR STAT CARDS
+========================================================= */
+
+.recommendations-header__stats {
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 16px;
+
+  width: 100%;
+  min-width: 0;
+
+  margin-top: 18px;
+}
+
+/* =========================================================
+   STAT CARD BASE
+========================================================= */
+
+.recommendations-header__stat {
+  position: relative;
+
+  display: flex !important;
+
+  align-items: center;
+
+  gap: 13px;
+
+  width: 100%;
+  min-width: 0;
+
+  min-height: 132px;
+
+  padding: 20px 72px 20px 20px !important;
+
+  overflow: hidden;
+
+  border-radius: 19px !important;
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease,
+    border-color 180ms ease;
+}
+
+.recommendations-header__stat:hover {
+  transform: translateY(-3px);
+
+  box-shadow: 0 15px 32px rgba(26, 72, 94, 0.1);
+}
+
+/* =========================================================
+   STAT COLORS
+========================================================= */
+
+.recommendations-header__stat--blue {
+  background: linear-gradient(135deg, #eff8ff, #e4f2ff) !important;
+
+  border: 1px solid #cde5fb !important;
+}
+
+.recommendations-header__stat--green {
+  background: linear-gradient(135deg, #effaf5, #e4f7ef) !important;
+
+  border: 1px solid #cbe9dc !important;
+}
+
+.recommendations-header__stat--purple {
+  background: linear-gradient(135deg, #f5f1ff, #eee9ff) !important;
+
+  border: 1px solid #ddd4ff !important;
+}
+
+.recommendations-header__stat--amber {
+  background: linear-gradient(135deg, #fff9eb, #fff1d7) !important;
+
+  border: 1px solid #f0ddba !important;
+}
+
+/* =========================================================
+   STAT ICON
+========================================================= */
+
+.recommendations-header__stat-icon {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+
+  flex: 0 0 48px;
+
+  border-radius: 50%;
+}
+
+.recommendations-header__stat-icon svg {
+  display: block;
+
+  width: 23px;
+  height: 23px;
+
+  flex: 0 0 auto;
+}
+
+.recommendations-header__stat--blue .recommendations-header__stat-icon {
+  color: #237ee8;
+
+  background: #dceeff;
+
+  border: 1px solid #c7e1fb;
+}
+
+.recommendations-header__stat--green .recommendations-header__stat-icon {
+  color: #13a67b;
+
+  background: #d9f4e9;
+
+  border: 1px solid #c0e7d7;
+}
+
+.recommendations-header__stat--purple .recommendations-header__stat-icon {
+  color: #7758e6;
+
+  background: #ebe5ff;
+
+  border: 1px solid #dcd1ff;
+}
+
+.recommendations-header__stat--amber .recommendations-header__stat-icon {
+  color: #dc9516;
+
+  background: #fff0d2;
+
+  border: 1px solid #f2ddb5;
+}
+
+/* =========================================================
+   STAT CONTENT
+========================================================= */
+
+.recommendations-header__stat-content {
+  display: flex;
+
+  flex-direction: column;
+
+  min-width: 0;
+
+  flex: 1 1 auto;
+}
+
+.recommendations-header__stat-content strong {
+  color: #14375e;
+
+  font-size: 28px;
+
+  line-height: 1.1;
+
+  font-weight: 800;
+
+  overflow-wrap: anywhere;
+}
+
+.recommendations-header__stat-content h3 {
+  margin: 4px 0 0;
+
+  color: #19456c;
+
+  font-size: 15px;
+
+  line-height: 1.3;
+
+  font-weight: 700;
+
+  overflow-wrap: anywhere;
+}
+
+.recommendations-header__stat-content p {
+  margin: 5px 0 0;
+
+  color: #6f8ba4;
+
+  font-size: 12px;
+
+  line-height: 1.4;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   STAT ARROW
+   ALWAYS FAR RIGHT
+========================================================= */
+
+.recommendations-header__stat-arrow {
+  position: absolute;
+
+  top: 50%;
+  right: 18px;
+
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  width: 43px;
+  height: 43px;
+
+  margin: 0;
+  padding: 0;
+
+  transform: translateY(-50%);
+
+  color: #2777ca;
+
+  background: rgba(255, 255, 255, 0.72);
+
+  border: 1px solid rgba(83, 154, 211, 0.3);
+
+  border-radius: 50%;
+
+  cursor: pointer;
+
+  transition:
+    transform 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.recommendations-header__stat-arrow svg {
+  display: block;
+
+  width: 18px;
+  height: 18px;
+
+  flex: 0 0 auto;
+}
+
+.recommendations-header__stat-arrow:hover {
+  transform: translate(3px, -50%);
+
+  background: rgba(255, 255, 255, 0.98);
+
+  box-shadow: 0 7px 16px rgba(30, 93, 145, 0.13);
+}
+
+/* =========================================================
+   POTENTIAL BANNER
+   IMPORTANT:
+   DESKTOP IS ALWAYS HORIZONTAL
+
+   VISUAL | CONTENT | QUOTE
+========================================================= */
+
+
+
+/* =========================================================
+   HIDDEN DATA
+========================================================= */
+
+.recommendations-header__hidden-data {
+  position: absolute;
+
+  width: 1px;
+  height: 1px;
+
+  overflow: hidden;
+
+  opacity: 0;
+
+  pointer-events: none;
+}
+
+/* =========================================================
+   1150px
+========================================================= */
+
+@media (max-width: 1150px) {
+  .recommendations-header__hero {
+    grid-template-columns:
+      minmax(0, 1fr)
+      minmax(360px, 0.9fr);
+
+    gap: 20px;
+
+    padding: 30px;
+  }
+
+  .recommendations-header__journey {
+    padding: 23px !important;
+  }
+
+  .recommendations-header__journey-body {
+    grid-template-columns:
+      minmax(145px, 0.85fr)
+      minmax(0, 1.15fr);
+
+    gap: 14px;
+  }
+
+  .recommendations-header__progress-circle {
+    width: 145px;
+    height: 145px;
+  }
+
+  .recommendations-header__progress-circle-inner {
+    width: 125px;
+    height: 125px;
+  }
+
+  /* -----------------------------------------------
+     POTENTIAL
+     Still horizontal
+  ------------------------------------------------ */
+
+  .recommendations-header__potential {
+    grid-template-columns:
+      190px
+      minmax(0, 1fr)
+      270px !important;
+
+    gap: 22px !important;
+
+    padding: 24px !important;
+  }
+}
+
+/* =========================================================
+   1050px
+========================================================= */
+
+@media (max-width: 1050px) {
+  .recommendations-header__potential {
+    grid-template-columns:
+      170px
+      minmax(0, 1fr)
+      245px !important;
+
+    gap: 18px !important;
+
+    padding: 21px !important;
+  }
+
+  .recommendations-header__potential .recommendations-header__potential-visual {
+    height: 165px !important;
+  }
+
+  .recommendations-header__potential-content h2 {
+    font-size: 23px;
+  }
+
+  .recommendations-header__potential-content p {
+    font-size: 14px;
+  }
+
+  .recommendations-header__potential-quote {
+    padding-left: 20px !important;
+  }
+
+  .recommendations-header__potential-quote blockquote {
+    font-size: 15px;
+  }
+
+  .recommendations-header__quote-mark {
+    left: 19px;
+  }
+}
+
+/* =========================================================
+   1000px
+========================================================= */
+
+@media (max-width: 1000px) {
+  .recommendations-header__stats {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .recommendations-header__potential {
+    grid-template-columns:
+      155px
+      minmax(0, 1fr)
+      220px !important;
+
+    gap: 16px !important;
+
+    padding: 19px !important;
+  }
+
+  .recommendations-header__potential .recommendations-header__potential-visual {
+    height: 150px !important;
+  }
+
+  .recommendations-header__potential-card--front {
+    width: 103px;
+    height: 121px;
+
+    padding: 15px;
+  }
+
+  .recommendations-header__potential-card--middle {
+    width: 97px;
+    height: 115px;
+  }
+
+  .recommendations-header__potential-card--back {
+    width: 92px;
+    height: 109px;
+  }
+
+  .recommendations-header__potential-content h2 {
+    font-size: 21px;
+  }
+
+  .recommendations-header__potential-content p {
+    font-size: 14px;
+
+    line-height: 1.55;
+  }
+
+  .recommendations-header__potential-quote {
+    padding-left: 17px !important;
+  }
+
+  .recommendations-header__potential-quote blockquote {
+    font-size: 14px;
+  }
+
+  .recommendations-header__quote-mark {
+    left: 16px;
+
+    font-size: 47px;
+  }
+}
+
+/* =========================================================
+   900px
+========================================================= */
+
+@media (max-width: 950px) {
+  .recommendations-header__hero {
+    grid-template-columns: 1fr;
+  }
+
+  .recommendations-header__journey {
+    min-height: 370px;
+  }
+
+  .recommendations-header__journey-body {
+    width: min(650px, 100%);
+
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /*
+    Keep potential horizontal.
+    We still have three columns here.
+  */
+
+  .recommendations-header__potential {
+    grid-template-columns:
+      140px
+      minmax(0, 1fr)
+      190px !important;
+
+    gap: 14px !important;
+
+    padding: 18px !important;
+  }
+
+  .recommendations-header__potential .recommendations-header__potential-visual {
+    height: 140px !important;
+  }
+
+  .recommendations-header__potential-card--front {
+    width: 96px;
+    height: 116px;
+
+    padding: 14px;
+  }
+
+  .recommendations-header__potential-card--middle {
+    width: 91px;
+    height: 111px;
+  }
+
+  .recommendations-header__potential-card--back {
+    width: 86px;
+    height: 105px;
+  }
+
+  .recommendations-header__potential-content h2 {
+    font-size: 20px;
+  }
+
+  .recommendations-header__potential-content p {
+    font-size: 14px;
+
+    line-height: 1.5;
+  }
+
+  .recommendations-header__potential-quote {
+    padding-left: 14px !important;
+  }
+
+  .recommendations-header__potential-quote blockquote {
+    font-size: 13px;
+
+    line-height: 1.45;
+  }
+
+  .recommendations-header__quote-mark {
+    left: 13px;
+
+    font-size: 42px;
+  }
+}
+
+/* =========================================================
+   820px
+   Switch before content becomes too compressed
+========================================================= */
+
+@media (max-width: 820px) {
+  /*
+    Two-column safe layout:
+
+    VISUAL | CONTENT
+           | QUOTE
+  */
+
+  .recommendations-header__potential {
+    display: grid !important;
+
+    grid-template-columns:
+      165px
+      minmax(0, 1fr) !important;
+
+    grid-template-rows:
+      auto
+      auto !important;
+
+    align-items: center !important;
+
+    gap: 18px !important;
+
+    padding: 20px !important;
+  }
+
+  .recommendations-header__potential .recommendations-header__potential-visual {
+    grid-column: 1 !important;
+
+    grid-row: 1 / span 2 !important;
+
+    width: 100% !important;
+
+    height: 190px !important;
+  }
+
+  .recommendations-header__potential
+    .recommendations-header__potential-content {
+    grid-column: 2 !important;
+
+    grid-row: 1 !important;
+  }
+
+  .recommendations-header__potential .recommendations-header__potential-quote {
+    grid-column: 2 !important;
+
+    grid-row: 2 !important;
+
+    padding: 15px 0 0 !important;
+
+    border-left: 0 !important;
+
+    border-top: 1px solid rgba(107, 170, 198, 0.25) !important;
+  }
+
+  .recommendations-header__potential-content h2 {
+    font-size: 21px;
+  }
+
+  .recommendations-header__potential-content p {
+    font-size: 14px;
+  }
+
+  .recommendations-header__potential-quote blockquote {
+    font-size: 15px;
+  }
+
+  .recommendations-header__quote-mark {
+    top: 2px;
+
+    left: 0;
+  }
+}
+
+/* =========================================================
+   700px
+========================================================= */
+
+@media (max-width: 700px) {
+  .recommendations-header {
+    margin-bottom: 28px;
+  }
+
+  .recommendations-header__hero {
+    padding: 25px 22px;
+
+    border-radius: 22px;
+  }
+
+  .recommendations-header__title {
+    font-size: 38px;
+
+    line-height: 1.08;
+  }
+
+  .recommendations-header__description {
+    font-size: 16px;
+
+    line-height: 1.62;
+  }
+
+  .recommendations-header__actions {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 10px;
+  }
+
+  .recommendations-header__primary-button,
+  .recommendations-header__secondary-button {
+    width: 100%;
+
+    max-width: 100%;
+  }
+
+  .recommendations-header__benefits {
+    display: grid;
+
+    grid-template-columns: 1fr;
+
+    gap: 9px;
+  }
+
+  .recommendations-header__journey {
+    min-height: auto;
+
+    padding: 22px !important;
+  }
+
+  .recommendations-header__journey-body {
+    grid-template-columns: 1fr;
+
+    gap: 18px;
+
+    margin-top: 22px;
+  }
+
+  .recommendations-header__progress-circle {
+    width: 155px;
+    height: 155px;
+  }
+
+  .recommendations-header__progress-circle-inner {
+    width: 135px;
+    height: 135px;
+  }
+
+  .recommendations-header__journey-points {
+    width: min(430px, 100%);
+
+    margin: 0 auto;
+  }
+
+  .recommendations-header__stats {
+    grid-template-columns: 1fr;
+
+    gap: 11px;
+  }
+
+  .recommendations-header__stat {
+    min-height: 112px;
+
+    padding: 17px 70px 17px 17px !important;
+  }
+
+  /*
+    Potential still remains horizontal
+    through 700px because the two-column
+    layout is still comfortable.
+  */
+
+  .recommendations-header__potential {
+    grid-template-columns:
+      145px
+      minmax(0, 1fr) !important;
+
+    grid-template-rows:
+      auto
+      auto !important;
+
+    gap: 16px !important;
+
+    padding: 19px !important;
+  }
+
+  .recommendations-header__potential .recommendations-header__potential-visual {
+    height: 175px !important;
+  }
+
+  .recommendations-header__potential-card--front {
+    width: 98px;
+    height: 118px;
+  }
+
+  .recommendations-header__potential-card--middle {
+    width: 93px;
+    height: 112px;
+  }
+
+  .recommendations-header__potential-card--back {
+    width: 88px;
+    height: 106px;
+  }
+
+  .recommendations-header__potential-content h2 {
+    font-size: 20px;
+  }
+
+  .recommendations-header__potential-content p {
+    font-size: 14px;
+
+    line-height: 1.55;
+  }
+
+  .recommendations-header__potential-quote blockquote {
+    font-size: 14px;
+  }
+}
+
+/* =========================================================
+   600px
+   Mobile = clean vertical
+========================================================= */
+
+@media (max-width: 600px) {
+  .recommendations-header__hero {
+    padding: 23px 19px;
+  }
+
+  .recommendations-header__eyebrow {
+    margin-bottom: 14px;
+  }
+
+  .recommendations-header__title {
+    font-size: 33px;
+
+    letter-spacing: -0.035em;
+  }
+
+  .recommendations-header__description {
+    margin-top: 15px;
+  }
+
+  .recommendations-header__benefits {
+    margin-top: 21px;
+  }
+
+  .recommendations-header__journey {
+    padding: 19px !important;
+  }
+
+  .recommendations-header__journey-top {
+    align-items: flex-start;
+
+    gap: 9px;
+  }
+
+  .recommendations-header__journey-heading {
+    gap: 9px;
+  }
+
+  .recommendations-header__journey-icon {
+    width: 41px;
+    height: 41px;
+
+    flex-basis: 41px;
+  }
+
+  .recommendations-header__journey-heading h2 {
+    font-size: 19px;
+  }
+
+  .recommendations-header__journey-heading p {
+    font-size: 12px;
+  }
+
+  .recommendations-header__progress-circle {
+    width: 145px;
+    height: 145px;
+  }
+
+  .recommendations-header__progress-circle-inner {
+    width: 125px;
+    height: 125px;
+  }
+
+  .recommendations-header__progress-circle-inner strong {
+    font-size: 28px;
+  }
+
+  .recommendations-header__journey-point {
+    font-size: 13px;
+  }
+
+  .recommendations-header__stat-arrow {
+    right: 16px;
+
+    width: 41px;
+    height: 41px;
+  }
+
+  /*
+    -----------------------------------------------
+    POTENTIAL
+    Fully vertical on mobile.
+    No squeezing.
+    -----------------------------------------------
+  */
+
+  .recommendations-header__potential {
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    align-items: stretch !important;
+
+    gap: 18px !important;
+
+    width: 100% !important;
+
+    padding: 19px !important;
+  }
+
+  .recommendations-header__potential .recommendations-header__potential-visual {
+    display: flex !important;
+
+    width: 100% !important;
+
+    height: 145px !important;
+
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+
+  .recommendations-header__potential
+    .recommendations-header__potential-content {
+    display: flex !important;
+
+    width: 100% !important;
+
+    grid-column: auto !important;
+    grid-row: auto !important;
+  }
+
+  .recommendations-header__potential .recommendations-header__potential-quote {
+    display: block !important;
+
+    width: 100% !important;
+
+    grid-column: auto !important;
+    grid-row: auto !important;
+
+    padding: 18px 0 0 !important;
+
+    border-left: 0 !important;
+
+    border-top: 1px solid rgba(107, 170, 198, 0.25) !important;
+  }
+
+  .recommendations-header__potential-content h2 {
+    font-size: 22px;
+  }
+
+  .recommendations-header__potential-content p {
+    font-size: 14px;
+
+    line-height: 1.58;
+  }
+
+  .recommendations-header__potential-quote blockquote {
+    font-size: 16px;
+  }
+
+  .recommendations-header__quote-mark {
+    top: -5px;
+
+    left: 0;
+
+    font-size: 48px;
+  }
+}
+
+/* =========================================================
+   480px
+========================================================= */
+
+@media (max-width: 480px) {
+  .recommendations-header__hero {
+    padding: 21px 16px;
+
+    border-radius: 20px;
+  }
+
+  .recommendations-header__title {
+    font-size: 29px;
+
+    line-height: 1.1;
+  }
+
+  .recommendations-header__description {
+    font-size: 16px;
+
+    line-height: 1.58;
+  }
+
+  .recommendations-header__journey {
+    padding: 17px !important;
+
+    border-radius: 19px !important;
+  }
+
+  .recommendations-header__journey-top {
+    flex-direction: column;
+
+    align-items: flex-start;
+  }
+
+  .recommendations-header__journey-body {
+    gap: 16px;
+  }
+
+  .recommendations-header__journey-footer {
+    align-items: flex-start;
+
+    font-size: 11px;
+  }
+
+  /* -----------------------------------------------
+     STAT CARD
+  ------------------------------------------------ */
+
+  .recommendations-header__stat {
+    min-height: 112px;
+
+    padding: 17px 66px 17px 17px !important;
+  }
+
+  .recommendations-header__stat-icon {
+    width: 43px;
+    height: 43px;
+
+    flex-basis: 43px;
+  }
+
+  .recommendations-header__stat-content strong {
+    font-size: 25px;
+  }
+
+  .recommendations-header__stat-content h3 {
+    font-size: 14px;
+
+    line-height: 1.35;
+  }
+
+  .recommendations-header__stat-content p {
+    font-size: 12px;
+  }
+
+  .recommendations-header__stat-arrow {
+    right: 14px;
+
+    width: 39px;
+    height: 39px;
+  }
+
+  /* -----------------------------------------------
+     POTENTIAL
+  ------------------------------------------------ */
+
+  .recommendations-header__potential {
+    padding: 17px !important;
+  }
+
+  .recommendations-header__potential .recommendations-header__potential-visual {
+    height: 135px !important;
+  }
+
+  .recommendations-header__potential-card--front {
+    width: 108px;
+
+    height: 126px;
+  }
+
+  .recommendations-header__potential-content h2 {
+    font-size: 21px;
+  }
+
+  .recommendations-header__potential-content p {
+    font-size: 14px;
+  }
+
+  .recommendations-header__potential-quote {
+    padding-top: 16px !important;
+  }
+
+  .recommendations-header__potential-quote blockquote {
+    font-size: 16px;
+  }
+}
+
+/* =========================================================
+   360px
+========================================================= */
+
+@media (max-width: 360px) {
+  .recommendations-header__hero {
+    padding: 19px 14px;
+  }
+
+  .recommendations-header__title {
+    font-size: 27px;
+  }
+
+  .recommendations-header__description {
+    font-size: 16px;
+
+    line-height: 1.55;
+  }
+
+  .recommendations-header__journey {
+    padding: 15px !important;
+  }
+
+  .recommendations-header__journey-heading h2 {
+    font-size: 17px;
+  }
+
+  .recommendations-header__progress-circle {
+    width: 132px;
+    height: 132px;
+  }
+
+  .recommendations-header__progress-circle-inner {
+    width: 114px;
+    height: 114px;
+  }
+
+  .recommendations-header__progress-circle-inner strong {
+    font-size: 25px;
+  }
+
+  .recommendations-header__journey-point {
+    font-size: 12px;
+  }
+
+  /* -----------------------------------------------
+     STAT CARD
+  ------------------------------------------------ */
+
+  .recommendations-header__stat {
+    min-height: 108px;
+
+    padding: 15px 62px 15px 15px !important;
+  }
+
+  .recommendations-header__stat-content strong {
+    font-size: 24px;
+  }
+
+  .recommendations-header__stat-content h3 {
+    font-size: 14px;
+  }
+
+  .recommendations-header__stat-content p {
+    font-size: 12px;
+  }
+
+  .recommendations-header__stat-arrow {
+    right: 12px;
+
+    width: 38px;
+    height: 38px;
+  }
+
+  /* -----------------------------------------------
+     POTENTIAL
+  ------------------------------------------------ */
+
+  .recommendations-header__potential {
+    padding: 15px !important;
+  }
+
+  .recommendations-header__potential .recommendations-header__potential-visual {
+    height: 125px !important;
+  }
+
+  .recommendations-header__potential-card--front {
+    width: 100px;
+
+    height: 118px;
+
+    padding: 15px;
+  }
+
+  .recommendations-header__potential-card--front div {
+    font-size: 15px;
+  }
+
+  .recommendations-header__potential-content h2 {
+    font-size: 20px;
+  }
+
+  .recommendations-header__potential-content p {
+    font-size: 14px;
+  }
+
+  .recommendations-header__potential-quote blockquote {
+    font-size: 15px;
+  }
+}
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .recommendations-header__stat,
+  .recommendations-header__secondary-button,
+  .recommendations-header__stat-arrow,
+  .recommendations-header__potential-card {
+    transition: none;
+  }
+
+  .recommendations-header__stat:hover {
+    transform: none;
+  }
+
+  .recommendations-header__secondary-button:hover {
+    transform: none;
+  }
+
+  .recommendations-header__potential-visual:hover
+    .recommendations-header__potential-card--front {
+    transform: translateX(13px) rotate(-3deg);
+  }
+
+  .recommendations-header__stat-arrow:hover {
+    transform: translateY(-50%);
+  }
+}
+

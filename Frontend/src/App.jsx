@@ -1,6 +1,6 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
+import AdminRoutes from "./routes/AdminRoutes";
 // ================================
 // PUBLIC PAGES
 // ================================
@@ -69,6 +69,7 @@ function App() {
         */}
         <Route path="/learner/*" element={<LearnerRoutes />} />
         <Route path="/trainer/*" element={<TrainerRoutes />} />
+        <Route path="/admin/*" element={<AdminRoutes />} />
       </Routes>
     </BrowserRouter>
   );

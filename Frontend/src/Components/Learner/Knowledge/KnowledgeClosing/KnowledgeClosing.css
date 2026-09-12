@@ -1,0 +1,1242 @@
+/* =========================================================
+   KNOWLEDGE CLOSING
+   Capacity Connect — Learner Knowledge Hub
+
+   Design:
+   ✓ Light theme dominant
+   ✓ Ocean / knowledge aesthetic
+   ✓ Four unique pastel action cards
+   ✓ Glassmorphism
+   ✓ Premium navy CTA
+   ✓ Responsive
+   ✓ No horizontal overflow
+   ✓ No text clipping
+   ✓ SVG icons explicitly sized
+========================================================= */
+
+.knowledge-closing {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  padding: 30px 30px 65px;
+  background: #f5f9fc;
+  overflow: hidden;
+}
+
+.knowledge-closing *,
+.knowledge-closing *::before,
+.knowledge-closing *::after {
+  box-sizing: border-box;
+  min-width: 0;
+}
+
+.knowledge-closing__container {
+  position: relative;
+  width: 100%;
+  max-width: 1440px;
+  min-width: 0;
+  margin: 0 auto;
+  padding: 42px 58px 34px;
+  border: 1px solid rgba(196, 220, 231, 0.9);
+  border-radius: 28px;
+  background: linear-gradient(
+    112deg,
+    rgba(255, 255, 255, 0.98) 0%,
+    rgba(247, 252, 253, 0.96) 47%,
+    rgba(232, 245, 249, 0.94) 100%
+  );
+  box-shadow:
+    0 24px 60px rgba(39, 72, 96, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.95);
+  overflow: hidden;
+}
+
+/* =========================================================
+   AMBIENT BACKGROUND
+========================================================= */
+
+.knowledge-closing__ambient {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(30px);
+}
+
+.knowledge-closing__ambient--one {
+  top: -170px;
+  left: 35%;
+  width: 390px;
+  height: 300px;
+  background: rgba(116, 207, 231, 0.12);
+}
+
+.knowledge-closing__ambient--two {
+  right: -100px;
+  bottom: -150px;
+  width: 370px;
+  height: 300px;
+  background: rgba(177, 224, 201, 0.13);
+}
+
+.knowledge-closing__wave {
+  position: absolute;
+  border-radius: 50%;
+  border: 1px solid rgba(117, 194, 217, 0.12);
+  pointer-events: none;
+}
+
+.knowledge-closing__wave--one {
+  right: 27%;
+  bottom: -210px;
+  width: 530px;
+  height: 310px;
+}
+
+.knowledge-closing__wave--two {
+  right: -80px;
+  top: 230px;
+  width: 300px;
+  height: 190px;
+}
+
+/* =========================================================
+   TOP SECTION
+========================================================= */
+
+.knowledge-closing__top {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(470px, 1.05fr);
+  align-items: center;
+  gap: 42px;
+  width: 100%;
+  min-width: 0;
+}
+
+.knowledge-closing__content {
+  min-width: 0;
+  padding-right: 10px;
+}
+
+/* =========================================================
+   BRAND LINE
+========================================================= */
+
+.knowledge-closing__brand-line {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  margin-bottom: 17px;
+}
+
+.knowledge-closing__brand-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 31px;
+  width: 31px;
+  height: 31px;
+  border: 1px solid #d3e9f3;
+  border-radius: 50%;
+  background: rgba(232, 247, 252, 0.9);
+  color: #277ba0;
+  box-shadow: 0 5px 13px rgba(41, 111, 142, 0.08);
+}
+
+.knowledge-closing__brand-icon svg {
+  display: block;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
+}
+
+.knowledge-closing__brand-text {
+  color: #214d72;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 2px;
+  line-height: 1.4;
+  white-space: nowrap;
+}
+
+.knowledge-closing__brand-line-divider {
+  width: 55px;
+  height: 1px;
+  margin-left: 4px;
+  background: #9cc7da;
+}
+
+/* =========================================================
+   MAIN TITLE
+========================================================= */
+
+.knowledge-closing__title {
+  max-width: 620px;
+  margin: 0;
+  color: #103b64;
+  font-size: clamp(38px, 4vw, 62px);
+  font-weight: 850;
+  letter-spacing: -1.8px;
+  line-height: 1.08;
+  overflow-wrap: anywhere;
+}
+
+.knowledge-closing__title span {
+  display: block;
+  color: #143f67;
+}
+
+.knowledge-closing__description {
+  max-width: 650px;
+  margin: 19px 0 0;
+  color: #5f7c95;
+  font-size: 18px;
+  font-weight: 500;
+  line-height: 1.65;
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   OCEAN VISUAL
+========================================================= */
+
+.knowledge-closing__visual {
+  position: relative;
+  min-width: 0;
+  min-height: 345px;
+  border-radius: 32px;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.knowledge-closing__ocean-image {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: linear-gradient(
+    180deg,
+    #bce0f0 0%,
+    #d7edf2 38%,
+    #9dd2df 61%,
+    #428ca6 100%
+  );
+}
+
+/*
+   The visual is intentionally created in CSS so the component
+   doesn't depend on an external image URL.
+
+   It creates a premium stylized ocean / cliff / lighthouse
+   composition while remaining fully responsive.
+*/
+
+.knowledge-closing__sky {
+  position: absolute;
+  inset: 0 0 42% 0;
+  background:
+    radial-gradient(
+      circle at 69% 31%,
+      rgba(255, 237, 184, 0.9) 0,
+      rgba(255, 225, 158, 0.42) 12%,
+      transparent 30%
+    ),
+    linear-gradient(180deg, #9dcee3, #d9edf1);
+}
+
+.knowledge-closing__sun {
+  position: absolute;
+  top: 13%;
+  right: 24%;
+  width: 78px;
+  height: 78px;
+  border-radius: 50%;
+  background: rgba(255, 229, 169, 0.8);
+  box-shadow: 0 0 45px rgba(255, 225, 154, 0.65);
+}
+
+.knowledge-closing__cloud {
+  position: absolute;
+  width: 115px;
+  height: 25px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.48);
+  filter: blur(2px);
+}
+
+.knowledge-closing__cloud--one {
+  top: 20%;
+  left: 11%;
+}
+
+.knowledge-closing__cloud--two {
+  top: 31%;
+  left: 33%;
+  width: 75px;
+}
+
+/* =========================================================
+   CLIFF
+========================================================= */
+
+.knowledge-closing__cliff {
+  position: absolute;
+  right: -4%;
+  bottom: 21%;
+  width: 67%;
+  height: 46%;
+  border-radius: 58% 0 0 0;
+  background: linear-gradient(145deg, #527d6b 0%, #345d4e 45%, #234c43 100%);
+  clip-path: polygon(
+    17% 44%,
+    33% 30%,
+    48% 32%,
+    62% 18%,
+    78% 22%,
+    100% 5%,
+    100% 100%,
+    0 100%
+  );
+}
+
+.knowledge-closing__cliff::before {
+  content: "";
+  position: absolute;
+  top: 13%;
+  left: 25%;
+  width: 46%;
+  height: 35%;
+  border-radius: 50%;
+  background: rgba(136, 174, 132, 0.35);
+  filter: blur(10px);
+}
+
+.knowledge-closing__cliff-light {
+  position: absolute;
+  top: 25%;
+  left: 46%;
+  width: 30%;
+  height: 3px;
+  border-radius: 999px;
+  background: rgba(194, 221, 180, 0.55);
+  transform: rotate(-11deg);
+}
+
+/* =========================================================
+   LIGHTHOUSE
+========================================================= */
+
+.knowledge-closing__lighthouse {
+  position: absolute;
+  right: 23%;
+  bottom: 41%;
+  width: 23px;
+  height: 72px;
+  z-index: 4;
+}
+
+.knowledge-closing__lighthouse-body {
+  position: absolute;
+  left: 5px;
+  bottom: 0;
+  width: 13px;
+  height: 55px;
+  border-radius: 4px 4px 2px 2px;
+  background: repeating-linear-gradient(
+    180deg,
+    #f7f3e7 0 11px,
+    #cf6d58 11px 16px
+  );
+  transform: perspective(20px) rotateX(-1deg);
+}
+
+.knowledge-closing__lighthouse-top {
+  position: absolute;
+  top: 4px;
+  left: 1px;
+  width: 21px;
+  height: 11px;
+  border-radius: 50% 50% 3px 3px;
+  background: #3d5965;
+}
+
+.knowledge-closing__lighthouse-light {
+  position: absolute;
+  top: 0;
+  left: 7px;
+  width: 9px;
+  height: 7px;
+  border-radius: 3px;
+  background: #fff4b9;
+  box-shadow: 0 0 18px rgba(255, 236, 157, 0.9);
+}
+
+/* =========================================================
+   SEA
+========================================================= */
+
+.knowledge-closing__sea {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  height: 45%;
+  background: linear-gradient(180deg, #74b5c7, #3e8ca7);
+  clip-path: polygon(
+    0 30%,
+    17% 24%,
+    34% 33%,
+    51% 18%,
+    68% 27%,
+    84% 15%,
+    100% 21%,
+    100% 100%,
+    0 100%
+  );
+}
+
+.knowledge-closing__sea-line {
+  position: absolute;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(224, 246, 248, 0.5);
+}
+
+.knowledge-closing__sea-line--one {
+  top: 35%;
+  left: 9%;
+  width: 28%;
+}
+
+.knowledge-closing__sea-line--two {
+  top: 57%;
+  left: 48%;
+  width: 35%;
+}
+
+.knowledge-closing__sea-line--three {
+  top: 75%;
+  left: 17%;
+  width: 42%;
+}
+
+/* =========================================================
+   BIRDS
+========================================================= */
+
+.knowledge-closing__bird {
+  position: absolute;
+  z-index: 5;
+  color: #385b67;
+  font-size: 34px;
+  line-height: 1;
+  transform: rotate(12deg);
+}
+
+.knowledge-closing__bird--one {
+  top: 25%;
+  left: 47%;
+}
+
+.knowledge-closing__bird--two {
+  top: 19%;
+  left: 57%;
+  font-size: 24px;
+}
+
+/* =========================================================
+   QUOTE
+========================================================= */
+
+.knowledge-closing__quote {
+  position: absolute;
+  z-index: 8;
+  top: 25px;
+  left: 28px;
+  display: flex;
+  flex-direction: column;
+  width: min(300px, 47%);
+  min-width: 0;
+  padding: 23px 25px;
+  border: 1px solid rgba(255, 255, 255, 0.68);
+  border-radius: 50%;
+  background: rgba(247, 252, 253, 0.66);
+  box-shadow:
+    0 15px 35px rgba(33, 82, 104, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+}
+
+.knowledge-closing__quote-mark {
+  color: #4d94ba;
+  font-family: Georgia, serif;
+  font-size: 37px;
+  font-weight: 800;
+  line-height: 0.8;
+}
+
+.knowledge-closing__quote p {
+  margin: 5px 0 10px;
+  color: #164b72;
+  font-size: 16px;
+  font-weight: 750;
+  line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+
+.knowledge-closing__quote-line {
+  width: 35px;
+  height: 1px;
+  margin: 2px 0 8px;
+  background: #4b8dac;
+}
+
+.knowledge-closing__quote-author {
+  color: #47728b;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.4;
+}
+
+/* =========================================================
+   VISUAL MESSAGE
+========================================================= */
+
+.knowledge-closing__visual-message {
+  position: absolute;
+  z-index: 8;
+  top: 24px;
+  right: 25px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  color: rgba(255, 255, 255, 0.96);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 19px;
+  font-style: italic;
+  font-weight: 600;
+  line-height: 1.25;
+  text-align: right;
+  text-shadow: 0 2px 12px rgba(17, 64, 81, 0.35);
+}
+
+/* =========================================================
+   FOUR ACTION CARDS
+========================================================= */
+
+.knowledge-closing__actions {
+  position: relative;
+  z-index: 10;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 17px;
+  margin-top: 28px;
+}
+
+.knowledge-closing__action {
+  display: flex;
+  align-items: center;
+  min-width: 0;
+  min-height: 108px;
+  padding: 15px;
+  border: 1px solid transparent;
+  border-radius: 17px;
+  font-family: inherit;
+  text-align: left;
+  cursor: pointer;
+  box-shadow:
+    0 9px 22px rgba(44, 75, 95, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition:
+    transform 230ms ease,
+    box-shadow 230ms ease,
+    border-color 230ms ease;
+}
+
+.knowledge-closing__action:hover {
+  transform: translateY(-7px);
+  box-shadow:
+    0 18px 32px rgba(44, 75, 95, 0.13),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+.knowledge-closing__action--blue {
+  border-color: #cfe7f5;
+  background: linear-gradient(135deg, #edf8fd, #e3f3fa);
+}
+
+.knowledge-closing__action--green {
+  border-color: #d1eadc;
+  background: linear-gradient(135deg, #effaf3, #e5f6eb);
+}
+
+.knowledge-closing__action--amber {
+  border-color: #efdfc3;
+  background: linear-gradient(135deg, #fff8e9, #fff0d8);
+}
+
+.knowledge-closing__action--purple {
+  border-color: #e2d7f3;
+  background: linear-gradient(135deg, #f8f2ff, #f0e8fb);
+}
+
+.knowledge-closing__action-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 53px;
+  width: 53px;
+  height: 53px;
+  margin-right: 13px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.57);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.85),
+    0 6px 14px rgba(44, 75, 95, 0.06);
+}
+
+.knowledge-closing__action-icon svg {
+  display: block;
+  width: 25px;
+  height: 25px;
+  flex: 0 0 25px;
+  stroke-width: 1.8;
+}
+
+.knowledge-closing__action--blue .knowledge-closing__action-icon {
+  color: #2380ab;
+}
+
+.knowledge-closing__action--green .knowledge-closing__action-icon {
+  color: #378b60;
+}
+
+.knowledge-closing__action--amber .knowledge-closing__action-icon {
+  color: #ad7620;
+}
+
+.knowledge-closing__action--purple .knowledge-closing__action-icon {
+  color: #7954a9;
+}
+
+.knowledge-closing__action-content {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.knowledge-closing__action-title {
+  color: #173f62;
+  font-size: 16px;
+  font-weight: 800;
+  line-height: 1.35;
+  overflow-wrap: anywhere;
+}
+
+.knowledge-closing__action-description {
+  margin-top: 4px;
+  color: #70899d;
+  font-size: 13px;
+  font-weight: 550;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.knowledge-closing__action-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 27px;
+  width: 27px;
+  height: 27px;
+  margin-left: 8px;
+  color: #286a8e;
+  border-radius: 50%;
+  transition:
+    transform 220ms ease,
+    background 220ms ease;
+}
+
+.knowledge-closing__action:hover .knowledge-closing__action-arrow {
+  transform: translateX(4px);
+  background: rgba(255, 255, 255, 0.58);
+}
+
+.knowledge-closing__action-arrow svg {
+  display: block;
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+}
+
+/* =========================================================
+   BOTTOM DIVIDER
+========================================================= */
+
+.knowledge-closing__bottom {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 28px;
+  margin-top: 29px;
+  padding-top: 25px;
+  border-top: 1px solid rgba(176, 204, 216, 0.58);
+}
+
+/* =========================================================
+   VALUES
+========================================================= */
+
+.knowledge-closing__values {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.knowledge-closing__value {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.knowledge-closing__value-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 48px;
+  width: 48px;
+  height: 48px;
+  margin-right: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.66);
+  box-shadow:
+    0 7px 17px rgba(48, 78, 97, 0.06),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+.knowledge-closing__value-icon svg {
+  display: block;
+  width: 22px;
+  height: 22px;
+  flex: 0 0 22px;
+  stroke-width: 1.8;
+}
+
+.knowledge-closing__value--blue .knowledge-closing__value-icon {
+  color: #297ea6;
+  background: #e9f7fc;
+}
+
+.knowledge-closing__value--cyan .knowledge-closing__value-icon {
+  color: #27869a;
+  background: #e7f7f8;
+}
+
+.knowledge-closing__value--green .knowledge-closing__value-icon {
+  color: #378d65;
+  background: #eaf8f0;
+}
+
+.knowledge-closing__value-content {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.knowledge-closing__value-title {
+  color: #193f61;
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.knowledge-closing__value-description {
+  margin-top: 3px;
+  color: #7891a2;
+  font-size: 12px;
+  font-weight: 550;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+.knowledge-closing__value-divider {
+  width: 1px;
+  height: 48px;
+  margin: 0 22px;
+  background: #cddfe7;
+  flex: 0 0 1px;
+}
+
+/* =========================================================
+   PREMIUM NAVY CTA
+========================================================= */
+
+.knowledge-closing__cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  gap: 13px;
+  min-width: 245px;
+  min-height: 58px;
+  padding: 10px 12px 10px 23px;
+  border: 1px solid rgba(118, 208, 232, 0.2);
+  border-radius: 999px;
+  background: linear-gradient(135deg, #073b61, #084f76 55%, #075979);
+  color: #ffffff;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.4;
+  cursor: pointer;
+  box-shadow:
+    0 16px 30px rgba(5, 50, 79, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12);
+  overflow: hidden;
+  transition:
+    transform 240ms ease,
+    box-shadow 240ms ease,
+    background 240ms ease;
+}
+
+.knowledge-closing__cta::before {
+  content: "";
+  position: absolute;
+  top: -70%;
+  left: -35%;
+  width: 28%;
+  height: 240%;
+  background: rgba(255, 255, 255, 0.15);
+  transform: rotate(24deg);
+  transition: left 600ms ease;
+}
+
+.knowledge-closing__cta:hover {
+  transform: translateY(-4px);
+  background: linear-gradient(135deg, #084c74, #07678d);
+  box-shadow:
+    0 21px 38px rgba(5, 50, 79, 0.28),
+    inset 0 1px 0 rgba(255, 255, 255, 0.16);
+}
+
+.knowledge-closing__cta:hover::before {
+  left: 125%;
+}
+
+.knowledge-closing__cta-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 37px;
+  width: 37px;
+  height: 37px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition:
+    transform 220ms ease,
+    background 220ms ease;
+}
+
+.knowledge-closing__cta:hover .knowledge-closing__cta-arrow {
+  transform: translateX(3px);
+  background: rgba(255, 255, 255, 0.17);
+}
+
+.knowledge-closing__cta-arrow svg {
+  display: block;
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+}
+
+/* =========================================================
+   RESPONSIVE — 1250px
+========================================================= */
+
+@media (max-width: 1250px) {
+  .knowledge-closing__container {
+    padding-left: 40px;
+    padding-right: 40px;
+  }
+
+  .knowledge-closing__top {
+    grid-template-columns: minmax(0, 0.9fr) minmax(430px, 1.1fr);
+    gap: 30px;
+  }
+
+  .knowledge-closing__title {
+    font-size: clamp(36px, 4vw, 52px);
+  }
+
+  .knowledge-closing__value-divider {
+    margin-left: 14px;
+    margin-right: 14px;
+  }
+
+  .knowledge-closing__cta {
+    min-width: 220px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — 1050px
+========================================================= */
+
+@media (max-width: 1050px) {
+  .knowledge-closing {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .knowledge-closing__container {
+    padding: 35px 30px 30px;
+  }
+
+  .knowledge-closing__top {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .knowledge-closing__content {
+    padding-right: 0;
+  }
+
+  .knowledge-closing__title {
+    max-width: 700px;
+  }
+
+  .knowledge-closing__description {
+    max-width: 720px;
+  }
+
+  .knowledge-closing__visual {
+    min-height: 350px;
+  }
+
+  .knowledge-closing__actions {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .knowledge-closing__bottom {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .knowledge-closing__values {
+    width: 100%;
+  }
+
+  .knowledge-closing__cta {
+    align-self: flex-end;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — 760px
+========================================================= */
+
+@media (max-width: 760px) {
+  .knowledge-closing {
+    padding: 20px 18px 45px;
+  }
+
+  .knowledge-closing__container {
+    padding: 30px 22px 25px;
+    border-radius: 23px;
+  }
+
+  .knowledge-closing__brand-text {
+    font-size: 11px;
+  }
+
+  .knowledge-closing__brand-line-divider {
+    width: 38px;
+  }
+
+  .knowledge-closing__title {
+    font-size: clamp(34px, 8vw, 45px);
+    letter-spacing: -1px;
+  }
+
+  .knowledge-closing__description {
+    margin-top: 15px;
+    font-size: 16px;
+  }
+
+  .knowledge-closing__visual {
+    min-height: 315px;
+    border-radius: 24px;
+  }
+
+  .knowledge-closing__quote {
+    top: 18px;
+    left: 18px;
+    width: 260px;
+    max-width: 50%;
+    padding: 20px;
+  }
+
+  .knowledge-closing__quote p {
+    font-size: 14px;
+  }
+
+  .knowledge-closing__visual-message {
+    top: 19px;
+    right: 18px;
+    font-size: 16px;
+  }
+
+  .knowledge-closing__actions {
+    gap: 13px;
+  }
+
+  .knowledge-closing__action {
+    min-height: 102px;
+    padding: 13px;
+  }
+
+  .knowledge-closing__action-icon {
+    flex-basis: 47px;
+    width: 47px;
+    height: 47px;
+    margin-right: 10px;
+  }
+
+  .knowledge-closing__action-icon svg {
+    width: 22px;
+    height: 22px;
+    flex-basis: 22px;
+  }
+
+  .knowledge-closing__action-title {
+    font-size: 15px;
+  }
+
+  .knowledge-closing__action-description {
+    font-size: 12px;
+  }
+
+  .knowledge-closing__values {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .knowledge-closing__value {
+    width: 100%;
+  }
+
+  .knowledge-closing__value-divider {
+    display: none;
+  }
+
+  .knowledge-closing__cta {
+    align-self: stretch;
+    width: 100%;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — 560px
+========================================================= */
+
+@media (max-width: 560px) {
+  .knowledge-closing {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+
+  .knowledge-closing__container {
+    padding: 27px 16px 21px;
+    border-radius: 20px;
+  }
+
+  .knowledge-closing__brand-line {
+    gap: 8px;
+    margin-bottom: 14px;
+  }
+
+  .knowledge-closing__brand-icon {
+    flex-basis: 28px;
+    width: 28px;
+    height: 28px;
+  }
+
+  .knowledge-closing__brand-icon svg {
+    width: 14px;
+    height: 14px;
+    flex-basis: 14px;
+  }
+
+  .knowledge-closing__brand-text {
+    font-size: 10px;
+    letter-spacing: 1.5px;
+  }
+
+  .knowledge-closing__brand-line-divider {
+    display: none;
+  }
+
+  .knowledge-closing__title {
+    font-size: 34px;
+    line-height: 1.1;
+  }
+
+  .knowledge-closing__description {
+    font-size: 15px;
+    line-height: 1.6;
+  }
+
+  .knowledge-closing__visual {
+    min-height: 290px;
+  }
+
+  .knowledge-closing__quote {
+    top: 15px;
+    left: 15px;
+    width: 220px;
+    max-width: 54%;
+    padding: 17px;
+  }
+
+  .knowledge-closing__quote-mark {
+    font-size: 30px;
+  }
+
+  .knowledge-closing__quote p {
+    margin-top: 4px;
+    font-size: 13px;
+    line-height: 1.45;
+  }
+
+  .knowledge-closing__quote-author {
+    font-size: 10px;
+  }
+
+  .knowledge-closing__visual-message {
+    top: 15px;
+    right: 14px;
+    font-size: 13px;
+  }
+
+  .knowledge-closing__actions {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  .knowledge-closing__action {
+    min-height: 91px;
+  }
+
+  .knowledge-closing__action-description {
+    font-size: 13px;
+  }
+
+  .knowledge-closing__bottom {
+    gap: 20px;
+  }
+
+  .knowledge-closing__value-icon {
+    flex-basis: 44px;
+    width: 44px;
+    height: 44px;
+  }
+
+  .knowledge-closing__value-icon svg {
+    width: 20px;
+    height: 20px;
+    flex-basis: 20px;
+  }
+
+  .knowledge-closing__value-title {
+    font-size: 14px;
+  }
+
+  .knowledge-closing__value-description {
+    font-size: 12px;
+  }
+
+  .knowledge-closing__cta {
+    min-height: 54px;
+    padding-left: 17px;
+    font-size: 13px;
+  }
+}
+
+/* =========================================================
+   RESPONSIVE — 380px
+========================================================= */
+
+@media (max-width: 380px) {
+  .knowledge-closing {
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .knowledge-closing__container {
+    padding: 24px 13px 18px;
+  }
+
+  .knowledge-closing__title {
+    font-size: 30px;
+  }
+
+  .knowledge-closing__description {
+    font-size: 14px;
+  }
+
+  .knowledge-closing__visual {
+    min-height: 255px;
+  }
+
+  .knowledge-closing__quote {
+    width: 190px;
+    max-width: 58%;
+    padding: 14px;
+  }
+
+  .knowledge-closing__quote p {
+    font-size: 12px;
+  }
+
+  .knowledge-closing__visual-message {
+    font-size: 11px;
+  }
+
+  .knowledge-closing__action {
+    padding: 12px;
+  }
+
+  .knowledge-closing__action-icon {
+    flex-basis: 43px;
+    width: 43px;
+    height: 43px;
+  }
+
+  .knowledge-closing__action-title {
+    font-size: 14px;
+  }
+
+  .knowledge-closing__action-description {
+    font-size: 12px;
+  }
+
+  .knowledge-closing__cta {
+    min-width: 0;
+    font-size: 12px;
+  }
+}

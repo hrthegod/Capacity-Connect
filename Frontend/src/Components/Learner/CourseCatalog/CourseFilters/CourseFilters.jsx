@@ -17,6 +17,259 @@ import Button from "../../../../Reusable_components/Button/Button";
 import "./CourseFilters.css";
 
 /* =========================================================
+   DEFAULT FILTERS
+========================================================= */
+
+const DEFAULT_FILTERS = {
+  category: "all",
+  difficulty: "all",
+  duration: "all",
+  skill: "all",
+  sort: "relevant",
+};
+
+/* =========================================================
+   FILTER OPTIONS
+
+   These values are intentionally aligned with the
+   course data used by CourseCatalog.
+========================================================= */
+
+const FILTER_OPTIONS = {
+  category: [
+    {
+      id: "all",
+      label: "All Categories",
+      value: "all",
+    },
+    {
+      id: "ocean-science",
+      label: "Ocean Science",
+      value: "ocean-science",
+    },
+    {
+      id: "marine-technology",
+      label: "Marine Technology",
+      value: "marine-technology",
+    },
+    {
+      id: "data-analytics",
+      label: "Data & Analytics",
+      value: "data-analytics",
+    },
+    {
+      id: "sustainability",
+      label: "Sustainability",
+      value: "sustainability",
+    },
+    {
+      id: "leadership",
+      label: "Leadership",
+      value: "leadership",
+    },
+    {
+      id: "communication",
+      label: "Communication",
+      value: "communication",
+    },
+  ],
+
+  difficulty: [
+    {
+      id: "all",
+      label: "All Levels",
+      value: "all",
+    },
+    {
+      id: "beginner",
+      label: "Beginner",
+      value: "beginner",
+    },
+    {
+      id: "intermediate",
+      label: "Intermediate",
+      value: "intermediate",
+    },
+    {
+      id: "advanced",
+      label: "Advanced",
+      value: "advanced",
+    },
+  ],
+
+  duration: [
+    {
+      id: "all",
+      label: "Any Duration",
+      value: "all",
+    },
+    {
+      id: "short",
+      label: "1–3 Weeks",
+      value: "short",
+    },
+    {
+      id: "medium",
+      label: "4–6 Weeks",
+      value: "medium",
+    },
+    {
+      id: "long",
+      label: "7+ Weeks",
+      value: "long",
+    },
+  ],
+
+  skill: [
+    {
+      id: "all",
+      label: "All Skills",
+      value: "all",
+    },
+    {
+      id: "data-analysis",
+      label: "Data Analysis",
+      value: "data-analysis",
+    },
+    {
+      id: "programming",
+      label: "Programming",
+      value: "programming",
+    },
+    {
+      id: "python",
+      label: "Python",
+      value: "python",
+    },
+    {
+      id: "research",
+      label: "Research",
+      value: "research",
+    },
+    {
+      id: "communication",
+      label: "Communication",
+      value: "communication",
+    },
+    {
+      id: "leadership",
+      label: "Leadership",
+      value: "leadership",
+    },
+    {
+      id: "robotics",
+      label: "Robotics",
+      value: "robotics",
+    },
+    {
+      id: "sustainability",
+      label: "Sustainability",
+      value: "sustainability",
+    },
+    {
+      id: "conservation",
+      label: "Conservation",
+      value: "conservation",
+    },
+    {
+      id: "strategy",
+      label: "Strategy",
+      value: "strategy",
+    },
+    {
+      id: "marine-tech",
+      label: "Marine Tech",
+      value: "marine-tech",
+    },
+    {
+      id: "visualization",
+      label: "Visualization",
+      value: "visualization",
+    },
+    {
+      id: "management",
+      label: "Management",
+      value: "management",
+    },
+  ],
+
+  sort: [
+    {
+      id: "relevant",
+      label: "Most Relevant",
+      value: "relevant",
+    },
+    {
+      id: "newest",
+      label: "Newest First",
+      value: "newest",
+    },
+    {
+      id: "popular",
+      label: "Most Popular",
+      value: "popular",
+    },
+    {
+      id: "rating",
+      label: "Highest Rated",
+      value: "rating",
+    },
+    {
+      id: "duration-short",
+      label: "Shortest Duration",
+      value: "duration-short",
+    },
+  ],
+};
+
+/* =========================================================
+   FILTER CARD CONFIGURATION
+========================================================= */
+
+const FILTER_CARDS = [
+  {
+    key: "category",
+    label: "Category",
+    description: "Learning area",
+    icon: FiBookOpen,
+    tone: "cyan",
+    options: FILTER_OPTIONS.category,
+  },
+  {
+    key: "difficulty",
+    label: "Difficulty",
+    description: "Learning level",
+    icon: FiBarChart2,
+    tone: "violet",
+    options: FILTER_OPTIONS.difficulty,
+  },
+  {
+    key: "duration",
+    label: "Duration",
+    description: "Time commitment",
+    icon: FiClock,
+    tone: "amber",
+    options: FILTER_OPTIONS.duration,
+  },
+  {
+    key: "skill",
+    label: "Skill Focus",
+    description: "Target capability",
+    icon: FiTag,
+    tone: "green",
+    options: FILTER_OPTIONS.skill,
+  },
+  {
+    key: "sort",
+    label: "Sort By",
+    description: "Course ordering",
+    icon: FiSliders,
+    tone: "coral",
+    options: FILTER_OPTIONS.sort,
+  },
+];
+
+/* =========================================================
    COURSE FILTERS
    Capacity Connect - Learner Course Catalog
 
@@ -26,18 +279,10 @@ import "./CourseFilters.css";
 
 const CourseFilters = ({ totalCourses = 18, onFilterChange, onReset }) => {
   /* =========================================================
-     DEFAULT FILTERS
+     FILTER STATE
   ========================================================= */
 
-  const defaultFilters = {
-    category: "all",
-    difficulty: "all",
-    duration: "all",
-    skill: "all",
-    sort: "relevant",
-  };
-
-  const [filters, setFilters] = useState(defaultFilters);
+  const [filters, setFilters] = useState(DEFAULT_FILTERS);
 
   /* =========================================================
      DROPDOWN STATE
@@ -54,199 +299,6 @@ const CourseFilters = ({ totalCourses = 18, onFilterChange, onReset }) => {
 
   const dropdownRef = useRef(null);
   const triggerRefs = useRef({});
-
-  /* =========================================================
-     FILTER OPTIONS
-  ========================================================= */
-
-  const filterOptions = {
-    category: [
-      {
-        id: "all",
-        label: "All Categories",
-        value: "all",
-      },
-      {
-        id: "ocean-science",
-        label: "Ocean Science",
-        value: "ocean-science",
-      },
-      {
-        id: "marine-technology",
-        label: "Marine Technology",
-        value: "marine-technology",
-      },
-      {
-        id: "data-analytics",
-        label: "Data & Analytics",
-        value: "data-analytics",
-      },
-      {
-        id: "leadership",
-        label: "Leadership",
-        value: "leadership",
-      },
-      {
-        id: "communication",
-        label: "Communication",
-        value: "communication",
-      },
-    ],
-
-    difficulty: [
-      {
-        id: "all",
-        label: "All Levels",
-        value: "all",
-      },
-      {
-        id: "beginner",
-        label: "Beginner",
-        value: "beginner",
-      },
-      {
-        id: "intermediate",
-        label: "Intermediate",
-        value: "intermediate",
-      },
-      {
-        id: "advanced",
-        label: "Advanced",
-        value: "advanced",
-      },
-    ],
-
-    duration: [
-      {
-        id: "all",
-        label: "Any Duration",
-        value: "all",
-      },
-      {
-        id: "short",
-        label: "Under 2 Weeks",
-        value: "short",
-      },
-      {
-        id: "medium",
-        label: "2–6 Weeks",
-        value: "medium",
-      },
-      {
-        id: "long",
-        label: "6+ Weeks",
-        value: "long",
-      },
-    ],
-
-    skill: [
-      {
-        id: "all",
-        label: "All Skills",
-        value: "all",
-      },
-      {
-        id: "data-analysis",
-        label: "Data Analysis",
-        value: "data-analysis",
-      },
-      {
-        id: "programming",
-        label: "Programming",
-        value: "programming",
-      },
-      {
-        id: "management",
-        label: "Management",
-        value: "management",
-      },
-      {
-        id: "research",
-        label: "Research",
-        value: "research",
-      },
-      {
-        id: "communication",
-        label: "Communication",
-        value: "communication",
-      },
-    ],
-
-    sort: [
-      {
-        id: "relevant",
-        label: "Most Relevant",
-        value: "relevant",
-      },
-      {
-        id: "newest",
-        label: "Newest First",
-        value: "newest",
-      },
-      {
-        id: "popular",
-        label: "Most Popular",
-        value: "popular",
-      },
-      {
-        id: "rating",
-        label: "Highest Rated",
-        value: "rating",
-      },
-      {
-        id: "duration-short",
-        label: "Shortest Duration",
-        value: "duration-short",
-      },
-    ],
-  };
-
-  /* =========================================================
-     FILTER CARD CONFIGURATION
-  ========================================================= */
-
-  const filterCards = [
-    {
-      key: "category",
-      label: "Category",
-      description: "Learning area",
-      icon: FiBookOpen,
-      tone: "cyan",
-      options: filterOptions.category,
-    },
-    {
-      key: "difficulty",
-      label: "Difficulty",
-      description: "Learning level",
-      icon: FiBarChart2,
-      tone: "violet",
-      options: filterOptions.difficulty,
-    },
-    {
-      key: "duration",
-      label: "Duration",
-      description: "Time commitment",
-      icon: FiClock,
-      tone: "amber",
-      options: filterOptions.duration,
-    },
-    {
-      key: "skill",
-      label: "Skill Focus",
-      description: "Target capability",
-      icon: FiTag,
-      tone: "green",
-      options: filterOptions.skill,
-    },
-    {
-      key: "sort",
-      label: "Sort By",
-      description: "Course ordering",
-      icon: FiSliders,
-      tone: "coral",
-      options: filterOptions.sort,
-    },
-  ];
 
   /* =========================================================
      GET SELECTED LABEL
@@ -278,10 +330,7 @@ const CourseFilters = ({ totalCourses = 18, onFilterChange, onReset }) => {
     const verticalGap = 8;
 
     /*
-      Compact menu width.
-
-      We intentionally don't make it the full trigger width.
-      This keeps the dropdown visually lighter and more premium.
+      Keep dropdown compact and premium.
     */
     const desiredWidth = Math.min(270, Math.max(210, rect.width));
 
@@ -291,28 +340,17 @@ const CourseFilters = ({ totalCourses = 18, onFilterChange, onReset }) => {
     );
 
     /*
-      Approximate menu height.
-
-      The actual menu has max-height in CSS, so this is
-      only used to decide whether to open upward.
+      Estimate menu height only for deciding
+      whether the dropdown should open upward.
     */
     const estimatedMenuHeight = Math.min(
-      filterOptions[openFilter].length * 47 + 20,
+      FILTER_OPTIONS[openFilter].length * 47 + 20,
       270,
     );
 
     const spaceBelow = viewportHeight - rect.bottom - verticalGap;
-
     const spaceAbove = rect.top - verticalGap;
 
-    /*
-      Open upward if:
-
-      1. There isn't enough room below
-      2. AND there is more usable room above
-
-      Otherwise open downward.
-    */
     const shouldOpenAbove =
       spaceBelow < estimatedMenuHeight && spaceAbove > spaceBelow;
 
@@ -353,19 +391,16 @@ const CourseFilters = ({ totalCourses = 18, onFilterChange, onReset }) => {
       width: menuWidth,
       placement: shouldOpenAbove ? "top" : "bottom",
     });
-  }, [openFilter, filterOptions]);
+  }, [openFilter]);
 
   /* =========================================================
-     OPEN DROPDOWN
+     OPEN / CLOSE DROPDOWN
   ========================================================= */
 
   const handleOpenFilter = (filterKey) => {
-    if (openFilter === filterKey) {
-      setOpenFilter(null);
-      return;
-    }
-
-    setOpenFilter(filterKey);
+    setOpenFilter((currentFilter) =>
+      currentFilter === filterKey ? null : filterKey,
+    );
   };
 
   /* =========================================================
@@ -380,6 +415,11 @@ const CourseFilters = ({ totalCourses = 18, onFilterChange, onReset }) => {
 
     setFilters(updatedFilters);
 
+    /*
+      Send the complete filter object to CourseCatalog.
+      CourseCatalog is responsible for filtering the
+      actual course dataset.
+    */
     onFilterChange?.(updatedFilters);
 
     setOpenFilter(null);
@@ -390,11 +430,16 @@ const CourseFilters = ({ totalCourses = 18, onFilterChange, onReset }) => {
   ========================================================= */
 
   const handleReset = () => {
-    setFilters(defaultFilters);
+    const resetFilters = { ...DEFAULT_FILTERS };
+
+    setFilters(resetFilters);
 
     setOpenFilter(null);
 
-    onReset?.(defaultFilters);
+    /*
+      Notify CourseCatalog so its state is also reset.
+    */
+    onReset?.(resetFilters);
   };
 
   /* =========================================================
@@ -406,7 +451,6 @@ const CourseFilters = ({ totalCourses = 18, onFilterChange, onReset }) => {
 
     const handlePointerDown = (event) => {
       const dropdown = dropdownRef.current;
-
       const trigger = triggerRefs.current[openFilter];
 
       if (dropdown && dropdown.contains(event.target)) {
@@ -493,7 +537,7 @@ const CourseFilters = ({ totalCourses = 18, onFilterChange, onReset }) => {
      CURRENT OPEN FILTER
   ========================================================= */
 
-  const activeFilter = filterCards.find((filter) => filter.key === openFilter);
+  const activeFilter = FILTER_CARDS.find((filter) => filter.key === openFilter);
 
   /* =========================================================
      RENDER
@@ -543,7 +587,7 @@ const CourseFilters = ({ totalCourses = 18, onFilterChange, onReset }) => {
           ================================================= */}
 
           <div className="course-filters__grid">
-            {filterCards.map((filter) => {
+            {FILTER_CARDS.map((filter) => {
               const Icon = filter.icon;
 
               const isOpen = openFilter === filter.key;
@@ -658,9 +702,8 @@ const CourseFilters = ({ totalCourses = 18, onFilterChange, onReset }) => {
       {/* =====================================================
           VIEWPORT-AWARE DROPDOWN
 
-          This is intentionally outside the filter card.
-          It uses fixed positioning so it can never increase
-          the width/height of the filter card.
+          Intentionally outside the filter card so it does
+          not affect the card's width or layout.
       ===================================================== */}
 
       {openFilter && activeFilter && (

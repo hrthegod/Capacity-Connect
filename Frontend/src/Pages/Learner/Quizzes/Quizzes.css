@@ -1,0 +1,49 @@
+/* =========================================================
+   QUIZZES PAGE
+   Capacity Connect - Learner
+========================================================= */
+
+.quizzes-page {
+  width: 100%;
+  min-width: 0;
+  overflow-x: hidden;
+}
+
+.quizzes-page__container {
+  width: 100%;
+  max-width: 1600px;
+  min-width: 0;
+  margin: 0 auto;
+  padding: 0 28px;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+  .quizzes-page__container {
+    padding: 0 22px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 720px) {
+  .quizzes-page__container {
+    padding: 0 16px;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 390px) {
+  .quizzes-page__container {
+    padding: 0 12px;
+  }
+}

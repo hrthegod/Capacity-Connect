@@ -1,6 +1,7 @@
 /* =========================================================
    CAPACITY CONNECT
    LEARNER SIDEBAR
+   SCOPED / ISOLATED VERSION
 ========================================================= */
 
 /* =========================================================
@@ -34,7 +35,7 @@
    BRAND
 ========================================================= */
 
-.sidebar-brand {
+.learner-sidebar .sidebar-brand {
   width: 100%;
 
   display: flex;
@@ -53,7 +54,7 @@
    LOGO
 ========================================================= */
 
-.sidebar-logo {
+.learner-sidebar .sidebar-logo {
   width: 42px;
   height: 42px;
 
@@ -81,14 +82,14 @@
    BRAND TEXT
 ========================================================= */
 
-.sidebar-brand-text {
+.learner-sidebar .sidebar-brand-text {
   display: flex;
   flex-direction: column;
 
   min-width: 0;
 }
 
-.brand-title {
+.learner-sidebar .brand-title {
   color: #061f35;
 
   font-size: 15px;
@@ -99,7 +100,7 @@
   letter-spacing: 0.2px;
 }
 
-.brand-subtitle {
+.learner-sidebar .brand-subtitle {
   margin-top: 2px;
 
   color: #1682a8;
@@ -116,7 +117,7 @@
    NAVIGATION
 ========================================================= */
 
-.sidebar-navigation {
+.learner-sidebar .sidebar-navigation {
   flex: 1;
 
   display: flex;
@@ -136,24 +137,27 @@
    SCROLLBAR
 ========================================================= */
 
-.sidebar-navigation::-webkit-scrollbar {
+.learner-sidebar .sidebar-navigation::-webkit-scrollbar {
   width: 4px;
 }
 
-.sidebar-navigation::-webkit-scrollbar-track {
+.learner-sidebar .sidebar-navigation::-webkit-scrollbar-track {
   background: transparent;
 }
 
-.sidebar-navigation::-webkit-scrollbar-thumb {
+.learner-sidebar .sidebar-navigation::-webkit-scrollbar-thumb {
   background: #d3e0e8;
 
   border-radius: 10px;
 }
 
-/* Firefox */
+/* =========================================================
+   FIREFOX SCROLLBAR
+========================================================= */
 
-.sidebar-navigation {
+.learner-sidebar .sidebar-navigation {
   scrollbar-width: thin;
+
   scrollbar-color: #d3e0e8 transparent;
 }
 
@@ -161,7 +165,7 @@
    NAVIGATION GROUP
 ========================================================= */
 
-.sidebar-group {
+.learner-sidebar .sidebar-group {
   width: 100%;
 
   display: flex;
@@ -174,7 +178,7 @@
    GROUP TITLE
 ========================================================= */
 
-.sidebar-group-title {
+.learner-sidebar .sidebar-group-title {
   padding: 0 10px;
 
   color: #7895a9;
@@ -193,7 +197,7 @@
    GROUP ITEMS
 ========================================================= */
 
-.sidebar-group-items {
+.learner-sidebar .sidebar-group-items {
   width: 100%;
 
   display: flex;
@@ -206,7 +210,7 @@
    NAVIGATION ITEM
 ========================================================= */
 
-.sidebar-nav-item {
+.learner-sidebar .sidebar-nav-item {
   width: 100%;
   min-height: 44px;
 
@@ -245,7 +249,7 @@
    NAVIGATION ICON
 ========================================================= */
 
-.sidebar-nav-icon {
+.learner-sidebar .sidebar-nav-icon {
   width: 20px;
   height: 20px;
 
@@ -264,7 +268,7 @@
     transform 180ms ease;
 }
 
-.sidebar-nav-icon svg {
+.learner-sidebar .sidebar-nav-icon svg {
   width: 18px;
   height: 18px;
 
@@ -275,7 +279,7 @@
    NAVIGATION LABEL
 ========================================================= */
 
-.sidebar-nav-label {
+.learner-sidebar .sidebar-nav-label {
   white-space: nowrap;
 
   overflow: hidden;
@@ -292,13 +296,13 @@
    HOVER
 ========================================================= */
 
-.sidebar-nav-item:hover {
+.learner-sidebar .sidebar-nav-item:hover {
   color: #0b6d91;
 
   background: #eef8fb;
 }
 
-.sidebar-nav-item:hover .sidebar-nav-icon {
+.learner-sidebar .sidebar-nav-item:hover .sidebar-nav-icon {
   color: #1682a8;
 
   transform: translateX(1px);
@@ -308,7 +312,7 @@
    ACTIVE NAVIGATION ITEM
 ========================================================= */
 
-.sidebar-nav-item.active {
+.learner-sidebar .sidebar-nav-item.active {
   color: #08799d;
 
   background: #e3f6fb;
@@ -318,7 +322,7 @@
   box-shadow: inset 3px 0 0 #35bee2;
 }
 
-.sidebar-nav-item.active .sidebar-nav-icon {
+.learner-sidebar .sidebar-nav-item.active .sidebar-nav-icon {
   color: #0b8caf;
 }
 
@@ -326,7 +330,7 @@
    ACTIVE HOVER
 ========================================================= */
 
-.sidebar-nav-item.active:hover {
+.learner-sidebar .sidebar-nav-item.active:hover {
   background: #dff4fa;
 }
 
@@ -335,7 +339,7 @@
    Dark theme only for Profile / Settings / Logout
 ========================================================= */
 
-.sidebar-bottom {
+.learner-sidebar .sidebar-bottom {
   width: 100%;
 
   flex-shrink: 0;
@@ -351,7 +355,7 @@
    BOTTOM LINKS
 ========================================================= */
 
-.sidebar-bottom-links {
+.learner-sidebar .sidebar-bottom-links {
   width: 100%;
 
   display: flex;
@@ -368,7 +372,7 @@
    BOTTOM ITEM
 ========================================================= */
 
-.sidebar-bottom-item {
+.learner-sidebar .sidebar-bottom-item {
   width: 100%;
   min-height: 42px;
 
@@ -384,6 +388,7 @@
   box-sizing: border-box;
 
   border: 0;
+
   border-radius: 8px;
 
   background: transparent;
@@ -409,11 +414,11 @@
    BOTTOM ICON
 ========================================================= */
 
-.sidebar-bottom-item .sidebar-nav-icon {
+.learner-sidebar .sidebar-bottom-item .sidebar-nav-icon {
   color: #7895a9;
 }
 
-.sidebar-bottom-item .sidebar-nav-icon svg {
+.learner-sidebar .sidebar-bottom-item .sidebar-nav-icon svg {
   width: 18px;
   height: 18px;
 }
@@ -422,13 +427,13 @@
    BOTTOM HOVER
 ========================================================= */
 
-.sidebar-bottom-item:hover {
+.learner-sidebar .sidebar-bottom-item:hover {
   color: #ffffff;
 
   background: rgba(255, 255, 255, 0.08);
 }
 
-.sidebar-bottom-item:hover .sidebar-nav-icon {
+.learner-sidebar .sidebar-bottom-item:hover .sidebar-nav-icon {
   color: #69d4ed;
 
   transform: translateX(1px);
@@ -438,7 +443,7 @@
    BOTTOM ACTIVE
 ========================================================= */
 
-.sidebar-bottom-item.active {
+.learner-sidebar .sidebar-bottom-item.active {
   color: #ffffff;
 
   background: rgba(53, 190, 226, 0.16);
@@ -446,7 +451,7 @@
   box-shadow: inset 3px 0 0 #35bee2;
 }
 
-.sidebar-bottom-item.active .sidebar-nav-icon {
+.learner-sidebar .sidebar-bottom-item.active .sidebar-nav-icon {
   color: #69d4ed;
 }
 
@@ -454,17 +459,17 @@
    LOGOUT
 ========================================================= */
 
-.sidebar-logout {
+.learner-sidebar .sidebar-logout {
   margin-top: 2px;
 }
 
-.sidebar-logout:hover {
+.learner-sidebar .sidebar-logout:hover {
   color: #ffffff;
 
   background: rgba(255, 255, 255, 0.08);
 }
 
-.sidebar-logout .sidebar-nav-icon {
+.learner-sidebar .sidebar-logout .sidebar-nav-icon {
   color: #9bb0bf;
 }
 
@@ -472,8 +477,8 @@
    FOCUS ACCESSIBILITY
 ========================================================= */
 
-.sidebar-nav-item:focus-visible,
-.sidebar-bottom-item:focus-visible {
+.learner-sidebar .sidebar-nav-item:focus-visible,
+.learner-sidebar .sidebar-bottom-item:focus-visible {
   outline: 2px solid #35bee2;
 
   outline-offset: 2px;
@@ -492,13 +497,13 @@
      Brand
   ------------------------------------------------------- */
 
-  .sidebar-brand {
+  .learner-sidebar .sidebar-brand {
     justify-content: center;
 
     padding: 20px 10px;
   }
 
-  .sidebar-brand-text {
+  .learner-sidebar .sidebar-brand-text {
     display: none;
   }
 
@@ -506,21 +511,21 @@
      Navigation
   ------------------------------------------------------- */
 
-  .sidebar-navigation {
+  .learner-sidebar .sidebar-navigation {
     padding: 4px 10px 14px;
 
     gap: 20px;
   }
 
-  .sidebar-group-title {
+  .learner-sidebar .sidebar-group-title {
     display: none;
   }
 
-  .sidebar-group {
+  .learner-sidebar .sidebar-group {
     gap: 0;
   }
 
-  .sidebar-group-items {
+  .learner-sidebar .sidebar-group-items {
     gap: 5px;
   }
 
@@ -528,7 +533,7 @@
      Navigation Item
   ------------------------------------------------------- */
 
-  .sidebar-nav-item {
+  .learner-sidebar .sidebar-nav-item {
     min-height: 44px;
 
     justify-content: center;
@@ -538,11 +543,11 @@
     gap: 0;
   }
 
-  .sidebar-nav-label {
+  .learner-sidebar .sidebar-nav-label {
     display: none;
   }
 
-  .sidebar-nav-icon {
+  .learner-sidebar .sidebar-nav-icon {
     width: 22px;
     height: 22px;
   }
@@ -551,11 +556,11 @@
      Bottom
   ------------------------------------------------------- */
 
-  .sidebar-bottom-links {
+  .learner-sidebar .sidebar-bottom-links {
     padding: 10px 10px 12px;
   }
 
-  .sidebar-bottom-item {
+  .learner-sidebar .sidebar-bottom-item {
     min-height: 44px;
 
     justify-content: center;
@@ -565,7 +570,7 @@
     gap: 0;
   }
 
-  .sidebar-bottom-item .sidebar-nav-label {
+  .learner-sidebar .sidebar-bottom-item .sidebar-nav-label {
     display: none;
   }
 }
@@ -576,8 +581,8 @@
 ========================================================= */
 
 @media (max-width: 900px) {
-  .sidebar-nav-item::after,
-  .sidebar-bottom-item::after {
+  .learner-sidebar .sidebar-nav-item::after,
+  .learner-sidebar .sidebar-bottom-item::after {
     content: attr(data-tooltip);
 
     position: absolute;
@@ -605,7 +610,6 @@
     pointer-events: none;
 
     opacity: 0;
-
     visibility: hidden;
 
     z-index: 1000;
@@ -618,8 +622,8 @@
       visibility 150ms ease;
   }
 
-  .sidebar-nav-item:hover::after,
-  .sidebar-bottom-item:hover::after {
+  .learner-sidebar .sidebar-nav-item:hover::after,
+  .learner-sidebar .sidebar-bottom-item:hover::after {
     opacity: 1;
 
     visibility: visible;
@@ -637,11 +641,11 @@
     width: 68px;
   }
 
-  .sidebar-brand {
+  .learner-sidebar .sidebar-brand {
     padding: 18px 8px;
   }
 
-  .sidebar-logo {
+  .learner-sidebar .sidebar-logo {
     width: 40px;
     height: 40px;
 
@@ -650,14 +654,14 @@
     font-size: 15px;
   }
 
-  .sidebar-navigation {
+  .learner-sidebar .sidebar-navigation {
     padding-left: 8px;
     padding-right: 8px;
 
     gap: 17px;
   }
 
-  .sidebar-bottom-links {
+  .learner-sidebar .sidebar-bottom-links {
     padding-left: 8px;
     padding-right: 8px;
   }
@@ -672,26 +676,26 @@
     width: 64px;
   }
 
-  .sidebar-brand {
+  .learner-sidebar .sidebar-brand {
     padding-left: 7px;
     padding-right: 7px;
   }
 
-  .sidebar-logo {
+  .learner-sidebar .sidebar-logo {
     width: 38px;
     height: 38px;
 
     font-size: 14px;
   }
 
-  .sidebar-navigation {
+  .learner-sidebar .sidebar-navigation {
     padding-left: 7px;
     padding-right: 7px;
 
     gap: 15px;
   }
 
-  .sidebar-bottom-links {
+  .learner-sidebar .sidebar-bottom-links {
     padding-left: 7px;
     padding-right: 7px;
   }

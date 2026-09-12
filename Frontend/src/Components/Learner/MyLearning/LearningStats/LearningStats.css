@@ -1,0 +1,864 @@
+/* =========================================================
+   LEARNING STATS
+   Premium Learning Overview Section
+========================================================= */
+
+.learning-stats {
+  position: relative;
+  width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+
+  padding: 8px 0 28px;
+
+  overflow: hidden;
+
+  
+
+  border-radius: 24px;
+}
+
+/* =========================================================
+   BACKGROUND DECORATION
+========================================================= */
+
+.learning-stats__background {
+  position: absolute;
+  inset: 0;
+
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.learning-stats__background-wave {
+  position: absolute;
+  display: block;
+
+  width: 620px;
+  height: 180px;
+
+  border: 1px solid rgba(45, 157, 205, 0.08);
+  border-radius: 50%;
+
+  transform: rotate(-5deg);
+}
+
+.learning-stats__background-wave--one {
+  right: -250px;
+  bottom: -90px;
+}
+
+.learning-stats__background-wave--two {
+  right: -210px;
+  bottom: -118px;
+
+  width: 680px;
+  height: 210px;
+
+  border-color: rgba(45, 157, 205, 0.055);
+}
+
+.learning-stats__background-glow {
+  position: absolute;
+
+  width: 260px;
+  height: 260px;
+
+  border-radius: 50%;
+
+  filter: blur(10px);
+
+  opacity: 0.32;
+}
+
+.learning-stats__background-glow--one {
+  top: -180px;
+  right: 8%;
+
+  background: rgba(56, 189, 248, 0.1);
+}
+
+.learning-stats__background-glow--two {
+  left: -180px;
+  bottom: -180px;
+
+  background: rgba(99, 102, 241, 0.07);
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.learning-stats__container {
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: 1600px;
+
+  margin: 0 auto;
+  padding: 0 4px;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.learning-stats__header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+
+  gap: 32px;
+
+  margin-bottom: 24px;
+
+  min-width: 0;
+}
+
+.learning-stats__heading {
+  min-width: 0;
+  max-width: 760px;
+}
+
+.learning-stats__eyebrow {
+  display: inline-flex;
+  align-items: center;
+
+  margin-bottom: 8px;
+
+  font-size: 13px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+
+  color: #1684b6;
+}
+
+.learning-stats__title {
+  margin: 0;
+
+  font-size: clamp(26px, 2.2vw, 34px);
+  font-weight: 750;
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+
+  color: #102a43;
+}
+
+.learning-stats__description {
+  margin: 9px 0 0;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.65;
+
+  color: #60788d;
+}
+
+/* =========================================================
+   HEADER ACTIONS
+========================================================= */
+
+.learning-stats__header-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+
+  gap: 14px;
+
+  flex-shrink: 0;
+}
+
+.learning-stats__period {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  min-height: 42px;
+
+  padding: 0 15px;
+
+  border: 1px solid #d9e8f1;
+  border-radius: 999px;
+
+  background: rgba(255, 255, 255, 0.88);
+
+  box-shadow: 0 4px 14px rgba(15, 59, 86, 0.045);
+
+  color: #39576c;
+
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 650;
+
+  cursor: default;
+
+  white-space: nowrap;
+}
+
+.learning-stats__period-dot {
+  width: 7px;
+  height: 7px;
+
+  margin-right: 9px;
+
+  border-radius: 50%;
+
+  background: #1597c8;
+
+  box-shadow: 0 0 0 4px rgba(21, 151, 200, 0.1);
+}
+
+.learning-stats__details-button {
+  min-height: 42px;
+
+  color: #176d97 !important;
+
+  font-size: 14px !important;
+  font-weight: 700 !important;
+}
+
+.learning-stats__details-button:hover {
+  color: #0f587c !important;
+}
+
+/* =========================================================
+   STAT GRID
+========================================================= */
+
+.learning-stats__grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+
+  gap: 18px;
+
+  width: 100%;
+  max-width: 100%;
+
+  min-width: 0;
+
+  box-sizing: border-box;
+}
+
+/* Important:
+   Prevent the reusable Card component from making
+   any grid column wider than its available space.
+*/
+.learning-stats__grid > * {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   CARD BASE
+========================================================= */
+
+.learning-stats__card {
+  position: relative;
+
+  min-width: 0;
+  min-height: 0;
+
+  overflow: hidden;
+
+  border: 1px solid #dfebf2 !important;
+
+  background: rgba(255, 255, 255, 0.96) !important;
+
+  box-shadow:
+    0 8px 26px rgba(20, 66, 92, 0.055),
+    0 2px 6px rgba(20, 66, 92, 0.025);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    border-color 0.25s ease;
+}
+
+.learning-stats__card:hover {
+  transform: translateY(-4px);
+
+  box-shadow:
+    0 16px 34px rgba(20, 66, 92, 0.095),
+    0 4px 10px rgba(20, 66, 92, 0.035);
+}
+
+/* =========================================================
+   CARD COLOR TOP ACCENTS
+========================================================= */
+
+.learning-stats__card--blue {
+  border-top: 3px solid #2f8fce !important;
+}
+
+.learning-stats__card--orange {
+  border-top: 3px solid #ef9a3c !important;
+}
+
+.learning-stats__card--green {
+  border-top: 3px solid #38a875 !important;
+}
+
+.learning-stats__card--purple {
+  border-top: 3px solid #8b72d9 !important;
+}
+
+/* =========================================================
+   CARD CONTENT
+========================================================= */
+
+.learning-stats__card-content {
+  position: relative;
+  z-index: 2;
+
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  min-width: 0;
+
+  min-height: 305px;
+
+  box-sizing: border-box;
+
+  padding: 22px 22px 20px;
+}
+
+/* =========================================================
+   CARD TOP
+========================================================= */
+
+.learning-stats__card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+
+  gap: 14px;
+
+  width: 100%;
+  min-width: 0;
+
+  margin-bottom: 22px;
+}
+
+/* =========================================================
+   ICONS
+========================================================= */
+
+.learning-stats__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 48px;
+  height: 48px;
+
+  flex: 0 0 48px;
+
+  border-radius: 14px;
+
+  font-size: 22px;
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease;
+}
+
+.learning-stats__card:hover .learning-stats__icon {
+  transform: translateY(-2px);
+}
+
+/* BLUE */
+
+.learning-stats__card--blue .learning-stats__icon {
+  color: #2385bd;
+
+  background: #eaf6fd;
+
+  box-shadow: inset 0 0 0 1px rgba(35, 133, 189, 0.07);
+}
+
+/* ORANGE */
+
+.learning-stats__card--orange .learning-stats__icon {
+  color: #dd8124;
+
+  background: #fff3e6;
+
+  box-shadow: inset 0 0 0 1px rgba(221, 129, 36, 0.08);
+}
+
+/* GREEN */
+
+.learning-stats__card--green .learning-stats__icon {
+  color: #299663;
+
+  background: #eaf8f1;
+
+  box-shadow: inset 0 0 0 1px rgba(41, 150, 99, 0.08);
+}
+
+/* PURPLE */
+
+.learning-stats__card--purple .learning-stats__icon {
+  color: #765fc3;
+
+  background: #f1edfc;
+
+  box-shadow: inset 0 0 0 1px rgba(118, 95, 195, 0.08);
+}
+
+/* =========================================================
+   BADGE
+========================================================= */
+
+.learning-stats__card-top .badge {
+  flex-shrink: 0;
+}
+
+/* =========================================================
+   CARD TITLE
+========================================================= */
+
+.learning-stats__card-title {
+  margin-bottom: 5px;
+
+  font-size: 16px;
+  font-weight: 650;
+  line-height: 1.4;
+
+  color: #587184;
+}
+
+/* =========================================================
+   MAIN VALUE
+========================================================= */
+
+.learning-stats__value {
+  margin: 0;
+
+  font-size: clamp(34px, 3vw, 46px);
+  font-weight: 780;
+  line-height: 1.08;
+  letter-spacing: -0.035em;
+
+  color: #102a43;
+}
+
+/* =========================================================
+   DESCRIPTION
+========================================================= */
+
+.learning-stats__card-description {
+  margin: 10px 0 0;
+
+  max-width: 250px;
+
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.5;
+
+  color: #71869a;
+}
+
+/* =========================================================
+   PROGRESS CARD
+========================================================= */
+
+.learning-stats__progress-wrapper {
+  width: 100%;
+  min-width: 0;
+
+  margin-top: 18px;
+}
+
+.learning-stats__progress-wrapper .progress-bar {
+  width: 100%;
+}
+
+.learning-stats__progress-label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 12px;
+
+  margin-top: 8px;
+
+  font-size: 13px;
+  line-height: 1.4;
+
+  color: #7a8ea0;
+}
+
+.learning-stats__progress-label strong {
+  flex-shrink: 0;
+
+  color: #735dc0;
+
+  font-size: 13px;
+  font-weight: 750;
+}
+
+/* =========================================================
+   CARD ACTION
+========================================================= */
+
+.learning-stats__card-action {
+  display: flex;
+  align-items: center;
+
+  margin-top: auto;
+  padding-top: 20px;
+
+  min-width: 0;
+}
+
+.learning-stats__action-button {
+  min-width: 0;
+  max-width: 100%;
+
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+
+  font-size: 14px !important;
+  font-weight: 700 !important;
+
+  white-space: normal !important;
+  text-align: left;
+
+  color: #477086 !important;
+
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.learning-stats__action-button:hover {
+  transform: translateX(2px);
+}
+
+/* Contextual action colors */
+
+.learning-stats__card--blue .learning-stats__action-button {
+  color: #247cab !important;
+}
+
+.learning-stats__card--orange .learning-stats__action-button {
+  color: #cf7620 !important;
+}
+
+.learning-stats__card--green .learning-stats__action-button {
+  color: #27895c !important;
+}
+
+.learning-stats__card--purple .learning-stats__action-button {
+  color: #715ab8 !important;
+}
+
+/* =========================================================
+   DECORATIVE CARD WAVES
+========================================================= */
+
+.learning-stats__card-wave {
+  position: absolute;
+
+  right: -38px;
+  bottom: -55px;
+
+  width: 220px;
+  height: 105px;
+
+  z-index: 1;
+
+  pointer-events: none;
+}
+
+.learning-stats__card-wave span {
+  position: absolute;
+
+  display: block;
+
+  width: 220px;
+  height: 105px;
+
+  border: 1px solid;
+
+  border-radius: 50%;
+}
+
+.learning-stats__card-wave span:first-child {
+  right: 0;
+  bottom: 0;
+}
+
+.learning-stats__card-wave span:last-child {
+  right: 22px;
+  bottom: 15px;
+
+  opacity: 0.55;
+}
+
+/* BLUE WAVE */
+
+.learning-stats__card--blue .learning-stats__card-wave span {
+  border-color: rgba(47, 143, 206, 0.13);
+}
+
+/* ORANGE WAVE */
+
+.learning-stats__card--orange .learning-stats__card-wave span {
+  border-color: rgba(239, 154, 60, 0.15);
+}
+
+/* GREEN WAVE */
+
+.learning-stats__card--green .learning-stats__card-wave span {
+  border-color: rgba(56, 168, 117, 0.14);
+}
+
+/* PURPLE WAVE */
+
+.learning-stats__card--purple .learning-stats__card-wave span {
+  border-color: rgba(139, 114, 217, 0.14);
+}
+
+/* =========================================================
+   LARGE LAPTOP
+   4 cards remain, but slightly tighter
+========================================================= */
+
+@media (max-width: 1280px) {
+  .learning-stats__grid {
+    gap: 14px;
+  }
+
+  .learning-stats__card-content {
+    padding: 20px 18px 18px;
+  }
+
+  .learning-stats__card-description {
+    max-width: 220px;
+  }
+}
+
+/* =========================================================
+   TABLET / NARROW DESKTOP
+   2 x 2
+========================================================= */
+
+@media (max-width: 1100px) {
+  .learning-stats {
+    padding-top: 6px;
+  }
+
+  .learning-stats__header {
+    align-items: flex-start;
+    flex-direction: column;
+
+    gap: 18px;
+  }
+
+  .learning-stats__header-actions {
+    width: 100%;
+
+    justify-content: flex-start;
+  }
+
+  .learning-stats__grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+
+    gap: 16px;
+  }
+
+  .learning-stats__card-content {
+    min-height: 290px;
+  }
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 733px) {
+  .learning-stats {
+    padding: 4px 0 24px;
+
+    border-radius: 20px;
+  }
+
+  .learning-stats__container {
+    padding: 0;
+  }
+
+  .learning-stats__header {
+    margin-bottom: 20px;
+  }
+
+  .learning-stats__title {
+    font-size: 28px;
+  }
+
+  .learning-stats__description {
+    font-size: 16px;
+  }
+
+  .learning-stats__header-actions {
+    flex-wrap: wrap;
+
+    gap: 10px;
+  }
+
+  .learning-stats__period {
+    min-height: 40px;
+  }
+
+  .learning-stats__grid {
+    gap: 14px;
+  }
+
+  .learning-stats__card-content {
+    min-height: 280px;
+
+    padding: 19px 18px 18px;
+  }
+}
+
+/* =========================================================
+   MOBILE
+   1 COLUMN
+========================================================= */
+
+@media (max-width: 560px) {
+  .learning-stats__grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .learning-stats__header-actions {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .learning-stats__period {
+    width: auto;
+  }
+
+  .learning-stats__details-button {
+    min-height: 40px;
+  }
+
+  .learning-stats__card-content {
+    min-height: 0;
+
+    padding: 20px 20px 18px;
+  }
+
+  .learning-stats__card-top {
+    margin-bottom: 20px;
+  }
+
+  .learning-stats__value {
+    font-size: 40px;
+  }
+
+  .learning-stats__card-description {
+    max-width: 100%;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 400px) {
+  .learning-stats__title {
+    font-size: 25px;
+  }
+
+  .learning-stats__description {
+    font-size: 16px;
+  }
+
+  .learning-stats__card-content {
+    padding: 18px 17px 17px;
+  }
+
+  .learning-stats__icon {
+    width: 45px;
+    height: 45px;
+
+    flex-basis: 45px;
+
+    font-size: 20px;
+  }
+
+  .learning-stats__value {
+    font-size: 37px;
+  }
+
+  .learning-stats__card-description {
+    font-size: 16px;
+  }
+
+  .learning-stats__card-wave {
+    right: -70px;
+  }
+}
+
+/* =========================================================
+   VERY SMALL DEVICES
+========================================================= */
+
+@media (max-width: 340px) {
+  .learning-stats__card-top {
+    align-items: flex-start;
+  }
+
+  .learning-stats__icon {
+    width: 42px;
+    height: 42px;
+
+    flex-basis: 42px;
+
+    font-size: 19px;
+  }
+
+  .learning-stats__value {
+    font-size: 35px;
+  }
+
+  .learning-stats__action-button {
+    font-size: 14px !important;
+  }
+}
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .learning-stats__card,
+  .learning-stats__icon,
+  .learning-stats__action-button {
+    transition: none;
+  }
+
+  .learning-stats__card:hover {
+    transform: none;
+  }
+
+  .learning-stats__card:hover .learning-stats__icon {
+    transform: none;
+  }
+
+  .learning-stats__action-button:hover {
+    transform: none;
+  }
+}

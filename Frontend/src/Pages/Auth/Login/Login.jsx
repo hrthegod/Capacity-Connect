@@ -2,6 +2,8 @@ import { useState } from "react";
 import "./Login.css";
 import { useNavigate } from "react-router-dom";
 import { apiFetch } from "../../../api/apiClient";
+import { signInWithPopup } from "firebase/auth";
+import { auth, googleProvider } from "../../../firebase";
 // Zero-dependency SVG Icons for complete reusability across any React project
 const Icons = {
   Logo: () => (
@@ -312,9 +314,52 @@ export default function Login({
     }
   };
 
-  const handleSocialClick = (provider) => {
-    window.alert(`Sign in with ${provider} is ready for integration.`);
-  };
+  const handleGoogleLogin = async () => {
+  try {
+    setIsSubmitting(true);
+    setErrors({});
+
+    // Open Google sign-in popup
+    const result = await signInWithPopup(auth, googleProvider);
+
+    // Get Firebase ID token
+    const idToken = await result.user.getIdToken();
+
+    // Send Firebase token to our backend
+    const data = await apiFetch("/auth/google", {
+      method: "POST",
+      body: JSON.stringify({ idToken }),
+    });
+
+    // Store Capacity Connect authentication
+    localStorage.setItem("token", data.data.token);
+    localStorage.setItem("user", JSON.stringify(data.data.user));
+
+    // Redirect according to user's role
+    const role = data?.data?.user?.role?.toUpperCase();
+
+    if (role === "LEARNER") {
+      navigate("/learner/dashboard");
+    } else if (role === "TRAINER") {
+      navigate("/trainer");
+    } else if (role === "ADMIN") {
+      navigate("/admin");
+    } else {
+      setErrors({
+        general: "Google login successful, but your account role is invalid.",
+      });
+    }
+
+  } catch (error) {
+    console.error("Google login error:", error);
+
+    setErrors({
+      general: error.message || "Unable to sign in with Google",
+    });
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   const heroImage =
     imageSrc ||
@@ -357,7 +402,7 @@ export default function Login({
             <button
               type="button"
               className="cc-log-social-btn"
-              onClick={() => handleSocialClick("Google")}
+              onClick={handleGoogleLogin}
               aria-label="Sign in with Google"
             >
               <Icons.Google />

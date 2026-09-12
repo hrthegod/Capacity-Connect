@@ -11,10 +11,6 @@ import {
 import "./WelcomeSection.css";
 
 const WelcomeSection = () => {
-  // Get the currently logged-in user
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
-  const userName = user.name || "Trainer";
-
   return (
     <section className="trainer-welcome">
       {/* =====================================================
@@ -34,7 +30,7 @@ const WelcomeSection = () => {
 
         {/* Greeting */}
         <h1 className="trainer-welcome-title">
-          Good Morning, {userName}!
+          Good Morning, Rohan!
           <span className="trainer-welcome-wave">👋</span>
         </h1>
 

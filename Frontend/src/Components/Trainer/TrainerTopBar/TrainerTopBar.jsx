@@ -17,8 +17,6 @@ import "./TrainerTopBar.css";
 const TrainerTopBar = () => {
   const [searchValue, setSearchValue] = useState("");
   const [showProfileMenu, setShowProfileMenu] = useState(false);
-  const user = JSON.parse(localStorage.getItem("user") || "{}");
-const userName = user.name || "Trainer";
 
   const profileRef = useRef(null);
   const searchInputRef = useRef(null);
@@ -241,7 +239,7 @@ const userName = user.name || "Trainer";
 
             {/* Trainer Information */}
             <div className="trainer-profile-info">
-              <span className="trainer-profile-name">{userName}</span>
+              <span className="trainer-profile-name">Rohan Mehta</span>
 
               <span className="trainer-profile-role">Trainer</span>
             </div>
@@ -270,7 +268,7 @@ const userName = user.name || "Trainer";
                 </div>
 
                 <div>
-                  <strong>{userName}</strong>
+                  <strong>Rohan Mehta</strong>
 
                   <span>Trainer</span>
                 </div>

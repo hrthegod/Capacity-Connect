@@ -1,0 +1,183 @@
+/* =========================================================
+   KNOWLEDGE PAGE
+   Capacity Connect — Learner Knowledge Hub
+
+   CURRENT:
+   ✓ Clean page wrapper
+   ✓ No horizontal scrolling
+   ✓ Responsive
+   ✓ Proper width handling
+   ✓ Safe box sizing
+   ✓ Ready for future Knowledge components
+========================================================= */
+
+/* =========================================================
+   PAGE ROOT
+========================================================= */
+
+.knowledge-page {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  min-height: 100%;
+
+  margin: 0;
+  padding: 0;
+
+  box-sizing: border-box;
+
+  overflow-x: clip;
+  overflow-y: visible;
+
+  color: #173f66;
+}
+
+/* =========================================================
+   GLOBAL BOX SIZING
+========================================================= */
+
+.knowledge-page *,
+.knowledge-page *::before,
+.knowledge-page *::after {
+  box-sizing: border-box;
+
+  min-width: 0;
+}
+
+/* =========================================================
+   CONTAINER
+========================================================= */
+
+.knowledge-page__container {
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+
+  margin: 0 auto;
+  padding: 0;
+
+  box-sizing: border-box;
+
+  overflow: visible;
+}
+
+/* =========================================================
+   IMPORTANT WIDTH PROTECTION
+========================================================= */
+
+.knowledge-page img,
+.knowledge-page video,
+.knowledge-page canvas,
+.knowledge-page iframe {
+  max-width: 100%;
+}
+
+/* =========================================================
+   TEXT PROTECTION
+========================================================= */
+
+.knowledge-page h1,
+.knowledge-page h2,
+.knowledge-page h3,
+.knowledge-page h4,
+.knowledge-page h5,
+.knowledge-page h6,
+.knowledge-page p,
+.knowledge-page span {
+  max-width: 100%;
+
+  overflow-wrap: anywhere;
+}
+
+/* =========================================================
+   BUTTON / INPUT PROTECTION
+========================================================= */
+
+.knowledge-page button,
+.knowledge-page input,
+.knowledge-page textarea,
+.knowledge-page select {
+  max-width: 100%;
+
+  font-family: inherit;
+}
+
+/* =========================================================
+   SVG PROTECTION
+========================================================= */
+
+.knowledge-page svg {
+  display: block;
+
+  max-width: 100%;
+
+  flex: 0 0 auto;
+}
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 850px) {
+  .knowledge-page {
+    width: 100%;
+    max-width: 100%;
+
+    overflow-x: clip;
+  }
+
+  .knowledge-page__container {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 600px) {
+  .knowledge-page {
+    width: 100%;
+    max-width: 100%;
+
+    overflow-x: clip;
+  }
+
+  .knowledge-page__container {
+    width: 100%;
+    max-width: 100%;
+
+    padding: 0;
+  }
+}
+
+/* =========================================================
+   SMALL MOBILE
+========================================================= */
+
+@media (max-width: 380px) {
+  .knowledge-page {
+    width: 100%;
+    max-width: 100%;
+  }
+
+  .knowledge-page__container {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* =========================================================
+   VERY SMALL SCREENS
+========================================================= */
+
+@media (max-width: 320px) {
+  .knowledge-page {
+    width: 100%;
+    max-width: 100%;
+
+    overflow-x: clip;
+  }
+}
