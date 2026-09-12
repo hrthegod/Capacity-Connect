@@ -67,7 +67,7 @@ const certificates = [
 
 const CertificateCard = ({
   learner = {
-    name: "Dev Bhojani",
+    name: "Harshil Vajani",
     role: "Learner",
     profilePhoto: "",
   },
