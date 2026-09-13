@@ -31,6 +31,7 @@ import knowledgeImage from "../../assets/Images/platform-feature3.jpg";
 import progressImage from "../../assets/Images/platform-feature4.webp";
 import collaborationImage from "../../assets/Images/platform-feature5.jpg";
 import competenciesImage from "../../assets/Images/platform-feature6.jpeg";
+import logo from "../../assets/Images/Final_logo_IMD.png";
 
 import "./Landing.css";
 
@@ -40,6 +41,7 @@ const Landing = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
+  const [activeSearch, setActiveSearch] = useState("");
 
   const howItWorksJourneyRef = useRef(null);
   const howItWorksCardRefs = useRef([]);
@@ -195,7 +197,9 @@ const Landing = () => {
 
     if (!value) return;
 
-    console.log("Capacity Connect search:", value);
+    setActiveSearch(value);
+
+    scrollToSection("features");
   };
 
   const handlePopularSearch = (value) => {
@@ -254,21 +258,21 @@ const Landing = () => {
       label: "Learning Paths",
       value: "learning-paths",
       description: "Follow structured development journeys",
-      onClick: () => scrollToSection("features"),
+      onClick: () => navigate("/login"),
     },
     {
       id: "competencies",
       label: "Competencies",
       value: "competencies",
       description: "Explore capability areas",
-      onClick: () => scrollToSection("features"),
+      onClick: () => navigate("/login"),
     },
     {
       id: "assessment",
       label: "Skill Assessment",
       value: "assessment",
       description: "Understand your current capabilities",
-      onClick: () => scrollToSection("features"),
+      onClick: () => navigate("/login"),
     },
   ];
 
@@ -296,7 +300,7 @@ const Landing = () => {
       label: "Research Resources",
       value: "research",
       description: "Research and technical resources",
-      onClick: () => scrollToSection("knowledge-hub"),
+      onClick: () => navigate("/login"),
     },
   ];
 
@@ -329,8 +333,8 @@ const Landing = () => {
         <div className="landing__hero-vignette" />
 
         {/* ===================================================
-            MAIN NAVBAR
-        ==================================================== */}
+      MAIN NAVBAR
+  ==================================================== */}
 
         <header
           className={[
@@ -342,8 +346,8 @@ const Landing = () => {
         >
           <div className="landing__navbar">
             {/* -------------------------------------------------
-                LEFT: BRAND
-            -------------------------------------------------- */}
+        LEFT: BRAND
+    -------------------------------------------------- */}
 
             <a
               href="#top"
@@ -351,9 +355,11 @@ const Landing = () => {
               aria-label="Capacity Connect"
             >
               <span className="landing__brand-logo">
-                <span className="landing__brand-wave landing__brand-wave--1" />
-                <span className="landing__brand-wave landing__brand-wave--2" />
-                <span className="landing__brand-wave landing__brand-wave--3" />
+                <img
+                  src={logo}
+                  alt="Capacity Connect"
+                  className="landing__brand-logo-image"
+                />
               </span>
 
               <span className="landing__brand-text">
@@ -364,10 +370,14 @@ const Landing = () => {
             </a>
 
             {/* -------------------------------------------------
-                CENTER: NAVIGATION
-            -------------------------------------------------- */}
+        CENTER: NAVIGATION
+    -------------------------------------------------- */}
 
             <nav className="landing__nav" aria-label="Primary navigation">
+              {/* =================================================
+          EXPLORE
+      ================================================== */}
+
               <div className="landing__nav-dropdown">
                 <Dropdown
                   items={exploreItems}
@@ -384,6 +394,11 @@ const Landing = () => {
                 />
               </div>
 
+              {/* =================================================
+          ABOUT
+          Landing page section
+      ================================================== */}
+
               <button
                 type="button"
                 className="landing__nav-link"
@@ -391,6 +406,10 @@ const Landing = () => {
               >
                 About
               </button>
+
+              {/* =================================================
+          RESOURCES
+      ================================================== */}
 
               <div className="landing__nav-dropdown">
                 <Dropdown
@@ -408,6 +427,10 @@ const Landing = () => {
                 />
               </div>
 
+              {/* =================================================
+          HOW IT WORKS
+      ================================================== */}
+
               <button
                 type="button"
                 className="landing__nav-link"
@@ -415,11 +438,37 @@ const Landing = () => {
               >
                 How It Works
               </button>
+
+              {/* =================================================
+          ABOUT US
+          Separate Page
+      ================================================== */}
+
+              <button
+                type="button"
+                className="landing__nav-link"
+                onClick={() => navigate("/about-us")}
+              >
+                About Us
+              </button>
+
+              {/* =================================================
+          CONTACT US
+          Separate Page
+      ================================================== */}
+
+              <button
+                type="button"
+                className="landing__nav-link"
+                onClick={() => navigate("/contact-us")}
+              >
+                Contact Us
+              </button>
             </nav>
 
             {/* -------------------------------------------------
-                RIGHT: ACTIONS
-            -------------------------------------------------- */}
+        RIGHT: ACTIONS
+    -------------------------------------------------- */}
 
             <div className="landing__actions">
               <button
@@ -442,8 +491,8 @@ const Landing = () => {
             </div>
 
             {/* -------------------------------------------------
-                MOBILE
-            -------------------------------------------------- */}
+        MOBILE
+    -------------------------------------------------- */}
 
             <button
               type="button"
@@ -457,31 +506,100 @@ const Landing = () => {
           </div>
 
           {/* =================================================
-              MOBILE MENU
-          ================================================== */}
+      MOBILE MENU
+  ================================================== */}
 
           {mobileOpen && (
             <div className="landing__mobile-menu">
-              <button type="button" onClick={() => handleAction("Explore")}>
+              {/* -------------------------------------------------
+          EXPLORE
+      -------------------------------------------------- */}
+
+              <button
+                type="button"
+                onClick={() => {
+                  handleAction("Explore");
+                  setMobileOpen(false);
+                }}
+              >
                 Explore
                 <FiChevronDown />
               </button>
 
-              <button type="button" onClick={() => scrollToSection("about")}>
+              {/* -------------------------------------------------
+          ABOUT
+      -------------------------------------------------- */}
+
+              <button
+                type="button"
+                onClick={() => {
+                  scrollToSection("about");
+                  setMobileOpen(false);
+                }}
+              >
                 About
               </button>
 
-              <button type="button" onClick={() => handleAction("Resources")}>
+              {/* -------------------------------------------------
+          RESOURCES
+      -------------------------------------------------- */}
+
+              <button
+                type="button"
+                onClick={() => {
+                  handleAction("Resources");
+                  setMobileOpen(false);
+                }}
+              >
                 Resources
                 <FiChevronDown />
               </button>
 
+              {/* -------------------------------------------------
+          HOW IT WORKS
+      -------------------------------------------------- */}
+
               <button
                 type="button"
-                onClick={() => scrollToSection("how-it-works")}
+                onClick={() => {
+                  scrollToSection("how-it-works");
+                  setMobileOpen(false);
+                }}
               >
                 How It Works
               </button>
+
+              {/* -------------------------------------------------
+          ABOUT US
+      -------------------------------------------------- */}
+
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileOpen(false);
+                  navigate("/about-us");
+                }}
+              >
+                About Us
+              </button>
+
+              {/* -------------------------------------------------
+          CONTACT US
+      -------------------------------------------------- */}
+
+              <button
+                type="button"
+                onClick={() => {
+                  setMobileOpen(false);
+                  navigate("/contact-us");
+                }}
+              >
+                Contact Us
+              </button>
+
+              {/* -------------------------------------------------
+          MOBILE ACTIONS
+      -------------------------------------------------- */}
 
               <div className="landing__mobile-actions">
                 <Button
@@ -489,7 +607,10 @@ const Landing = () => {
                   size="md"
                   rounded="full"
                   fullWidth
-                  onClick={() => navigate("/login")}
+                  onClick={() => {
+                    setMobileOpen(false);
+                    navigate("/login");
+                  }}
                 >
                   Login
                 </Button>
@@ -499,7 +620,10 @@ const Landing = () => {
                   size="md"
                   rounded="full"
                   fullWidth
-                  onClick={() => navigate("/register")}
+                  onClick={() => {
+                    setMobileOpen(false);
+                    navigate("/register");
+                  }}
                 >
                   Sign Up
                 </Button>
@@ -509,8 +633,8 @@ const Landing = () => {
         </header>
 
         {/* ===================================================
-            HERO CONTENT
-        ==================================================== */}
+      HERO CONTENT
+  ==================================================== */}
 
         <div className="landing__content">
           {/* Government line */}
@@ -621,8 +745,8 @@ const Landing = () => {
         </div>
 
         {/* ===================================================
-            BOTTOM INFORMATION
-        ==================================================== */}
+      BOTTOM INFORMATION
+  ==================================================== */}
 
         <div className="landing__bottom">
           <div className="landing__bottom-rule" />
@@ -659,8 +783,8 @@ const Landing = () => {
 
       <section className="landing__about" id="about">
         {/* ===================================================
-            GALAXY / ORBITAL BACKGROUND
-        ==================================================== */}
+      GALAXY / ORBITAL BACKGROUND
+  ==================================================== */}
 
         <div className="capacity-galaxy" aria-hidden="true">
           <div className="capacity-galaxy__glow capacity-galaxy__glow--one" />
@@ -687,13 +811,13 @@ const Landing = () => {
         </div>
 
         {/* ===================================================
-            SECTION CONTAINER
-        ==================================================== */}
+      SECTION CONTAINER
+  ==================================================== */}
 
         <div className="capacity-section">
           {/* =================================================
-              INTRODUCTION
-          ================================================== */}
+        INTRODUCTION
+    ================================================== */}
 
           <header className="capacity-intro">
             <div className="capacity-intro__eyebrow">
@@ -720,16 +844,16 @@ const Landing = () => {
           </header>
 
           {/* =================================================
-              ECOSYSTEM SYSTEM
-              
-              This is NOT a normal card grid.
-              It is a connected orbital system.
-          ================================================== */}
+        ECOSYSTEM SYSTEM
+
+        This is NOT a normal card grid.
+        It is a connected orbital system.
+    ================================================== */}
 
           <div className="capacity-system">
             {/* ------------------------------------------------
-                CENTRAL HUB
-            ------------------------------------------------- */}
+          CENTRAL HUB
+      ------------------------------------------------- */}
 
             <div className="capacity-system__hub">
               <div className="capacity-system__hub-orbit" />
@@ -750,8 +874,8 @@ const Landing = () => {
             </div>
 
             {/* ------------------------------------------------
-                CONNECTION LINES
-            ------------------------------------------------- */}
+          CONNECTION LINES
+      ------------------------------------------------- */}
 
             <div
               className="capacity-system__connection capacity-system__connection--learn"
@@ -775,8 +899,8 @@ const Landing = () => {
             </div>
 
             {/* =================================================
-                LEARN
-            ================================================== */}
+          LEARN
+      ================================================== */}
 
             <article className="capacity-lane capacity-lane--learn">
               <div className="capacity-lane__index">01</div>
@@ -807,7 +931,12 @@ const Landing = () => {
                   rounded="full"
                   rightIcon={<FiArrowRight />}
                   className="capacity-lane__action"
-                  onClick={() => handleAction("Explore learning")}
+                  onClick={() => {
+                    document.getElementById("how-it-works")?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }}
                 >
                   Explore learning
                 </Button>
@@ -815,8 +944,8 @@ const Landing = () => {
             </article>
 
             {/* =================================================
-                DEVELOP
-            ================================================== */}
+          DEVELOP
+      ================================================== */}
 
             <article className="capacity-lane capacity-lane--develop">
               <div className="capacity-lane__index">02</div>
@@ -847,7 +976,12 @@ const Landing = () => {
                   rounded="full"
                   rightIcon={<FiArrowRight />}
                   className="capacity-lane__action"
-                  onClick={() => handleAction("Build capability")}
+                  onClick={() => {
+                    document.getElementById("how-it-works")?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }}
                 >
                   Build capability
                 </Button>
@@ -855,8 +989,8 @@ const Landing = () => {
             </article>
 
             {/* =================================================
-                DISCOVER
-            ================================================== */}
+          DISCOVER
+      ================================================== */}
 
             <article className="capacity-lane capacity-lane--discover">
               <div className="capacity-lane__index">03</div>
@@ -887,7 +1021,12 @@ const Landing = () => {
                   rounded="full"
                   rightIcon={<FiArrowRight />}
                   className="capacity-lane__action"
-                  onClick={() => handleAction("Discover opportunities")}
+                  onClick={() => {
+                    document.getElementById("how-it-works")?.scrollIntoView({
+                      behavior: "smooth",
+                      block: "start",
+                    });
+                  }}
                 >
                   Discover opportunities
                 </Button>
@@ -896,12 +1035,12 @@ const Landing = () => {
           </div>
 
           {/* =================================================
-              THE JOURNEY
-          ================================================== */}
+        THE JOURNEY
+    ================================================== */}
 
           {/* =================================================
-              FINAL STATEMENT
-          ================================================== */}
+        FINAL STATEMENT
+    ================================================== */}
 
           <div className="capacity-statement">
             <div className="capacity-statement__line" />
@@ -937,12 +1076,14 @@ const Landing = () => {
         <div className="platform-features">
           {/* ============================================================
         INTRO
-        ============================================================ */}
+    ============================================================ */}
 
           <header className="platform-features__intro">
             <div className="platform-features__eyebrow">
               <span className="platform-features__eyebrow-line" />
+
               <span>PLATFORM FEATURES</span>
+
               <span className="platform-features__eyebrow-line" />
             </div>
 
@@ -960,12 +1101,12 @@ const Landing = () => {
 
           {/* ============================================================
         FEATURE JOURNEY
-        ============================================================ */}
+    ============================================================ */}
 
           <div className="platform-features__journey">
             {/* ==========================================================
           CONTINUOUS SVG WAVE
-          ========================================================== */}
+      ========================================================== */}
 
             <svg
               className="platform-features__wave"
@@ -1039,7 +1180,7 @@ const Landing = () => {
 
             {/* ==========================================================
           STEP 01 — LEARNING
-          ========================================================== */}
+      ========================================================== */}
 
             <article className="platform-feature platform-feature--left">
               <div className="platform-feature__content">
@@ -1065,7 +1206,11 @@ const Landing = () => {
                     <span>Curated Content</span>
                   </div>
 
-                  <button type="button" className="platform-feature__link">
+                  <button
+                    type="button"
+                    className="platform-feature__link"
+                    onClick={() => navigate("/login")}
+                  >
                     Explore learning
                     <FiArrowRight />
                   </button>
@@ -1078,6 +1223,7 @@ const Landing = () => {
 
               <div className="platform-feature__annotation">
                 <span className="platform-feature__annotation-line" />
+
                 <span>
                   EXPLORE
                   <br />
@@ -1090,12 +1236,10 @@ const Landing = () => {
 
             {/* ==========================================================
           STEP 02 — ASSESSMENT
-          ========================================================== */}
+      ========================================================== */}
 
             <article className="platform-feature platform-feature--right">
               <div className="platform-feature__visual platform-feature__visual--ocean">
-                {/* Add image path later */}
-
                 <img src={standingImage} alt="Research vessel" />
               </div>
 
@@ -1122,7 +1266,11 @@ const Landing = () => {
                     <span>Self Evaluation</span>
                   </div>
 
-                  <button type="button" className="platform-feature__link">
+                  <button
+                    type="button"
+                    className="platform-feature__link"
+                    onClick={() => navigate("/login")}
+                  >
                     Assess capabilities
                     <FiArrowRight />
                   </button>
@@ -1146,7 +1294,7 @@ const Landing = () => {
 
             {/* ==========================================================
           STEP 03 — KNOWLEDGE
-          ========================================================== */}
+      ========================================================== */}
 
             <article className="platform-feature platform-feature--left">
               <div className="platform-feature__content">
@@ -1172,7 +1320,11 @@ const Landing = () => {
                     <span>Resources</span>
                   </div>
 
-                  <button type="button" className="platform-feature__link">
+                  <button
+                    type="button"
+                    className="platform-feature__link"
+                    onClick={() => navigate("/login")}
+                  >
                     Explore knowledge
                     <FiArrowRight />
                   </button>
@@ -1180,8 +1332,6 @@ const Landing = () => {
               </div>
 
               <div className="platform-feature__visual platform-feature__visual--satellite">
-                {/* Add image path later */}
-
                 <img src={knowledgeImage} alt="Research vessel" />
               </div>
 
@@ -1200,12 +1350,10 @@ const Landing = () => {
 
             {/* ==========================================================
           STEP 04 — PROGRESS
-          ========================================================== */}
+      ========================================================== */}
 
             <article className="platform-feature platform-feature--right">
               <div className="platform-feature__visual platform-feature__visual--ice">
-                {/* Add image path later */}
-
                 <img src={progressImage} alt="Research vessel" />
               </div>
 
@@ -1232,7 +1380,11 @@ const Landing = () => {
                     <span>Development Journey</span>
                   </div>
 
-                  <button type="button" className="platform-feature__link">
+                  <button
+                    type="button"
+                    className="platform-feature__link"
+                    onClick={() => navigate("/login")}
+                  >
                     View progress
                     <FiArrowRight />
                   </button>
@@ -1254,7 +1406,7 @@ const Landing = () => {
 
             {/* ==========================================================
           STEP 05 — COLLABORATION
-          ========================================================== */}
+      ========================================================== */}
 
             <article className="platform-feature platform-feature--left">
               <div className="platform-feature__content">
@@ -1282,7 +1434,11 @@ const Landing = () => {
                     <span>Knowledge Sharing</span>
                   </div>
 
-                  <button type="button" className="platform-feature__link">
+                  <button
+                    type="button"
+                    className="platform-feature__link"
+                    onClick={() => navigate("/login")}
+                  >
                     Connect &amp; collaborate
                     <FiArrowRight />
                   </button>
@@ -1290,8 +1446,6 @@ const Landing = () => {
               </div>
 
               <div className="platform-feature__visual platform-feature__visual--crew">
-                {/* Add image path later */}
-
                 <img src={collaborationImage} alt="Research vessel" />
               </div>
 
@@ -1310,12 +1464,10 @@ const Landing = () => {
 
             {/* ==========================================================
           STEP 06 — COMPETENCIES
-          ========================================================== */}
+      ========================================================== */}
 
             <article className="platform-feature platform-feature--right">
               <div className="platform-feature__visual platform-feature__visual--lighthouse">
-                {/* Add image path later */}
-
                 <img src={competenciesImage} alt="Research vessel" />
               </div>
 
@@ -1344,7 +1496,11 @@ const Landing = () => {
                     <span>Capability Building</span>
                   </div>
 
-                  <button type="button" className="platform-feature__link">
+                  <button
+                    type="button"
+                    className="platform-feature__link"
+                    onClick={() => navigate("/login")}
+                  >
                     Explore competencies
                     <FiArrowRight />
                   </button>
@@ -1369,7 +1525,7 @@ const Landing = () => {
 
           {/* ============================================================
         DEVELOPMENT JOURNEY
-        ============================================================ */}
+    ============================================================ */}
 
           <div className="platform-development">
             <div className="platform-development__heading">
@@ -1610,7 +1766,11 @@ const Landing = () => {
                 <span>Goals</span>
               </div>
 
-              <button type="button" className="how-it-works__card-action">
+              <button
+                type="button"
+                className="how-it-works__card-action"
+                onClick={() => navigate("/login")}
+              >
                 <span>Create your profile</span>
                 <FiArrowRight />
               </button>
@@ -1651,7 +1811,11 @@ const Landing = () => {
                 <span>Opportunities</span>
               </div>
 
-              <button type="button" className="how-it-works__card-action">
+              <button
+                type="button"
+                className="how-it-works__card-action"
+                onClick={() => navigate("/login")}
+              >
                 <span>Explore opportunities</span>
                 <FiArrowRight />
               </button>
@@ -1692,7 +1856,11 @@ const Landing = () => {
                 <span>Practice</span>
               </div>
 
-              <button type="button" className="how-it-works__card-action">
+              <button
+                type="button"
+                className="how-it-works__card-action"
+                onClick={() => navigate("/login")}
+              >
                 <span>Start learning</span>
                 <FiArrowRight />
               </button>
@@ -1733,7 +1901,11 @@ const Landing = () => {
                 <span>Goals</span>
               </div>
 
-              <button type="button" className="how-it-works__card-action">
+              <button
+                type="button"
+                className="how-it-works__card-action"
+                onClick={() => navigate("/login")}
+              >
                 <span>View your growth</span>
                 <FiArrowRight />
               </button>
@@ -2606,7 +2778,7 @@ const Landing = () => {
       <footer className="landing-footer">
         {/* ==============================================================
       FOOTER ATMOSPHERE
-      ============================================================== */}
+  ============================================================== */}
 
         <div
           className="landing-footer__glow landing-footer__glow--blue"
@@ -2627,7 +2799,7 @@ const Landing = () => {
 
         {/* ==============================================================
       BRAND / IDENTITY
-      ============================================================== */}
+  ============================================================== */}
 
         <div className="landing-footer__brand-zone">
           <div className="landing-footer__brand-mark">
@@ -2665,7 +2837,7 @@ const Landing = () => {
 
         {/* ==============================================================
       NAVIGATION
-      ============================================================== */}
+  ============================================================== */}
 
         <div className="landing-footer__navigation">
           {/* PLATFORM */}
@@ -2813,7 +2985,7 @@ const Landing = () => {
 
         {/* ==============================================================
       CAPABILITY RAIL
-      ============================================================== */}
+  ============================================================== */}
 
         <div className="landing-footer__rail">
           <div className="landing-footer__rail-line" />
@@ -2847,7 +3019,7 @@ const Landing = () => {
 
         {/* ==============================================================
       GOVERNMENT / INSTITUTIONAL IDENTITY
-      ============================================================== */}
+  ============================================================== */}
 
         <div className="landing-footer__institution">
           <div className="landing-footer__institution-mark">
@@ -2872,27 +3044,51 @@ const Landing = () => {
             <span>Connected capability development ecosystem</span>
           </div>
 
+          {/* ==========================================================
+        SOCIAL MEDIA
+    ========================================================== */}
+
           <div className="landing-footer__socials">
+            {/* LinkedIn */}
+
             <button
               type="button"
               aria-label="LinkedIn"
-              onClick={() => handleAction("LinkedIn")}
+              onClick={() =>
+                window.open(
+                  "https://www.linkedin.com/",
+                  "_blank",
+                  "noopener,noreferrer",
+                )
+              }
             >
               in
             </button>
 
+            {/* YouTube */}
+
             <button
               type="button"
               aria-label="YouTube"
-              onClick={() => handleAction("YouTube")}
+              onClick={() =>
+                window.open(
+                  "https://www.youtube.com/",
+                  "_blank",
+                  "noopener,noreferrer",
+                )
+              }
             >
               ▶
             </button>
 
+            {/* X */}
+
             <button
               type="button"
               aria-label="X"
-              onClick={() => handleAction("X")}
+              onClick={() =>
+                window.open("https://x.com/", "_blank", "noopener,noreferrer")
+              }
             >
               X
             </button>
@@ -2901,7 +3097,7 @@ const Landing = () => {
 
         {/* ==============================================================
       LEGAL BAR
-      ============================================================== */}
+  ============================================================== */}
 
         <div className="landing-footer__legal">
           <span className="landing-footer__copyright">
