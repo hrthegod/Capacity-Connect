@@ -1590,7 +1590,7 @@
    SMALL TABLET / MOBILE
 ========================================================= */
 
-@media (max-width: 850px) {
+@media (max-width: 1245px) {
   .landing__nav,
   .landing__actions {
     display: none;
@@ -11632,4 +11632,26 @@ section - 6 ======================================================   */
     width: 11px;
     height: 11px;
   }
+}
+.landing__brand-logo {
+  width: 48px;
+  height: 48px;
+  flex: 0 0 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.landing__brand-logo-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
+}
+.landing-footer__logo-image {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: contain;
 }

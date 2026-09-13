@@ -2263,10 +2263,6 @@ const Landing = () => {
     SECTION 6 — KNOWLEDGE HUB + FINAL CTA
     ================================================================ */}
 
-      {/* ================================================================
-    SECTION 6 — KNOWLEDGE HUB + FINAL CTA
-    ================================================================ */}
-
       <section className="cc-kh" id="knowledge-hub">
         {/* ================================================================
       BACKGROUND ATMOSPHERE
@@ -2635,9 +2631,11 @@ const Landing = () => {
 
         <div className="landing-footer__brand-zone">
           <div className="landing-footer__brand-mark">
-            <span className="landing-footer__wave landing-footer__wave--1" />
-            <span className="landing-footer__wave landing-footer__wave--2" />
-            <span className="landing-footer__wave landing-footer__wave--3" />
+            <img
+              src={logo}
+              alt="Capacity Connect"
+              className="landing-footer__logo-image"
+            />
           </div>
 
           <div className="landing-footer__brand">
